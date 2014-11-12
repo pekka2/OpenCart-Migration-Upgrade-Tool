@@ -1,0 +1,2 @@
+ Copy this files success.png, error.png from directory admin/view/image.
+ And copy from version 2.0 admin images user.png and lockscreen.png
