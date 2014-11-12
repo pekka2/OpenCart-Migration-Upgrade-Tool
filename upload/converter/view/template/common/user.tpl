@@ -6,6 +6,10 @@
     <?php } ?>
   </div>
 
+  <?php if ($error_warning) { ?>
+  <div class="warning round"><?php echo $error_warning; ?></div>
+  <?php } ?>
+
     <div class="heading">
       <h1><img src="view/image/home.png" alt="" /> <?php echo $heading_title; ?></h1>
 
