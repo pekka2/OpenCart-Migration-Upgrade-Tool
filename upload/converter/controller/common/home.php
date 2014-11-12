@@ -1,5 +1,6 @@
 <?php   
 class ControllerCommonHome extends Controller {   
+        private $error = array();
 	public function index() {
 
 		$this->language->load('common/home');
@@ -179,7 +180,7 @@ class ControllerCommonHome extends Controller {
                
                 $ok = 0;
 
-       if(isset($this->request->post['user_group'])){
+       if( isset($this->request->post['user_group']) && $this->validate() ){
             $user_group = $this->model_user_user_group->getUserGroup($this->request->post['user_group']);
 
             foreach($upgrade_access as $perm){
@@ -189,7 +190,8 @@ class ControllerCommonHome extends Controller {
                        ++$ok;
                     }
             }
-            
+    
+
            if($ok === 0){  
 
               $this->data['upgrade_access'] = $upgrade_access;  
@@ -199,7 +201,12 @@ class ControllerCommonHome extends Controller {
                   $this->data['upgrade_access'] = $upgrade_access;
             }
         }
- 
+   
+ 		if (isset($this->error['warning'])) {
+			$this->data['error_warning'] = $this->error['warning'];
+		} else {
+			$this->data['error_warning'] = '';
+		}
 
                
 		$this->template = 'common/user.tpl';
@@ -209,6 +216,16 @@ class ControllerCommonHome extends Controller {
 		);
 
 		$this->response->setOutput($this->render());
-	}	
+   }
+   protected function validate() {
+		if (!$this->user->hasPermission('modify', 'user/user_group')) {
+			$this->error['warning'] = $this->language->get('error_permission');
+		}
+		if (!$this->error) {
+			return true;
+		} else { 
+			return false;
+		}
+   }	
 }
 ?>
