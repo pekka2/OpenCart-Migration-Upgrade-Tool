@@ -1,0 +1,65 @@
+/**
+ * @version		$Id: NAME.xxx 2014-10-17 16:52Z mic $
+ * @package		OpenCart Shopconverter 1.5.x - 2.x
+ * @author		Pekka Mansikka - http://pm-netti.com & mic - http://pixelnbit.com
+ * @copyright	2014 peku & mic
+ * @license		MIT http://opensource.org/licenses/MIT
+ */
+
+Versionen/Changelog (rev):
+********************
+legend
+* -> Security Fix
+# -> Bug Fix
++ -> Addition
+^ -> Change
+- -> Removed
+! -> Note
+
+CONVERTER
+---------
+1.1.1   2014.11.12      + Database Upgrade to OC version 2.0.1b
+1.1.0   2014.11.11      ^ Class Structure of Table order in file model/upgrade/database.php
+                        # method getDbColumns
+1.0.9   2014.11.10      + PHP Class Structure from Opencart
+                        + own system category
+                        + language file system/library/lmodel
+                        + language directory system/language_model
+                        + constant DIR_LANGUAGE_MODEL
+                        + constant DB_USER_SALT
+                        + constant DIR_DOCUMENT_ROOT
+                        + constant DIR_STORE_IMAGE
+1.0.8   2014.11.03      ^ change new settings add to own function
+                        # fixed upgrade order of version 1.5.0 and version 1.5.1 or newer (lines 1765 - 2008)
+1.0.7   2014.11.03      # fixed updatepaths of images array ( function getImages() )
+                        # fixed modules new way ( line 2697 )
+                        + added simulate for layout module ( lines 2798 - 2801 )
+                        # fixed/change logo and icon paths to database ( lines 3049 - 3077 )  
+                     
+1.0.6   2014.10.31      + change content from table return_product to table return
+                        + index for column parent_id in table category and for column product_id in table product_imgae
+                        # image copies script
+
+1.0.5   2014.10.30      + other way for store upgrade
+                        + table engine fix to table customer_online in version 1.5.4
+                        ^ change full structure of copying images codes
+                        # fixed key limit of bestseller module in version 1.5.0
+                        # fixed  content of table customer_group_description
+
+1.0.4   2014.10.28      + addend versions 1.5.0x
+                        + added function files to directory models
+
+1.0.3	2014.10.20	+ delete columns (v. 1.5.1 - 1.5.12)
+
+1.0.2	2014.10.19	+ new fields / tables
+					+ cache
+1.0.1	2014.10.17	+ adopt filepath
+					+ languages
+1.0.0	2014.10.15	inital release
+
+COMPARE_DATABASES
+-----------------
+1.0.1	2014.10.26	+ check for basic tables
+					+ display of table infos
+					^ code cleaning
+1.0.0	2014.10.24	initial release
