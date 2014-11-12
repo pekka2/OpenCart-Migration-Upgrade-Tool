@@ -1,9 +1,9 @@
 <?php
 class ControllerUpgradeDatabase extends Controller {   
-	public function index() {
+        private $error = array();
+   public function index() {
 		$this->language->load('upgrade/database');
-    $this->lmodel->set('upgrade_database',$this->language->load('upgrade/database'));
-    
+                $this->lmodel->set('upgrade_database',$this->language->load('upgrade/database'));
 		$this->load->model('upgrade/database');
 		$this->load->model('upgrade/table_columns');
 		$this->load->model('upgrade/settings');
@@ -22,7 +22,7 @@ class ControllerUpgradeDatabase extends Controller {
 			'separator' => false
 		);
 
-                if( isset( $this->request->post['step1']) ){
+                if( isset( $this->request->post['step1']) && $this->validate() ){
                  $this->data['dirOld'] = ( !empty( $_POST['dirOld'] ) ? true : false );
                  $this->data['images'] = ( !empty( $_POST['images'] ) ? true : 'image' );
                  $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
@@ -74,6 +74,16 @@ class ControllerUpgradeDatabase extends Controller {
 			'common/footer'
 		);
 		$this->response->setOutput($this->render());
-	}
+   }
+   protected function validate() {
+		if (!$this->user->hasPermission('modify', 'upgrade/database')) {
+			$this->error['warning'] = $this->language->get('error_permission');
+		}
+		if (!$this->error) {
+			return true;
+		} else { 
+			return false;
+		}
+   }
 }
 ?>
