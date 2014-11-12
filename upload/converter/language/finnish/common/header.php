@@ -1,11 +1,7 @@
 <?php
 // Heading
-$_['heading_title']                    = 'Administration';
+$_['heading_title']                    = 'Ylläpito';
 
 // Text
-$_['text_your_version']                = 'FOUND YOUR STORE VERSION: %s';
-$_['text_simulation']	               = 'Simulation is';
-$_['text_confirm']		       = 'Delete/Uninstall cannot be undone! Are you sure you want to do this?';
-$_['text_on']			       = 'ON';
-$_['text_off']			       = 'OFF';
+$_['text_your_version']                = 'LÖYTYI SINUN KAUPAN VERSIO';
 ?>
