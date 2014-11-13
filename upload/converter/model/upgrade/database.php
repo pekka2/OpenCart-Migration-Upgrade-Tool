@@ -1213,6 +1213,6 @@ class ModelUpgradeDatabase extends Model{
        return str_replace( $data, '<div class="msg round">' . $data .'</div>', $data);
   }
   public function version( $data ){
-       return str_replace( $data, '<div class="msg-version round">' . $data .'</div>', $data);
+       return str_replace( $data, '<div class="success round">' . $data .'</div>', $data);
   }
 }
