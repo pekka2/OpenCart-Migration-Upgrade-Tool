@@ -20,6 +20,7 @@ CONVERTER
 ---------
 1.1.2b  2014.11.13      + method getColumnKey to file model/upgrade/table_columns.php
                         + method getColumnType to file model/upgrade/table_columns.php
+                        + notification database OC version level in time of upgrade
 1.1.1   2014.11.12      + Database Upgrade to OC version 2.0.0.1b
 1.1.0   2014.11.11      ^ Class Structure of Table order in file model/upgrade/database.php
                         # method getDbColumns
