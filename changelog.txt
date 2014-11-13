@@ -2,7 +2,7 @@
  * @version		$Id: NAME.xxx 2014-10-17 16:52Z mic $
  * @package		OpenCart Shopconverter 1.5.x - 2.x
  * @author		Pekka Mansikka - http://pm-netti.com & mic - http://pixelnbit.com
- * @copyright	2014 peku & mic
+ * @copyright	        2014 peku & mic
  * @license		MIT http://opensource.org/licenses/MIT
  */
 
