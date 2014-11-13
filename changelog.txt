@@ -18,7 +18,7 @@ legend
 
 CONVERTER
 ---------
-1.1.2b  2014.11.13      + method getColumnKey to file model/upgrade/table_columns.php
+1.1.2   2014.11.13      + method getColumnKey to file model/upgrade/table_columns.php
                         + method getColumnType to file model/upgrade/table_columns.php
                         + notification database OC version level in time of upgrade
 1.1.1   2014.11.12      + Database Upgrade to OC version 2.0.0.1b
