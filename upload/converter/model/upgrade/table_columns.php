@@ -446,153 +446,174 @@ class ModelUpgradeTableColumns extends Model{
 		array(
                         'table'         => 'affiliate',
 			'field'		=> 'status',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'affiliate',
 			'field'		=> 'approved',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'banner',
 			'field'		=> 'status',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'category',
 			'field'		=> 'top',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'category',
 			'field'		=> 'status',
-			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
-		),
-		array(
-                        'table'         => 'country',
-			'field'		=> 'postcode',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'country',
 			'field'		=> 'postcode_required',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'country',
 			'field'		=> 'status',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 1'
 		),
 		array(
                         'table'         => 'coupon',
 			'field'		=> 'logged',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'coupon',
 			'field'		=> 'shipping',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'coupon',
 			'field'		=> 'status',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'currency',
 			'field'		=> 'status',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'customer',
 			'field'		=> 'newsletter',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'customer',
 			'field'		=> 'status',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'customer',
 			'field'		=> 'approved',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'information',
 			'field'		=> 'status',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT \'1\''
 		),
 		array(
                         'table'         => 'language',
 			'field'		=> 'status',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'order_history',
 			'field'		=> 'notify',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'customer',
 			'field'		=> 'approved',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'product',
 			'field'		=> 'shipping',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT \'1\''
 		),
 		array(
                         'table'         => 'product',
 			'field'		=> 'subtract',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT \'1\''
 		),
 		array(
                         'table'         => 'product',
 			'field'		=> 'status',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'product_option',
 			'field'		=> 'required',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'product_option_value',
 			'field'		=> 'subtract',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'return_history',
 			'field'		=> 'notify',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'review',
 			'field'		=> 'status',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'user',
 			'field'		=> 'status',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'voucher',
 			'field'		=> 'status',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
 		),
 		array(
                         'table'         => 'zone',
 			'field'		=> 'status',
+			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT \'1\''
 		)
        );
 
      $changecounter = 0;
-
-  if( !$this->cache->get( 'create_index' ) ){
 
 	$keyset = array(
 		array(
@@ -619,9 +640,7 @@ class ModelUpgradeTableColumns extends Model{
 
           foreach( $keyset as $k => $v ) {
 
-	    if( array_search( DB_PREFIX . $v['table'], $this->getTables() ) || $v['table'] == 'address' ) {
-
-		 if( array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) ) {
+	     if( !$this->getColumnKey( $v['field'], $v['table'] ) ) { 
 			$sql = '
 			CREATE INDEX
 				`' . $v['index'] . '`
@@ -637,11 +656,7 @@ class ModelUpgradeTableColumns extends Model{
                         }
 			++$changecounter;
 			$text .= $this->msg( sprintf( $this->lang['msg_change_column'], $v['field'],  $v['table'] ) );
-			if( !$this->simulate ) {
-                          $this->cache->delete( $v['table'] );
-                        }
 		}
-	    }
          }
 	
 	  $sql = '
@@ -659,13 +674,9 @@ class ModelUpgradeTableColumns extends Model{
                  }
 	  ++$changecounter;
 
-	if( !$this->simulate ) {
-          $this->cache->set( 'create_index', $keyset );
-         }
 
 	  $text .= $this->msg( sprintf( $this->lang['msg_change_column'], 'currency_value',  DB_PREFIX . 'order' ) );
 
-     }
 
      foreach( $changecols as $k => $v ) {
 
@@ -696,9 +707,7 @@ class ModelUpgradeTableColumns extends Model{
 
      foreach( $changetype as $k => $v ) {
 
-	   if( array_search( DB_PREFIX . $v['table'], $this->getTables() ) || $v['table'] == 'address' ) {
-
-		if( array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) ) {
+	   if( !$this->getColumnType( $v['field'], $v['type'], $v['table']) ) {
 			$sql = '
 			ALTER TABLE
 				`' . DB_PREFIX . $v['table'] . '`
@@ -716,8 +725,7 @@ class ModelUpgradeTableColumns extends Model{
 			if( !$this->simulate ) {
                           $this->cache->delete( $v['table'] );
                         }
-		}
-	}
+	   }
      }
 
 
@@ -983,6 +991,7 @@ class ModelUpgradeTableColumns extends Model{
        $data = str_replace( $data, '<div class="msg round"> ' . $data .' </div>', $data);
        return $data;
   }
+
   public function getDbColumns( $table ) {
 	if( $data =  $this->cache->get( $table ) ) {
 		return $data;
@@ -1000,6 +1009,40 @@ class ModelUpgradeTableColumns extends Model{
           return $ret;	
          }
     }
+  }
+
+  private function getColumnKey( $column, $table ) {
+
+     if( array_search( DB_PREFIX . $table, $this->getTables() ) || $table == 'address'){
+                $fields = $this->db->query("SHOW COLUMNS FROM " . DB_PREFIX . $table . " FROM " . DB_DATABASE);
+
+        if( array_search( $column, $this->getDbColumns( $table ) ) ){
+           foreach( $fields->rows as $field){
+              if($field['Field'] == $column){
+   
+                 return ( !empty( $field['Key'] ) ? true : false );
+    
+             }
+          }
+        }  	
+     }
+  }
+
+  private function getColumnType( $column, $type, $table ) {
+ 
+     if( array_search( DB_PREFIX . $table, $this->getTables() ) || $table == 'address'){
+            $fields = $this->db->query("SHOW COLUMNS FROM " . DB_PREFIX . $table . " FROM " . DB_DATABASE);
+
+        if( array_search( $column, $this->getDbColumns( $table ) ) ){
+           foreach( $fields->rows as $field){
+              if($field['Field'] == $column ){
+  
+                 return strpos($field['Type'], $type);
+    
+              }
+           }
+        }
+     }
   }
 
   public function getTables() {
