@@ -218,7 +218,7 @@ class ControllerCommonHome extends Controller {
 		$this->response->setOutput($this->render());
    }
    protected function validate() {
-		if (!$this->user->hasPermission('modify', 'user/user_group')) {
+		if (!$this->user->hasPermission('modify', 'user/user')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		if (!$this->error) {
