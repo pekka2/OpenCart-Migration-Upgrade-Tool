@@ -97,6 +97,7 @@ class ModelUpgradeDatabase extends Model{
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'tax_rule' ) );
 	}
+		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '1.5.1.3', '' ) );
     return $text;
   }
 
@@ -200,6 +201,8 @@ class ModelUpgradeDatabase extends Model{
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'order_voucher' ) );
 	}
+
+		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '1.5.2', '' ) );
     return $text;
   }
 
@@ -251,6 +254,7 @@ class ModelUpgradeDatabase extends Model{
                 }
              }
 	}
+		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '1.5.3.1', '' ) );
     return $text;
   }
   public function addUpgradeTo154() {
@@ -275,6 +279,7 @@ class ModelUpgradeDatabase extends Model{
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'customer_online' ) );
 	}
+		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '1.5.4', '' ) );
     return $text;
   }
   public function addUpgradeTo155() {
@@ -750,6 +755,7 @@ class ModelUpgradeDatabase extends Model{
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'product_filter' ) );
 	}
+		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '1.5.5.1', '' ) );
     return $text;
   }
   public function addUpgradeTo156() {
@@ -829,6 +835,7 @@ class ModelUpgradeDatabase extends Model{
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'product_recurring' ) );
 	}
+		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '1.5.6.4', '' ) );
     return $text;
   }
   public function addUpgradeTo2000() {
@@ -1161,6 +1168,7 @@ class ModelUpgradeDatabase extends Model{
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'upload' ) );
 	}
+		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '2.0.0.1', '' ) );
     return $text;
   }
   public function fixEngineOfTableCustomerOnline(){
@@ -1203,5 +1211,8 @@ class ModelUpgradeDatabase extends Model{
   }
   public function msg( $data ){
        return str_replace( $data, '<div class="msg round">' . $data .'</div>', $data);
+  }
+  public function version( $data ){
+       return str_replace( $data, '<div class="msg-version round">' . $data .'</div>', $data);
   }
 }
