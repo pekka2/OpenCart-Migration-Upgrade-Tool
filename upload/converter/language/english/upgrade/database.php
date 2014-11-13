@@ -53,4 +53,5 @@ $_['msg_table_count']	= 'ADDED total <b>%s</b> TABLES SUCCESSFULLY';
 $_['msg_table_engine']		= 'In Table <b>%s</b> is table engine changed <em>MyISAM</em>';
 $_['msg_table_engine_checked']	= 'Table Engine in table <b>%s</b> is checked';
 $_['msg_text']			= 'Table <b>%s</b> - %s';
+$_['msg_upgrade_to_version']	= 'Database Tables is added to version <b>%s</b> - %s level.';
 ?>
