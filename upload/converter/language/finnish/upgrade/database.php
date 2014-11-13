@@ -55,4 +55,5 @@ $_['msg_table_count']	= 'Lisätty yhteensä <b>%s</b> taulua onnistuneesti';
 $_['msg_table_engine']          = 'Taulun <b>%s</b> tietokanta-moottoriksi on vaihdettu <em>MyISAM</em>';
 $_['msg_table_engine_checked']  = 'Taulun <b>%s</b> tietokanta-moottori on tarkistettu';
 $_['msg_text']			= 'Taulussa <b>%s</b> - %s';
+$_['msg_upgrade_to_version']	= 'Tietokannan taulut on lisätty version <b>%s</b> - %s tasolle.';
 ?>
