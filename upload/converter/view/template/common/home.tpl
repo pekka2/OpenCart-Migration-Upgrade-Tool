@@ -53,7 +53,7 @@ If you choose method A, follow these steps:
 	1.	copy the whole content of this package inside the folder UPLOAD
 		into your shopsoftware root
 		It should then look like: ../converter
-	2.	start the converter via http://YOURSHOP/converter/converter.php
+	2.	start the converter via http://YOURSHOP/converter/index.php
 	3.	follow the instructions on the screen
 
 If you choose method B, follow these steps:
@@ -66,7 +66,7 @@ If you choose method B, follow these steps:
 		into the new folder
 	4.	copy ../config.php and ../admin/config.php from your old shop
 		into the new folder
-	5.	start the converter via http://YOURSHOP/converter/converter.php
+	5.	start the converter via http://YOURSHOP/converter/index.php
 	6.	follow the instructions on the screen
 
 Guarantee / Warranty / Non-Warranty Clause
