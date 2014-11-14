@@ -159,17 +159,17 @@ class ModelUpgradeTableColumns extends Model{
 		array(
                         'table'        => 'product',
 			'field'		=> 'mpn',
-			'column'	=> ' varchar(14) NOT NULL AFTER upc'
+			'column'	=> ' varchar(64) NOT NULL AFTER upc'
 		),
 		array(
                         'table'        => 'product',
 			'field'		=> 'isbn',
-			'column'	=> ' varchar(14) NOT NULL AFTER upc'
+			'column'	=> ' varchar(17) NOT NULL AFTER upc'
 		),
 		array(
                         'table'        => 'product',
 			'field'		=> 'jan',
-			'column'	=> ' varchar(14) NOT NULL AFTER upc'
+			'column'	=> ' varchar(13) NOT NULL AFTER upc'
 		),
 		array(
                         'table'        => 'product',
