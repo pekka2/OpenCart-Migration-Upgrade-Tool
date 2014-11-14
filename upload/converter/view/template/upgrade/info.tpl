@@ -20,6 +20,11 @@
    
     <div class="block">
        <label>
+         <i><u> <?php echo $text_your_database;?> <?php echo $text_database;?> </u></i>
+       </label>
+    </div>
+    <div class="block">
+       <label>
           <?php echo $text_your_db_tables;?> <?php echo $your_database_tables;?>
        </label>
     </div>
