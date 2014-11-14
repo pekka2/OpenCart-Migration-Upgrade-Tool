@@ -23,6 +23,8 @@ class ControllerUpgradeInfo extends Controller {
                 $this->data['text_your_db_tables'] = $this->language->get('text_your_db_tables');
                 $this->data['text_oc2_db_tables'] = $this->language->get('text_oc2_db_tables');
                 $this->data['text_expired_tables'] = $this->language->get('text_expired_tables');
+                $this->data['text_your_database'] = $this->language->get('text_your_database');
+                $this->data['text_database'] = DB_DATABASE;
                 $this->data['button_database'] = $this->language->get('button_database');
 
 		$this->data['button_permission'] = $this->language->get('button_permission');
