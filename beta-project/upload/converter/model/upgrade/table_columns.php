@@ -928,7 +928,6 @@ class ModelUpgradeTableColumns extends Model{
                         }
                 }
 	}
-	}
      }
 
 
