@@ -7,6 +7,7 @@ class ModelUpgradeSettings extends Model{
 	 */
   private $settincounter = 0;
   private $converter_modules = array();
+  private $converter_serialize_modules = array();
   private $lang;
   private $settings = array();
 
@@ -154,7 +155,7 @@ class ModelUpgradeSettings extends Model{
 					'module'	=> $mod['group'],
 					'layout'	=> $mod['value'][$j]['layout_id'],
 					'position'	=> $mod['value'][$j]['position'],
-					'sort_order'=> $mod['value'][$j]['sort_order'],
+					'sort_order'    => $mod['value'][$j]['sort_order'],
 					'code'		=> $code
 				);
 		   }
@@ -243,13 +244,13 @@ class ModelUpgradeSettings extends Model{
 
        $text .= $this->newSettings();
 
-            $for_mod = array('account','affiliate','banner', 'bestseller','category','featured','information','latest','slideshow');
-            $for_mod2 = array('account','affiliate','category','information');
-            $for_mod3 = array('banner','bestseller','featured','latest','slideshow','special');
+            $for_mod = array('account','affiliate','banner', 'bestseller','category','featured','information','latest','slideshow'); // all
+            $for_mod2 = array('account','affiliate','category','information'); // no serialized
+            $for_mod3 = array('banner','bestseller','featured','latest','slideshow','special'); // serialized
 
            $settings = array();
 
-      for($i = 0;$i<count($for_mod);$i++){
+           for($i = 0;$i<count($for_mod);$i++){
      
              $sql = '
              SELECT 
@@ -267,14 +268,8 @@ class ModelUpgradeSettings extends Model{
              }
         }
 
-              
-        for($i=0;$i<count($for_mod);$i++){  
-
-               $this->getSettings($for_mod[$i]);
-        }
-
-
         for($i=0;$i<count($for_mod2);$i++){  
+               $this->getSettings($for_mod2[$i],0);
                        
            if( !$this->simulate ) {
               $this->deleteSettingGroup($for_mod2[$i]);
@@ -284,12 +279,13 @@ class ModelUpgradeSettings extends Model{
                                               
        }
        for($i=0;$i<count($for_mod3);$i++){  
+               $this->getSettings($for_mod3[$i],1);
     
           if( !$this->simulate ) {
              $this->deleteSettingGroup($for_mod3[$i]);
           }
            
-             $text .= $this->insertArr( $for_mod3[$i] ); 
+             $text .= $this->insertSerial( $for_mod3[$i] ); 
                                    
         } 
 
@@ -316,7 +312,7 @@ class ModelUpgradeSettings extends Model{
    $config_mail['smtp_timeout'] = ( !empty( $configs6->row['value'] ) ) ? $configs6->row['value'] : '';
 
       $sql = "INSERT INTO " . DB_PREFIX . "setting SET
-                          `group`=
+                          `group`= 'config',
                           `key` = 'config_mail',
                           `value` = '" . serialize($config_mail) ."',
                           `serialized` = '1'";
@@ -336,7 +332,7 @@ class ModelUpgradeSettings extends Model{
       }
     }
 
-  public function getSettings( $key ){                            
+  public function getSettings( $key, $arr = '' ){                            
          if( isset( $this->settings[0][$key] ) && isset( $this->settings[0][$key][$key . '_0_position'] ) || isset($this->settings[0][$key][$key . '_1_position'] ) ){
 
                   $keys = array_keys( $this->settings[0][$key] );
@@ -363,8 +359,12 @@ class ModelUpgradeSettings extends Model{
                                array_shift( $x );
                                       
                                $x = implode( '_',$x );
-                                                                                                                  
-                              $this->converter_modules[$key][$con{$i}[1]][$x] = $this->settings[0][$key][$keys[$i]];  
+                              if( $arr == 0 ){                                                                                    
+                               $this->converter_modules[$key][$con{$i}[1]][$x] = $this->settings[0][$key][$keys[$i]];  
+                              }
+                              if( $arr == 1 ){                                                                                    
+                               $this->converter_serialize_modules[$key][$con{$i}[1]][$x] = $this->settings[0][$key][$keys[$i]];  
+                              }
                                                                                                             
                          }
                  }
@@ -373,16 +373,13 @@ class ModelUpgradeSettings extends Model{
 
   public function insertStr( $key ){
         $text = '';
+          if( !empty( $this->converter_modules )  ) {           
 
-          if( count( $this->converter_modules ) > 0 ) {                                    
-           if( isset( $this->converter_modules[$key . '_module'][1]['status'] ) ){      
-                               
-                        $value = $this->converter_modules[$key . '_module'][1]['status'];
+           if( !empty( $this->converter_modules[$key] ) ){      
+                       $keys = array_keys( $this->converter_modules[$key] );
+                        $value = $this->converter_modules[$key ][$keys[0]]['status'];
                                                                
-             } elseif ( isset($this->converter_modules[$key . '_module'][0]['status'] ) ){   
-                                                                                    
-                     $value = $this->converter_modules[$key . '_module'][0]['status'];                                             
-         } 
+          }     
         if( isset( $value ) ){
   
    /*
@@ -432,26 +429,20 @@ class ModelUpgradeSettings extends Model{
    }        
     return $text;             
   }
-  public function insertArr( $key ){
+  public function insertSerial( $key ){
         $text = '';
-  if( count($this->converter_modules) > 0 ) {           
+  if( !empty( $this->converter_serialize_modules) ) {           
   
-   if( isset($this->converter_modules[$key] ) && count( $this->converter_modules[$key] ) > 0 ){
-   
-        if(isset($this->converter_modules[$key][1]['status'])){
-
-            $value = $this->converter_modules[$key][1]['status'];
-
-        } elseif(isset($this->converter_modules[$key][0]['status'])){
-
-             $value = $this->converter_modules[$key][0]['status'];
-        } 
+   if( !empty( $this->converter_serialize_modules[$key] ) ){
+           $keys = array_keys( $this->converter_serialize_modules[$key] );
+            $value = $this->converter_serialize_modules[$key][$keys[0]]['status'];
+    
    /*
     * Insert module status to table setting
     *
     */
 
-    if( isset( $value ) ){
+    if( !empty( $value ) ){
                                                                                             
          $sql = "INSERT INTO
                           " . DB_PREFIX ."setting SET
@@ -474,24 +465,22 @@ class ModelUpgradeSettings extends Model{
 
         $settings = array();
                  
-  for( $i = min( array_keys( $this->converter_modules[$key] ) ); $i<count( $this->converter_modules[$key] );$i++ ){
-    if (!isset($this->converter_modules[$key]['product'])) { 
+  for( $i = min( array_keys( $this->converter_serialize_modules[$key] ) ); $i<count( $this->converter_serialize_modules[$key] );$i++ ){
+    if (!isset($this->converter_serialize_modules[$key]['product'])) { 
  
    /*
     * Insert module layouts to table layout_module
     *
-    */    
-   $this->converter_modules[$key][$i]['position'] = str_replace('left', 'column_left',$this->converter_modules[$key][$i]['position']);  
-   $this->converter_modules[$key][$i]['position'] = str_replace('right', 'column_right',$this->converter_modules[$key][$i]['position']);  
-   $this->converter_modules[$key][$i]['position'] = str_replace('column_column_', 'column_',$this->converter_modules[$key][$i]['position']);    
+    */ 
+
        $sql = "
               INSERT INTO 
                           " . DB_PREFIX . "layout_module
               SET
-                        `layout_id`= '" . $this->converter_modules[$key][$i]['layout_id'] . "',
+                        `layout_id`= '" . $this->converter_serialize_modules[$key][$i]['layout_id'] . "',
                         `code` = '" . $key . ".0',
-                        `position`= '" . $this->converter_modules[$key][$i]['position'] . "',
-                        `sort_order`='" .$this->converter_modules[$key][$i]['sort_order'] . "'";
+                        `position`= '" . $this->converter_serialize_modules[$key][$i]['position'] . "',
+                        `sort_order`='" .$this->converter_serialize_modules[$key][$i]['sort_order'] . "'";
 
 	if( !$this->simulate ) {
                $this->db->query( $sql );
@@ -504,28 +493,28 @@ class ModelUpgradeSettings extends Model{
 
       $setting = array();
                                                                             
-     if( isset( $this->converter_modules[$key][$i]['width'] ) && isset( $this->converter_modules[$key][$i]['height'] ) ){
+     if( isset( $this->converter_serialize_modules[$key][$i]['width'] ) && isset( $this->converter_serialize_modules[$key][$i]['height'] ) ){
                                                                                                                     
-           $setting = array( "width"=> $this->converter_modules[$key][$i]['width'],
-                            "height"=> $this->converter_modules[$key][$i]['height'] );
+           $setting = array( "width"=> $this->converter_serialize_modules[$key][$i]['width'],
+                            "height"=> $this->converter_serialize_modules[$key][$i]['height'] );
                                                                                                                      
       }                                                                        
-     if( isset( $this->converter_modules[$key][$i]['image_width'] ) && isset( $this->converter_modules[$key][$i]['image_height'] ) ){
+     if( isset( $this->converter_serialize_modules[$key][$i]['image_width'] ) && isset( $this->converter_serialize_modules[$key][$i]['image_height'] ) ){
                                                                                                                     
-           $setting = array( "width"=> $this->converter_modules[$key][$i]['image_width'],
-                             "height"=> $this->converter_modules[$key][$i]['image_height'] );
+           $setting = array( "width"=> $this->converter_serialize_modules[$key][$i]['image_width'],
+                             "height"=> $this->converter_serialize_modules[$key][$i]['image_height'] );
                                                                                                                      
       }  
   
-      if( isset( $this->converter_modules[$key][$i]['banner_id'])){
+      if( isset( $this->converter_serialize_modules[$key][$i]['banner_id'])){
                                                                                               
-           $setting =   array_merge( $setting, array( "banner_id"=> $this->converter_modules[$key][$i]['banner_id'] ) );
+           $setting =   array_merge( $setting, array( "banner_id"=> $this->converter_serialize_modules[$key][$i]['banner_id'] ) );
                                                                                                           
       }
 
-      if( isset( $this->converter_modules[$key][$i]['limit'] ) ){
+      if( isset( $this->converter_serialize_modules[$key][$i]['limit'] ) ){
                                                                                               
-           $setting =   array_merge( $setting, array( "limit"=> $this->converter_modules[$key][$i]['limit'] ) );
+           $setting =   array_merge( $setting, array( "limit"=> $this->converter_serialize_modules[$key][$i]['limit'] ) );
                                                                                                           
       }
           $settings[] = $setting;
@@ -556,10 +545,9 @@ class ModelUpgradeSettings extends Model{
 	$text .= $this->msg( sprintf( $this->lang['msg_config'], $key. '_module', '' ) );
     
                 }                                                                         
-              }                                                                      
-            }                                   
+              }                                  
        }    
-
+   }
         $text .= $this->deleteSettings();
 	$text .= $this->msg( sprintf( $this->lang['msg_config'], 'msg_end_converter_setting', '' ) );
             return $text;                                       
