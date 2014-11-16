@@ -11,5 +11,5 @@ legend
 
 CONVERTER
 ---------
-1.1.3Beta 2014.11.15      + support versions 1.4.9x
-1.1.2     2014.11.13        base release
+1.1.x Beta 2014.11.15      + support versions 1.4.9x
+1.1.2      2014.11.13        base release
