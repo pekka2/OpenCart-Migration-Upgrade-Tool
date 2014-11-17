@@ -391,6 +391,11 @@ class ModelUpgradeSettings extends Model{
           $sort_order = $this->config->get( $mod . '_0_sort_order' );
           $position = $this->config->get( $mod . '_0_position' );
           
+          $module[0]['limit'] = $this->config->get( $mod . '_0_limit' );
+          $module[0]['width'] = $this->config->get( $mod . '_0_image_width' );
+          $module[0]['height'] = $this->config->get( $mod . '_0_image_height' );
+
+         $str = serialize($module);
 
         }
           if( $str ){
