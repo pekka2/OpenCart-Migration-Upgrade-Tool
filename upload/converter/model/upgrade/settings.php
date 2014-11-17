@@ -9,184 +9,110 @@ class ModelUpgradeSettings extends Model{
   private $converter_modules = array();
   private $converter_serialize_modules = array();
   private $lang;
+  private $simulate;
+  private $showOps;
   private $settings = array();
 
-  public function version151orNewer( $data ){
+   private function array_splice_assoc(&$input, $offset, $length, $replacement) {
+        $replacement = (array) $replacement;
+        $key_indices = array_flip(array_keys($input));
+        if (isset($input[$offset]) && is_string($offset)) {
+                $offset = $key_indices[$offset];
+        }
+        if (isset($input[$length]) && is_string($length)) {
+                $length = $key_indices[$length] - $offset;
+        }
 
-
+        $input = array_slice($input, 0, $offset, TRUE)
+                + $replacement
+                + array_slice($input, $offset + $length, NULL, TRUE);
+   }
+  public function getChangeModule( $data ){
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
+        $this->lang = $this->lmodel->get('upgrade_database');
 
-    if( array_search( 'serialized', $this->getDbColumns( 'setting' ) )) {
-       $this->lang = $this->lmodel->get('upgrade_database');
+        $text = '';
+  if( !$this->hasSetting( 'config_complete_status' ) ){
+     /* No serialized modules */
+     $text .= $this->getChangeModules( 'category' );
+     $text .= $this->getChangeModules( 'account' );
+     $text .= $this->getChangeModules( 'information' );
+     $text .= $this->getChangeModules( 'affiliate' );
+     /* Serialized modules */
+     $text .= $this->getChangeSerializeModule( 'bestseller' );
+     $text .= $this->getChangeSerializeModule( 'latest' );
+     $text .= $this->getChangeSerializeModule( 'special' );
+     $text .= $this->getFeatured();
+     $text .= $this->getCarousel();
+     $text .= $this->getSlideshow();
+     /* new config settings */
+     $text .= $this->getConfigMail();
+     $text .= $this->newSettings();
+  }
+     return $text;
+  }
 
-        $text = $this->newSettings();
+  public function getFeatured(){
+        $text = '';
+        $str = '';
+        $status = 0;
+         $module = array();
+	if( $this->hasSetting( 'featured_product' ) && !$this->hasSetting( 'featured_0_position' )) {
+        /*
+         * version 1.5.1 or newer
+         */
+         $product = explode(',',$this->config->get('featured_product') );
 
-	if( !$this->hasSetting( 'config_mail' ) ) {
-		$sql = '
-		INSERT INTO
-			`' . DB_PREFIX . 'setting`
-		SET
-			`store_id` = \'0\',
-			`group` = \'config\',
-			`key` = \'config_mail\',
-			`value` = \''. $this->db->escape( 'a:7:{s:8:"protocol";s:4:"mail";s:9:"parameter";s:0:"";s:13:"smtp_hostname";s:0:"";s:13:"smtp_username";s:0:"";s:13:"smtp_password";s:0:"";s:9:"smtp_port";s:0:"";s:12:"smtp_timeout";s:0:"";}') . '\',
-			`serialized` = \'1\'';
+          $module = $this->config->get( 'featured_module' );
+          $width = $module[0]['image_width'];
+          $height = $module[0]['image_height'];
+          $status = $module[0]['status'];
+          $layout_id = $module[0]['layout_id'];
+          $sort_order = $module[0]['sort_order'];
+          $position = $module[0]['position'];
+          
+         $count =  count($module[0]);
 
+         $hkey = 2;
+         $k = $count - $hkey;
+
+         $this->array_splice_assoc($module[0],'image_width',1, array('width' => $width ) );
+         $this->array_splice_assoc($module[0],'image_height', (int)$k , array('height' => $height ) );
+         $this->array_splice_assoc($module[0],'limit',0, array('product' => $product ) );
+
+         $str = serialize($module);
+        }
+	if( $this->hasSetting( 'featured_0_status' ) && $this->hasSetting( 'featured_0_position' )) {
+        /*
+         * version 1.5.0 - 1.5.0.5
+         */
+
+         $product = explode(',',$this->config->get('featured_product') );
+
+          $module[0]['product'] = array('product' => $product);
+          $module[0]['limit']   = count( $product );
+          $module[0]['width']   = $this->config->get( 'featured_0_image_width' );
+          $module[0]['height']  = $this->config->get( 'featured_0_image_height' );
+          $status = $this->config->get( 'featured_0_status' );
+          $layout_id = $this->config->get( 'featured_0_layout_id' );
+          $sort_order = $this->config->get( 'featured_0_sort_order' );
+          $position = $this->config->get( 'featured_0_position' );
+          
+         $str = serialize($module);
+
+        }
+          if( $str ){
 		if( !$this->simulate ) {
-                       $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->settingcounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_mail', '' ) );
-	}
-
-	$modules = array();
-
-	$sql = '
-	SELECT
-		*
-	FROM
-		`' . DB_PREFIX . 'setting`
-	WHERE
-		`key` LIKE \'%_module%\'';
-
-	$secure = $this->db->query( $sql );
-
-
-		foreach( $secure->rows as $module ) {
-			if( $module['serialized']  == 1 ) {
-				$modules[] = array(
-					'id'	=> $module['setting_id'],
-					'name'	=> $module['key'],
-					'group'	=> $module['group'],
-					'value'	=> unserialize( $module['value'] )
-				);
-			}
-		}
-
-	$module_layouts = array();
-
-	foreach( $modules as $mod ) {
-		 if( $mod['name'] == 'featured_module' ||
-                     $mod['name'] == 'bestseller_module' ||
-                     $mod['name'] == 'latest_module' ||
-                     $mod['name'] == 'special_module' ) {
-			// Update Featured module array keys
-			$count = count( $mod['value'] );
-			for( $i = 0; $i < $count; ++$i ) {
-				if( isset( $mod['value'][$i]['image_width'] ) ) {
-					$mod['value'][$i]['width'] =  $mod['value'][$i]['image_width'];
-				}else{
-					$mod['value'][$i]['width'] = 90;
-				}
-
-				if( isset( $mod['value'][$i]['image_height'] ) ) { // 10
-					$mod['value'][$i]['height'] =  $mod['value'][$i]['image_height'];
-				}else{
-					$mod['value'][$i]['height'] = 90;
-				}
-			}
-
-		$sql = '
-		UPDATE
-			`' . DB_PREFIX . 'setting`
-		SET
-		      `value` = \'' . serialize( $mod['value'] ) . '\'
-		WHERE
-			setting_id = \'' . $mod['id'] . '\'';
-
-               if( !$this->simulate ) {
-		      $this->db->query( $sql );
-	       }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-
-			$value = $mod['value'][0];
-
-	 if( $value['status'] == 1 ) {
-				$status = str_replace( 'module', 'status', $mod['name'] );
-
-		$sql = '
-		SELECT
-			*
-		FROM
-			`' . DB_PREFIX . 'setting`
-		WHERE
-			`key` = \'' . $status . '\'';
-
-		$modulestatus = $this->db->query( $sql );
-
-		if( count( $modulestatus->row ) == 0 ) {
-			$sql = '
-			INSERT INTO
-				`' . DB_PREFIX . 'setting`
-			SET
-				`store_id` = \'0\',
-				`group` = \'' . $mod['group'] . '\',
-				`key` = \'' . $status . '\',
-				`value` = \'1\',
-				`serialized` = \'0\'';
-
-                    if( !$this->simulate ) {
-		           $this->db->query( $sql );
-                    }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->settingcounter;
-
-		$text .= $this->msg( sprintf( $this->lang['msg_config'], $status, '' ) );
-			}
-		}
-
-		$count1 = count( $mod['value'] );
-	        for( $j = 0; $j < $count1; ++$j ) {
-				$code = '';
-
-			if( $mod['name'] != 'account_module' && $mod['name'] != 'category_module' && $mod['name'] !='information_module' && $mod['name'] != 'affiliate_module' ) {
-					$code = '.0';
-			}
-
-				$module_layouts[] = array(
-					'module'	=> $mod['group'],
-					'layout'	=> $mod['value'][$j]['layout_id'],
-					'position'	=> $mod['value'][$j]['position'],
-					'sort_order'    => $mod['value'][$j]['sort_order'],
-					'code'		=> $code
-				);
-		   }
-	  }
-
-		$sql = '
-		SELECT
-			*
-		FROM
-			`' . DB_PREFIX . 'layout_module`';
-               if( !$this->simulate ) {
-
-		$check = $this->db->query( $sql );
-
-               }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-
-
-       if( !isset( $check->row['code'] ) && count( $module_layouts ) > 0 ) {
-			$count = count( $module_layouts );
-	 for( $i = 0; $i < $count; ++$i ) {
-		$sql = '
+                  $this->deleteSettingGroup( 'featured' );
+                }   $sql = '
 			INSERT INTO
 				   `' . DB_PREFIX . 'layout_module`
 			SET
-				   `layout_id` = \'' . $module_layouts[$i]['layout'] . '\',
-				   `code`= \'' . $module_layouts[$i]['module'] .$module_layouts[$i]['code'] . '\',
-				   `position` = \'' . $module_layouts[$i]['position'] . '\',
-				   `sort_order` = \'' . $module_layouts[$i]['sort_order'] . '\'';
+				   `layout_id` = \'' . $layout_id . '\',
+				   `code`= \'featured.0\',
+				   `position` = \'' . $position . '\',
+				   `sort_order` = \'' . $sort_order . '\'';
 
             if( !$this->simulate ) {
 		   $this->db->query( $sql );
@@ -194,367 +120,518 @@ class ModelUpgradeSettings extends Model{
             if( $this->showOps ) {
                    $text .= '<p><pre>' . $sql .'</pre></p>';
            }
-	$text .= $this->msg( sprintf( $this->lang['msg_config'],  DB_PREFIX . 'layout_module', $module_layouts[$i]['module'] ) );
-	 }
-       }
-     } 
-
-      $text .= $this->deleteSettings();
-
-	$text .= $this->msg( sprintf( $this->lang['msg_new_setting'], $this->settingcounter, DB_PREFIX . 'setting', '') );
-
-	$text .= $this->msg( $this->lang['msg_end_converter_setting'] );
-
-     return $text;
-    }
-   }
-
-   /*
-    * Modules
-    * Olds Opencart versions, 1.5.0.5 or parent
-    *
-    */
-
-  public function version1505orParent( $data ){
-
-        $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
-        $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
-        $text = '';
-
-     if( !array_search( 'serialized', $this->getDbColumns( 'setting' ) ) ) {
-       $this->lang = $this->lmodel->get('upgrade_database');
-
-	$text .= $this->msg(  $this->lang['msg_converter_setting'] );
-    
+	$text .= $this->msg( sprintf( $this->lang['msg_config'], 'featured_module',  DB_PREFIX . 'layout_module' ) );
 
          $sql = '
-               ALTER TABLE
-                          `' . DB_PREFIX . 'setting`
-               ADD COLUMN
-                          serialized tinyint(1) NOT NULL';
-
-               if( !$this->simulate ) {
-                      $this->db->query( $sql );
-               }
-               if( $this->showOps ) {
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`group` = \'featured\',
+			`key` = \'featured_status\',
+			`value` = \'' . $status . '\',
+			`serialized`= \'0\'';
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
                       $text .= '<p><pre>' . $sql .'</pre></p>';
-               }
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'featured_status', DB_PREFIX . 'setting' ) );
 
-       $text .= $this->msg( sprintf( $this->lang['msg_config'],  'setting', 'column', 'serialized' ) );   
+         $sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`group` = \'featured\',
+			`key` = \'featured_module\',
+			`value` = \'' . $str . '\',
+			`serialized`= \'1\'';
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'featured_module', DB_PREFIX . 'setting' ) );
+         }
+   return $text;
+  }
 
-       $text .= $this->newSettings();
 
-            $for_mod = array('account','affiliate','banner', 'bestseller','category','featured','information','latest','slideshow'); // all
-            $for_mod2 = array('account','affiliate','category','information'); // no serialized
-            $for_mod3 = array('banner','bestseller','featured','latest','slideshow','special'); // serialized
+  public function getCarousel(){
+        $text = '';
+        $str = '';
+        $status = 0;
+         $module = array();
+	if( $this->config->get( 'carousel_module' ) ) {
+        /*
+         * version 1.5.1 or newer
+         */
 
-           $settings = array();
+          $module = $this->config->get( 'carousel_module' );
 
-           for($i = 0;$i<count($for_mod);$i++){
-     
-             $sql = '
-             SELECT 
-                    * 
-             FROM 
-                   ' . DB_PREFIX . 'setting 
-             WHERE `group` = \'' . $for_mod[$i].'\'';
-                                                
-             $query = $this->db->query( $sql ) or die (mysql_error());
+          $height = $module[0]['height'];
+          $status = $module[0]['status'];
+          $layout_id = $module[0]['layout_id'];
+          $sort_order = $module[0]['sort_order'];
+          $position = $module[0]['position'];
+          
+         $count =  count($module[0]);
 
-             foreach($query->rows as $result){
-                                                                                    
-                   $this->settings[0][$for_mod[$i]][$result['key']] = $result['value'];
-                                                             
-             }
+         $hkey = 3;
+         $k = $count - $hkey;
+
+         $this->array_splice_assoc($module[0],'height', (int)$k , array('height' => $height ) );
+
+         $str = serialize($module);
         }
 
-        for($i=0;$i<count($for_mod2);$i++){  
-               $this->getSettings($for_mod2[$i],0);
-                       
-           if( !$this->simulate ) {
-              $this->deleteSettingGroup($for_mod2[$i]);
+          if( $str ){
+		if( !$this->simulate ) {
+                  $this->deleteSettingGroup( 'carousel' );
+                }
+               $sql = '
+			INSERT INTO
+				   `' . DB_PREFIX . 'layout_module`
+			SET
+				   `layout_id` = \'' . $layout_id . '\',
+				   `code`= \'carousel.0\',
+				   `position` = \'' . $position . '\',
+				   `sort_order` = \'' . $sort_order . '\'';
+
+            if( !$this->simulate ) {
+		   $this->db->query( $sql );
+            }
+            if( $this->showOps ) {
+                   $text .= '<p><pre>' . $sql .'</pre></p>';
            }
-            
-              $text .= $this->insertStr( $for_mod2[$i] );
-                                              
-       }
-       for($i=0;$i<count($for_mod3);$i++){  
-               $this->getSettings($for_mod3[$i],1);
-    
-          if( !$this->simulate ) {
-             $this->deleteSettingGroup($for_mod3[$i]);
-          }
-           
-             $text .= $this->insertSerial( $for_mod3[$i] ); 
-                                   
-        } 
+	$text .= $this->msg( sprintf( $this->lang['msg_config'], 'carousel_module',  DB_PREFIX . 'layout_module' ) );
+         $sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`group` = \'carousel\',
+			`key` = \'carousel_status\',
+			`value` = \'' . $status . '\',
+			`serialized`= \'0\'';
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'carousel_status', DB_PREFIX . 'setting' ) );
 
-    if( !$this->simulate ) {
-           $this->deleteSettingGroup('manufacturer');
-    }
+         $sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`group` = \'carousel\',
+			`key` = \'carousel_module\',
+			`value` = \'' . $str . '\',
+			`serialized`= \'1\'';
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'carousel_module', DB_PREFIX . 'setting' ) );
+  }
+   return $text;
+  }
+
+  public function getSlideshow(){
+
+        $text = '';
+        $str = '';
+        $status = 0;
+         $module = array();
+	if( $this->hasSetting( 'slideshow_module' ) && !$this->hasSetting( 'slideshow_0_position' )) {
+        /*
+         * version 1.5.1 or newer
+         */
+
+          $module = $this->config->get( 'slideshow_module' );
+          $height = $module[0]['height'];
+          $status = $module[0]['status'];
+          $layout_id = $module[0]['layout_id'];
+          $sort_order = $module[0]['sort_order'];
+          $position = $module[0]['position'];
+          
+         $count =  count($module[0]);
+
+         $hkey = 2;
+         $k = $count - $hkey;
+
+         $this->array_splice_assoc($module[0],'height', (int)$k , array('height' => $height ) );
+
+         $str = serialize($module);
+        }
+
+	if( $this->hasSetting( 'slideshow_0_width' ) && $this->hasSetting( 'slideshow_0_position' )) {
+         /* version 1.5.0x */
+          $module[0]['banner_id']   = $this->config->get( 'slideshow_0_banner_id' );
+          $module[0]['width']   = $this->config->get( 'slideshow_0_image_width' );
+          $module[0]['height']  = $this->config->get( 'slideshow_0_image_height' );
+          $status = $this->config->get( 'slideshow_0_status' );
+          $layout_id = $this->config->get( 'slideshow_0_layout_id' );
+          $sort_order = $this->config->get( 'slideshow_0_sort_order' );
+          $position = $this->config->get( 'slideshow_0_position' );
+          
+         $str = serialize($module);
+         }
+          if( $str ){
+		if( !$this->simulate ) {
+                  $this->deleteSettingGroup( 'slideshow' );
+                }
+               $sql = '
+			INSERT INTO
+				   `' . DB_PREFIX . 'layout_module`
+			SET
+				   `layout_id` = \'' . $layout_id . '\',
+				   `code`= \'slideshow.0\',
+				   `position` = \'' . $position . '\',
+				   `sort_order` = \'' . $sort_order . '\'';
+
+            if( !$this->simulate ) {
+		   $this->db->query( $sql );
+            }
+            if( $this->showOps ) {
+                   $text .= '<p><pre>' . $sql .'</pre></p>';
+           }
+	$text .= $this->msg( sprintf( $this->lang['msg_config'], 'slideshow_module',  DB_PREFIX . 'layout_module' ) );
+         $sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`group` = \'slideshow\',
+			`key` = \'slideshow_status\',
+			`value` = \'' . $status . '\',
+			`serialized`= \'0\'';
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'slideshow_status', DB_PREFIX . 'setting' ) );
+
+         $sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`group` = \'slideshow\',
+			`key` = \'slideshow_module\',
+			`value` = \'' . $str . '\',
+			`serialized`= \'1\'';
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'slideshow_module', DB_PREFIX . 'setting' ) );
+         }
+   return $text;
+  }
+
+
+  public function getChangeSerializeModule($mod){
+     /*
+      * This is modules 'bestseller', 'latest' and 'special'
+      */
+        $text = '';
+        $str = '';
+        $status = 0;
+        $module = array();
+
+	if( $this->config->get( $mod . '_module' ) && !$this->hasSetting( $mod . '_0_position' )) {
+        /*
+         * version 1.5.1 or newer
+         */
+          $module = $this->config->get( $mod . '_module' );
+          $width = $module[0]['image_width'];
+          $height = $module[0]['image_height'];
+          $status = $module[0]['status'];
+          $layout_id = $module[0]['layout_id'];
+          $sort_order = $module[0]['sort_order'];
+          $position = $module[0]['position'];
+          
+         $count =  count($module[0]);
+
+         $hkey = 2;
+         $k = $count - $hkey;
+
+         $this->array_splice_assoc($module[0],'image_width',1, array('width' => $width ) );
+         $this->array_splice_assoc($module[0],'image_height', (int)$k , array('height' => $height ) );
+
+         $str = serialize($module);
+        }
+
+	if( $this->config->get( $mod . '_0_status' ) && $this->hasSetting( $mod . '_0_position' )) {
+        /*
+         * version 1.5.0 - 1.5.0.5
+         */
+
+          $status = $this->config->get( $mod . '_0_status' );
+          $layout_id = $this->config->get( $mod . '_0_layout_id' );
+          $sort_order = $this->config->get( $mod . '_0_sort_order' );
+          $position = $this->config->get( $mod . '_0_position' );
+          
+
+        }
+          if( $str ){
+		if( !$this->simulate ) {
+                  $this->deleteSettingGroup( $mod );
+                }
+               $sql = '
+			INSERT INTO
+				   `' . DB_PREFIX . 'layout_module`
+			SET
+				   `layout_id` = \'' . $layout_id . '\',
+				   `code`= \'' . $mod . '.0\',
+				   `position` = \'' . $position . '\',
+				   `sort_order` = \'' . $sort_order . '\'';
+
+            if( !$this->simulate ) {
+		   $this->db->query( $sql );
+            }
+            if( $this->showOps ) {
+                   $text .= '<p><pre>' . $sql .'</pre></p>';
+           }
+	$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module',  DB_PREFIX . 'layout_module' ) );
+
+         $sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`group` = \'' . $mod . '\',
+			`key` = \'' . $mod . '_status\',
+			`value` = \'' . $status . '\',
+			`serialized`= \'0\'';
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_status', DB_PREFIX . 'setting' ) );
+
+         $sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`group` = \'' . $mod . '\',
+			`key` = \'' . $mod . '_module\',
+			`value` = \'' . $str . '\',
+			`serialized`= \'1\'';
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module', DB_PREFIX . 'setting' ) );
+         }
+   return $text;
+  }
+
+
+  private function getChangeModules( $mod ){
+     /*
+      * This is modules 'category', 'account', 'affiliate' and 'information'
+      */
+        $text = '';
+        $str = '';
+        $status = 0;
+         $module = array();
+	if( $this->config->get( $mod . '_module' ) && !$this->hasSetting( $mod . '_0_position' ) && !$this->hasSetting( $mod . '_1_position' )) {
+        /*
+         * version 1.5.1 or newer
+         */
+
+          $module = $this->config->get( $mod . '_module' );
+          $status = $module[0]['status'];
+          $layout_id = $module[0]['layout_id'];
+          $sort_order = $module[0]['sort_order'];
+          $position = $module[0]['position'];
+
+		if( !$this->simulate ) {
+                  $this->deleteSettingGroup( $mod );
+                }
+         foreach($module as $one){
+          $sql = '
+			INSERT INTO
+				   `' . DB_PREFIX . 'layout_module`
+			SET
+				   `layout_id` = \'' . $one['layout_id'] . '\',
+				   `code`= \'' . $mod . '\',
+				   `position` = \'' . $one['position'] . '\',
+                                   `sort_order` = \'' . $one['sort_order'] . '\'';
+            if( !$this->simulate ) {
+		   $this->db->query( $sql );
+            }
+            if( $this->showOps ) {
+                   $text .= '<p><pre>' . $sql .'</pre></p>';
+            }
+	   $text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module',  DB_PREFIX . 'layout_module' ) );
+         }
+
+         $sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`group` = \'' . $mod . '\',
+			`key` = \'' . $mod . '_status\',
+			`value` = \'' . $status . '\',
+			`serialized`= \'0\'';
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_status', DB_PREFIX . 'setting' ) );
+        }
+
+	if( $this->config->get( $mod . '_0_layout_id' ) ||  $this->config->get( $mod . '_1_layout_id' )) {
          
+          $module = $this->config->get( $mod . '_module' );
+          if( $this->config->get( $mod . '_0_layout_id' )){
+           $pos = strpos($module, ',' );
+           $up = array( 0 =>'0');
+           
+          } elseif( $this->config->get( $mod . '_1_layout_id' )){
+       
+           $pos = strpos($module,',');
 
-    $config_mail = array();
+             if($pos){
+               $up = explode(',',$module);
+             } else {
+              $up = array( 0 =>'1');
+            }
+          }
 
-    $configs = $this->db->query("SELECT * FROM ".DB_PREFIX . "setting WHERE `key` = 'config_mail_protocol'");
-    $configs2 = $this->db->query("SELECT * FROM ".DB_PREFIX . "setting WHERE `key` = 'config_smtp_hostname'");
-    $configs3 = $this->db->query("SELECT * FROM ".DB_PREFIX . "setting WHERE `key` = 'config_smtp_username'");
-    $configs4 = $this->db->query("SELECT * FROM ".DB_PREFIX . "setting WHERE `key` = 'config_smtp_password'");
-    $configs5 = $this->db->query("SELECT * FROM ".DB_PREFIX . "setting WHERE `key` = 'config_smtp_port'");
-    $configs6 = $this->db->query("SELECT * FROM ".DB_PREFIX . "setting WHERE `key` = 'config_smtp_timeout'");
+             for( $i=0;$i<count($up);$i++){
+                 if( $i == 0){
+                   $status = $this->config->get( $mod .'_' . $up[$i] .'_status');
+                }
+               //  $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
+                if(!$this->config->get( $mod . '_' . $up[$i] . '_sort_order') ){
+                 $sort_order = 1;
+                }else{
+                  $sort_order = $this->config->get( $mod . '_' . $up[$i] . '_sort_order');
+                }
 
-   $config_mail['protocol'] = ( !empty( $configs->row['value'] ) ) ? $configs->row['value'] : '';
-   $config_mail['parameter'] = '';
-   $config_mail['smtp_hostname'] = ( !empty( $configs2->row['value'] ) ) ? $configs2->row['value'] : '';
-   $config_mail['smtp_username'] = ( !empty( $configs3->row['value'] ) ) ? $configs3->row['value'] : '';
-   $config_mail['smtp_password'] = ( !empty( $configs4->row['value'] ) ) ? $configs4->row['value'] : '';
-   $config_mail['smtp_port'] = ( !empty( $configs5->row['value'] ) ) ? $configs5->row['value'] : '';
-   $config_mail['smtp_timeout'] = ( !empty( $configs6->row['value'] ) ) ? $configs6->row['value'] : '';
+                 $sql = '
+			INSERT INTO
+				   `' . DB_PREFIX . 'layout_module`
+			SET
+				   `layout_id` = \'' . $this->config->get( $mod .'_' . $up[$i] .'_layout_id') . '\',
+				   `code`= \'' . $mod . '\',
+				   `position` = \'' . $this->config->get( $mod .'_' . $up[$i] .'_position') . '\',
+                                   `sort_order` = \'' . $sort_order . '\'';
 
-      $sql = "INSERT INTO " . DB_PREFIX . "setting SET
+            if( !$this->simulate ) {
+		   $this->db->query( $sql );
+            }
+            if( $this->showOps ) {
+                   $text .= '<p><pre>' . $sql .'</pre></p>';
+            }
+
+	$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module',  DB_PREFIX . 'layout_module' ) );
+        }
+
+		if( !$this->simulate ) {
+                  $this->deleteSettingGroup( $mod );
+                }
+        $sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`group` = \'' . $mod . '\',
+			`key` = \'' . $mod . '_status\',
+			`value` = \'' . $status . '\',
+			`serialized`= \'0\'';
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_status', DB_PREFIX . 'setting' ) );
+          } 
+
+    return $text;
+   }
+
+   private function getConfigMail(){
+     $text = '';
+    if( $this->config->get('config_mail_protocol') && !$this->hasSetting('config_mail') ){
+      $config_mail = array();
+
+       $configs = $this->config->get('config_mail_protocol');
+       $configs2 = $this->config->get('config_smtp_hostname');
+       $configs3 = $this->config->get('config_smtp_username');
+       $configs4 = $this->config->get('config_smtp_password');
+       $configs5 = $this->config->get('config_smtp_port');
+       $configs6 = $this->config->get('config_smtp_timeout');
+
+       $config_mail['protocol'] = ( !empty( $configs ) ) ? $configs : '';
+       $config_mail['parameter'] = $this->config->get('config_mail_parameter');
+       $config_mail['smtp_hostname'] = ( !empty( $configs2 ) ) ? $configs2 : '';
+       $config_mail['smtp_username'] = ( !empty( $configs3 ) ) ? $configs3 : '';
+       $config_mail['smtp_password'] = ( !empty( $configs4 ) ) ? $configs4 : '';
+       $config_mail['smtp_port'] = ( !empty( $configs5 ) ) ? $configs5 : '';
+       $config_mail['smtp_timeout'] = ( !empty( $configs6 ) ) ? $configs6 : '';
+ 
+
+      $sql = "
+             INSERT INTO 
+                        " . DB_PREFIX . "setting
+             SET
                           `group`= 'config',
                           `key` = 'config_mail',
                           `value` = '" . serialize($config_mail) ."',
                           `serialized` = '1'";
           
-               if( !$this->simulate ) {
+                if( !$this->simulate ) {
 		      $this->db->query( $sql );
-               }
+                }
                 if( $this->showOps ) {
                       $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 		++$this->settingcounter;
        $text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_mail', '' ) );
 
-       $text .= $this->deleteSettings();
 
-       return $text;
-      }
-    }
-
-  public function getSettings( $key, $arr = '' ){                            
-         if( isset( $this->settings[0][$key] ) && isset( $this->settings[0][$key][$key . '_0_position'] ) || isset($this->settings[0][$key][$key . '_1_position'] ) ){
-
-                  $keys = array_keys( $this->settings[0][$key] );
-                  $ky = array_search( $key . '_module',$keys );
-
-                   if(count($keys) > $ky+1){        
-
-                         $str = $keys[$ky+1];
-                         array_splice($keys,$ky,1,$str); 
-                                                                        
-                  } else {
-                                                                                              
-                         array_pop( $keys );
-
-                  }
-
-                  for($i=0;$i<count( $keys );$i++ ){
-                           if( strpos( $keys[$i],'_' ) ){
-                                                                                            
-                               $con{$i} = explode( '_',$keys[$i] );
-                               $x = $con{$i};
-                                            
-                               array_shift( $x );
-                               array_shift( $x );
-                                      
-                               $x = implode( '_',$x );
-                              if( $arr == 0 ){                                                                                    
-                               $this->converter_modules[$key][$con{$i}[1]][$x] = $this->settings[0][$key][$keys[$i]];  
-                              }
-                              if( $arr == 1 ){                                                                                    
-                               $this->converter_serialize_modules[$key][$con{$i}[1]][$x] = $this->settings[0][$key][$keys[$i]];  
-                              }
-                                                                                                            
-                         }
-                 }
-           }                                  
-  }
-
-  public function insertStr( $key ){
-        $text = '';
-          if( !empty( $this->converter_modules )  ) {           
-
-           if( !empty( $this->converter_modules[$key] ) ){      
-                       $keys = array_keys( $this->converter_modules[$key] );
-                        $value = $this->converter_modules[$key ][$keys[0]]['status'];
-                                                               
-          }     
-        if( isset( $value ) ){
-  
-   /*
-    * Insert module status to table setting
-    *
-    */                                                                   
-                  $sql = "INSERT INTO
-                            " . DB_PREFIX ."setting SET
-                                      `store_id` = '0',
-                                      `group`= '" . $key . "',
-                                      `key` = '" . $key . "_status',
-                                      `value` = '" . $value ."',
-                                      `serialized` = '0'";
-                                                
-	if( !$this->simulate ) {
-               $this->db->query( $sql );
-        }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-	++$this->settingcounter;
-	$text .= $this->msg( sprintf( $this->lang['msg_config'], $key. $key .'_status', '' ) );
-      }
-
-   /*
-    * Insert module layouts to table layout_module
-    *
-    */ 
-       for( $i=min( array_keys( $this->converter_modules[$key] ) );$i<count($this->converter_modules[$key]);$i++ ){
-           $sql = "INSERT INTO 
-                    " . DB_PREFIX . "layout_module SET
-                      `layout_id`= '" . $this->converter_modules[$key][$i]['layout_id'] . "',
-                      `code` = '" . $key . "',
-                      `position`= '" .$this->converter_modules[$key][$i]['position'] . "',
-                      `sort_order`='" .$this->converter_modules[$key][$i]['sort_order'] . "'";
-                    
-	if( !$this->simulate ) {
-               $this->db->query( $sql );
-        }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-	++$this->settingcounter;
-	$text .= $this->msg( sprintf( $this->lang['msg_config'],  DB_PREFIX . 'layout_module', $key .'_module', '' ) );
-      }
-
-   }        
-    return $text;             
-  }
-  public function insertSerial( $key ){
-        $text = '';
-  if( !empty( $this->converter_serialize_modules) ) {           
-  
-   if( !empty( $this->converter_serialize_modules[$key] ) ){
-           $keys = array_keys( $this->converter_serialize_modules[$key] );
-            $value = $this->converter_serialize_modules[$key][$keys[0]]['status'];
-    
-   /*
-    * Insert module status to table setting
-    *
-    */
-
-    if( !empty( $value ) ){
-                                                                                            
-         $sql = "INSERT INTO
-                          " . DB_PREFIX ."setting SET
-                            `store_id`   = '0',
-                            `group`      = '" . $key . "',
-                            `key`        = '" . $key ."_status',
-                            `value`      = '" . $value ."',
-                            `serialized` = '0'";
-                         
-
-	if( !$this->simulate ) {
-               $this->db->query( $sql );
-        }
-         if( $this->showOps ) {
-               $text .= '<p><pre>' . $sql .'</pre></p>';
-         }
-	++$this->settingcounter;
-	$text .= $this->msg( sprintf( $this->lang['msg_config'], $key .'_status', '' ) );                                                
-     }
-
-        $settings = array();
-                 
-  for( $i = min( array_keys( $this->converter_serialize_modules[$key] ) ); $i<count( $this->converter_serialize_modules[$key] );$i++ ){
-    if (!isset($this->converter_serialize_modules[$key]['product'])) { 
- 
-   /*
-    * Insert module layouts to table layout_module
-    *
-    */ 
-
-       $sql = "
-              INSERT INTO 
-                          " . DB_PREFIX . "layout_module
-              SET
-                        `layout_id`= '" . $this->converter_serialize_modules[$key][$i]['layout_id'] . "',
-                        `code` = '" . $key . ".0',
-                        `position`= '" . $this->converter_serialize_modules[$key][$i]['position'] . "',
-                        `sort_order`='" .$this->converter_serialize_modules[$key][$i]['sort_order'] . "'";
-
-	if( !$this->simulate ) {
-               $this->db->query( $sql );
-        }
-        if( $this->showOps ) {
-               $text .= '<p><pre>' . $sql .'</pre></p>';
-         }
-	++$this->settingcounter;
-	$text .= $this->msg( sprintf( $this->lang['msg_config'], $key. '_module.0', '' ) );   
-
-      $setting = array();
-                                                                            
-     if( isset( $this->converter_serialize_modules[$key][$i]['width'] ) && isset( $this->converter_serialize_modules[$key][$i]['height'] ) ){
-                                                                                                                    
-           $setting = array( "width"=> $this->converter_serialize_modules[$key][$i]['width'],
-                            "height"=> $this->converter_serialize_modules[$key][$i]['height'] );
-                                                                                                                     
-      }                                                                        
-     if( isset( $this->converter_serialize_modules[$key][$i]['image_width'] ) && isset( $this->converter_serialize_modules[$key][$i]['image_height'] ) ){
-                                                                                                                    
-           $setting = array( "width"=> $this->converter_serialize_modules[$key][$i]['image_width'],
-                             "height"=> $this->converter_serialize_modules[$key][$i]['image_height'] );
-                                                                                                                     
-      }  
-  
-      if( isset( $this->converter_serialize_modules[$key][$i]['banner_id'])){
-                                                                                              
-           $setting =   array_merge( $setting, array( "banner_id"=> $this->converter_serialize_modules[$key][$i]['banner_id'] ) );
-                                                                                                          
-      }
-
-      if( isset( $this->converter_serialize_modules[$key][$i]['limit'] ) ){
-                                                                                              
-           $setting =   array_merge( $setting, array( "limit"=> $this->converter_serialize_modules[$key][$i]['limit'] ) );
-                                                                                                          
-      }
-          $settings[] = $setting;
-
-        if(!empty($settings)){
-
-   /*
-    * Insert serialized modules to table setting
-    *
-    */  
-
-           $sql = "
-             INSERT INTO 
-                        " . DB_PREFIX . "setting
-             SET 
-                        `group` = '" . $key . "',
-                        `key`   = '" .$key."_module',
-                        `value` = '" . serialize($settings) ."',
-                        `serialized` = '1'";
-
-	        if( !$this->simulate ) {
-                    $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-	++$this->settingcounter;
-	$text .= $this->msg( sprintf( $this->lang['msg_config'], $key. '_module', '' ) );
-    
-                }                                                                         
-              }                                  
-       }    
    }
-        $text .= $this->deleteSettings();
-	$text .= $this->msg( sprintf( $this->lang['msg_config'], 'msg_end_converter_setting', '' ) );
-            return $text;                                       
-    }                     
-  }
+       return $text;
+   }
 
-  public function newSettings(){
+   private function newSettings(){
+  
         $text ='';
 	if( !$this->hasSetting( 'config_ftp_status' ) ) {
 
