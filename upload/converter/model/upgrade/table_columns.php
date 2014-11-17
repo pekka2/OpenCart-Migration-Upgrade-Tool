@@ -237,6 +237,11 @@ class ModelUpgradeTableColumns extends Model{
 			'column'	=> ' int(11) NOT NULL'
 		),
 		array(
+                        'table'        => 'setting',
+			'field'		=> 'serialized',
+			'column'	=> ' tinyint(1) NOT NULL'
+		),
+		array(
                         'table'        => 'tax_rate',
 			'field'		=> 'type',
 			'column'	=> ' char(1) NOT NULL AFTER rate'
