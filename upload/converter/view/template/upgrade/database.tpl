@@ -88,9 +88,7 @@
    <?php if( isset( $drop_columns ) ) { echo $drop_columns; } ?>
    <?php if( isset( $change_columns ) ) { echo $change_columns; } ?>
    <?php if( isset( $drop_tables ) ) { echo $drop_tables; } ?>
-   <?php if( isset( $add_setting151newer ) ) { echo $add_setting151newer; } ?>
-   <?php if( isset( $add_setting1505parent ) ) { echo $add_setting1505parent; } ?>
-   <?php if( isset( $delete_settings ) ) { echo $delete_settings; } ?>
+   <?php if( isset( $add_settings ) ) { echo $add_settings; } ?>
 
 <div class="msg round">
 
