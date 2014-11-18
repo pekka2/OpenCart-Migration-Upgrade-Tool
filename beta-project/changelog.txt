@@ -11,5 +11,10 @@ legend
 
 CONVERTER
 ---------
-1.1.x Beta 2014.11.15      + tables and columns in versions 1.4.9x
-1.1.2      2014.11.13        base release
+1.1.6 B 2014.11.18      + tables for versions 1.4.7 - 1.4.9x
+                        + columns for versions 1.4.7 - 1.4.9x
+                        + change columns for versions 1.4.7 - 1.4.9x
+                        + change module structutre for versions 1.4.7 - 1.4.9x
+                        + new settings for versions 1.4.7 - 1.4.9x
+1.1.B   2014.11.14      + tables and columns versions 1.4.9x
+1.1.2   2014.11.13       initial base
