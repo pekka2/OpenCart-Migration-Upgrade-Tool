@@ -127,6 +127,11 @@ class ModelUpgradeTableColumns extends Model{
 			'column'	=> ' text NOT NULL'
 		),
 		array(
+                        'table'        => 'order',
+			'field'		=> 'commission',
+			'column'	=> ' decimal(15,8) NOT NULL AFTER order_status_id'
+		),
+		array(
                         'table'         => 'order',
 			'field'		=> 'payment_custom_field',
 			'column'	=> ' text NOT NULL'
@@ -574,12 +579,6 @@ class ModelUpgradeTableColumns extends Model{
 			'field'		=> 'invoice_no',
 			'oldfield'	=> 'invoice_id',
 			'column'	=> ' int(11) NOT NULL'
-		),
-		array(
-                        'table'         => 'order',
-			'field'		=> 'commission',
-			'oldfield'	=> 'comission',
-			'column'	=> ' decimal(15,8) NOT NULL'
 		),
 		array(
                         'table'         => 'order',
