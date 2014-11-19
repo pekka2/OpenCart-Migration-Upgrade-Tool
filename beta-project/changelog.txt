@@ -11,6 +11,7 @@ legend
 
 CONVERTER
 ---------
+1.1.7 B 2014.11.19      +  administrator permissions new layouts
 1.1.6 B 2014.11.18      + tables for versions 1.4.7 - 1.4.9x
                         + columns for versions 1.4.7 - 1.4.9x
                         + change columns for versions 1.4.7 - 1.4.9x
