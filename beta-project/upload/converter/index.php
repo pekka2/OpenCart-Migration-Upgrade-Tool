@@ -160,8 +160,8 @@ $cache = new Cache();
 $registry->set('cache', $cache);
 
 // Language Model
-$cache = new LModel();
-$registry->set('lmodel', $cache);
+$lcache = new LModel();
+$registry->set('lmodel', $lcache);
 
 // Session
 $session = new Session();
