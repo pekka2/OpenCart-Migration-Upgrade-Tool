@@ -4,6 +4,7 @@ class ControllerUpgradeDatabase extends Controller {
    public function index() {
 		$this->language->load('upgrade/database');
                 $this->lmodel->set('upgrade_database',$this->language->load('upgrade/database'));
+		$this->load->model('upgrade/info');
 		$this->load->model('upgrade/database');
 		$this->load->model('upgrade/table_columns');
 		$this->load->model('upgrade/settings');
@@ -34,6 +35,7 @@ class ControllerUpgradeDatabase extends Controller {
                  $this->data['add_columns'] = $this->model_upgrade_table_columns->addColumns( $this->request->post );
                  $this->data['drop_tables'] = $this->model_upgrade_table_columns->deleteTables( $this->request->post );
                  $this->data['add_settings'] = $this->model_upgrade_settings->getChangeModule( $this->request->post );
+                 $this->model_upgrade_info->addPermissions($this->post['simulate']);
                 }
                 $this->data['database'] = $this->url->link('upgrade/database', 'token=' . $this->session->data['token'], 'SSL');
                 $this->data['configuration'] = $this->url->link('upgrade/configuration', 'token=' . $this->session->data['token'], 'SSL');
