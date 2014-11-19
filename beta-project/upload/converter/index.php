@@ -159,7 +159,7 @@ $registry->set('response', $response);
 $cache = new Cache();
 $registry->set('cache', $cache);
 
-// Langaugae Model
+// Language Model
 $cache = new LModel();
 $registry->set('lmodel', $cache);
 
