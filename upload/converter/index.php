@@ -131,9 +131,9 @@ $registry->set('response', $response);
 $cache = new Cache();
 $registry->set('cache', $cache);
 
-// Langaugae Model
-$cache = new LModel();
-$registry->set('lmodel', $cache);
+// Language Model
+$lcache = new LModel();
+$registry->set('lmodel', $lcache);
 
 // Session
 $session = new Session();
