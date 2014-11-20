@@ -36,9 +36,7 @@ class ModelUpgradeSettings extends Model{
   if( !$this->hasSetting( 'config_complete_status' ) ){
      /* No serialized modules */
      $text .= $this->getChangeModules( 'category' );
-     $text .= $this->getChangeModules( 'account' );
      $text .= $this->getChangeModules( 'information' );
-     $text .= $this->getChangeModules( 'affiliate' );
      /* Serialized modules */
      $text .= $this->getChangeSerializeModule( 'bestseller' );
      $text .= $this->getChangeSerializeModule( 'latest' );
@@ -110,20 +108,16 @@ class ModelUpgradeSettings extends Model{
          * version 1.4.7 - 1.4.9.5
          */
 
-          $product = $this->getFeaturedProducts($this->config->get( 'featured_limit' ));
+          $product = $this->getFeaturedProducts( 4 );
 
-          $module[0]['product'] = array('product' => $product);
-          $module[0]['limit']   = $this->config->get( 'featured_limit' );
-          $module[0]['width']   = 80;
-          $module[0]['height']  = 80;
+          $module[0]['product'] = $product;
+          $module[0]['limit']   = 4;
+          $module[0]['width']   = 200;
+          $module[0]['height']  = 200;
           $status = $this->config->get( 'featured_status' );
           $layout_id = 1;
           $sort_order = $this->config->get( 'featured_sort_order' );
-          $position = $this->config->get( 'featured_position' );
-
-             $position = str_replace('left','column_left',$position );
-             $position = str_replace('right','column_right',$position );
-             $position = str_replace('home','content_top',$position );
+          $position = 'content_bottom';
           
          $str = serialize($module);
 
@@ -188,17 +182,21 @@ class ModelUpgradeSettings extends Model{
    return $text;
   }
 
-
-	private function getFeaturedProducts($limit = '10') {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd
-                ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) 
-               WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' LIMIT " . $limit);
+  private function getFeaturedProducts($limit = '4') {
 	$info = array();
+
+      if( array_search( DB_PREFIX . 'product_featured', $this->getTables() ) ){
+        $i= 0;
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_featured");
+            if( count( $query->row > 0 ) ){
 		foreach($query->rows as $product){
-                 $info[] = $product['product_id'];
+                 $info[$i] = $product['product_id'];
+                 $i++;
                 }
-          return $info;
-	}
+            }
+      }
+       return $info;
+  }
   public function getCarousel(){
         $text = '';
         $str = '';
@@ -443,15 +441,15 @@ class ModelUpgradeSettings extends Model{
           $status = $this->config->get( $mod . '_status' );
           $layout_id = 1;
           $sort_order = $this->config->get( $mod . '_sort_order' );
-          $position = $this->config->get( $mod . '_position' );
 
-             $position = str_replace('left','column_left',$position );
-             $position = str_replace('right','column_right',$position );
-             $position = str_replace('home','content_top',$position );
-
-          $module[0]['limit'] = $this->config->get( $mod . '_limit' );
-          $module[0]['width'] = 80;
-          $module[0]['height'] = 80;
+          $position = 'content_bottom';
+          $module[0]['limit'] = 4;
+          $module[0]['width'] = 200;
+          $module[0]['height'] = 200;
+          if( $mod == 'latest' ){
+          $position = 'content_top';
+          $module[0]['limit'] = 8;
+          }
 
          $str = serialize($module);
         }
@@ -650,15 +648,70 @@ class ModelUpgradeSettings extends Model{
              $position = str_replace('left','column_left',$position );
              $position = str_replace('right','column_right',$position );
              $position = str_replace('home','content_top',$position );
+             $sort_order = $this->config->get( $mod . '_position' );
 
+    $module = array(
+		array(
+                        'module'        => $mod,
+			'position'	=> $position,
+			'layout_id'	=> 1,
+                        'sort_order'    => $sort_order
+		),
+		array(
+                        'module'        => 'category',
+			'position'	=> $position,
+			'layout_id'	=> 2,
+                        'sort_order'    => 1
+		),
+		array(
+                        'module'        => 'category',
+			'position'	=> $position,
+			'layout_id'	=> 3,
+                        'sort_order'    => 1
+		),
+		array(
+                        'module'        => 'information',
+			'position'	=> $position,
+			'layout_id'	=> 8,
+                        'sort_order'    => 1
+		),
+		array(
+                        'module'        => 'information',
+			'position'	=> $position,
+			'layout_id'	=> 9,
+                        'sort_order'    => 1
+		),
+		array(
+                        'module'        => 'information',
+			'position'	=> $position,
+			'layout_id'	=> 11,
+                        'sort_order'    => 1
+		),
+		array(
+                        'module'        => 'account',
+			'position'	=> 'column_left',
+			'layout_id'	=> 6,
+                        'sort_order'    => 1
+		),
+		array(
+                        'module'        => 'affiliate',
+			'position'	=> 'column_left',
+			'layout_id'	=> 10,
+                        'sort_order'    => 1
+		)
+              );
+
+    foreach( $module as $k => $v ) {
+
+	if( !$this->hasLayoutModule( $v['module'], $v['layout_id'] ) ) {
                  $sql = '
 			INSERT INTO
 				   `' . DB_PREFIX . 'layout_module`
 			SET
-				   `layout_id` = \'1\',
-				   `code`= \'' . $mod . '\',
-				   `position` = \'' . $position . '\',
-                                   `sort_order` = \'' . $this->config->get( $mod . '_sort_order' ) . '\'';
+				   `layout_id` = \'' . $v['layout_id'] . '\',
+				   `code`= \'' . $v['module'] . '\',
+				   `position` = \'' . $v['position'] . '\',
+                                   `sort_order` = \'' . $v['sort_order'] . '\'';
 
             if( !$this->simulate ) {
 		   $this->db->query( $sql );
@@ -668,6 +721,8 @@ class ModelUpgradeSettings extends Model{
             }
 
 	$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module',  DB_PREFIX . 'layout_module' ) );
+         }
+   }
 
         $this->deleteSettingGroup( $mod );
 
@@ -1731,7 +1786,7 @@ class ModelUpgradeSettings extends Model{
                       $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 		++$this->settingcounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_secure', '' ) );
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_secure', 'setting' ) );
 	}
 
     return $text;
@@ -1831,6 +1886,26 @@ class ModelUpgradeSettings extends Model{
 	}
 
 	return true;
+   }
+   public function hasLayoutModule( $module, $layout_id ) {
+	$sql = '
+	SELECT
+		*
+	FROM
+		`' . DB_PREFIX . 'layout_module`
+	WHERE
+                `layout_id` = \'' . $layout_id . '\'
+        AND
+		`code` = \'' . $module . '\'';
+      if( !$this->simulate ) {
+	$result = $this->db->query( $sql );
+
+	if( count( $result->row ) == 0 ) {
+		return false;
+	}
+
+	return true;
+     }
    }
 
   public function msg( $data ){
