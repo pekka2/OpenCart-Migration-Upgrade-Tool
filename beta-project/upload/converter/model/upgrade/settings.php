@@ -37,6 +37,8 @@ class ModelUpgradeSettings extends Model{
      /* No serialized modules */
      $text .= $this->getChangeModules( 'category' );
      $text .= $this->getChangeModules( 'information' );
+     $text .= $this->getChangeModules( 'account' );
+     $text .= $this->getChangeModules( 'affiliate' );
      /* Serialized modules */
      $text .= $this->getChangeSerializeModule( 'bestseller' );
      $text .= $this->getChangeSerializeModule( 'latest' );
@@ -118,7 +120,7 @@ class ModelUpgradeSettings extends Model{
           $layout_id = 1;
           $sort_order = $this->config->get( 'featured_sort_order' );
           $position = 'content_bottom';
-          
+      
          $str = serialize($module);
 
         }
@@ -186,8 +188,10 @@ class ModelUpgradeSettings extends Model{
 	$info = array();
 
       if( array_search( DB_PREFIX . 'product_featured', $this->getTables() ) ){
+
         $i= 0;
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_featured");
+
             if( count( $query->row > 0 ) ){
 		foreach($query->rows as $product){
                  $info[$i] = $product['product_id'];
@@ -195,6 +199,7 @@ class ModelUpgradeSettings extends Model{
                 }
             }
       }
+
        return $info;
   }
   public function getCarousel(){
@@ -542,6 +547,7 @@ class ModelUpgradeSettings extends Model{
 				   `code`= \'' . $mod . '\',
 				   `position` = \'' . $one['position'] . '\',
                                    `sort_order` = \'' . $one['sort_order'] . '\'';
+
             if( !$this->simulate ) {
 		   $this->db->query( $sql );
             }
@@ -550,6 +556,7 @@ class ModelUpgradeSettings extends Model{
             }
 	   $text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module',  DB_PREFIX . 'layout_module' ) );
          }
+
 
          $this->deleteSettingGroup( $mod );
          $sql = '
