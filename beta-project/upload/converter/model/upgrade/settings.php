@@ -726,14 +726,34 @@ class ModelUpgradeSettings extends Model{
 
         $this->deleteSettingGroup( $mod );
 
-        $sql = '
+    $setting = array(
+		array(
+                        'key'        => $mod . '_status',
+			'group'      => $mod,
+			'value'	     => 1
+		),
+		array(
+                        'key'        => 'account_status',
+			'group'      => 'account',
+			'value'	     => 1
+		),
+		array(
+                        'key'        => 'affiliate_status',
+			'group'      => 'affiliate',
+			'value'	     => 1
+		)
+          );
+    foreach( $setting as $k => $v ) {
+
+	if( !$this->hasSetting( $v['key'] ) ) {
+         $sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
 		SET
 			`store_id` = \'0\',
-			`group` = \'' . $mod . '\',
-			`key` = \'' . $mod . '_status\',
-			`value` = \'' . $status . '\',
+			`group` = \'' . $v['group'] . '\',
+			`key` = \'' . $v['key'] . '\',
+			`value` = \'' . $v['value'] . '\',
 			`serialized`= \'0\'';
 		if( !$this->simulate ) {
                        $this->db->query( $sql );
@@ -743,7 +763,35 @@ class ModelUpgradeSettings extends Model{
                 }
 		++$this->settingcounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_status', DB_PREFIX . 'setting' ) );
-          } 
+        }
+    }
+    $exten = array(
+                array('mod'        => 'account'
+		),
+		array(
+                      'mod'        => 'affiliate'
+		)
+          );
+    foreach( $exten as $k => $v ) {
+
+	if( !$this->hasExtension( $v['mod'] ) ) {
+         $sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'extension`
+		SET
+			`type` = \'module\',
+			`code` = \'' . $v['mod'] . '\'';
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], $v['mod'], DB_PREFIX . 'extension' ) );
+        }
+    }
+   } 
     return $text;
    }
 
@@ -1878,6 +1926,29 @@ class ModelUpgradeSettings extends Model{
 		`' . DB_PREFIX . 'setting`
 	WHERE
 		`key` = \'' . $val . '\'';
+
+	$result = $this->db->query( $sql );
+
+	if( count( $result->row ) == 0 ) {
+		return false;
+	}
+
+	return true;
+   }
+   public function hasExtension( $val ) {
+    if( array_search( 'code', $this->getDbColumns( 'extension' ) ) ){
+      $field = 'code';
+    }
+    if( array_search( 'key', $this->getDbColumns( 'extension' ) ) ){
+      $field = 'key';
+    }
+	$sql = '
+	SELECT
+		*
+	FROM
+		`' . DB_PREFIX . 'extension`
+	WHERE
+		`' . $field . '` = \'' . $val . '\'';
 
 	$result = $this->db->query( $sql );
 
