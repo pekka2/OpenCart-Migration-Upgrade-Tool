@@ -506,10 +506,6 @@ class ModelUpgradeTableColumns extends Model{
 		),
 		array(
                         'table'         => 'product_option',
-			'field'		=> 'option_value'
-		),
-		array(
-                        'table'         => 'product_option',
 			'field'		=> 'sort_order'
 		),
 		array(
