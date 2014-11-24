@@ -14,7 +14,7 @@ Author		Pekka Mansikka - http://pm-netti.com & mic - http://pixelnbit.com
 Copyright	2014 Pekka Mansikka - http://pm-netti.com & mic - http://pixelnbit.com
 
 Requirement/Erforderlich:
-- OpenCart min. 1.5.0.0
+- OpenCart min. 1.4.7
 -------------------------
 
 Description
