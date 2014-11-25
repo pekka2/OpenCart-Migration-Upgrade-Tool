@@ -838,7 +838,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '1.5.6.4', '' ) );
     return $text;
   }
-  public function addUpgradeTo2000() {
+  public function addUpgradeTo2001() {
         $text = '';
 	if( !array_search( DB_PREFIX . 'affiliate_activity', $this->getTables() ) ) {
 		$sql = '
@@ -906,6 +906,20 @@ class ModelUpgradeDatabase extends Model{
                 }
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'api' ) );
+		
+		  $sql = '
+		  INSERT INTO
+		 	   `' . DB_PREFIX . 'api` (`api_id`, `username`, `password`, `status`, `date_added`, `date_modified`)
+		  VALUES
+			   (1, \'localhost\', \'abcdefghijk\', 1, NOW(), NOW())';
+
+		  if( !$this->simulate ) {
+                     $this->db->query( $sql );
+                  }
+                 if( $this->showOps ) {
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		  $text .= $this->msg( sprintf( $this->lang['msg_text'],   'customer_group_description', $this->lang['msg_new_data'] ) );
 	}
 
 	if( !array_search( DB_PREFIX . 'customer_activity', $this->getTables() ) ) {
