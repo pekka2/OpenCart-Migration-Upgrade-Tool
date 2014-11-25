@@ -72,6 +72,14 @@ class ModelUpgradeSettings extends Model{
           $sort_order = $module[0]['sort_order'];
           $position = $module[0]['position'];
           
+         if( !isset( $module[0]['limit'] )){
+          $limit = 4;
+          $key = 0;
+          } else {
+           $limit = $module[0]['limit'];
+           $key = 1;
+          }
+          
          $count =  count($module[0]);
 
          $hkey = 2;
@@ -79,7 +87,7 @@ class ModelUpgradeSettings extends Model{
 
          $this->array_splice_assoc($module[0],'image_width',1, array('width' => $width ) );
          $this->array_splice_assoc($module[0],'image_height', (int)$k , array('height' => $height ) );
-         $this->array_splice_assoc($module[0],'limit',0, array('product' => $product ) );
+         $this->array_splice_assoc($module[0],'limit',$key, array('limit'=> $limit,'product' => $product ) );
 
          $str = serialize($module);
         }
