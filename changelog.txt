@@ -18,6 +18,8 @@ legend
 
 CONVERTER
 ---------
+1.1.7   2014.11.25      + API localhost user
+                        # featured module key 'limit' in versions 1.5.1 - 1.5.1.3
 1.1.6   2014.11.19      +  administrator permissions new layouts
 1.1.5   2014.11.17      ^ code of change modules structure converter
 1.1.4   2014.11.16      + array converter_serialize_modules in versions 1.5.0x
