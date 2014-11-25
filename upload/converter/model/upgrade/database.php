@@ -49,7 +49,7 @@ class ModelUpgradeDatabase extends Model{
            $text .= $this->addUpgradeTo156();
         }
 	if( !array_search( DB_PREFIX . 'event', $this->getTables() ) ) {
-           $text .= $this->addUpgradeTo2000();
+           $text .= $this->addUpgradeTo2001();
         }
 	$text .= '<div class="header round"> ';
         $text .=  sprintf( addslashes($this->lang['msg_table_count']), $this->tablecounter, '' );
