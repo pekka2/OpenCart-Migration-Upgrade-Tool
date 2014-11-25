@@ -919,7 +919,7 @@ class ModelUpgradeDatabase extends Model{
                  if( $this->showOps ) {
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
-		  $text .= $this->msg( sprintf( $this->lang['msg_text'],   'customer_group_description', $this->lang['msg_new_data'] ) );
+		  $text .= $this->msg( sprintf( $this->lang['msg_text'],   'api', $this->lang['msg_new_data'] ) );
 	}
 
 	if( !array_search( DB_PREFIX . 'customer_activity', $this->getTables() ) ) {
