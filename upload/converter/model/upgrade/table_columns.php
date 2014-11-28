@@ -27,9 +27,29 @@ class ModelUpgradeTableColumns extends Model{
 			'column'	=> ' int(3) NOT NULL'
 		),
 		array(
+                        'table'         => 'category',
+			'field'		=> 'column',
+			'column'	=> ' varchar(255) NOT NULL AFTER parent_id'
+		),
+		array(
+                        'table'         => 'category',
+			'field'		=> 'top',
+			'column'	=> ' tinyint(1) NOT NULL AFTER parent_id'
+		),
+		array(
                         'table'         => 'category_description',
 			'field'		=> 'meta_title',
 			'column'	=> ' varchar(255) NOT NULL AFTER description'
+		),
+		array(
+                        'table'         => 'coupon',
+			'field'		=> 'name',
+			'column'	=> ' varchar(128) NOT NULL AFTER coupon_id'
+		),
+		array(
+                        'table'         => 'country',
+			'field'		=> 'postcode_required',
+			'column'	=> ' tinyint(1) NOT NULL AFTER address_format'
 		),
 		array(
                         'table'         => 'customer',
@@ -47,19 +67,14 @@ class ModelUpgradeTableColumns extends Model{
 			'column'	=> ' tinyint(1) NOT NULL'
 		),
 		array(
-                        'table'        => 'customer',
+                        'table'         => 'customer',
 			'field'		=> 'token',
 			'column'	=> ' varchar(255) NOT NULL AFTER approved'
 		),
 		array(
-                        'table'         => 'user',
-			'field'		=> 'salt',
-			'column'	=> ' varchar(9) NOT NULL AFTER password'
-		),
-		array(
-                        'table'         => 'user',
-			'field'		=> 'image',
-			'column'	=> ' varchar(255) NOT NULL AFTER email'
+                        'table'         => 'customer',
+			'field'		=> 'wishlist',
+			'column'	=> ' text AFTER cart'
 		),
 		array(
                         'table'         => 'information',
@@ -82,169 +97,269 @@ class ModelUpgradeTableColumns extends Model{
 			'column'	=> ' varchar(255) NOT NULL'
 		),
 		array(
-                        'table'        => 'customer_group',
+                        'table'         => 'customer_group',
 			'field'		=> 'approval',
 			'column'	=> ' int(1) NOT NULL'
 		),
 		array(
-                        'table'        => 'customer_group',
+                        'table'         => 'customer_group',
 			'field'		=> 'sort_order',
 			'column'	=> ' int(3) NOT NULL'
 		),
 		array(
-                        'table'        => 'option_value',
+                        'table'         => 'option_value',
 			'field'		=> 'image',
 			'column'	=> ' varchar(255) NOT NULL AFTER option_id'
 		),
 		array(
-                        'table'        => 'order',
+                        'table'         => 'order',
 			'field'		=> 'payment_code',
 			'column'	=> ' varchar(128) NOT NULL'
 		),
 		array(
-                        'table'        => 'order',
+                        'table'         => 'order',
+			'field'		=> 'affiliate_id',
+			'column'	=> ' int(11) NOT NULL AFTER order_status_id'
+		),
+		array(
+                        'table'         => 'order',
 			'field'		=> 'custom_field',
 			'column'	=> ' text NOT NULL'
 		),
 		array(
                         'table'        => 'order',
+			'field'		=> 'commission',
+			'column'	=> ' decimal(15,8) NOT NULL AFTER order_status_id'
+		),
+		array(
+                        'table'         => 'order',
 			'field'		=> 'payment_custom_field',
 			'column'	=> ' text NOT NULL'
 		),
 		array(
-                        'table'        => 'order',
+                        'table'         => 'order',
 			'field'		=> 'shipping_custom_field',
 			'column'	=> ' text NOT NULL'
 		),
 		array(
-                        'table'        => 'order',
+                        'table'         => 'order',
 			'field'		=> 'shipping_code',
 			'column'	=> ' varchar(128) NOT NULL'
 		),
 		array(
-                        'table'        => 'order',
+                        'table'         => 'order',
 			'field'		=> 'forwarded_ip',
 			'column'	=> ' varchar(40) NOT NULL'
 		),
 		array(
-                        'table'        => 'order',
+                        'table'         => 'order',
 			'field'		=> 'user_agent',
 			'column'	=> ' varchar(255) NOT NULL'
 		),
 		array(
-                        'table'        => 'order',
+                        'table'         => 'order',
 			'field'		=> 'accept_language',
 			'column'	=> ' varchar(255) NOT NULL'
 		),
 		array(
-                        'table'        => 'order',
+                        'table'         => 'order',
 			'field'		=> 'marketing_id',
 			'column'	=> ' int(11) NOT NULL'
 		),
 		array(
-                        'table'        => 'order',
+                        'table'         => 'order',
 			'field'		=> 'tracking',
 			'column'	=> ' varchar(64) NOT NULL'
 		),
 		array(
-                        'table'        => 'order_product',
+                        'table'         => 'order',
+			'field'		=> 'currency_value',
+			'column'	=> ' decimal(15,8) NOT NULL DEFAULT \'1.00000000\''
+		),
+		array(
+                        'table'         => 'order_product',
 			'field'		=> 'reward',
 			'column'	=> ' int(8) NOT NULL'
 		),
 		array(
-                        'table'        => 'order_recurring_transaction',
+                        'table'         => 'order_recurring_transaction',
 			'field'		=> 'reference',
 			'column'	=> ' varchar(255) NOT NULL AFTER order_recurring_id'
 		),
 		array(
-                        'table'        => 'product',
+                        'table'         => 'product',
 			'field'		=> 'mpn',
-			'column'	=> ' varchar(64) NOT NULL AFTER upc'
+			'column'	=> ' varchar(64) NOT NULL AFTER sku'
 		),
 		array(
-                        'table'        => 'product',
+                        'table'         => 'product',
 			'field'		=> 'isbn',
-			'column'	=> ' varchar(17) NOT NULL AFTER upc'
+			'column'	=> ' varchar(17) NOT NULL AFTER sku'
 		),
 		array(
-                        'table'        => 'product',
+                        'table'         => 'product',
 			'field'		=> 'jan',
-			'column'	=> ' varchar(13) NOT NULL AFTER upc'
+			'column'	=> ' varchar(13) NOT NULL AFTER sku'
 		),
 		array(
-                        'table'        => 'product',
+                        'table'         => 'product',
 			'field'		=> 'ean',
-			'column'	=> ' varchar(14) NOT NULL AFTER upc'
+			'column'	=> ' varchar(14) NOT NULL AFTER sku'
 		),
 		array(
-                        'table'        => 'product_description',
-			'field'		=> 'meta_title',
-			'column'	=> ' varchar(255) NOT NULL AFTER description'
+                        'table'         => 'product',
+			'field'		=> 'upc',
+			'column'	=> ' varchar(12) NOT NULL AFTER sku'
 		),
 		array(
-                        'table'        => 'product_description',
-			'field'		=> 'tag',
-			'column'	=> ' text NOT NULL AFTER description'
+                        'table'         => 'product',
+			'field'		=> 'minimum',
+			'column'	=> ' int(11) NOT NULL AFTER length_class_id'
 		),
 		array(
-                        'table'        => 'product_image',
+                        'table'         => 'product',
+			'field'		=> 'points',
+			'column'	=> ' int(8) NOT NULL AFTER price'
+		),
+		array(
+                        'table'         => 'product',
+			'field'		=> 'sort_order',
+			'column'	=> ' int(11) NOT NULL AFTER viewed'
+		),
+		array(
+                        'table'         => 'product_image',
 			'field'		=> 'sort_order',
 			'column'	=> ' int(3) NOT NULL'
 		),
 		array(
-                        'table'        => 'product_recurring',
+                        'table'         => 'product_description',
+			'field'		=> 'meta_title',
+			'column'	=> ' varchar(255) NOT NULL AFTER description'
+		),
+		array(
+                        'table'         => 'product_description',
+			'field'		=> 'tag',
+			'column'	=> ' text NOT NULL AFTER description'
+		),
+		array(
+                        'table'         => 'product_option',
+			'field'		=> 'option_id',
+			'column'	=> ' int(11) NOT NULL AFTER product_id'
+		),
+		array(
+                        'table'         => 'product_option',
+			'field'		=> 'required',
+			'column'	=> ' tinyint(1) NOT NULL'
+		),
+		array(
+                        'table'         => 'product_option_value',
+			'field'		=> 'option_value_id',
+			'column'	=> ' int(11) NOT NULL AFTER product_id'
+		),
+		array(
+                        'table'         => 'product_option_value',
+			'field'		=> 'option_id',
+			'column'	=> ' int(11) NOT NULL AFTER product_id'
+		),
+		array(
+                        'table'         => 'product_option_value',
+			'field'		=> 'weight_prefix',
+			'column'	=> ' varchar(1) NOT NULL AFTER price'
+		),
+		array(
+                        'table'         => 'product_option_value',
+			'field'		=> 'weight',
+			'column'	=> ' decimal(15,8) NOT NULL AFTER price'
+		),
+		array(
+                        'table'         => 'product_option_value',
+			'field'		=> 'points_prefix',
+			'column'	=> ' varchar(1) NOT NULL AFTER price'
+		),
+		array(
+                        'table'         => 'product_option_value',
+			'field'		=> 'points',
+			'column'	=> ' int(8) NOT NULL AFTER price'
+		),
+		array(
+                        'table'         => 'product_option_value',
+			'field'		=> 'price_prefix',
+			'column'	=> ' varchar(1) NOT NULL AFTER price'
+		),
+		array(
+                        'table'         => 'product_recurring',
 			'field'		=> 'customer_group_id',
 			'column'	=> ' int(11) NOT NULL'
 		),
 		array(
-                        'table'        => 'product_recurring',
+                        'table'         => 'product_recurring',
 			'field'		=> 'recurring_id',
 			'column'	=> ' int(11) NOT NULL'
 		),
 		array(
-                        'table'        => 'return',
+                        'table'         => 'return',
 			'field'		=> 'product_id',
 			'column'	=> ' int(11) NOT NULL'
 		),
 		array(
-                        'table'        => 'return',
+                        'table'         => 'return',
 			'field'		=> 'product',
 			'column'	=> ' varchar(255) NOT NULL'
 		),
 		array(
-                        'table'        => 'return',
+                        'table'         => 'return',
 			'field'		=> 'model',
 			'column'	=> ' varchar(64) NOT NULL'
 		),
 		array(
-                        'table'        => 'return',
+                        'table'         => 'return',
 			'field'		=> 'quantity',
 			'column'	=> ' int(4) NOT NULL'
 		),
 		array(
-                        'table'        => 'return',
+                        'table'         => 'return',
 			'field'		=> 'opened',
 			'column'	=> ' tinyint(1) NOT NULL'
 		),
 		array(
-                        'table'        => 'return',
+                        'table'         => 'return',
 			'field'		=> 'return_reason_id',
 			'column'	=> ' int(11) NOT NULL'
 		),
 		array(
-                        'table'        => 'return',
+                        'table'         => 'return',
 			'field'		=> 'return_action_id',
 			'column'	=> ' int(11) NOT NULL'
 		),
 		array(
-                        'table'        => 'setting',
+                        'table'         => 'setting',
 			'field'		=> 'serialized',
 			'column'	=> ' tinyint(1) NOT NULL'
 		),
 		array(
-                        'table'        => 'tax_rate',
+                        'table'         => 'setting',
+			'field'		=> 'store_id',
+			'column'	=> ' int(11) NOT NULL AFTER setting_id'
+		),
+		array(
+                        'table'         => 'tax_rate',
 			'field'		=> 'type',
 			'column'	=> ' char(1) NOT NULL AFTER rate'
+		),
+		array(
+                        'table'         => 'user',
+			'field'		=> 'code',
+			'column'	=> ' varchar(40) NOT NULL AFTER email'
+		),
+		array(
+                        'table'         => 'user',
+			'field'		=> 'image',
+			'column'	=> ' varchar(255) NOT NULL AFTER email'
+		),
+		array(
+                        'table'         => 'user',
+			'field'		=> 'salt',
+			'column'	=> ' varchar(9) NOT NULL AFTER password'
 		)
 	);
 
@@ -260,7 +375,7 @@ class ModelUpgradeTableColumns extends Model{
 			ALTER TABLE
 				`' . DB_PREFIX . $v['table'] . '`
 			ADD COLUMN
-				' . $v['field'] . $v['column'];
+				`' . $v['field'] . '`' . $v['column'];
 
 			if( !$this->simulate ) {
                                $this->db->query( $sql );
@@ -269,6 +384,20 @@ class ModelUpgradeTableColumns extends Model{
                                $text .= '<p><pre>' . $sql .'</pre></p>';
                         }
 			++$altercounter;
+                   if( $v['table'] == 'category' && $v['field'] == 'top' ){
+			$sql = '
+			UPDATE
+				`' . DB_PREFIX . $v['table'] . '`
+			SET
+				`top` = \'1\'';
+
+			if( !$this->simulate ) {
+                               $this->db->query( $sql );
+                        }
+                        if( $this->showOps ) {
+                               $text .= '<p><pre>' . $sql .'</pre></p>';
+                        }
+                   }
 			$text .= $this->msg( sprintf( $this->lang['msg_column'], $v['field'],  $v['table'] ) );
                         $this->cache->delete( $v['table'] );
 
@@ -333,7 +462,15 @@ class ModelUpgradeTableColumns extends Model{
 		),
 		array(
                         'table'         => 'order',
-			'field'		=> 'payment_company_id'
+			'field'		=> 'coupon_id'
+		),
+		array(
+                        'table'         => 'order',
+			'field'		=> 'coupon_id'
+		),
+		array(
+                        'table'         => 'order',
+			'field'		=> 'invoice_date'
 		),
 		array(
                         'table'         => 'order',
@@ -344,12 +481,32 @@ class ModelUpgradeTableColumns extends Model{
 			'field'		=> 'reward'
 		),
 		array(
+                        'table'         => 'order',
+			'field'		=> 'value'
+		),
+		array(
+                        'table'         => 'order_product',
+			'field'		=> 'subtract'
+		),
+		array(
                         'table'         => 'order_total',
 			'field'		=> 'text'
 		),
 		array(
+                        'table'         => 'product',
+			'field'		=> 'cost'
+		),
+		array(
+                        'table'         => 'product',
+			'field'		=> 'maximum'
+		),
+		array(
                         'table'         => 'product_recurring',
 			'field'		=> 'store_id'
+		),
+		array(
+                        'table'         => 'product_option',
+			'field'		=> 'sort_order'
 		),
 		array(
                         'table'         => 'tax_rate',
@@ -371,7 +528,7 @@ class ModelUpgradeTableColumns extends Model{
 			ALTER TABLE
 				`' . DB_PREFIX . $v['table'] . '`
 			DROP COLUMN
-				' . $v['field'];
+				`' . $v['field'] . '`';
 
 			if( !$this->simulate ) {
                                $this->db->query( $sql );
@@ -385,7 +542,7 @@ class ModelUpgradeTableColumns extends Model{
                              $this->cache->delete( $v['table'] );
                         }
 		}
-	}
+	 }
       }
         
 	$text .= '<div class="header round"> ';
@@ -402,46 +559,82 @@ class ModelUpgradeTableColumns extends Model{
     $text = '';
   $changecols = array(
 		array(
+                        'table'         => 'category_description',
+			'field'		=> 'meta_keyword',
+			'oldfield'	=> 'meta_keywords',
+			'column'	=> ' varchar(255) NOT NULL'
+		),
+		array(
+                        'table'         => 'extension',
+			'field'		=> 'code',
+			'oldfield'	=> 'key',
+			'column'	=> ' varchar(32) NOT NULL'
+		),
+		array(
+                        'table'         => 'order',
+			'field'		=> 'invoice_no',
+			'oldfield'	=> 'invoice_id',
+			'column'	=> ' int(11) NOT NULL'
+		),
+		array(
+                        'table'         => 'order',
+			'field'		=> 'currency_code',
+			'oldfield'	=> 'currency',
+			'column'	=> ' varchar(3) NOT NULL'
+		),
+		array(
                         'table'         => 'order_recurring',
 			'field'		=> 'reference',
 			'oldfield'	=> 'profile_reference',
-			'column'	=> 'profile_reference reference varchar(255) NOT NULL'
+			'column'	=> ' varchar(255) NOT NULL'
 		),
 		array(
                         'table'         => 'order_recurring',
 			'field'		=> 'recurring_name',
 			'oldfield'	=> 'profile_name',
-			'column'	=> 'profile_name recurring_name varchar(255) NOT NULL'
+			'column'	=> ' varchar(255) NOT NULL'
 		),
 		array(
                         'table'         => 'order_recurring',
 			'field'		=> 'recurring_description',
 			'oldfield'	=> 'profile_description',
-			'column'	=> 'profile_description recurring_description varchar(255) NOT NULL'
+			'column'	=> ' varchar(255) NOT NULL'
 		),
 		array(
                         'table'         => 'order_recurring',
 			'field'		=> 'recurring_id',
 			'oldfield'	=> 'profile_id',
-			'column'	=> 'profile_id recurring_id int(11) NOT NULL'
+			'column'	=> ' int(11) NOT NULL'
 		),
 		array(
                         'table'         => 'order_recurring',
 			'field'		=> 'date_added',
 			'oldfield'	=> 'created',
-			'column'	=> 'created date_added datetime NOT NULL'
+			'column'	=> ' datetime NOT NULL'
 		),
 		array(
                         'table'         => 'order_recurring_transaction',
 			'field'		=> 'date_added',
 			'oldfield'	=> 'created',
-			'column'	=> 'created date_added datetime NOT NULL'
+			'column'	=> ' datetime NOT NULL'
+		),
+		array(
+                        'table'         => 'product_description',
+			'field'		=> 'meta_keyword',
+			'oldfield'	=> 'meta_keywords',
+			'column'	=> ' varchar(255) NOT NULL'
 		),
 		array(
                         'table'         => 'product_option',
 			'field'		=> 'value',
 			'oldfield'	=> 'option_value',
-			'column'	=> 'option_value value text NOT NULL'
+			'column'	=> ' text NOT NULL'
+		),
+		array(
+                        'table'         => 'setting',
+			'field'		=> 'code',
+			'oldfield'	=> 'group',
+			'column'	=> ' varchar(32) NOT NULL'
 		)
         );
 	
@@ -627,7 +820,22 @@ class ModelUpgradeTableColumns extends Model{
 			'field'		=> 'parent_id'
 		),
 		array(
+                        'table'         => 'product_discount',
+			'index'		=> 'product_id',
+			'field'		=> 'product_id'
+		),
+		array(
                         'table'         => 'product_image',
+			'index'		=> 'product_id',
+			'field'		=> 'product_id'
+		),
+		array(
+                        'table'         => 'product_special',
+			'index'		=> 'product_id',
+			'field'		=> 'product_id'
+		),
+		array(
+                        'table'         => 'review',
 			'index'		=> 'product_id',
 			'field'		=> 'product_id'
 		),
@@ -645,6 +853,7 @@ class ModelUpgradeTableColumns extends Model{
 
           foreach( $keyset as $k => $v ) {
 
+        if( array_search( DB_PREFIX . $v['table'] , $this->getTables()) ) {
 	     if( !$this->getColumnKey( $v['field'], $v['table'] ) ) { 
 			$sql = '
 			CREATE INDEX
@@ -662,8 +871,9 @@ class ModelUpgradeTableColumns extends Model{
 			++$changecounter;
 			$text .= $this->msg( sprintf( $this->lang['msg_change_column'], $v['field'],  $v['table'] ) );
 		}
+             }
          }
-	
+	if( array_search( 'currency_value', $this->getDbColumns( 'order' ) ) ){
 	  $sql = '
                  ALTER TABLE
                            ' . DB_PREFIX . 'order
@@ -681,18 +891,20 @@ class ModelUpgradeTableColumns extends Model{
 
 
 	  $text .= $this->msg( sprintf( $this->lang['msg_change_column'], 'currency_value',  DB_PREFIX . 'order' ) );
+         }
 
 
      foreach( $changecols as $k => $v ) {
+        if( array_search( DB_PREFIX . $v['table'] , $this->getTables()) ) {
 
 	   if( array_search( DB_PREFIX . $v['table'], $this->getTables() ) || $v['table'] == 'address' ) {
                       
-		if( array_search( $v['oldfield'], $this->getDbColumns( $v['table'] ) ) ) {
+		if( array_search( $v['oldfield'], $this->getDbColumns( $v['table'] ) ) && !array_search( $v['column'], $this->getDbColumns( $v['table'] ) ) ) {
 			$sql = '
 			ALTER TABLE
 				  `' . DB_PREFIX . $v['table'] . '`
 			CHANGE
-				  ' . $v['column'];
+				  `' . $v['oldfield'] . '` `' . $v['field'] . '` ' . $v['column'];
 
 			if( !$this->simulate ) {
                                $this->db->query( $sql );
@@ -705,14 +917,29 @@ class ModelUpgradeTableColumns extends Model{
 			if( !$this->simulate ) {
                            $this->cache->delete( $v['table'] );
                         }
-		}
-	}
-     }
+		} 
+               else if (!array_search( $v['oldfield'], $this->getDbColumns( $v['table'] ) ) &&
+                       !array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) ) {$sql = '
+			ALTER TABLE
+				  `' . DB_PREFIX . $v['table'] . '`
+			ADD COLUMN
+				  `' . $v['field'] . '` ' . $v['column'];
 
+			if( !$this->simulate ) {
+                               $this->db->query( $sql );
+                        }
+                        if( $this->showOps ) {
+                               $text .= '<p><pre>' . $sql .'</pre></p>';
+                        }
+                }
+           }
+	 }
+     }
 
      foreach( $changetype as $k => $v ) {
 
-	   if( !$this->getColumnType( $v['field'], $v['type'], $v['table']) ) {
+        if( array_search( DB_PREFIX . $v['table'] , $this->getTables()) ) {
+	   if( array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) && !$this->getColumnType( $v['field'], $v['type'], $v['table']) ) {
 			$sql = '
 			ALTER TABLE
 				`' . DB_PREFIX . $v['table'] . '`
@@ -730,7 +957,26 @@ class ModelUpgradeTableColumns extends Model{
 			if( !$this->simulate ) {
                           $this->cache->delete( $v['table'] );
                         }
+	   }  elseif( !array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) ) {
+			$sql = '
+			ALTER TABLE
+				`' . DB_PREFIX . $v['table'] . '`
+		        ADD COLUMN
+				' . $v['field'] . $v['column'];
+
+			if( !$this->simulate ) {
+                               $this->db->query( $sql );
+                        }
+                        if( $this->showOps ) {
+                               $text .= '<p><pre>' . $sql .'</pre></p>';
+                        }
+			++$changecounter;
+			$text .= $this->msg( sprintf( $this->lang['msg_change_column'], $v['field'],  $v['table'] ) );
+			if( !$this->simulate ) {
+                          $this->cache->delete( $v['table'] );
+                        }
 	   }
+        }
      }
 
 
@@ -881,15 +1127,21 @@ class ModelUpgradeTableColumns extends Model{
     $text = '';
 
   $droptable = array(
+                     'coupon_description',
                      'customer_field',
                      'customer_ip_blacklist',
+                     'order_download',
                      'order_field',
                      'order_misc',
+                     'product_featured',
+                     'product_option_description',
+                     'product_option_value_description',
 		     'product_profile',
                      'product_tag',
+                     'product_tags',
                      'profile',
 		     'profile_description',
-                     'order_download'
+                     'store_description'
 		);
 
        foreach( $droptable as $table ) {
