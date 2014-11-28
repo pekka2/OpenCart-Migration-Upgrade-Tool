@@ -14,7 +14,7 @@
  * @todo move to mysqli
  */
 
-define('VERSION', '1.1.7');
+define('VERSION', '1.1.8');
 
 // Configuration
 if (is_file('config.php')) {
@@ -40,32 +40,60 @@ $registry = new Registry();
 $config = new Config();
 $registry->set('config', $config);
 
+function getDbColumns( ) {
+
+                $link = mysql_connect( DB_HOSTNAME, DB_USERNAME, DB_PASSWORD );
+                $db_selected = mysql_select_db( DB_DATABASE );
+
+                $colums = mysql_query("SHOW COLUMNS FROM " . DB_PREFIX . "setting FROM " . DB_DATABASE);
+		
+		$ret = array();
+
+               while( $field = mysql_fetch_assoc($colums)){
+                 $ret[] = $field['Field'];
+               }
+
+  return $ret;
+}
 // Database
 
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 $registry->set('db', $db);
 
 // Settings
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0'");
 
-foreach ($query->rows as $setting) {
-    if(isset($setting['serialized']) ) {
-     /*
-      * If database is 1.5.1 or newer
-      */
-	if (!$setting['serialized']) {
-		$config->set($setting['key'], $setting['value']);
-	} else {
-		$config->set($setting['key'], unserialize($setting['value']));
-	}
-   } else {
-    /*
-     * If database is 1.5.0 5 or parent
-     */
-	$config->set($setting['key'], $setting['value']);
-   }
+if( array_search('store_id', getDbColumns() ) ){
+/*
+ * Version 1.5.0 or newer
+ */
+
+     $query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0'");
+
+} else{
+/*
+ * Version 1.4.7 - 1.4.9.5
+ */
+
+  $query = $db->query("SELECT * FROM " . DB_PREFIX . "setting");
+
 }
-
+     foreach ($query->rows as $setting) {
+         if(isset($setting['serialized']) ) {
+        /*
+         * If database is 1.5.1 or newer
+         */
+	     if (!$setting['serialized']) {
+	  	$config->set($setting['key'], $setting['value']);
+	     } else {
+		$config->set($setting['key'], unserialize($setting['value']));
+	     }
+        } else {
+      /*
+       * If database is 1.5.0 5 or parent
+       */
+	 $config->set($setting['key'], $setting['value']);
+       }
+    }
 // Loader
 $loader = new Loader($registry);
 $registry->set('load', $loader);
