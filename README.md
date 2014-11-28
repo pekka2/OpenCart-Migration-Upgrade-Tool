@@ -1,6 +1,6 @@
 /**
  * @version		$Id: readme.txt 2014-10-17 16:35Z mic $
- * @package		OpenCart Shopconverter 1.5.x - 2.x
+ * @package		OpenCart Shopconverter 1.4.x - 2.x
  * @author		Pekka Mansikka - http://pm-netti.com & mic - http://pixelnbit.com
  * @copyright	        2014 peku & mic
  * @license		MIT http://opensource.org/licenses/MIT
@@ -19,7 +19,7 @@ Requirement/Erforderlich:
 
 Description
 -----------
-This program coverts an OpenCart shop of version 1.5.x to the latest v.2 version.
+This program coverts an OpenCart shop of version 1.4.x to the latest v.2 version.
 
 Features
 --------
