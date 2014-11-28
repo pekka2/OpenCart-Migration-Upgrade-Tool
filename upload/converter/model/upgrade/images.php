@@ -5,6 +5,15 @@ class ModelUpgradeImages extends Model{
 /**
  * adopting image paths
  */
+  public function getTables() {
+       $query = $this->db->query("SHOW TABLES FROM " . DB_DATABASE);
+
+        $table_list = array();
+        foreach($query->rows as $table){
+                      $table_list[] = $table['Tables_in_'. DB_DATABASE];
+          }
+        return $table_list;
+  }
    public function imagePaths( $data ) {
        $this->lang = $this->lmodel->get('upgrade_images');
 
@@ -142,6 +151,7 @@ class ModelUpgradeImages extends Model{
  */
    $imageInfo = array();
 
+  if( array_search( DB_PREFIX . 'banner_image' , $this->getTables()) ) {
      $sql = '
 	    SELECT
 	          *
@@ -163,7 +173,7 @@ class ModelUpgradeImages extends Model{
          );
      }
    }
-
+ }
 
     $sql = '
 	   SELECT
