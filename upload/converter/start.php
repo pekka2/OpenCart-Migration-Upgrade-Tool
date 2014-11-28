@@ -30,8 +30,8 @@ if( !array_search('salt', getDbColumns() ) ){
 }
 if( isset($_POST['config']) ){
 $output  = '<?php' . "\r\n";
-$output .= 'define(\'HTTP_SERVER\', \'' . HTTP_SERVER . 'converter/\');' . "\r\n";
-$output .= 'define(\'HTTPS_SERVER\', \'' . HTTPS_SERVER . 'converter/\');' . "\r\n";
+$output .= 'define(\'HTTP_SERVER\', \'http://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/.\\') . '/' . '\');' . "\r\n";
+$output .= 'define(\'HTTPS_SERVER\', \'https://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/.\\') . '/' . '\');' . "\r\n";
 $output .= "\r\n";
 
 $output .= '// DIR' . "\r\n";
