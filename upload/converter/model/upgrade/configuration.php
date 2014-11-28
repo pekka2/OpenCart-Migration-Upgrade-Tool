@@ -27,6 +27,7 @@ class ModelUpgradeConfiguration extends Model{
 
 			if( is_writable( DIR_DOCUMENT_ROOT . 'config.php' ) ) {
 				if( !$simulate ) {
+
 		    	$content = str_replace( '/system/database/', '/system/library/db/', $content );
 					$fw = fopen( DIR_DOCUMENT_ROOT . 'config.php', 'wb' );
 					fwrite( $fw, $content );
