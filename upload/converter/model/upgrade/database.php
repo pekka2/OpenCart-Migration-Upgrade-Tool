@@ -909,9 +909,9 @@ class ModelUpgradeDatabase extends Model{
 		
 		  $sql = '
 		  INSERT INTO
-		 	   `' . DB_PREFIX . 'api` (`api_id`, `username`, `password`, `status`, `date_added`, `date_modified`)
+		 	   `' . DB_PREFIX . 'api` (`username`, `password`, `status`, `date_added`, `date_modified`)
 		  VALUES
-			   (1, \'localhost\', \'abcdefghijk\', 1, NOW(), NOW())';
+			   (\'localhost\', \'abcdefghijk\', 1, NOW(), NOW())';
 
 		  if( !$this->simulate ) {
                      $this->db->query( $sql );
