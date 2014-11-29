@@ -2,7 +2,7 @@
 class ModelUpgradeSettings extends Model{
 	/**
 	 * Modules
-         * Openacart versions 1.5.1 or newer
+         * Openacart versions 1.4.7 or newer
          *
 	 */
   private $settincounter = 0;
@@ -35,7 +35,7 @@ class ModelUpgradeSettings extends Model{
 
         $text = '';
         $this->module = 1;
-  if( !$this->hasSetting( 'config_complete_status' ) ){
+ // if( !$this->hasSetting( 'config_complete_status' ) ){
      /* No serialized modules */
      $text .= $this->getChangeModules( 'category' );
      $text .= $this->getChangeModules( 'information' );
@@ -53,7 +53,7 @@ class ModelUpgradeSettings extends Model{
      $text .= $this->newSettings();
      /* delete old settings */
      $this->deleteSettingGroup( 'manufacturer' );
-  }
+ // }
      return $text;
   }
 
@@ -62,7 +62,53 @@ class ModelUpgradeSettings extends Model{
         $str = '';
         $status = 0;
          $module = array();
-	if( $this->hasSetting( 'featured_product' ) && !$this->hasSetting( 'featured_0_position' )) {
+
+	if( $this->config->get( 'featured_status' ) && $this->hasLayout( 'featured' ) ) {
+        /*
+         * version 2.0.0.0 or newer
+         */
+         $product = explode(',',$this->config->get('featured_product') );
+
+          $mmodule = $this->config->get( 'featured_module' );
+
+         $sql = '
+			SELECT * FROM
+				   `' . DB_PREFIX . 'layout_module`
+			WHERE
+				  `code` LIKE \'featured%\'';
+  
+	  $query = $this->db->query( $sql );
+
+          $layout_id = $query->row['layout_id'];
+          $layout_module_id = $query->row['layout_module_id'];
+          
+
+            $code = $query->row['code'];
+          $part = explode('.', $code);
+         if( isset($part[1]) ){
+             $part[1] = $this->module;
+             $code = implode('.',$part);
+         }
+
+         $sql = '
+			SELECT * FROM
+				   `' . DB_PREFIX . 'layout`
+			WHERE
+				   `layout_id`= \'' . $query->row['layout_id'] . '\'';
+  
+		  $query = $this->db->query( $sql );
+
+          $name = $query->row['name'];
+          $module['name'] = 'Featured - ' . $name;
+          $module['width'] = $mmodule[0]['width'];
+          $module['height'] = $mmodule[0]['height'];
+          $module['limit'] = $mmodule[0]['limit'];
+          $module['product'] = $product;
+          $module['status'] = $this->config->get('featured_status');
+
+         $str = serialize($module);
+        }
+	if( $this->hasSetting( 'featured_product' ) && !$this->hasSetting( 'featured_0_position' ) && !$this->hasLayout( 'featured' )) {
         /*
          * version 1.5.1 or newer
          */
@@ -160,6 +206,7 @@ class ModelUpgradeSettings extends Model{
 
                   $this->deleteSettingGroup( 'featured' );
 
+              if( !$this->hasLayout( 'featured' ) ) {
                 $sql = '
 			INSERT INTO
 				   `' . DB_PREFIX . 'layout_module`
@@ -169,9 +216,19 @@ class ModelUpgradeSettings extends Model{
 				   `position` = \'' . $position . '\',
 				   `sort_order` = \'' . $sort_order . '\'';
 
-            if( !$this->simulate ) {
+                 } else {
+                $sql = '
+			UPDATE
+				   `' . DB_PREFIX . 'layout_module`
+			SET
+				   `code`= \'' . $code . '\'
+                        WHERE
+                                  `layout_module_id` = \''. $layout_module_id . '\'';
+
+               }
+            if( !$this->simulate ){
 		   $this->db->query( $sql );
-            }
+           }
             if( $this->showOps ) {
                    $text .= '<p><pre>' . $sql .'</pre></p>';
            }
@@ -221,7 +278,51 @@ class ModelUpgradeSettings extends Model{
         $str = '';
         $status = 0;
          $module = array();
-	if( $this->config->get( 'carousel_module' ) ) {
+	if( $this->config->get( 'carousel_module' )  && $this->hasLayout( 'carousel' )) {
+        /*
+         * version 2.0.0.0
+         */
+
+          $mmodule = $this->config->get( 'carousel_module' );
+
+         $sql = '
+			SELECT * FROM
+				   `' . DB_PREFIX . 'layout_module`
+			WHERE
+				  `code` LIKE \'carousel%\'';
+  
+	  $query = $this->db->query( $sql );
+
+          $layout_module_id = $query->row['layout_module_id'];
+          
+
+            $code = $query->row['code'];
+
+          $part = explode('.', $code);
+
+         if( isset($part[1]) ){
+             $part[1] = $this->module;
+             $code = implode('.',$part);
+         }
+
+         $sql = '
+			SELECT * FROM
+				   `' . DB_PREFIX . 'layout`
+			WHERE
+				   `layout_id`= \'' . $query->row['layout_id'] . '\'';
+  
+		  $query = $this->db->query( $sql );
+
+            $name = $query->row['name'];
+
+          $module['name'] = 'Carousel - ' . $name;
+          $module['banner_id'] = $mmodule[0]['banner_id'];
+          $module['width'] = $mmodule[0]['width'];
+          $module['height'] = $mmodule[0]['height'];
+          $module['status'] = $this->config->get('carousel_status');
+         $str = serialize($module);
+        }
+	if( $this->config->get( 'carousel_module' )  && !$this->hasLayout( 'carousel' )) {
         /*
          * version 1.5.1 or newer
          */
@@ -255,6 +356,8 @@ class ModelUpgradeSettings extends Model{
 		if( !$this->simulate ) {
                   $this->deleteSettingGroup( 'carousel' );
                 }
+
+              if( !$this->hasLayout( 'carousel' ) ) {
                $sql = '
 			INSERT INTO
 				   `' . DB_PREFIX . 'layout_module`
@@ -264,6 +367,16 @@ class ModelUpgradeSettings extends Model{
 				   `position` = \'' . $position . '\',
 				   `sort_order` = \'' . $sort_order . '\'';
 
+                 } else {
+                $sql = '
+			UPDATE
+				   `' . DB_PREFIX . 'layout_module`
+			SET
+				   `code`= \'' . $code . '\'
+                        WHERE
+                                  `layout_module_id` = \''. $layout_module_id . '\'';
+
+               }
             if( !$this->simulate ) {
 		   $this->db->query( $sql );
             }
@@ -301,7 +414,53 @@ class ModelUpgradeSettings extends Model{
         $str = '';
         $status = 0;
          $module = array();
-	if( $this->hasSetting( 'slideshow_module' ) && !$this->hasSetting( 'slideshow_0_position' )) {
+	if( $this->hasSetting( 'slideshow_module' )  && $this->hasLayout( 'slideshow' )) {
+        /*
+         * version 2.0.0.0
+         */
+
+          $mmodule = $this->config->get( 'slideshow_module' );
+
+         $sql = '
+			SELECT * FROM
+				   `' . DB_PREFIX . 'layout_module`
+			WHERE
+				  `code` LIKE \'slideshow%\'';
+  
+	  $query = $this->db->query( $sql );
+
+          $layout_module_id = $query->row['layout_module_id'];
+          
+
+            $code = $query->row['code'];
+
+          $part = explode('.', $code);
+
+         if( isset($part[1]) ){
+             $part[1] = $this->module;
+             $code = implode('.',$part);
+         }
+          
+         $sql = '
+			SELECT * FROM
+				   `' . DB_PREFIX . 'layout`
+			WHERE
+				   `layout_id`= \'' . $query->row['layout_id'] . '\'';
+  
+		  $query = $this->db->query( $sql );
+
+          $name = $query->row['name'];
+
+          $module['name'] = 'Slideshow - ' . $name;
+          $module['banner_id'] = $mmodule[0]['banner_id'];
+          $module['width'] = $mmodule[0]['width'];
+          $module['height'] = $mmodule[0]['height'];
+          $module['status'] = $this->config->get('slideshow_status');
+
+         $str = serialize($module);
+        }
+
+	if( $this->hasSetting( 'slideshow_module' ) && !$this->hasSetting( 'slideshow_0_position' ) && !$this->hasLayout( 'slideshow' )) {
         /*
          * version 1.5.1 or newer
          */
@@ -357,6 +516,7 @@ class ModelUpgradeSettings extends Model{
           if( $str ){
                   $this->deleteSettingGroup( 'slideshow' );
 
+              if( !$this->hasLayout( 'slideshow' ) ) {
                $sql = '
 			INSERT INTO
 				   `' . DB_PREFIX . 'layout_module`
@@ -366,6 +526,16 @@ class ModelUpgradeSettings extends Model{
 				   `position` = \'' . $position . '\',
 				   `sort_order` = \'' . $sort_order . '\'';
 
+                 } else {
+                $sql = '
+			UPDATE
+				   `' . DB_PREFIX . 'layout_module`
+			SET
+				   `code`= \'' . $code . '\'
+                        WHERE
+                                  `layout_module_id` = \''. $layout_module_id . '\'';
+
+               }
             if( !$this->simulate ) {
 		   $this->db->query( $sql );
             }
@@ -406,7 +576,51 @@ class ModelUpgradeSettings extends Model{
         $status = 0;
         $module = array();
 
-	if( $this->config->get( $mod . '_module' ) && !$this->hasSetting( $mod . '_0_position' )) {
+	if( $this->config->get( $mod . '_module' ) && $this->hasLayout( $mod )) {
+        /*
+         * version 2.0.0.0
+         */
+          $mmodule = $this->config->get( $mod . '_module' );
+          
+         $sql = '
+			SELECT * FROM
+				   `' . DB_PREFIX . 'layout_module`
+			WHERE
+				  `code` LIKE \'' . $mod .'%\'';
+  
+	  $query = $this->db->query( $sql );
+
+          $layout_module_id = $query->row['layout_module_id'];
+          
+
+            $code = $query->row['code'];
+
+          $part = explode('.', $code);
+
+         if( isset($part[1]) ){
+             $part[1] = $this->module;
+             $code = implode('.',$part);
+         }
+
+         $sql = '
+			SELECT * FROM
+				   `' . DB_PREFIX . 'layout`
+			WHERE
+				   `layout_id`= \'' . $query->row['layout_id'] . '\'';
+  
+		  $query = $this->db->query( $sql );
+
+          $name = $query->row['name'];
+          $module['name'] = $mod . ' - ' . $name;
+          $module['width'] = $mmodule[0]['image_width'];
+          $module['height'] = $mmodule[0]['image_height'];
+          $module['limit'] = $mmodule[0]['limit'];
+          $module['status'] = $this->config->get( $mod . '_status');
+
+         $str = serialize($module);
+        }
+
+	if( $this->config->get( $mod . '_module' ) && !$this->hasSetting( $mod . '_0_position' ) && !$this->hasLayout( $mod )) {
         /*
          * version 1.5.1 or newer
          */
@@ -490,6 +704,7 @@ class ModelUpgradeSettings extends Model{
 
                $this->deleteSettingGroup( $mod );
 
+              if( !$this->hasLayout( $mod ) ) {
              $sql = '
 		     INSERT INTO
 			        `' . DB_PREFIX . 'layout_module`
@@ -499,6 +714,16 @@ class ModelUpgradeSettings extends Model{
 				`position` = \'' . $position . '\',
 				`sort_order` = \'' . $sort_order . '\'';
 
+                 } else {
+                $sql = '
+			UPDATE
+				   `' . DB_PREFIX . 'layout_module`
+			SET
+				   `code`= \'' . $code . '\'
+                        WHERE
+                                  `layout_module_id` = \''. $layout_module_id . '\'';
+
+               }
             if( !$this->simulate ) {
 		   $this->db->query( $sql );
             }
@@ -1953,7 +2178,28 @@ class ModelUpgradeSettings extends Model{
 
 	return true;
    }
-   public function hasExtension( $val ) {
+   private function hasLayout( $val ) {
+ 
+	$sql = '
+	SELECT
+		*
+	FROM
+		`' . DB_PREFIX . 'layout_module`
+	WHERE
+		`code` LIKE  \'' . $val . '%\'';
+
+        if( array_search( DB_PREFIX . 'layout_module', $this->getTables() ) ){
+	$result = $this->db->query( $sql );
+	if( count( $result->row ) == 0 ) {
+		return false;
+	}
+       } else {
+		return false;
+	}
+
+	return true;
+   }
+   private function hasExtension( $val ) {
     if( array_search( 'code', $this->getDbColumns( 'extension' ) ) ){
       $field = 'code';
     }
