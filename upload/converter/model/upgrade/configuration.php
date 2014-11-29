@@ -19,9 +19,9 @@ class ModelUpgradeConfiguration extends Model{
                 array_pop($server);
                 $server = implode('/',$server);
                 
-		$http_server = 'define(\'HTTP_SERVER\', \'http://' . $server . '/\'); // OC 1.5+';
-		$https_server = 'define(\'HTTPS_SERVER\', \'https://' .$server . '/\'); // OC 1.5+';
-		$https_catalog = 'define(\'HTTPS_CATALOG\', \'https://' .$server . '/\'); // OC 1.5+';
+		$http_server = 'define(\'HTTP_SERVER\', \'http://' . $server . '/\'); // OC 1.4+';
+		$https_server = 'define(\'HTTPS_SERVER\', \'https://' .$server . '/\'); // OC 1.4+';
+		$https_catalog = 'define(\'HTTPS_CATALOG\', \'https://' .$server . '/\'); // OC 1.4+';
 
 		// frontend
 	    $content = file_get_contents( DIR_DOCUMENT_ROOT . 'config.php' );
