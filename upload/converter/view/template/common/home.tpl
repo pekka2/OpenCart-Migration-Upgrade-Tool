@@ -20,7 +20,7 @@
 
 Description
 -----------
-This program coverts an OpenCart shop of version 1.5.x to the latest v.2 version.
+This program coverts an OpenCart shop of version 1.4.7-2.0.0.0 to the latest v.2 version.
 
 Features
 --------
