@@ -49,7 +49,7 @@ class ModelUpgradeDatabase extends Model{
 	if( !array_search( DB_PREFIX . 'order_recurring', $this->getTables() ) ) {
            $text .= $this->addUpgradeTo156();
         }
-	if( !array_search( DB_PREFIX . 'event', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'module', $this->getTables() ) ) {
            $text .= $this->addUpgradeTo2001();
         }
 	$text .= '<div class="header round"> ';
