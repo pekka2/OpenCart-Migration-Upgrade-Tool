@@ -14,20 +14,6 @@ class ModelUpgradeSettings extends Model{
   private $showOps;
   private $settings = array();
 
-   private function array_splice_assoc(&$input, $offset, $length, $replacement) {
-        $replacement = (array) $replacement;
-        $key_indices = array_flip(array_keys($input));
-        if (isset($input[$offset]) && is_string($offset)) {
-                $offset = $key_indices[$offset];
-        }
-        if (isset($input[$length]) && is_string($length)) {
-                $length = $key_indices[$length] - $offset;
-        }
-
-        $input = array_slice($input, 0, $offset, TRUE)
-                + $replacement
-                + array_slice($input, $offset + $length, NULL, TRUE);
-   }
   public function getChangeModule( $data ){
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
@@ -121,13 +107,9 @@ class ModelUpgradeSettings extends Model{
           
          if( !isset( $module[0]['limit'] )){
           $limit = 4;
-          $key = 0;
           } else {
            $limit = $module[0]['limit'];
-           $key = 1;
           }
-
-         $this->array_splice_assoc($mmodule[0],'limit',$key, array('limit'=> $limit,'product' => $product ) );
 
          $sql = '
 			SELECT * FROM
@@ -141,8 +123,8 @@ class ModelUpgradeSettings extends Model{
           $module['name'] = 'Featured - ' . $name;
           $module['width'] = $mmodule[0]['image_width'];
           $module['height'] = $mmodule[0]['image_height'];
-          $module['limit'] = $mmodule[0]['limit'];
-          $module['product'] = $mmodule[0]['product'];
+          $module['limit'] = $limit;
+          $module['product'] = $product;
           $module['status'] = $mmodule[0]['status'];
          $str = serialize($module);
         }
