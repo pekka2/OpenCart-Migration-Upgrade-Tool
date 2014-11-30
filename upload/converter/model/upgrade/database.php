@@ -2209,7 +2209,35 @@ class ModelUpgradeDatabase extends Model{
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'upload' ) );
 	}
-		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '2.0.0.1', '' ) );
+	
+        if( !$this->hasLayout( 'Compare' ) ){
+            $sql = '
+                   INSERT INTO
+                              `' . DB_PREFIX . 'layout` (`layout_id`, `name`)
+                   VALUES
+                              (12, \'Compare\'),
+                              (13, \'Search\')';
+
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                } if( $this->showOps ) {
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+
+            $sql = '
+                   INSERT INTO
+                              `' . DB_PREFIX . 'layout_route` (`layout_route_id`, `layout_id`, `route`)
+                   VALUES
+                              (52, 12, \'product/compare\'),
+                              (53, 13, \'product/search\')';
+
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                } if( $this->showOps ) {
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+	}
+		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '2.0.1.0', '' ) );
     return $text;
   }
   public function fixEngineOfTableCustomerOnline(){
@@ -2250,6 +2278,23 @@ class ModelUpgradeDatabase extends Model{
 
      return $text;
   }
+   public function hasLayout( $val ) {
+	$sql = '
+	SELECT
+		*
+	FROM
+		`' . DB_PREFIX . 'layout`
+	WHERE
+		`name` = \'' . $val . '\'';
+
+	$result = $this->db->query( $sql );
+
+	if( count( $result->row ) == 0 ) {
+		return false;
+	}
+
+	return true;
+   }
   public function msg( $data ){
        return str_replace( $data, '<div class="msg round">' . $data .'</div>', $data);
   }
