@@ -81,7 +81,7 @@ class ModelUpgradeSettings extends Model{
        $modules2 = ( !is_null(  $this->config->get( $mod . '_0_status' ) ) ? true:false);
 
        }
-       if( !$modules2 ){
+       elseif( !$modules2 ){
 
        $modules3 = ( !is_null(  $this->config->get( $mod . '_width' )) ||  !is_null(  $this->config->get( $mod . '_position' )) ? true:false);
 
