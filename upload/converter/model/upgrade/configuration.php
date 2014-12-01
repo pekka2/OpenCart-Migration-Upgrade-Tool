@@ -64,7 +64,7 @@ class ModelUpgradeConfiguration extends Model{
 				$text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'DIR_UPLOAD', 'config.php' ) );
 				$text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'DIR_MODIFICATION', 'config.php' ) );
 			}else{
-				$text .= $this->msg->displayError(  $this->lang, 'msg_perm_file', 'config.php' );
+				$text .= $this->msg(  sprintf( $this->lang, 'msg_perm_file', 'config.php' ) );
 			}
 		}else{
 			$text .= $this->msg( sprintf(  $this->lang['msg_config_uptodate'], 'config.php', '' ) );
@@ -108,7 +108,7 @@ class ModelUpgradeConfiguration extends Model{
 				$text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DIR_UPLOAD', $file ) );
 				$text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DIR_MODIFICATION', $file ) );
 			}else{
-				$text .= $this->msg->displayError(  $this->lang['msg_perm_file'], 'config.php', $file );
+				$text .= $this->msg(  sprintf( $this->lang['msg_perm_file'], 'config.php', $file ) );
 			}
 		}else{
 			$text .= $this->msg( sprintf(  $this->lang['msg_config_uptodate'], $file, '' ) );
