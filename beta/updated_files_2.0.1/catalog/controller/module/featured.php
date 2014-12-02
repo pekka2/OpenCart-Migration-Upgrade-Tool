@@ -22,7 +22,7 @@ class ControllerModuleFeatured extends Controller {
 		}
 
      /*
-      * Added check index limit
+      * Added check index product
       ******************************/
          if( isset($setting['product']) ) {
 		$products = array_slice($setting['product'], 0, (int)$setting['limit']);
