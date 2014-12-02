@@ -114,12 +114,6 @@ class ModelUpgradeSettings extends Model{
                                           if(isset($modulesx[$k[$i]]['image_height'])){
                                                        $modulesx[$k[$i]]['height'] = $modulesx[$k[$i]]['image_height'];
                                           }
-                                          if( $this->hasLayout('slideshow') && $mod == 'slideshow'){
-                                                       $modulesx[$k[$i]]['width'] = '1140';
-                                                       $modulesx[$k[$i]]['height'] = '380';
-
-                                                       $modulesx[$k[$i]]['banner_id'] = $modulesx[0]['banner_id'];
-                                          }
                                           
                    $modules[$i] = array('width' => $modulesx[$k[$i]]['width'],
                                                    'height' => $modulesx[$k[$i]]['height'],
@@ -247,7 +241,7 @@ class ModelUpgradeSettings extends Model{
                        SELECT * FROM
                                                   `' . DB_PREFIX . 'layout_module`
                        WHERE
-                                  `code` LIKE \'' . $mod .'%\' ORDER BY `code` DESC';
+                                  `code` LIKE \'' . $mod .'%\' ORDER BY `layout_module_id` ASC';
                                   
     $query = $this->db->query( $sql );
     
