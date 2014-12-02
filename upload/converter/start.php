@@ -8,11 +8,11 @@ function getDbColumns( ) {
                 $link = mysql_connect( DB_HOSTNAME, DB_USERNAME, DB_PASSWORD );
                 $db_selected = mysql_select_db( DB_DATABASE );
 
-                $colums = mysql_query("SHOW COLUMNS FROM " . DB_PREFIX . "user FROM " . DB_DATABASE);
+                $fields = mysql_query("SHOW COLUMNS FROM " . DB_PREFIX . "user");
 		
 		$ret = array();
 
-               while( $field = mysql_fetch_assoc($colums)){
+               while( $field = mysql_fetch_assoc($fields)){
                  $ret[] = $field['Field'];
                }
 
