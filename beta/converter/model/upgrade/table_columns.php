@@ -52,6 +52,11 @@ class ModelUpgradeTableColumns extends Model{
 			'column'	=> ' tinyint(1) NOT NULL AFTER address_format'
 		),
 		array(
+                        'table'         => 'custom_field',
+			'field'		=> 'status',
+			'column'	=> ' tinyint(1) NOT NULL AFTER location'
+		),
+		array(
                         'table'         => 'customer',
 			'field'		=> 'custom_field',
 			'column'	=> ' text NOT NULL AFTER address_id'
