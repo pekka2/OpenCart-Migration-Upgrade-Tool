@@ -34,19 +34,17 @@ class ControllerUpgradeInfo extends Controller {
                 $tables = $this->model_upgrade_info->listTables();            
                 $new_oc_verions = $this->model_upgrade_info->getVersion2Tables();
                 $this->data['your_database_tables'] = count($tables);
-                $this->data['upgrade_database_tables'] = count($new_oc_verions);
-                $missing_tables = array_diff($new_oc_verions,$tables);
-                $expired_tables = array_diff($tables,$new_oc_verions);
+                $this->data['upgrade_database_tables'] = $new_oc_verions;
+                $missing_tables = $new_oc_verions - count($tables) );
+                $expired_tables = count($tables) - $new_oc_verions;
 
-                $missing = count($missing_tables);
+                $this->data['expirend'] = $expired_tables;
 
-                $this->data['expirend'] = count($expired_tables);
-
-                if($missing === 0){
+                if($missing_tables === 0){
                   $this->data['text_tables_complete'] = $this->language->get('text_tables_complete');
                 } 
 
-                 $this->data['missing'] = $missing;
+                 $this->data['missing'] = $missing_tables;
 
 		$this->template = 'upgrade/info.tpl';
 
