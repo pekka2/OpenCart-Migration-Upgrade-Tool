@@ -38,7 +38,7 @@ class ModelUpgradeSettings extends Model{
      $text .= $this->getConfigMail();
      $text .= $this->newSettings();
      /* delete old settings */
-     $this->deleteSettingGroup( 'manufacturer' );
+     $text .= $this->deleteSettingGroup( 'manufacturer' );
      return $text;
   }
 
@@ -344,6 +344,7 @@ class ModelUpgradeSettings extends Model{
        }
      }
 
+         $text .= $this->deleteSettingGroup( $mod );
    return $text;
   }
 
@@ -1877,5 +1878,9 @@ class ModelUpgradeSettings extends Model{
 	$this->db->query( $sql );
      }
 
+     if( $this->showOps ) {
+        $text = '<p><pre>' . $sql .'</pre></p>';
+     }
+	$text .= $this->msg( sprintf( $this->lang['msg_delete_setting'], $group . '_module', DB_PREFIX . 'setting','' ) );
   }
 }
