@@ -38,7 +38,7 @@ class ControllerUpgradeInfo extends Controller {
                 $missing_tables = $new_oc_verions - count($tables);
                 $expired_tables = count($tables) - $new_oc_verions;
 
-                $this->data['expirend'] = count($expired_tables);
+                $this->data['expirend'] = $expired_tables;
 
                 if($missing_tables === 0){
                   $this->data['text_tables_complete'] = $this->language->get('text_tables_complete');
