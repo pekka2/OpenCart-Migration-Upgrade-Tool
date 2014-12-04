@@ -3,31 +3,6 @@ $root	= dirname( dirname( __FILE__ ) ) . '/';
 
 require( $root . 'config.php' );
 
-function getDbColumns( ) {
-
-                $link = mysql_connect( DB_HOSTNAME, DB_USERNAME, DB_PASSWORD );
-                $db_selected = mysql_select_db( DB_DATABASE );
-
-                $fields = mysql_query("SHOW COLUMNS FROM " . DB_PREFIX . "user");
-		
-		$ret = array();
-
-               while( $field = mysql_fetch_assoc($fields)){
-                 $ret[] = $field['Field'];
-               }
-
-  return $ret;
-}
-if( !array_search('salt', getDbColumns() ) ){
-
-  $user_salt = 0;
-
-} else {
-
-  $user_salt = 1;
-
-
-}
 if( isset($_POST['config']) ){
 $output  = '<?php' . "\r\n";
 $output .= 'define(\'HTTP_SERVER\', \'http://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/.\\') . '/' . '\');' . "\r\n";
@@ -57,7 +32,6 @@ $output .= 'define(\'DB_USERNAME\', \'' . DB_USERNAME . '\');' . "\r\n";
 $output .= 'define(\'DB_PASSWORD\', \'' . DB_PASSWORD . '\');' . "\r\n";
 $output .= 'define(\'DB_DATABASE\', \'' . DB_DATABASE . '\');' . "\r\n";
 $output .= 'define(\'DB_PREFIX\', \'' . DB_PREFIX . '\');' . "\r\n";
-$output .= 'define(\'DB_USER_SALT\', \'' . $user_salt . '\');' . "\r\n";
 $output .= '?>';
 
 $fw = fopen("config.php","w") or die (error());
