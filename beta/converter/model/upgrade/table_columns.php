@@ -1228,27 +1228,10 @@ class ModelUpgradeTableColumns extends Model{
 	$text .= sprintf( $this->lang['msg_delete_table'], $deletetab, '' );
         $text .= ' </div>';
 
-        $this->changeSalt();
-
        return $text;
 
   }
 
-
-  private function changeSalt(){
-
-         $file = DIR_APPLICATION . 'config.php';
-
-         $content = file_get_contents( $file );
-         $content = str_replace('(\'DB_USER_SALT\', \'0\')', '(\'DB_USER_SALT\', \'1\')', $content);
-	    
-	if( !$this->simulate ) {
-		$fw = fopen( $file, 'w' );
-		fwrite( $fw, $content );
-		fclose( $fw );
-	}
-		    
-  }
   private function msg( $data ){
        $data = str_replace( $data, '<div class="msg round"> ' . $data .' </div>', $data);
        return $data;
