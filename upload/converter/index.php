@@ -14,7 +14,7 @@
  * @todo move to mysqli
  */
 
-define('VERSION', '1.1.9');
+define('VERSION', '1.2.0');
 
 // Configuration
 if (is_file('config.php')) {
@@ -45,7 +45,7 @@ function getDbColumns( ) {
                 $link = mysql_connect( DB_HOSTNAME, DB_USERNAME, DB_PASSWORD );
                 $db_selected = mysql_select_db( DB_DATABASE );
 
-                $colums = mysql_query("SHOW COLUMNS FROM " . DB_PREFIX . "setting FROM " . DB_DATABASE);
+                $colums = mysql_query("SHOW COLUMNS FROM " . DB_PREFIX . "setting");
 		
 		$ret = array();
 
