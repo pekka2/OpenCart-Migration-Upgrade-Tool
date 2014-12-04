@@ -34,7 +34,7 @@ class User {
 	}
 
 	public function login($username, $password) {
-         if( DB_USER_SALT == 1 ){
+         if( $this->getSalt() ){
 		$user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "' AND (password = SHA1(CONCAT(salt, SHA1(CONCAT(salt, SHA1('" . $this->db->escape($password) . "'))))) OR password = '" . $this->db->escape(md5($password)) . "') AND status = '1'");
           } else {
     	$user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "' AND password = '" . $this->db->escape(md5($password)) . "' AND status = '1'");
@@ -61,6 +61,22 @@ class User {
 		}
 	}
 
+         private function getSalt( ) {
+                                              
+                       $fields = mysql_query("SHOW COLUMNS FROM " . DB_PREFIX . "user") or die ( mysql_error() );
+                                              
+                              $ret = array();
+                                              
+                       while( $field = mysql_fetch_assoc($fields)){
+                                              
+                               $ret[] = $field['Field'];
+                                              
+                       }
+                        if( !array_search('salt',$ret) ){
+                                  return false;
+                         }
+                     return true;
+         }
 	public function logout() {
 		unset($this->session->data['user_id']);
 
