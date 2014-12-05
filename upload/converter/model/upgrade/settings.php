@@ -172,12 +172,14 @@ class ModelUpgradeSettings extends Model{
                                                   `' . DB_PREFIX . 'layout_module`
                        WHERE
                                   `code` LIKE \'' . $mod .'%\' ORDER BY `code` DESC';
-                                  
+  
+    if( array_search( DB_PREFIX . 'layout_module' , $this->getTables()) ) {                                
     $query = $this->db->query( $sql );
         if( count($query->rows) >  $count){
                             $array = $modules;
                             $modules = array_merge($modules,$array);
        }
+    }
 
           $count = count( $modules );
           foreach( $modules as $modul ){
