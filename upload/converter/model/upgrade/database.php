@@ -37,7 +37,7 @@ class ModelUpgradeDatabase extends Model{
         }
 	if( array_search( DB_PREFIX . 'customer_online', $this->getTables() ) &&
             array_search( DB_PREFIX . 'customer_ip_blacklist', $this->getTables() )) {
-           $text .= $this->fixEngineOfTableCustomerOnline();
+          // $text .= $this->fixEngineOfTableCustomerOnline();
         }
 	if( !array_search( DB_PREFIX . 'customer_online', $this->getTables() ) ) {
            $text .= $this->addUpgradeTo154();
