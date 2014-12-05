@@ -1612,24 +1612,6 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'custom_field_description' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'custom_field_customer_group', $this->getTables() ) ) {
-		$sql = '
-		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'custom_field_customer_group` (
-		`custom_field_id` int(11) NOT NULL,
-		`customer_group_id` int(11) NOT NULL,
-		PRIMARY KEY (`custom_field_id`,`customer_group_id`)
-		) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci';
-
-		if( !$this->simulate ) {
-                     $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->tablecounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'custom_field_customer_group' ) );
-	}
-
 	if( !array_search( DB_PREFIX . 'custom_field_value', $this->getTables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'custom_field_value` (
