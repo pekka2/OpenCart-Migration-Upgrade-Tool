@@ -166,7 +166,7 @@ class ModelUpgradeImages extends Model{
                       "table"      => 'banner_image',
                       "field"      => 'banner_image_id',
                       "id"         => $images['banner_image_id'],
-                      "path"       => $root . $this->dirImage . str_replace('catalog',$imgdata,$images['image']),
+                      "path"       => $root . $this->dirImage . str_replace('data','catalog',$images['image']),
                       "updatepath" => str_replace('data','catalog/banners', str_replace('demo/','',$images['image'] )),
                       "newpath"    => DIR_STORE_IMAGE . 'catalog/banners/'. basename($images['image']),
                       "newdirpath" => DIR_STORE_IMAGE . 'catalog/banners/'
