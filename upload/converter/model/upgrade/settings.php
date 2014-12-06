@@ -288,10 +288,10 @@ class ModelUpgradeSettings extends Model{
 			INSERT INTO
 				`' . DB_PREFIX . 'layout_module`
 			SET
-                                                                                            `layout_id` = \'' . $modul['layout_id'] . '\',
-                                                                                            `code`= \'' .  $mod . '.' . $this->module . '\',
-                                                                                            `position` = \'' . $modul['position'] . '\',
-                                                                                            `sort_order` = \'' . $modul['sort_order'] . '\'';
+                               `layout_id` = \'' . $modul['layout_id'] . '\',
+                               `code`= \'' .  $mod . '.' . $this->module . '\',
+                               `position` = \'' . $modul['position'] . '\',
+                               `sort_order` = \'' . $modul['sort_order'] . '\'';
             if( !$this->simulate ) {
 		   $this->db->query( $sql );
             }
@@ -300,14 +300,12 @@ class ModelUpgradeSettings extends Model{
             }
 
 	$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module',  DB_PREFIX . 'layout_module' ) );
-                       
-          }
+             
 
          if( !isset($modul['layout_id']) ){
           $modul['layout_id'] = 1;
          }   
 
-             if( !$this->hasLayout( $mod ) ){
          $sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'module`
