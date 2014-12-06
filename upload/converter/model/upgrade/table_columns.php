@@ -1276,7 +1276,7 @@ class ModelUpgradeTableColumns extends Model{
   private function getColumnType( $column, $type, $table ) {
  
      if( array_search( DB_PREFIX . $table, $this->getTables() ) || $table == 'address'){
-            $fields = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . '`' );
+            $fields = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . '`" );
 
         if( array_search( $column, $this->getDbColumns( $table ) ) ){
            foreach( $fields->rows as $field){
