@@ -10,7 +10,7 @@ $output .= 'define(\'HTTPS_SERVER\', \'https://' . $_SERVER['HTTP_HOST'] . rtrim
 $output .= "\r\n";
 
 $output .= '// DIR' . "\r\n";
-$output .= 'define(\'DIR_DOCUMENT_ROOT\', \'' . $root . '/\');' . "\r\n";
+$output .= 'define(\'DIR_DOCUMENT_ROOT\', \'' . $root . '\');' . "\r\n";
 $output .= 'define(\'DIR_APPLICATION\', \'' . $root . 'converter/\');' . "\r\n";
 $output .= 'define(\'DIR_SYSTEM\', \'' . $root . 'converter/system/\');' . "\r\n";
 $output .= 'define(\'DIR_DATABASE\', \'' . $root . 'converter/system/database/\');' . "\r\n";
