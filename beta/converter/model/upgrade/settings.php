@@ -316,7 +316,6 @@ class ModelUpgradeSettings extends Model{
             }
 
 	$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module',  DB_PREFIX . 'layout_module' ) );
-                   
 
          if( !isset($modul['layout_id']) ){
           $modul['layout_id'] = 1;
@@ -339,16 +338,13 @@ class ModelUpgradeSettings extends Model{
 		++$this->settingcounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'slideshow_module', DB_PREFIX . 'module' ) );
                  
-    }
-
+        }
        }
      }
 
          $text .= $this->deleteSettingGroup( $mod );
    return $text;
   }
-
-
   private function getChangeModules( $mod ){
      /*
       * This is modules 'category', 'account', 'affiliate' and 'information'
