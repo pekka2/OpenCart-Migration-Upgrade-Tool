@@ -45,7 +45,7 @@ function getDbColumns( ) {
                 $link = mysql_connect( DB_HOSTNAME, DB_USERNAME, DB_PASSWORD );
                 $db_selected = mysql_select_db( DB_DATABASE );
 
-                $colums = mysql_query("SHOW COLUMNS FROM " . DB_PREFIX . "setting");
+                $colums = mysql_query("SHOW COLUMNS FROM `" . DB_PREFIX . "setting`");
 		
 		$ret = array();
 
