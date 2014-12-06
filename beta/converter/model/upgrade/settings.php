@@ -1846,7 +1846,7 @@ class ModelUpgradeSettings extends Model{
 		global $link;
 
         if( array_search( DB_PREFIX . $table, $this->getTables() ) || $table == 'address'){
-                $colums = $this->db->query("SHOW COLUMNS FROM " . DB_PREFIX . $table );
+                $colums = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`");
 
 		$ret		= array();
 
