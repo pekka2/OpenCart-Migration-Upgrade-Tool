@@ -11,6 +11,8 @@ legend
 
 CONVERTER
 ---------
+1.2.1   2014.12.06      ^ up Opencart version 2.0.1.1
+                        # module save
 1.2.0   2014.12.02      ^ all serialize modules custom same method
                         # change also all subpages serialize basic modules
 1.1.9   2014.11.30      + to Opencart 2.0.1.0 level
