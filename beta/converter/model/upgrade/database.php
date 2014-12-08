@@ -5,7 +5,7 @@ class ModelUpgradeDatabase extends Model{
   private $showOps;
   private $tablecounter;
   public function getTables() {
-       $query = $this->db->query("SHOW TABLES FROM " . DB_DATABASE);
+       $query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
 
         $table_list = array();
         foreach($query->rows as $table){
