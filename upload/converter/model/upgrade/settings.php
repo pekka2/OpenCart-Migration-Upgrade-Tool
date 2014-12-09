@@ -1833,6 +1833,7 @@ class ModelUpgradeSettings extends Model{
    }
 
    public function deleteSettingGroup($group) {
+   	$text = '';
 	$sql = '
 	DELETE FROM
 		`' . DB_PREFIX . 'setting`
