@@ -28,7 +28,7 @@ class ModelUpgradeImages extends Model{
           $images = $this->getImages();
           $imageInfo = $images[0];
           $text .= $images[1];
-//print_r($imageInfo[1]);
+
             $copy = 0;
             $imagepath = 0;
 
@@ -122,7 +122,7 @@ class ModelUpgradeImages extends Model{
 	}
 		
    } else{
-	$text .= '<div class="header round">';
+	$text .= '<div class="error round">';
 	$text .= sprintf( $this->lang['msg_perm_dir'], DIR_STORE_IMAGE );
         $text .= '</div>';
    }
