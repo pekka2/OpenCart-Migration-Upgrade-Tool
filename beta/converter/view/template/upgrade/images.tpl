@@ -23,7 +23,6 @@
 		<div class="clr"></div>
 		<div class="block-big"><?php echo $text_finish_text; ?></div>
 		<div class="block-big">
-			<div class="error round"><?php echo $text_finish_note; ?></div>
 		</div>
  </div>
 
