@@ -14,7 +14,7 @@ class ModelUpgradeInfo extends Model{
 
    $tables = 124;
    
-  return unserialize($tables);
+  return $tables;
   }
   public function getAdminPermissions() {
 
