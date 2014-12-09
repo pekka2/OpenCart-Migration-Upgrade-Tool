@@ -2,7 +2,7 @@
 class ModelUpgradeInfo extends Model{
   public function listTables() {
 
-       $query = $this->db->query("SHOW TABLES FROM " . DB_DATABASE);
+       $query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
 
         $table_list = array();
         foreach($query->rows as $table){
