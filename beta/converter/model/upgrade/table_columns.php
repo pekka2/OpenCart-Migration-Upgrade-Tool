@@ -883,7 +883,7 @@ class ModelUpgradeTableColumns extends Model{
                  ALTER TABLE
                            ' . DB_PREFIX . 'order
                  ALTER 
-                           currency_value
+                           `currency_value`
                  SET DEFAULT  \'1.00000000\'';
 		
 	        if( !$this->simulate ) {
