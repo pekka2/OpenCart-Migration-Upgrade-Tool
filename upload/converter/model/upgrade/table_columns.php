@@ -1029,7 +1029,7 @@ class ModelUpgradeTableColumns extends Model{
 			FROM
 				`' . DB_PREFIX . 'tax_rate`
 			WHERE
-				tax_class_id = \''. $tax['tax_class_id'] . '\'';
+				`tax_class_id` = \''. $tax['tax_class_id'] . '\'';
 
 			$result = $this->db->query( $sql );
 
@@ -1038,10 +1038,10 @@ class ModelUpgradeTableColumns extends Model{
 				INSERT INTO
 					`' . DB_PREFIX . 'tax_rule`
 				SET
-					tax_class_id = \'' . $tax['tax_class_id'] . '\',
-					tax_rate_id = \'' . $tax['tax_rate_id'] . '\',
-					based = \'shipping\',
-					priority = \'' . $tax['priority'] . '\'';
+					`tax_class_id` = \'' . $tax['tax_class_id'] . '\',
+					`tax_rate_id` = \'' . $tax['tax_rate_id'] . '\',
+					`based` = \'shipping\',
+					`priority` = \'' . $tax['priority'] . '\'';
 
 				if( !$this->simulate ) {
                                        $this->db->query( $sql );
@@ -1059,7 +1059,7 @@ class ModelUpgradeTableColumns extends Model{
 			FROM
 				`' . DB_PREFIX . 'tax_rate_to_customer_group`
 			WHERE
-				tax_rate_id = \'' . $rate['tax_rate_id'] . '\'';
+				`tax_rate_id` = \'' . $rate['tax_rate_id'] . '\'';
 
 	   if( array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->getTables() ) ) {
 			$result = $this->db->query( $sql );
@@ -1069,8 +1069,8 @@ class ModelUpgradeTableColumns extends Model{
 				INSERT INTO
 					`' . DB_PREFIX . 'tax_rate_to_customer_group`
 				SET
-					tax_rate_id = \'' . $rate['tax_rate_id'] . '\',
-					customer_group_id = \'1\'';
+					`tax_rate_id` = \'' . $rate['tax_rate_id'] . '\',
+					`customer_group_id` = \'1\'';
 
 				if( !$this->simulate ) {
                                        $this->db->query( $sql );
@@ -1087,7 +1087,7 @@ class ModelUpgradeTableColumns extends Model{
 		ALTER TABLE
 			`' . DB_PREFIX . 'tax_rate`
 		CHANGE
-			description name varchar(255) NOT NULL';
+			`description` `name` varchar(255) NOT NULL';
 
 		if( array_search( 'description', $this->getDbColumns( 'tax_rate' ) ) ) {
 
@@ -1171,7 +1171,7 @@ class ModelUpgradeTableColumns extends Model{
                 $sql = '
                 SELECT 
                        *
-                FROM  `' . DB_PREFIX . 'return_product';
+                FROM  `' . DB_PREFIX . 'return_product`';
  
                 $query = $this->db->query($sql);
 
