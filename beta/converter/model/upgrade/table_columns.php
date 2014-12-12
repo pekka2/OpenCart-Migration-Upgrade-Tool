@@ -1171,7 +1171,7 @@ class ModelUpgradeTableColumns extends Model{
                 $sql = '
                 SELECT 
                        *
-                FROM  `' . DB_PREFIX . 'return_product';
+                FROM  `' . DB_PREFIX . 'return_product`';
  
                 $query = $this->db->query($sql);
 
