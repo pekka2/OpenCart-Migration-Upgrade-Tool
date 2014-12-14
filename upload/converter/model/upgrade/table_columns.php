@@ -881,7 +881,7 @@ class ModelUpgradeTableColumns extends Model{
 	if( array_search( 'currency_value', $this->getDbColumns( 'order' ) ) ){
 	  $sql = '
                  ALTER TABLE
-                           ' . DB_PREFIX . 'order
+                           `' . DB_PREFIX . 'order`
                  ALTER 
                            `currency_value`
                  SET DEFAULT  \'1.00000000\'';
