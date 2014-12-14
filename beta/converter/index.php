@@ -14,7 +14,7 @@
  * @todo move to mysqli
  */
 
-define('VERSION', '1.2.1');
+define('VERSION', '1.2.2');
 
 // Configuration
 if (is_file('config.php')) {
@@ -40,29 +40,22 @@ $registry = new Registry();
 $config = new Config();
 $registry->set('config', $config);
 
-function getDbColumns( ) {
-
-                $link = mysql_connect( DB_HOSTNAME, DB_USERNAME, DB_PASSWORD );
-                $db_selected = mysql_select_db( DB_DATABASE );
-
-                $colums = mysql_query("SHOW COLUMNS FROM `" . DB_PREFIX . "setting`");
-		
-		$ret = array();
-
-               while( $field = mysql_fetch_assoc($colums)){
-                 $ret[] = $field['Field'];
-               }
-
-  return $ret;
-}
 // Database
 
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 $registry->set('db', $db);
 
+                $colums = $db->query("SHOW COLUMNS FROM `" . DB_PREFIX . "setting`");
+		
+		$ret = array();
+
+              foreach($colums->rows as $field){
+                 $ret[] = $field['Field'];
+               }
+
 // Settings
 
-if( array_search('store_id', getDbColumns() ) ){
+if( array_search('store_id', $ret ) ){
 /*
  * Version 1.5.0 or newer
  */
