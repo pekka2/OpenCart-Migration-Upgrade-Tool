@@ -2211,12 +2211,22 @@ class ModelUpgradeDatabase extends Model{
 	}
 	
         if( !$this->hasLayout( 'Compare' ) ){
+            $sql = 'SELECT MAX(layout_id) as maxim
+                     FROM `' . DB_PREFIX . 'layout`'; 
+
+               $query = $this->db->query( $sql );
+                $layout_id = $query->row['maxim']+1;
+                $layout_id2 = $layout_id+1;
+
+              if( $this->showOps ) {
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
             $sql = '
                    INSERT INTO
                               `' . DB_PREFIX . 'layout` (`layout_id`, `name`)
                    VALUES
-                              (12, \'Compare\'),
-                              (13, \'Search\')';
+                              (' . $layout_id .', \'Compare\'),
+                              (' . $layout_id2 . ', \'Search\')';
 
 		if( !$this->simulate ) {
                        $this->db->query( $sql );
@@ -2224,12 +2234,19 @@ class ModelUpgradeDatabase extends Model{
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 
+            $sql = 'SELECT MAX(layout_route_id) as layout_route
+                     FROM `' . DB_PREFIX . 'layout_route`'; 
+
+               $query = $this->db->query( $sql );
+                $layout_route_id = $query->row['layout_route']+1;
+                $layout_route_id2 = $layout_route_id+1;
+
             $sql = '
                    INSERT INTO
                               `' . DB_PREFIX . 'layout_route` (`layout_route_id`, `layout_id`, `route`)
                    VALUES
-                              (52, 12, \'product/compare\'),
-                              (53, 13, \'product/search\')';
+                              (' . $layout_route_id . ', ' . $layout_id . ', \'product/compare\'),
+                              (' . $layout_route_id2 . ', ' . $layout_id2 . ', \'product/search\')';
 
 		if( !$this->simulate ) {
                        $this->db->query( $sql );
