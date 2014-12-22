@@ -864,7 +864,7 @@ class ModelUpgradeTableColumns extends Model{
 			CREATE INDEX
 				`' . $v['index'] . '`
                         ON
-			         ' . DB_PREFIX . $v['table'].'(' . $v['field'] . ') using
+			         `' . DB_PREFIX . $v['table'].'` (' . $v['field'] . ') using
                         BTREE';
 
 			if( !$this->simulate ) {
