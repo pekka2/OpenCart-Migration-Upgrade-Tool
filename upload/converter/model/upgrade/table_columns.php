@@ -861,11 +861,10 @@ class ModelUpgradeTableColumns extends Model{
         if( array_search( DB_PREFIX . $v['table'] , $this->getTables()) ) {
 	     if( !$this->getColumnKey( $v['field'], $v['table'] ) ) { 
 			$sql = '
-			CREATE INDEX
-				`' . $v['index'] . '`
-                        ON
-			         `' . DB_PREFIX . $v['table'].'` (' . $v['field'] . ') using
-                        BTREE';
+			ALTER TABLE
+				`' . DB_PREFIX . $v['table'] . '`
+                        ADD INDEX
+			         `' .  $v['index'].'` (' . $v['field'] . ')';
 
 			if( !$this->simulate ) {
                                $this->db->query( $sql );
