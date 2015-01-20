@@ -410,6 +410,12 @@ class ModelUpgradeTableColumns extends Model{
             }
 	}
 
+                       $up = $this->db->query("SELECT * FROM ". DB_PREFIX . "product_description");
+                                      foreach($up->rows as $pro){
+                                      $this->db->query("UPDATE `". DB_PREFIX . "product_description`
+                                                             SET `meta_title` = '" . $this->db->escape($pro['name']) . "'
+                                                             WHERE `product_id` = '" . $pro['product_id'] . "'");
+                                      }
 	$text .= '<div class="header round"> ';
 	$text .= sprintf( $this->lang['msg_col_counter'], $altercounter, '' );
         $text .= ' </div>';
