@@ -409,6 +409,7 @@ class ModelUpgradeTableColumns extends Model{
 	       }
             }
 	}
+		if( !$this->simulate ) {
 
                        $up = $this->db->query("SELECT * FROM ". DB_PREFIX . "product_description");
                                       foreach($up->rows as $pro){
@@ -422,6 +423,7 @@ class ModelUpgradeTableColumns extends Model{
                                                              SET `meta_title` = '" . $this->db->escape($cat['name']) . "'
                                                              WHERE `category_id` = '" . $cat['category_id'] . "'");
                                       }
+	       }
 	$text .= '<div class="header round"> ';
 	$text .= sprintf( $this->lang['msg_col_counter'], $altercounter, '' );
         $text .= ' </div>';
