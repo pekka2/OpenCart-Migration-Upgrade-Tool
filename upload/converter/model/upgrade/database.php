@@ -2210,7 +2210,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'upload' ) );
 	}
 	
-        if( !$this->hasLayout( 'Compare' ) ){
+        if( !$this->hasLayout( 'Compare' )  && array_search( DB_PREFIX . 'layout', $this->getTables()) ){
             $sql = 'SELECT MAX(layout_id) as maxim
                      FROM `' . DB_PREFIX . 'layout`'; 
 
