@@ -26,12 +26,15 @@ if (!defined('DIR_APPLICATION')) {
 	header('Location: start.php');
 	exit;
 }
+// vQmod
+require_once('./vqmod/vqmod.php');
+VQMod::bootup();
 
-require_once(DIR_SYSTEM . 'startup.php');
+// VQMODDED Startup
+require_once(VQMod::modCheck(DIR_SYSTEM . 'startup.php'));
 
 // Application Classes
-
-require_once(DIR_SYSTEM . 'library/user.php');
+require_once(VQMod::modCheck(DIR_SYSTEM . 'library/user.php'));
 
 // Registry
 $registry = new Registry();
@@ -174,7 +177,7 @@ $config->set('config_language_id', $languages[$config->get('config_admin_languag
 
 // Language
 $language = new Language($languages[$config->get('config_admin_language')]['directory']);
-$language->load($languages[$config->get('config_admin_language')]['filename']);
+$language->load( $language->getlang );
 $registry->set('language', $language);
 
 // Document
