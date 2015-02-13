@@ -1,6 +1,7 @@
 <?php
 class Language {
 	private $default = 'english';
+	private $default_getlang = 'en-US';
 	private $directory;
 	private $data = array();
 
@@ -10,10 +11,19 @@ class Language {
 
 	public function get($key) {
 		return (isset($this->data[$key]) ? $this->data[$key] : $key);
+                                              $this->getLang();
+	}
+	public function getLang() {
+                        $browser_languages = explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+                        $language = explode(';',$browser_languages[2]);
+                        $arr_language = explode('-',$language[0]);
+                        $arr_language[1] = strtoupper($arr_language[1]);
+             
+                        $this->getlang = implode("-",$arr_language);
 	}
 
 	public function load($filename) {
-		$file = DIR_LANGUAGE . $this->directory . '/' . $filename . '.php';
+		$file = DIR_LANGUAGE . $this->getlang . '/' . $filename . '.php';
 
 		if (file_exists($file)) {
 			$_ = array();
@@ -25,7 +35,11 @@ class Language {
 			return $this->data;
 		}
 
-		$file = DIR_LANGUAGE . $this->default . '/' . $filename . '.php';
+                if( !strpos( '/', $filename) ){
+                        $file = DIR_LANGUAGE . $this->default_getlang . '/' . $this->default_getlang . '.php';
+                } else {
+                        $file = DIR_LANGUAGE . $this->default_getlang . '/' . $filename . '.php';
+                }
 
 		if (file_exists($file)) {
 			$_ = array();
@@ -36,8 +50,7 @@ class Language {
 
 			return $this->data;
 		} else {
-			trigger_error('Error: Could not load language ' . $filename . '!');
-		//	exit();
+			exit('<b>Error: Could not load language ' . $file . '!</b>');
 		}
 	}
 }
