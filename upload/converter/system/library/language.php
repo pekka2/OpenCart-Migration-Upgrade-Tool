@@ -35,7 +35,7 @@ class Language {
 			return $this->data;
 		}
 
-                if( !strpos( '/', $filename) ){
+                 if( preg_match( '/\//', $filename) ){
                         $file = DIR_LANGUAGE . $this->default_getlang . '/' . $this->default_getlang . '.php';
                 } else {
                         $file = DIR_LANGUAGE . $this->default_getlang . '/' . $filename . '.php';
