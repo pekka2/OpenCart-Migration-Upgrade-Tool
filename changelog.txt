@@ -20,6 +20,7 @@ CONVERTER
 ---------
 1.2.4   2015.02.13      ^ language structure from Browser
                         + vqMod
+                        + settings config_location_image width&height
 1.2.3   2015.01.20      + product name add to column meta_title
                         + category name add to column meta_title
 1.2.2   2014.15.06      ^ code field store_id check in table setting
