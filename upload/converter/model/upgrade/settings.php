@@ -1553,6 +1553,48 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_customer_group_display', '' ) );
 	}
 
+           if( !$this->hasSetting( 'config_image_location_width' ) ) {
+		$sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`code` = \'config\',
+			`key` = \'config_image_location_width\',
+			`value`= \'268\',
+			`serialized`= \'0\'';
+
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_image_location_width', '' ) );
+	}
+
+	if( !$this->hasSetting( 'config_image_location_height' ) ) {
+		$sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`code` = \'config\',
+			`key` = \'config_image_location_height\',
+			`value`= \'50\',
+			`serialized`= \'0\'';
+
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_image_location_height', '' ) );
+	}
+
 	if( !$this->hasSetting( 'config_file_extension_allowed' ) ) {
 		$sql = '
 		INSERT INTO
