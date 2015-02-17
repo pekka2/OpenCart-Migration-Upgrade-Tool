@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id: converter.php 2014-10-16 10:10Z mic $
- * @package		OpenCart Shopconverter 1.5.x - 2.x
+ * @package		OpenCart Migration & Upgrade Tool
  * @author		Pekka Mansikka - http://pm-netti.com & mic - http://pixelnbit.com
  * @copyright	2014 Pekka & mic
  * @license		MIT http://opensource.org/licenses/MIT
