@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']                 = 'Opencart Converter %s Dashboard';
+$_['heading_title']                 = 'OpenCart Migration & Upgrade Tool %s';
 // Button
 $_['button_language']               = 'Admin Language';
 $_['button_permission']             = 'Administrative permission';
