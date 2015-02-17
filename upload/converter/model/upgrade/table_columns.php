@@ -955,7 +955,7 @@ class ModelUpgradeTableColumns extends Model{
      }
 
      foreach( $changetype as $k => $v ) {
-
+           $this->cache->delete( $v['table'] );
         if( array_search( DB_PREFIX . $v['table'] , $this->getTables()) ) {
 	   if( array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) && !$this->getColumnType( $v['field'], $v['type'], $v['table']) ) {
 			$sql = '
