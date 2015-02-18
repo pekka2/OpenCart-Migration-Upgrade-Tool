@@ -453,11 +453,11 @@ class ModelUpgradeTableColumns extends Model{
 			'field'		=> 'tax_id'
 		),
 		array(
-                        'table'         => 'customer_field',
+                        'table'         => 'custom_field',
 			'field'		=> 'position'
 		),
 		array(
-                        'table'         => 'customer_field',
+                        'table'         => 'custom_field',
 			'field'		=> 'required'
 		),
 		array(
