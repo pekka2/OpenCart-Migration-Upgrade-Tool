@@ -56,6 +56,11 @@ class ModelUpgradeTableColumns extends Model{
 			'field'		=> 'status',
 			'column'	=> ' tinyint(1) NOT NULL AFTER location'
 		),
+                array(
+                	'table'         => 'custom_field_customer_group',
+            	        'field'         => 'required',
+                	'column'        => ' tinyint(1) NOT NULL'
+         	),
 		array(
                         'table'         => 'customer',
 			'field'		=> 'custom_field',
