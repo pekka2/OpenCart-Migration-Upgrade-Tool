@@ -980,7 +980,7 @@ class ModelUpgradeTableColumns extends Model{
 			if( !$this->simulate ) {
                           $this->cache->delete( $v['table'] );
                         }
-	   }  elseif( !array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) ) {
+	   } /*  elseif( !array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) ) {
 			$sql = '
 			ALTER TABLE
 				`' . DB_PREFIX . $v['table'] . '`
@@ -998,7 +998,7 @@ class ModelUpgradeTableColumns extends Model{
 			if( !$this->simulate ) {
                           $this->cache->delete( $v['table'] );
                         }
-	   }
+	   } */
         }
      }
 
