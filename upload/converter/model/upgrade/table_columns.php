@@ -57,6 +57,12 @@ class ModelUpgradeTableColumns extends Model{
 			'column'	=> ' tinyint(1) NOT NULL AFTER location'
 		),
 		array(
+			'table'         => 'custom_field_customer_group',
+			'field'         => 'required',
+			'type'          => 'inyint(',
+			'column'        => ' tinyint(1) NOT NULL'
+		),
+		array(
                         'table'         => 'customer',
 			'field'		=> 'custom_field',
 			'column'	=> ' text NOT NULL AFTER address_id'
@@ -448,11 +454,11 @@ class ModelUpgradeTableColumns extends Model{
 			'field'		=> 'tax_id'
 		),
 		array(
-                        'table'         => 'customer_field',
+                        'table'         => 'custom_field',
 			'field'		=> 'position'
 		),
 		array(
-                        'table'         => 'customer_field',
+                        'table'         => 'custom_field',
 			'field'		=> 'required'
 		),
 		array(
