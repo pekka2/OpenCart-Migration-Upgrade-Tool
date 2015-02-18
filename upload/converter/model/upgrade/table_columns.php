@@ -750,12 +750,12 @@ class ModelUpgradeTableColumns extends Model{
 			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT \'1\''
 		),
-		array(
+		/*array(
                         'table'         => 'language',
 			'field'		=> 'status',
 			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
-		),
+		),*/
 		array(
                         'table'         => 'order_history',
 			'field'		=> 'notify',
