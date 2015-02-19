@@ -1,6 +1,7 @@
 <?php
 class Language {
 	private $default = 'en-US';
+	public $getlang = '';
 	private $data = array();
 
 	public function __construct($directory) {
