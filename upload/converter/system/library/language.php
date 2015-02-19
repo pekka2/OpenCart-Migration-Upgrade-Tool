@@ -1,8 +1,6 @@
 <?php
 class Language {
-	private $default = 'english';
-	private $default_getlang = 'en-US';
-	private $directory;
+	private $default = 'en-US';
 	private $data = array();
 
 	public function __construct($directory) {
@@ -36,9 +34,9 @@ class Language {
 		}
 
                  if( preg_match( '/\//', $filename) ){
-                        $file = DIR_LANGUAGE . $this->default_getlang . '/' . $this->default_getlang . '.php';
+                        $file = DIR_LANGUAGE . $this->default . '/' . $this->default . '.php';
                 } else {
-                        $file = DIR_LANGUAGE . $this->default_getlang . '/' . $filename . '.php';
+                        $file = DIR_LANGUAGE . $this->default . '/' . $filename . '.php';
                 }
 
 		if (file_exists($file)) {
