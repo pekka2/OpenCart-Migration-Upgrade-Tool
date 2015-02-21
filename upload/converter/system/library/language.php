@@ -16,9 +16,13 @@ class Language {
                         $browser_languages = explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
                         $language = explode(';',$browser_languages[2]);
                         $arr_language = explode('-',$language[0]);
+                        if(isset($arr_language[1])){
                         $arr_language[1] = strtoupper($arr_language[1]);
-             
                         $this->getlang = implode("-",$arr_language);
+                        } else {
+                        	$this->getlang = $this->default;
+                        }
+             
 	}
 
 	public function load($filename) {
