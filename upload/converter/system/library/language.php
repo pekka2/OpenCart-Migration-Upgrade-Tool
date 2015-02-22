@@ -39,9 +39,9 @@ class Language {
 		}
 
                  if( preg_match( '/\//', $filename) ){
-                        $file = DIR_LANGUAGE . $this->default . '/' . $this->default . '.php';
-                } else {
                         $file = DIR_LANGUAGE . $this->default . '/' . $filename . '.php';
+                } else {
+                        $file = DIR_LANGUAGE . $this->default . '/' .  $this->default . '.php';
                 }
 
 		if (file_exists($file)) {
