@@ -980,25 +980,7 @@ class ModelUpgradeTableColumns extends Model{
 			if( !$this->simulate ) {
                           $this->cache->delete( $v['table'] );
                         }
-	   } /*  elseif( !array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) ) {
-			$sql = '
-			ALTER TABLE
-				`' . DB_PREFIX . $v['table'] . '`
-		        ADD COLUMN
-				' . $v['field'] . $v['column'];
-
-			if( !$this->simulate ) {
-                               $this->db->query( $sql );
-                        }
-                        if( $this->showOps ) {
-                               $text .= '<p><pre>' . $sql .'</pre></p>';
-                        }
-			++$changecounter;
-			$text .= $this->msg( sprintf( $this->lang['msg_change_column'], $v['field'],  $v['table'] ) );
-			if( !$this->simulate ) {
-                          $this->cache->delete( $v['table'] );
-                        }
-	   } */
+	   }
         }
      }
 
