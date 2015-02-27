@@ -37,6 +37,9 @@ class ControllerUpgradeInfo extends Controller {
                 $this->data['upgrade_database_tables'] = $new_oc_verions;
                 $missing_tables = $new_oc_verions - count($tables);
                 $expired_tables = count($tables) - $new_oc_verions;
+                if($expired_tables < 0){
+                       $expired_tables = 0;
+                }
 
                 $this->data['expirend'] = $expired_tables;
 
