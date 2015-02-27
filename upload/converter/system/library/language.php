@@ -14,10 +14,14 @@ class Language {
 	}
 	public function getLang() {
                         $browser_languages = explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-                        $language = explode(';',$browser_languages[2]);
+                        f( isset($browser_languages[2]) ){
+                               $language = explode(';',$browser_languages[2]);
+                        }else {
+                                $language = explode(';',$browser_languages[1]);
+                         }
                         $arr_language = explode('-',$language[0]);
                         if(isset($arr_language[1])){
-                        $arr_language[1] = strtoupper($arr_language[1]);
+                                $arr_language[1] = strtoupper($arr_language[1]);
                         $this->getlang = implode("-",$arr_language);
                         } else {
                         	$this->getlang = $this->default;
