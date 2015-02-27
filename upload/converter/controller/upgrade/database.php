@@ -33,7 +33,12 @@ class ControllerUpgradeDatabase extends Controller {
                  $this->data['upgrade_data'] = $this->model_upgrade_database->addTables( $this->request->post );
                  $this->data['change_taxrate'] = $this->model_upgrade_table_columns->changeTaxRate( $this->request->post );
                  $this->data['add_columns'] = $this->model_upgrade_table_columns->addColumns( $this->request->post );
-                 $this->data['add_settings'] = $this->model_upgrade_settings->getChangeModule( $this->request->post );
+                 $modules = $this->model_upgrade_settings->hasModule();
+                 if( !$modules ) {
+                        $this->data['add_settings'] = $this->model_upgrade_settings->getChangeModule( $this->request->post );
+                 } else {
+                        $this->data['add_settings'] = '';
+                 }
                  $this->data['drop_tables'] = $this->model_upgrade_table_columns->deleteTables( $this->request->post );
                  $this->model_upgrade_info->addPermissions($this->post['simulate']);
                 }
