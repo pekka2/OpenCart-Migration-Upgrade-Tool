@@ -1817,6 +1817,23 @@ class ModelUpgradeSettings extends Model{
             }
 	return true;
    }
+   public function hasModule() {
+ 
+	$sql = '
+	SELECT
+		*
+	FROM
+		`' . DB_PREFIX . 'module`';
+       if( array_search( DB_PREFIX . 'module' , $this->getTables())){
+	$result = $this->db->query( $sql );
+	if( count( $result->row ) == 0 ) {
+		return false;
+	}
+              } else {
+		return false;
+            }
+	return true;
+   }
    private function hasExtension( $val ) {
     if( array_search( 'code', $this->getDbColumns( 'extension' ) ) ){
       $field = 'code';
