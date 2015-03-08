@@ -18,6 +18,11 @@ legend
 
 CONVERTER
 ---------
+1.2.7   2015.03.08      + Banner name to Module name
+1.2.6   2015.02.27      + Check modules of upgraded to version 2.0.1.1, settings and modules is not check when table `module` is not empty
+                        # language to browser
+1.2.5   2015.02.18      + Column `required` to table `custom_field_customer_group`
+                        # Table name `customer_file` to `custom_field`
 1.2.4   2015.02.13      ^ language structure from Browser
                         + vqMod
                         + settings config_location_image width&height
