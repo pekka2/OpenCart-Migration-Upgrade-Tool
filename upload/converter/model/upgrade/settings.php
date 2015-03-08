@@ -196,6 +196,11 @@ class ModelUpgradeSettings extends Model{
        } else{
          $name = 'Home';
        }
+         if( isset($modul['banner_id']) ){
+                 $banner_name = $this->getBannerName($modul['banner_id']);
+         }else{
+         $banner_name = '';
+        } 
              
        $module = array(
                       'name'   => ucwords($mod) . ' - '. $name,
@@ -1858,6 +1863,19 @@ class ModelUpgradeSettings extends Model{
 	return true;
    }
 
+  private function getBannerName($banner_id){
+  $sql = '
+ 	 SELECT
+	 	*
+	 FROM
+		`' . DB_PREFIX . 'banner`
+	 WHERE
+		`banner_id` = \'' . $banner_id . '\'';
+	$result = $this->db->query( $sql );
+        if( isset($result->row['name']) ){
+         return '-' . $result->row['name'];
+        }
+  }
   public function msg( $data ){
        return str_replace( $data, '<div class="msg round">' . $data .'</div>', $data);
   }
