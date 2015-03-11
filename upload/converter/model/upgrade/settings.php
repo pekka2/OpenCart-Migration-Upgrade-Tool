@@ -203,7 +203,7 @@ class ModelUpgradeSettings extends Model{
         } 
              
        $module = array(
-                      'name'   => ucwords($mod) . ' - '. $name,
+                      'name'   => $name . $banner_name,
                       'width'  => $modul['width'],
                       'height' => $modul['height'],
                       'status' => ( !empty( $modul['status'] )  ? true:false) );
