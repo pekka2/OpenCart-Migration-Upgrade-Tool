@@ -18,6 +18,7 @@ legend
 
 CONVERTER
 ---------
+1.2.8   2015.03.13      ^ no change directory to banner images
 1.2.7   2015.03.08      + Banner name to Module name
 1.2.6   2015.02.27      + Check modules of upgraded to version 2.0.1.1, settings and modules is not check when table `module` is not empty
                         # language to browser
