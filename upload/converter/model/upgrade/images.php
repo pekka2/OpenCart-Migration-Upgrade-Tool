@@ -57,6 +57,7 @@ class ModelUpgradeImages extends Model{
          /*
           * Copy files to Catalog directories banners, product etc.
           */
+         if( $this->dirOld ){
               if( !file_exists( $img['newpath'] ) || $this->simulate){
                  if( !$this->simulate ){
 
@@ -67,6 +68,7 @@ class ModelUpgradeImages extends Model{
 		 $text .= $this->msg( sprintf( $this->lang['msg_image_copied'], $img['newpath'], '' ) );
 		 ++$copy;
              }
+        }
            /*
             * Update paths to database
             */
@@ -168,7 +170,7 @@ class ModelUpgradeImages extends Model{
                       "id"         => $images['banner_image_id'],
                       "path"       => $root . $this->dirImage . str_replace('data','catalog',$images['image']),
                       "updatepath" => str_replace('data','catalog/banners', str_replace('demo/','',$images['image'] )),
-                      "newpath"    => DIR_STORE_IMAGE . 'catalog/banners/'. basename($images['image']),
+                      "newpath"    => DIR_STORE_IMAGE . str_replace('data','catalog', $images['image']),
                       "newdirpath" => DIR_STORE_IMAGE . 'catalog/banners/'
          );
      }
