@@ -68,7 +68,8 @@ class ModelUpgradeImages extends Model{
 		 $text .= $this->msg( sprintf( $this->lang['msg_image_copied'], $img['newpath'], '' ) );
 		 ++$copy;
              }
-        }
+           }
+         } 
            /*
             * Update paths to database
             */
@@ -87,7 +88,6 @@ class ModelUpgradeImages extends Model{
 				++$imagepath;
        
           }
-      } 
 
 	if( $this->hasSetting( 'config_logo' ) ) {
 		$sql = '
