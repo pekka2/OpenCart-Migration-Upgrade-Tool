@@ -117,6 +117,11 @@ class ModelUpgradeTableColumns extends Model{
 			'column'	=> ' int(3) NOT NULL'
 		),
 		array(
+                        'table'         => 'modification',
+			'field'		=> 'xml',
+			'column'	=> ' mediumtext NOT NULL AFTER link'
+		),
+		array(
                         'table'         => 'option_value',
 			'field'		=> 'image',
 			'column'	=> ' varchar(255) NOT NULL AFTER option_id'
@@ -414,7 +419,7 @@ class ModelUpgradeTableColumns extends Model{
 	       }
             }
 	}
-		if( !$this->simulate ) {
+	if( !$this->simulate ) {
 
                        $up = $this->db->query("SELECT * FROM ". DB_PREFIX . "product_description");
                                       foreach($up->rows as $pro){
@@ -428,7 +433,17 @@ class ModelUpgradeTableColumns extends Model{
                                                              SET `meta_title` = '" . $this->db->escape($cat['name']) . "'
                                                              WHERE `category_id` = '" . $cat['category_id'] . "'");
                                       }
+             if( array_search( 'xml', $this->getDbColumns( 'modification' ) ) &&  array_search( 'code', $this->getDbColumns( 'modification' ) )) {
+
+                       $ups = $this->db->query("SELECT * FROM ". DB_PREFIX . "modification");
+                                      foreach($ups->rows as $cat){
+                                      $this->db->query("UPDATE `". DB_PREFIX . "modification`
+                                                             SET `xml` = '" . $this->db->escape($cat['code']) . "'
+                                                             WHERE `modification_id` = '" . $cat['modification_id'] . "'");
+                                      }
+
 	       }
+	 }
 	$text .= '<div class="header round"> ';
 	$text .= sprintf( $this->lang['msg_col_counter'], $altercounter, '' );
         $text .= ' </div>';
@@ -483,6 +498,10 @@ class ModelUpgradeTableColumns extends Model{
 		array(
                         'table'         => 'download',
 			'field'		=> 'remaining'
+		),
+		array(
+                        'table'         => 'modification',
+			'field'		=> 'code'
 		),
 		array(
                         'table'         => 'order',
