@@ -63,7 +63,7 @@ class User {
 
          private function getSalt( ) {
                                               
-                       $fields = mysql_query("SHOW COLUMNS FROM `" . DB_PREFIX . "user`") or die ( mysql_error() );
+                       $fields = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . "user`") or die ( mysql_error() );
                                               
                               $ret = array();
                                               
