@@ -41,6 +41,12 @@ Installation
 Simply copy all folders (and included files) from the folder UPLOAD
 into the root directory of your shop.
 
+ *********************************************************************************************************************************
+ * IF SHOW ERRORS IN AFTER LOGIN: 
+ * ============================= 
+ * Version 1.47-1.5.6.4: Copy file user.php in directory your-store/system/libary to directory your-store/converter/system/library
+ * Version 2.0.0.0: Copy file user.php in directory your-store/converter/help-2.0/ to directory your-store/converter/system/library
+ **********************************************************************************************************************************
 Operation
 ---------
 The update can be done in 2 ways:
