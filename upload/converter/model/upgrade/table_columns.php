@@ -436,11 +436,13 @@ class ModelUpgradeTableColumns extends Model{
              if( array_search( 'xml', $this->getDbColumns( 'modification' ) ) &&  array_search( 'code', $this->getDbColumns( 'modification' ) )) {
 
                        $ups = $this->db->query("SELECT * FROM ". DB_PREFIX . "modification");
+                       if( count($ups->row) > 0 ){
                                       foreach($ups->rows as $cat){
                                       $this->db->query("UPDATE `". DB_PREFIX . "modification`
                                                              SET `xml` = '" . $this->db->escape($cat['code']) . "'
                                                              WHERE `modification_id` = '" . $cat['modification_id'] . "'");
                                       }
+                       }
 
 	       }
 	 }
