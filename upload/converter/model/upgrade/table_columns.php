@@ -943,7 +943,7 @@ class ModelUpgradeTableColumns extends Model{
 
 	   if( array_search( DB_PREFIX . $v['table'], $this->getTables() ) || $v['table'] == 'address' ) {
                       
-		if( array_search( $v['oldfield'], $this->getDbColumns( $v['table'] ) ) && !array_search( $v['column'], $this->getDbColumns( $v['table'] ) ) ) {
+		if( array_search( $v['oldfield'], $this->getDbColumns( $v['table'] ) ) && !array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) ) {
 			$sql = '
 			ALTER TABLE
 				  `' . DB_PREFIX . $v['table'] . '`
@@ -962,20 +962,6 @@ class ModelUpgradeTableColumns extends Model{
                            $this->cache->delete( $v['table'] );
                         }
 		} 
-               else if (!array_search( $v['oldfield'], $this->getDbColumns( $v['table'] ) ) &&
-                       !array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) ) {$sql = '
-			ALTER TABLE
-				  `' . DB_PREFIX . $v['table'] . '`
-			ADD COLUMN
-				  `' . $v['field'] . '` ' . $v['column'];
-
-			if( !$this->simulate ) {
-                               $this->db->query( $sql );
-                        }
-                        if( $this->showOps ) {
-                               $text .= '<p><pre>' . $sql .'</pre></p>';
-                        }
-                }
            }
 	 }
      }
