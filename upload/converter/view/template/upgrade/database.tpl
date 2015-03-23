@@ -51,12 +51,14 @@
 					&nbsp;
 					<input type="text" value="admin" name="dirAdmin" title="<?php echo $help_adminDir; ?>" size="20" />
 				</div>
+                                 <!--
 				<div class="block">
 					<?php echo $entry_oldDir; ?>
 					&nbsp;
 					<input type="text" value="" name="dirOld" title="<?php echo $help_oldDir; ?>" placeholder="<?php echo $_SERVER['DOCUMENT_ROOT'];?>" size="60" />
 <?php echo sprintf($text_exa_store_path, $_SERVER['SCRIPT_FILENAME']);?>
 				</div>
+                                 -->
 				<div class="block">
 					<?php echo $entry_imageDir; ?>
 					&nbsp;
