@@ -296,7 +296,7 @@ class ModelUpgradeImages extends Model{
                    );';
              if( !$this->simulate ) {
 
-                  @mkdir( DIR_STORE_IMAGE . $dir . '/banners' , octdec( $this->permission ) );
+              //    @mkdir( DIR_STORE_IMAGE . $dir . '/banners' , octdec( $this->permission ) );
 
              }	 	
       if( $this->showOps ) {
@@ -315,7 +315,7 @@ class ModelUpgradeImages extends Model{
                    );';
              if( !$this->simulate ) {
 
-                  @mkdir( DIR_STORE_IMAGE . $dir . '/manufacturer' , octdec( $this->permission ) );
+              //    @mkdir( DIR_STORE_IMAGE . $dir . '/manufacturer' , octdec( $this->permission ) );
 
              } 	
       if( $this->showOps ) {
@@ -334,7 +334,7 @@ class ModelUpgradeImages extends Model{
                    );';
              if( !$this->simulate ) {
 
-                  @mkdir( DIR_STORE_IMAGE . $dir . '/product' , octdec( $this->permission ) );
+               //   @mkdir( DIR_STORE_IMAGE . $dir . '/product' , octdec( $this->permission ) );
 
              } 	
       if( $this->showOps ) {
