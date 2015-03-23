@@ -64,8 +64,8 @@ If you choose method A, follow these steps:
         4.      set full permissions for Top Administrator Group
 	5.	follow the instructions on the screen
 
-If you choose method B, follow these steps:
-
+If you choose method B, follow these steps (NOTICE: This you can use, when change domain root directory):
+/* THIS FEATURE IS REMOVE SO FAR. */
 	1.	create a new folder (subfolder preferred) inside your shop
 	2.	copy the whole content of this package inside the folder UPLOAD
 		into your shopsoftware root
