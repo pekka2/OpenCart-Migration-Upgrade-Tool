@@ -80,6 +80,43 @@ If you choose method B, follow these steps (NOTICE: This you can use, when chang
         8.      set full permissions for Top Administrator Group
 	9.	follow the instructions on the screen
 
+Permissions:
+------------
+
+Directory `converter`, same permission when store/system/logs
+Directory `converter/system/language_model`, same permission when store/system/logs
+Directory `converter/system/logs`, same permission when store/system/logs
+
+STEPS:
+=====
+
+Step 1:
+------
+a. Add new Tables
+b. Add new Columns
+c. Rename Columns
+d. Delete expired columns and tables
+e. Add new Settings to table `setting`
+f. Move modules to table `module`
+g. Delete expired smodule settings from table `setting`
+
+Step 2:
+-------
+a. Add constant `DIR_MODIFICATION` and `DIR_UPLOAD` to files config.php
+b. Add constant `HTTPS_CATALOG` to file admin/config.php in versions 1.4.7 - 1.5.2.1
+
+Step 3:
+-------
+a. Change imagepaths in database
+b. Rename directory `image/data` to `image/catalog` and directory `image/cache/data` to  `image/cache/catalog`
+
+Upgrade Repeat:
+--------------
+1. You can 1. upgrade after change tables from trade database, e.g. tables address, customer and orders.
+2. Repeat database upgrade. Because those tables is no imagepaths, you can Skip step 2 and step3.
+3. If change e.g. tables banner_image, category, manufacturer or products, your need run imagepaths upgrade (step 3).
+4. This repreat Upgrade is not add new settings to table setting (step 1 e-g). You are not change table setting after first upgrade.
+
 Guarantee / Warranty / Non-Warranty Clause
 ------------------------------------------
 This program is distributed as it is.
