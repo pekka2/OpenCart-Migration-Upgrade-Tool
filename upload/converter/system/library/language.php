@@ -14,7 +14,7 @@ class Language {
 	}
 	public function getLang() {
                         $browser_languages = explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-                        f( isset($browser_languages[2]) ){
+                        if( isset($browser_languages[2]) ){
                                $language = explode(';',$browser_languages[2]);
                         }else {
                                 $language = explode(';',$browser_languages[1]);
