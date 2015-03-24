@@ -13,10 +13,6 @@ License		MIT
 Author		Pekka Mansikka - http://pm-netti.com & mic - http://pixelnbit.com
 Copyright	2014 Pekka Mansikka - http://pm-netti.com & mic - http://pixelnbit.com
 
-Requirement/Erforderlich:
-- OpenCart min. 1.4.7
--------------------------
-
 Description
 -----------
 This program coverts an OpenCart shop of version 1.4.x to the latest v.2 version.
@@ -98,7 +94,7 @@ c. Rename Columns
 d. Delete expired columns and tables
 e. Add new Settings to table `setting`
 f. Move modules to table `module`
-g. Delete expired smodule settings from table `setting`
+g. Delete expired module settings from table `setting`
 
 Step 2:
 -------
