@@ -555,6 +555,10 @@ class ModelUpgradeTableColumns extends Model{
 		),
 		array(
                         'table'         => 'tax_rate',
+			'field'		=> 'description'
+		),
+		array(
+                        'table'         => 'tax_rate',
 			'field'		=> 'priority'
                    ),
 		array(
@@ -1007,7 +1011,7 @@ class ModelUpgradeTableColumns extends Model{
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
       $text = '';
 
-	if( array_search( 'tax_class_id', $this->getDbColumns( 'tax_rate' ) ) !=false)  {
+	if( array_search( 'tax_class_id', $this->getDbColumns( 'tax_rate' ) ) !=false && !array_search( 'name', $this->getDbColumns( 'tax_rate' ))  {
 
 		$sql = '
 		SELECT
