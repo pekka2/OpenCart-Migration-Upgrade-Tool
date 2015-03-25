@@ -113,7 +113,7 @@ Upgrade Repeat:
 1. You can 1. upgrade after change tables from trade database, e.g. tables `address`, `customer` and `order`s.
 2. Repeat database upgrade. Because those tables is no imagepaths, you can Skip step 2 and step3.
 3. If change e.g. tables `banner_image`, `category`, `manufacturer` or `product`s, your need run imagepaths upgrade (step 3).
-4. This repreat Upgrade is not add new settings to table `setting` (step 1 e-g). You are not change table `setting` after first upgrade.
+4. This repreat Upgrade is not add new settings to table `setting` (step 1 e-g). You is not change table `setting` after first upgrade.
 
 Guarantee / Warranty / Non-Warranty Clause
 ------------------------------------------
