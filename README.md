@@ -82,6 +82,7 @@ Permissions:
 Directory `converter`, same permission when store/system/logs
 Directory `converter/system/language_model`, same permission when store/system/logs
 Directory `converter/system/logs`, same permission when store/system/logs
+Directory `converter/vqmod/vqcache`, same permission when store/system/logs
 
 STEPS:
 =====
