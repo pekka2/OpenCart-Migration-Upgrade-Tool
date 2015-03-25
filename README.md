@@ -76,6 +76,7 @@ If you choose method B, follow these steps (NOTICE: This you can use, when chang
         8.      set full permissions for Top Administrator Group
 	9.	follow the instructions on the screen
 
+
 Permissions:
 ------------
 
