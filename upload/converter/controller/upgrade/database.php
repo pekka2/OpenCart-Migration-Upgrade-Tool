@@ -53,6 +53,8 @@ class ControllerUpgradeDatabase extends Controller {
                 $this->data['text_on'] = $this->language->get('text_on');
                 $this->data['text_off'] = $this->language->get('text_off');
                 $this->data['text_upgrade_info'] = $this->language->get('text_upgrade_info');
+                $this->data['text_update_theme'] = $this->language->get('text_update_theme');
+                $this->data['text_skip_theme'] = $this->language->get('text_skip_theme');
                 $this->data['text_update_config'] = $this->language->get('text_update_config');
                 $this->data['header_step_2'] = $this->language->get('header_step_2');
                 $this->data['help_simulate'] = $this->language->get('help_simulate');
@@ -73,6 +75,8 @@ class ControllerUpgradeDatabase extends Controller {
                 $this->data['text_toggle_help'] = $this->language->get('text_toggle_help');
                 $this->data['help_usage'] = $this->language->get('help_usage');
 
+                $this->data['themes'] = $this->model_upgrade_info->getThemes();
+                $this->data['config_theme'] = $this->config->get('config_template');
 		$this->template = 'upgrade/database.tpl';
 
 		$this->children = array(
