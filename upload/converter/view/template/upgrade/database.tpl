@@ -47,6 +47,20 @@
 					</label>
 				</div>
 				<div class="block">
+					<label><?php echo $text_update_theme;?>
+					<select name="theme">
+                                              <option><?php echo $text_skip_theme;?></option> 
+                                           <?php foreach($themes as $theme){?>
+                                            <?php if($theme['name'] == $config_theme){?>
+                                              <option value="<?php echo $theme['name'];?>" selected="selected"><?php echo $theme['name'];?></option> 
+                                            <?php } else{?>
+                                              <option value="<?php echo $theme['name'];?>"><?php echo $theme['name'];?></option> 
+                                            <?php } ?>
+                                            <?php } ?>
+                                          </select>
+					</label>
+				</div>
+				<div class="block">
 					<?php echo $entry_adminDir; ?>
 					&nbsp;
 					<input type="text" value="admin" name="dirAdmin" title="<?php echo $help_adminDir; ?>" size="20" />
