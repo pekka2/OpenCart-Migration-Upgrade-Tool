@@ -17,6 +17,8 @@ class ModelUpgradeSettings extends Model{
   public function getChangeModule( $data ){
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
+        if( !isset($data['theme'] ) ) $data['theme'] = '';
+        $this->theme  = ( !empty( $data['theme'] ) ? $data['theme'] : false );
         $this->lang = $this->lmodel->get('upgrade_database');
 
         $text = '';
@@ -1684,6 +1686,22 @@ class ModelUpgradeSettings extends Model{
 		$this->msg( sprintf( $this->lang['msg_config'], 'config_robots', '' ) );
 	}
 
+      if( $this->theme ){
+		$sql = '
+		UPDATE
+			`' . DB_PREFIX . 'setting`
+                SET
+                       `value` = \'' . $this->theme . '\'
+		WHERE
+		       `key` = \'config_template\'';
+
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+      }
 	if( !$this->hasSetting( 'config_secure' ) ) {
 		$sql = '
 		INSERT INTO
