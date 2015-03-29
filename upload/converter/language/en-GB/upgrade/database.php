@@ -13,6 +13,8 @@ $_['text_step_1_3']		= 'Step 1 / 3';
 $_['text_step_2_3']		= 'Step 2 / 3';
 $_['text_toggle_help']     	= 'Display/Hide Help';
 $_['text_upgrade_info']         = 'Upgrade Info';
+$_['text_update_theme']         = 'Update theme now';
+$_['text_skip_theme']            = 'Skip theme';
 $_['text_update_config']        = 'Now you can also update the <b>config.php</b> files if not already done';
 // Btn
 $_['btn_config']		= 'Update config files';
