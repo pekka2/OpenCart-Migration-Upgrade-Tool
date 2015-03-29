@@ -14,6 +14,8 @@ $_['text_step_2_3']		= 'Schritt 2 / 3';
 $_['text_toggle_help']	        = 'Hilfe Anzeigen/Verbergen';
 $_['text_update_config']        = 'Falls noch nicht bereits erledigt, können jetzt die <b>Konfiguationsdateien</b> aktualisiert werden';
 $_['text_upgrade_info']         = 'Upgrade of Database';
+$_['text_update_theme']         = 'Update theme now';
+$_['text_skip_theme']            = 'Skip theme';
 $_['text_upgrade_config']       = 'Upgrade of Configuration';
 // Entry
 $_['entry_adminDir']    	= 'Name des Adminordners';
