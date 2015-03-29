@@ -47,4 +47,16 @@ class ModelUpgradeInfo extends Model{
      }
    }
   }
+  public function getThemes(){
+    $path = DIR_DOCUMENT_ROOT . 'catalog/view/theme/';
+    $themes = array();
+    $open = opendir($path);   
+         while(( $file = readdir($open) ) !=false) {
+               if( is_dir($path. $file) && $file !='.' && $file !='..'){
+                  $themes[]['name'] = $file;
+              }
+        }
+     closedir($open); 
+     return $themes;
+  }
 }
