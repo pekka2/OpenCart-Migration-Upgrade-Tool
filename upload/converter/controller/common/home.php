@@ -147,7 +147,7 @@ class ControllerCommonHome extends Controller {
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_permissions'),
-			'href'      => $this->url->link('common/user', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('common/home/user', 'token=' . $this->session->data['token'], 'SSL'),
 			'separator' => false
 		);
 
