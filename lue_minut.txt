@@ -109,7 +109,7 @@ Päivityksen toisto:
    - Hanki ja asenna tarvittavia laajennuksia
    - Hanki ja asenna teema (kaikkia teeman ominaisuuksia ei välttämättä kannata asentaa valmiiksi, koska esim. teemaan mahdollisesti asennettavat
      uudet kuvat asentuu hakemistoon www.sinunkauppa.fi/testi/image/catalog)
-4. Kun testikauppa on riittävän valmis, jotta voisit sen ominaisuudet siirtää varsinaiseen kauppaan
+4. Kun testikauppa on riittävän valmis siirtääksesi sen ominaisuudet varsinaiseen kauppaan
    - Siirry admin sivuille ja aseta sekä kauppa että testikauppa huoltotilaan.
    - Siirry phpmyadminiin, tarkista päivitettävien taulujen tarve
    - Jos tauluun address on tullut uusia rivejä, siirry UUTEEN tietokantaan ja poista taulu address. Seuraavaksi siirry kaupan tietokantaan
