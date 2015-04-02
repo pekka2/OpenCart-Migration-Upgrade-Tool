@@ -117,6 +117,8 @@ Päivityksen toisto:
      tauluun address ja klikkaa `Toiminnot`(Operations).
      Siirry sivulla kohtaan `Kopioi tämä taulu toiseen tietokantaan` ja valitse listasta uuden tietokannan nimi. Paina `Siirry`.
    - Tee tämä toiminto kaikille tauluille, joihin on tullut muutoksia testikaupan asenuksen aikana.
+   - Varoitus: Setting taulun asetuksia ei muuteta tämän päivityksen toiston aikana. Älä siksi vaihda setting taulua ensimmäisen päivityksen
+     jälkeen, jotta et menetä version 2.0.x uusia asetuksia.
    - Ota vanhan kaupan tiedostoista varmuuskopio.
    - Kopioi kaikki version 2.0.x tiedostot sinun kaupan juureen.
    - Kopioi uuden teeman kaikki tiedostot kaupan juureen.
