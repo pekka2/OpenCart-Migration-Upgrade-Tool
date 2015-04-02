@@ -50,11 +50,12 @@ Toiminnot:
 
 Hakemistojen käyttöoikeudet:
 ---------------------------
-Asenna tarvittaessa seuraaville hakemsitoille sama käyttöoikeus kuin hakemistolla store/system/logs:
+Asenna tarvittaessa seuraaville hakemistoille sama käyttöoikeus kuin on hakemistolla store/system/logs:
 - `converter` 
 - `converter/system/language_model`
 - `converter/system/logs`
-- `converter/vqmod/vqcache`,
+- `converter/vqmod/vqcache`
+- `converter/vqmod/logs`
 
 VAIHEET:
 =======
