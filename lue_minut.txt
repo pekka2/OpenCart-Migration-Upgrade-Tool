@@ -41,7 +41,7 @@ Ensimmäinen kirjautuminen:
  * JOS KIRJAUTUMISESSA ON ONGELMA ( esim. "Notice: Undefined index: token ...." ): 
  * =============================================================================== 
  * Versio 1.47-1.5.6.4:Kopioi tiedosto user.php hakemistosta your-store/system/libary hakemistoon your-store/converter/system/library
- * Versio 2.0.0.0: Kopioi tiedosto user.php hakemsitosta upload/help-2.0/ hakemistoon your-store/converter/system/library
+ * Versio 2.0.0.0: Kopioi tiedosto user.php hakemistosta upload/help-2.0/ hakemistoon your-store/converter/system/library
  
 Toiminnot:
 ---------
@@ -71,13 +71,13 @@ g. Poistaa vanhentuneet moduulien asetukset taulusta `setting`
 
 Vaihe 2:
 -------
-a. Lisää PHP vakiot `DIR_MODIFICATION` and `DIR_UPLOAD` config.php tiedostoihin
+a. Lisää PHP vakiot `DIR_MODIFICATION` ja `DIR_UPLOAD` config.php tiedostoihin
 b. Lisää PHP vakion `HTTPS_CATALOG` admin/config.php tiedostoon versioissa 1.4.7 - 1.5.2.1
 
 Vaihe 3:
 -------
 a. Vaihtaa kuvatiedostojen polut tietokannassa
-b. Vaihtaa `image/data` hakemsiton nimeksi `image/catalog` ja `image/cache/data` nimeksi  `image/cache/catalog`
+b. Vaihtaa hakemiston `image/data` nimeksi `image/catalog` ja `image/cache/data` nimeksi  `image/cache/catalog`
 
 Ensimmäinen päivitys:
 ---------------------
@@ -125,6 +125,7 @@ Päivityksen toisto:
    - Siirry takaisin ohjelmaan OpenCart Migration & Upgrade Tool osoitteessa www.sinunkauppa.fi/converter ja aja uusi päivitys uuteen 
      tietokantaan. Taulut, jotka olet vaihtanut, päivitetään versioon 2.0.x.
    - Huomioitavaa: Muista ajaa myös vaihe 2 ja vaihe 3.
+   - Poista huoltotila.
   
 Tuki:
 -----
