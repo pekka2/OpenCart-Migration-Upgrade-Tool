@@ -93,7 +93,7 @@ Ensimmäinen päivitys:
    - Mene phpmyadminiin ja ota kaupan tietokannasta varmuuskopio.
    - Aja OpenCart Migration & Upgrade Tool (poista esikatselutila)
    - Lataa kaikki OpenCart 2.0.x tiedostot sinun kaupan palvelimelle (muista päivitää myös index.php). Älä lataa demokaupan tuotekuvia.
-   - Päivitys on valmis 
+   - Päivitys on valmis, poista huoltotila. 
 
 Päivityksen toisto:
 ------------------
@@ -104,7 +104,7 @@ Päivityksen toisto:
    - Kopioi kaupan config.php tiedostot hakemistoon  www.sinunkauppa.fi/testi ja muuta niissä olevat hakemistopolut oikeiksi ja muuta 
      tietokannan nimeksi luomasi uusi tietokanta.
    - Kopioi Migration & Upgarde Tool hakemsitoon www.sinunkauppa.fi/testi/converter
-   - Suorita päivitys Migration & Upgarde Tool työkalulla.
+   - Ensimmäinen päivitys: Suorita päivitys Migration & Upgarde Tool työkalulla.
 3. Teestikaupan muokkaus
    - Hanki ja asenna tarvittavia laajennuksia
    - Hanki ja asenna teema (kaikkia teeman ominaisuuksia ei välttämättä kannata asentaa valmiiksi, koska esim. teemaan mahdollisesti asennettavat
