@@ -68,6 +68,7 @@ d. Poistaa vanhentuneet taulut ja sarakkeet
 e. Lisää uudet asetukset tauluun `setting`
 f. Siirtää moduulit tauluun `module`
 g. Poistaa vanhentuneet moduulien asetukset taulusta `setting`
+h. Lisää `localhost` nimisen API käyttäjän
 
 Vaihe 2:
 -------
