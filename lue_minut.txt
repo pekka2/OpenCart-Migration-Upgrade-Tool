@@ -126,6 +126,9 @@ Päivityksen toisto:
    - Ota vanhan kaupan tiedostoista varmuuskopio.
    - Kopioi kaikki version 2.0.x tiedostot sinun kaupan juureen.
    - Kopioi uuden teeman kaikki tiedostot kaupan juureen.
+   - Jos olet asentanut testikauppaan OCMOD laajennuksia, kopioi hakemiston www.sinunkauppa.fi/testi/system/modification
+     sisältö sinun kaupan juuren vastaavaan hakemistoon. Tee samoin mahdollisille vqMod laajennuksille ja laajennuksiin
+     mahdollisesti liittyville moduuli- ym. tiedostoille.
    - Jos olet lisännyt testikauppaan uusia kuvia, kopioi uudet kuvat kaupan jureen hakemistoon image/data
    - Vaihda kaupan config.php tiedostoihin uuden tietokannan nimet.
    - Siirrä ohjelma OpenCart Migration & Upgrade Tool hakemistoon www.sinunkauppa.fi/converter.
