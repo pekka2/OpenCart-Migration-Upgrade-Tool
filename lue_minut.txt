@@ -141,4 +141,5 @@ Pekka Mansikka, peku@pm-netti.com
 
 Takuuehdot
 ----------
-Tämän ohjelman käyttäminen ohjeiden mukaisesti on turvallista. Jokainen käyttäjä on kuitenkin itse vastuussa virheellisestä käytöstä, esim. varmuuskopioiden puuttumisesta tai vanhan kaupan tiedostojen kopioiden puuttumisesta.
+Tämän ohjelman käyttäminen ohjeiden mukaisesti on turvallista. Jokainen käyttäjä on kuitenkin itse vastuussa
+virheellisestä käytöstä, esim. varmuuskopioiden puuttumisesta tai vanhan kaupan tiedostojen kopioiden puuttumisesta.
