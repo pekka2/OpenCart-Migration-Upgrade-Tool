@@ -100,7 +100,7 @@ Siirtyminen versioon 2.0.x nopeasti:
    - Aja OpenCart Migration & Upgrade Tool (poista esikatselutila)
    - Lataa kaikki OpenCart 2.0.x tiedostot sinun kaupan palvelimelle (muista päivitää myös index.php). Älä lataa demokaupan tuotekuvia.
    - Päivitys on valmis, poista huoltotila. 
- 3. Jos haluat kaupan ulkoasultaan ja laajennuksiltaan pääosin valmiiksi (kodan 1 viimeisimmän kohdan mukaisesti),
+ 3. Jos haluat kaupan ulkoasultaan ja laajennuksiltaan pääosin valmiiksi (kohdan 1 viimeisimmän vaihtoehdon mukaisesti),
     ennen kuin kauppa ryhtyy käyttämään versiota 2.0.x, siirry seuraamaan ohjetta `Päivityksen toisto`
 
 Päivityksen toisto:
