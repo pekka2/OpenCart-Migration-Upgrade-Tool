@@ -84,8 +84,8 @@ Vaihe 3:
 a. Vaihtaa kuvatiedostojen polut tietokannassa
 b. Vaihtaa hakemiston `image/data` nimeksi `image/catalog` ja `image/cache/data` nimeksi  `image/cache/catalog`
 
-Ensimmäinen päivitys:
----------------------
+Siityminen versioon 2.0.x nopeasti:
+----------------------------------
 1. Kartoita päivityksen tarve.
    - voitko vaihtaa kaupan heti versioon 2.x ?
    - riittääkö sinulle, että kauppa käyttää päivityksen jälkeen aluksi OpenCart oletus-teemaa?
@@ -99,6 +99,8 @@ Ensimmäinen päivitys:
    - Aja OpenCart Migration & Upgrade Tool (poista esikatselutila)
    - Lataa kaikki OpenCart 2.0.x tiedostot sinun kaupan palvelimelle (muista päivitää myös index.php). Älä lataa demokaupan tuotekuvia.
    - Päivitys on valmis, poista huoltotila. 
+ 3. Jos haluat kaupan ulkoasultaan ja laajennuksiltaan pääosin valmiiksi (kodan 1 viimeisimmän kohdan mukaisesti),
+    ennen kuin kauppa ryhtyy käyttämään versiota 2.0.x, siirry seuraamaan ohjetta `Päivityksen toisto`
 
 Päivityksen toisto:
 ------------------
