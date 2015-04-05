@@ -73,6 +73,7 @@ h. Lisää `localhost` nimisen API käyttäjän
 i. Taulun tax_rate korjaus tarvittaessa. Jos kauppa on päivitetty versiosta 1.5.1 - 1.5.1.2 suoraan esim. versioon 1.5.2
    tai uudempaan, tauluun on jäänyt vanhentuneita sarakkeita, jotka olisivat poistuneet jos kauppa olisi päivitetty
    versioon 1.5.1.3.
+j. Mahdollistaa teeman vaihtamisen päivityksen aikana.
 
 Vaihe 2:
 -------
