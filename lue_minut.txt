@@ -84,8 +84,8 @@ Vaihe 3:
 a. Vaihtaa kuvatiedostojen polut tietokannassa
 b. Vaihtaa hakemiston `image/data` nimeksi `image/catalog` ja `image/cache/data` nimeksi  `image/cache/catalog`
 
-Siityminen versioon 2.0.x nopeasti:
-----------------------------------
+Siirtyminen versioon 2.0.x nopeasti:
+------------------------------------
 1. Kartoita päivityksen tarve.
    - voitko vaihtaa kaupan heti versioon 2.x ?
    - riittääkö sinulle, että kauppa käyttää päivityksen jälkeen aluksi OpenCart oletus-teemaa?
