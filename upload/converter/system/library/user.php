@@ -35,10 +35,11 @@ class User {
 
 	public function login($username, $password) {
          if( $this->getSalt() ){
-		$user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "' AND (password = SHA1(CONCAT(salt, SHA1(CONCAT(salt, SHA1('" . $this->db->escape($password) . "'))))) OR password = '" . $this->db->escape(md5($password)) . "') AND status = '1'");
+		$sql = "SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "' AND (password = SHA1(CONCAT(salt, SHA1(CONCAT(salt, SHA1('" . $this->db->escape($password) . "'))))) OR password = '" . $this->db->escape(md5($password)) . "') AND status = '1'";
           } else {
-    	$user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "' AND password = '" . $this->db->escape(md5($password)) . "' AND status = '1'");
+         	$sql = "SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "' AND password = '" . $this->db->escape(md5($password)) . "' AND status = '1'";
           }
+                $user_query = $this->db->query($sql);
 		if ($user_query->num_rows) {
 			$this->session->data['user_id'] = $user_query->row['user_id'];
 
@@ -67,7 +68,7 @@ class User {
                                               
                               $ret = array();
                                               
-                       foreach( $fields->rows as $field){
+                       foreach( $fields->rows as $field ){
                                               
                                $ret[] = $field['Field'];
                                               
