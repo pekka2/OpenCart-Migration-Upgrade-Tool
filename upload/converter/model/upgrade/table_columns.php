@@ -22,6 +22,11 @@ class ModelUpgradeTableColumns extends Model{
 			'column'	=> ' varchar(9) NOT NULL AFTER password'
 		),
 		array(
+                        'table'         => 'affiliate',
+			'field'		=> 'filename',
+			'column'	=> ' varchar(128) NOT NULL AFTER salt'
+		),
+		array(
                         'table'         => 'banner_image',
 			'field'		=> 'sort_order',
 			'column'	=> ' int(3) NOT NULL'
@@ -40,6 +45,11 @@ class ModelUpgradeTableColumns extends Model{
                         'table'         => 'category_description',
 			'field'		=> 'meta_title',
 			'column'	=> ' varchar(255) NOT NULL AFTER description'
+		),
+		array(
+                        'table'         => 'category_description',
+			'field'		=> 'meta_keyword',
+			'column'	=> ' varchar(255) NOT NULL AFTER meta_description'
 		),
 		array(
                         'table'         => 'coupon',
