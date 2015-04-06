@@ -300,11 +300,11 @@ class ModelUpgradeImages extends Model{
 
              }	 	
       if( $this->showOps ) {
-		  $text .= '<p><pre>' . $php . '</pre></p>';
+	//	  $text .= '<p><pre>' . $php . '</pre></p>';
 		
 	} 
              ++$dirpath;
-		$text .= $this->msg( sprintf( $this->lang['msg_newDir'],DIR_STORE_IMAGE . $dir . '/banners' ) );	 
+	//	$text .= $this->msg( sprintf( $this->lang['msg_newDir'],DIR_STORE_IMAGE . $dir . '/banners' ) );	 
 
         }
         if( !is_dir( DIR_STORE_IMAGE . $dir . '/manufacturer' ) ){
@@ -319,11 +319,11 @@ class ModelUpgradeImages extends Model{
 
              } 	
       if( $this->showOps ) {
-		  $text .= '<p><pre>' . $php . '</pre></p>';
+	//	  $text .= '<p><pre>' . $php . '</pre></p>';
 		
 	} 
              ++$dirpath;
-		$text .= $this->msg( sprintf( $this->lang['msg_newDir'], DIR_STORE_IMAGE . $dir . '/manufacturer') );	 
+	//	$text .= $this->msg( sprintf( $this->lang['msg_newDir'], DIR_STORE_IMAGE . $dir . '/manufacturer') );	 
 
         }
         if( !is_dir( DIR_STORE_IMAGE . $dir . '/product' ) ){
@@ -338,11 +338,11 @@ class ModelUpgradeImages extends Model{
 
              } 	
       if( $this->showOps ) {
-		  $text .= '<p><pre>' . $php . '</pre></p>';
+		//  $text .= '<p><pre>' . $php . '</pre></p>';
 		
 	} 
              ++$dirpath;
-	    $text .= $this->msg( sprintf( $this->lang['msg_newDir'], DIR_STORE_IMAGE . $dir . '/product' ) );	 
+	 //   $text .= $this->msg( sprintf( $this->lang['msg_newDir'], DIR_STORE_IMAGE . $dir . '/product' ) );	 
 
         }
 
