@@ -238,6 +238,11 @@ class ModelUpgradeTableColumns extends Model{
 		),
 		array(
                         'table'         => 'product',
+			'field'		=> 'subtract',
+			'column'	=> ' tinyint(1) NOT NULL AFTER length_class_id'
+		),
+		array(
+                        'table'         => 'product',
 			'field'		=> 'sort_order',
 			'column'	=> ' int(11) NOT NULL AFTER viewed'
 		),
@@ -250,6 +255,11 @@ class ModelUpgradeTableColumns extends Model{
                         'table'         => 'product_description',
 			'field'		=> 'meta_title',
 			'column'	=> ' varchar(255) NOT NULL AFTER description'
+		),
+		array(
+                        'table'         => 'product_description',
+			'field'		=> 'meta_keyword',
+			'column'	=> ' varchar(255) NOT NULL AFTER meta_title'
 		),
 		array(
                         'table'         => 'product_description',
