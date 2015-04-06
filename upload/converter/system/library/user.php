@@ -67,7 +67,7 @@ class User {
                                               
                               $ret = array();
                                               
-                       while( $field = mysql_fetch_assoc($fields)){
+                       foreach( $fields->rows as $field){
                                               
                                $ret[] = $field['Field'];
                                               
