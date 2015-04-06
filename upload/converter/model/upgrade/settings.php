@@ -1889,10 +1889,12 @@ class ModelUpgradeSettings extends Model{
 		`' . DB_PREFIX . 'banner`
 	 WHERE
 		`banner_id` = \'' . $banner_id . '\'';
+      if( array_search( DB_PREFIX . 'banner', $this->getTables() ) ){
 	$result = $this->db->query( $sql );
         if( isset($result->row['name']) ){
          return '-' . $result->row['name'];
         }
+     }
   }
   public function msg( $data ){
        return str_replace( $data, '<div class="msg round">' . $data .'</div>', $data);
