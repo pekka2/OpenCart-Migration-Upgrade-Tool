@@ -45,11 +45,6 @@ into the root directory of your shop.
  **********************************************************************************************************************************
 Operation
 ---------
-The update can be done in 2 ways:
-
-A. on an already existing shop
-
-If you choose method A, follow these steps:
 
 	1.	copy the whole content of this package inside the folder UPLOAD
 		into your shopsoftware root
@@ -58,22 +53,6 @@ If you choose method A, follow these steps:
         3.      login
         4.      set full permissions for Top Administrator Group
 	5.	follow the instructions on the screen
-
-If you choose method B, follow these steps (NOTICE: This you can use, when change domain root directory):
-/* THIS FEATURE IS REMOVE SO FAR. */
-	1.	create a new folder (subfolder preferred) inside your shop
-	2.	copy the whole content of this package inside the folder UPLOAD
-		into your shopsoftware root
-		It should then look like: ../converter
-	3.	copy from your old shop the folder image (and the whole content)
-		into the new folder (if new shop is other server)
-        4.      copy database other new database
-	5.	copy ../config.php and ../admin/config.php from your old shop
-		into the new folder (change DB_DATABASE name)
-	6.	start the converter via http://YOURSHOP/converter/index.php
-        7.      login
-        8.      set full permissions for Top Administrator Group
-	9.	follow the instructions on the screen
 
 
 Permissions:
