@@ -113,7 +113,7 @@ Päivityksen toisto:
      tietokannan nimeksi luomasi uusi tietokanta.
    - Kopioi Migration & Upgarde Tool hakemsitoon www.sinunkauppa.fi/testi/converter
    - Ensimmäinen päivitys: Suorita päivitys Migration & Upgrade Tool työkalulla.
-3. Teestikaupan muokkaus
+3. Testikaupan muokkaus
    - Hanki ja asenna tarvittavia laajennuksia
    - Hanki ja asenna teema (kaikkia teeman ominaisuuksia ei välttämättä kannata asentaa valmiiksi, koska esim. teemaan mahdollisesti asennettavat
      uudet kuvat asentuu hakemistoon www.sinunkauppa.fi/testi/image/catalog)
