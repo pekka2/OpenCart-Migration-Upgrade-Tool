@@ -1,0 +1,54 @@
+<modification>
+	<name>Bugs 2.0.2.0 Fix</name>
+	<version>1.1</version>
+	<vqmver>2.3.2</vqmver>
+	<author>peku</author>
+	<code>aADw9893</code>
+	<file path="admin/controller/sale/order.php">
+		<operation>
+			<search><![CDATA[public function api() {]]></search>
+			<add position="after"><![CDATA[                                              $json = array();]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/information/contact.php">
+		<operation>
+			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
+			<add position="replace"><![CDATA[$this->config->get('config_mail_smtp_hostname')]]></add>
+		</operation>
+	</file>
+	<file path="catalog/model/account/customer.php">
+		<operation>
+			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
+			<add position="replace"><![CDATA[$this->config->get('config_mail_smtp_hostname')]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[$mail->setSubject($this->language->get('text_new_customer'));]]></search>
+			<add position="before"><![CDATA[			$mail->setFrom($this->config->get('config_email'));
+			$mail->setTo($this->config->get('config_email'));]]></add>
+		</operation>
+	</file>
+	<file path="catalog/model/checout/order.php">
+		<operation>
+			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
+			<add position="replace"><![CDATA[$this->config->get('config_mail_smtp_hostname')]]></add>
+		</operation>
+	</file>
+	<file path="catalog/model/marketing/affiliate.php">
+		<operation>
+			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
+			<add position="replace"><![CDATA[$this->config->get('config_mail_smtp_hostname')]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/marketing/affiliate.php">
+		<operation>
+			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
+			<add position="replace"><![CDATA[$this->config->get('config_mail_smtp_hostname')]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/sale/customer.php">
+		<operation>
+			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
+			<add position="replace"><![CDATA[$this->config->get('config_mail_smtp_hostname')]]></add>
+		</operation>
+	</file>
+</modification>
