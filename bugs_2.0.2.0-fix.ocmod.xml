@@ -24,7 +24,8 @@
 		<operation>
 			<search><![CDATA[$mail->setSubject($this->language->get('text_new_customer'));]]></search>
 			<add position="before"><![CDATA[			$mail->setFrom($this->config->get('config_email'));
-			$mail->setTo($this->config->get('config_email'));]]></add>
+			$mail->setTo($this->config->get('config_email'));
+                        $mail->setSender($this->config->get('config_name'));]]></add>
 		</operation>
 	</file>
 	<file path="catalog/model/checout/order.php">
