@@ -77,7 +77,7 @@ class ModelUpgradeImages extends Model{
 				UPDATE
 					`' . DB_PREFIX . $img['table'] . '`
 				SET
-					`image` = \'' . $img['updatepath'] . '\'
+					`image` = \'' . $this->db->escape($img['updatepath']) . '\'
 				WHERE
 					`' . $img['field'] . '` = \'' . (int) $img['id'] . '\'';
 
