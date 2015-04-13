@@ -123,7 +123,7 @@ Päivityksen toisto:
    - Jos tauluun address on tullut uusia rivejä, siirry UUTEEN tietokantaan ja poista taulu address. Seuraavaksi siirry kaupan tietokantaan
      tauluun address ja klikkaa `Toiminnot`(Operations).
      Siirry sivulla kohtaan `Kopioi tämä taulu toiseen tietokantaan` ja valitse listasta uuden tietokannan nimi. Paina `Siirry`.
-   - Tee tämä toiminto kaikille tauluille, joihin on tullut muutoksia testikaupan asenuksen aikana.
+   - Tee tämä toiminto kaikille tauluille, joihin on tullut muutoksia testikaupan asennuksen aikana.
    - Varoitus: Setting taulun asetuksia ei muuteta tämän päivityksen toiston aikana. Älä siksi vaihda setting taulua ensimmäisen päivityksen
      jälkeen, jotta et menetä version 2.0.x uusia asetuksia.
    - Ota vanhan kaupan tiedostoista varmuuskopio.
