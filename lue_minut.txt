@@ -111,7 +111,7 @@ Päivityksen toisto:
    - Luo uusi tietokanta, joka on kaupan tietokannan tarkka kopio.
    - Kopioi kaupan config.php tiedostot hakemistoon  www.sinunkauppa.fi/testi ja muuta niissä olevat hakemistopolut oikeiksi ja muuta 
      tietokannan nimeksi luomasi uusi tietokanta.
-   - Kopioi Migration & Upgarde Tool hakemsitoon www.sinunkauppa.fi/testi/converter
+   - Kopioi Migration & Upgarde Tool hakemistoon www.sinunkauppa.fi/testi/converter
    - Ensimmäinen päivitys: Suorita päivitys Migration & Upgrade Tool työkalulla.
 3. Testikaupan muokkaus
    - Hanki ja asenna tarvittavia laajennuksia
