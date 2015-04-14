@@ -258,7 +258,7 @@ class ModelUpgradeImages extends Model{
                       "table"      => 'product',
                       "field"      => 'product_id',
                       "id"         => $images['product_id'],
-                      "updatepath" => str_replace('data','catalog', $images['image'] )),
+                      "updatepath" => str_replace('data','catalog', $images['image'] ),
                       "path"       => $root . $this->dirImage . $images['image'],
                       "newpath"    => DIR_STORE_IMAGE . str_replace('data','catalog', $images['image']),
                       "newdirpath" => DIR_STORE_IMAGE . 'catalog/'
