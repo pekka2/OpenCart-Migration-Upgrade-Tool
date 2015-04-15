@@ -1015,7 +1015,7 @@ class ModelUpgradeTableColumns extends Model{
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
       $text = '';
 
-	if( array_search( 'tax_class_id', $this->getDbColumns( 'tax_rate' ) ) !=false && !array_search( 'name', $this->getDbColumns( 'tax_rate' )) ) {
+	if( array_search( 'tax_class_id', $this->getDbColumns( 'tax_rate' ) ) && !array_search( 'name', $this->getDbColumns( 'tax_rate' )) ) {
 
 		$sql = '
 		SELECT
