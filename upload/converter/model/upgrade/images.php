@@ -169,7 +169,7 @@ class ModelUpgradeImages extends Model{
                       "field"      => 'banner_image_id',
                       "id"         => $images['banner_image_id'],
                       "path"       => $root . $this->dirImage . str_replace('data','catalog',$images['image']),
-                      "updatepath" => str_replace('data','catalog', str_replace('demo/','',$images['image'] )),
+                      "updatepath" => str_replace('data','catalog', $images['image'] ),
                       "newpath"    => DIR_STORE_IMAGE . str_replace('data','catalog', $images['image']),
                       "newdirpath" => DIR_STORE_IMAGE . 'catalog/'
          );
@@ -236,7 +236,7 @@ class ModelUpgradeImages extends Model{
                       "table"      => 'manufacturer',
                       "field"      => 'manufacturer_id',
                       "id"         => $images['manufacturer_id'],
-                      "updatepath" => str_replace('data','catalog', str_replace('demo/','', $images['image'] )),
+                      "updatepath" => str_replace('data','catalog', $images['image'] ),
                       "path"       => $root . $this->dirImage . $images['image'],
                       "newpath"    => DIR_STORE_IMAGE .  str_replace('data','catalog', $images['image']),
                       "newdirpath" => DIR_STORE_IMAGE . 'catalog/'
@@ -258,7 +258,7 @@ class ModelUpgradeImages extends Model{
                       "table"      => 'product',
                       "field"      => 'product_id',
                       "id"         => $images['product_id'],
-                      "updatepath" => str_replace('data','catalog', $images['image'] )),
+                      "updatepath" => str_replace('data','catalog', $images['image'] ),
                       "path"       => $root . $this->dirImage . $images['image'],
                       "newpath"    => DIR_STORE_IMAGE . str_replace('data','catalog', $images['image']),
                       "newdirpath" => DIR_STORE_IMAGE . 'catalog/'
