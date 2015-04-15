@@ -10,6 +10,12 @@
 			<add position="after"><![CDATA[                                              $json = array();]]></add>
 		</operation>
 	</file>
+	<file path="admin/controller/module/html.php">
+		<operation>
+			<search><![CDATA[$data['module_description'] = '';]]></search>
+			<add position="replace"><![CDATA[$data['module_description'] = array();]]></add>
+		</operation>
+	</file>
 	<file path="catalog/controller/information/contact.php">
 		<operation>
 			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
