@@ -21,6 +21,12 @@
 			<add position="replace"><![CDATA[$data['module_description'] = array();]]></add>
 		</operation>
 	</file>
+	<file path="admin/view/template/module/google_hangouts.tpl">
+		<operation>
+			<search><![CDATA[$data[<?php echo $code; ?>]]></search>
+			<add position="replace"><![CDATA[<?php echo $google_hangouts_code; ?>]]></add>
+		</operation>
+	</file>
 	<file path="catalog/controller/information/contact.php">
 		<operation>
 			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
