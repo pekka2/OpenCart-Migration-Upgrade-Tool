@@ -21,4 +21,10 @@
 			<add position="replace"><![CDATA[<?php echo $google_hangouts_code; ?>]]></add>
 		</operation>
 	</file>
+	<file path="catalog/model/total/handling.php">
+		<operation>
+			<search><![CDATA[if (($this->cart->getSubTotal() <]]></search>
+			<add position="replace"><![CDATA[if (($this->cart->getSubTotal() >]]></add>
+		</operation>
+	</file>
 </modification>
