@@ -9,4 +9,16 @@
 			<add position="replace"><![CDATA[if ( isset($custom_field_customer_group['required']) ) {]]></add>
 		</operation>
 	</file>
+	<file path="admin/controller/module/html.php">
+		<operation>
+			<search><![CDATA[$data['module_description'] = '';]]></search>
+			<add position="replace"><![CDATA[$data['module_description'] = array();]]></add>
+		</operation>
+	</file>
+	<file path="admin/view/template/module/google_hangouts.tpl">
+		<operation>
+			<search><![CDATA[<?php echo $code; ?>]]></search>
+			<add position="replace"><![CDATA[<?php echo $google_hangouts_code; ?>]]></add>
+		</operation>
+	</file>
 </modification>
