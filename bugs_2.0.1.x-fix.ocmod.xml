@@ -1,6 +1,6 @@
 <modification>
 	<name>Bugs 2.0.1.x fix</name>
-	<version>1.0</version>
+	<version>1.1</version>
 	<author>peku</author>
 	<code>aADw9893zcu7</code>
 	<file path="admin/controller/sale/custom_field.php">
