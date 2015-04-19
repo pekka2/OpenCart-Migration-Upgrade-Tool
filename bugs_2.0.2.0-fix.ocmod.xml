@@ -45,13 +45,13 @@
                         $mail->setSender($this->config->get('config_name'));]]></add>
 		</operation>
 	</file>
-	<file path="catalog/model/checout/order.php">
+	<file path="catalog/model/checkout/order.php">
 		<operation>
 			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
 			<add position="replace"><![CDATA[$this->config->get('config_mail_smtp_hostname')]]></add>
 		</operation>
 	</file>
-	<file path="catalog/model/marketing/affiliate.php">
+	<file path="catalog/model/affiliate/affiliate.php">
 		<operation>
 			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
 			<add position="replace"><![CDATA[$this->config->get('config_mail_smtp_hostname')]]></add>
