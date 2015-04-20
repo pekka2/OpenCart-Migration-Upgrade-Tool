@@ -50,6 +50,34 @@
 			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
 			<add position="replace"><![CDATA[$this->config->get('config_mail_smtp_hostname')]]></add>
 		</operation>
+		<operation>
+			<search><![CDATA[$language->load('default');]]></search>
+			<add position="replace"><![CDATA[$language->load($order_info['language_directory']);]]></add>
+		</operation>
+	</file>
+	<file path="catalog/model/checkout/voucher.php">
+		<operation>
+			<search><![CDATA[$language->load('default');]]></search>
+			<add position="replace"><![CDATA[$language->load($order_info['language_directory']);]]></add>
+		</operation>
+	</file>
+	<file path="catalog/model/openbay/ebay_order.php">
+		<operation>
+			<search><![CDATA[$language->load('default');]]></search>
+			<add position="replace"><![CDATA[$language->load($order_info['language_directory']);]]></add>
+		</operation>
+	</file>
+	<file path="system/library/openbay.php">
+		<operation>
+			<search><![CDATA[$language->load('default');]]></search>
+			<add position="replace"><![CDATA[$language->load($order_info['language_directory']);]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/sale/voucher.php">
+		<operation>
+			<search><![CDATA[$language->load('default');]]></search>
+			<add position="replace"><![CDATA[$language->load($order_info['language_directory']);]]></add>
+		</operation>
 	</file>
 	<file path="catalog/model/affiliate/affiliate.php">
 		<operation>
