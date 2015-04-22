@@ -138,7 +138,7 @@
 		}]]></add>
 		</operation>
 	</file>
-	<file path="catalog/view/theme/default/template/account/register.tpl">
+	<file path="catalog/view/theme/*/template/account/register.tpl">
 		<operation>
 			<search><![CDATA[<div class="buttons">]]></search>
 			<add position="after"><![CDATA[
