@@ -21,6 +21,12 @@
 			<add position="replace"><![CDATA[$data['module_description'] = array();]]></add>
 		</operation>
 	</file>
+	<file path="admin/controller/module/bestseller.php">
+		<operation>
+			<search><![CDATA[$data['href' => $this->url->link('module/banner',]]></search>
+			<add position="replace"><![CDATA['href' => $this->url->link('module/bestseller',]]></add>
+		</operation>
+	</file>
 	<file path="admin/view/template/module/google_hangouts.tpl">
 		<operation>
 			<search><![CDATA[<?php echo $code; ?>]]></search>
