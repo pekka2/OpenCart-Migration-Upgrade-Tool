@@ -1,7 +1,7 @@
 <div class="footer">
     <div class="note round">
 			<b><a href="../index.php" class="link" title="<?php echo $text_to_my_store; ?>"><?php echo $text_to_my_store; ?></a></b>
-			<a href="http://github.com/pekka2/OC-Converter-to-Upgrade-2-0" class="link" title="Home of Converter" target="_blank">Home of Converter</a>
+			<a href="https://github.com/pekka2/OpenCart-Migration-Upgrade-Tool" class="link" title="Home of Converter" target="_blank">Home of Converter</a>
 			<a href="http://www.opencart.com/index.php?route=extension/extension&amp;filter_username=peku" class="link" title="Extensions from Peku" target="_blank">Extensions from Peku</a>
 			<a href="http://www.opencart.com/index.php?route=extension/extension&amp;filter_username=osworx" class="link" title="Extensions from OSWorX" target="_blank">Extensions from OSWorX</a>
 			<a href="http://osworx.net" class="link" title="OSWorX" target="_blank">More of OSWorX</a>
