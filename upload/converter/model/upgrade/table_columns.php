@@ -72,6 +72,12 @@ class ModelUpgradeTableColumns extends Model{
                 	'column'        => ' tinyint(1) NOT NULL'
          	),
 		array(
+			'table'         => 'custom_field_customer_group',
+			'field'         => 'required',
+			'type'          => 'inyint(',
+			'column'        => ' tinyint(1) NOT NULL'
+		),
+		array(
                         'table'         => 'customer',
 			'field'		=> 'custom_field',
 			'column'	=> ' text NOT NULL AFTER address_id'
@@ -784,12 +790,12 @@ class ModelUpgradeTableColumns extends Model{
 			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT \'1\''
 		),
-		array(
+		/*array(
                         'table'         => 'language',
 			'field'		=> 'status',
 			'type'		=> 'inyint(',
 			'column'	=> ' tinyint(1) NOT NULL DEFAULT 0'
-		),
+		),*/
 		array(
                         'table'         => 'order_history',
 			'field'		=> 'notify',
