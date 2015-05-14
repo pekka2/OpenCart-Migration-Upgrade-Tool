@@ -66,6 +66,10 @@
 			<search><![CDATA[$language->load('default');]]></search>
 			<add position="replace"><![CDATA[$language->load($order_info['language_directory']);]]></add>
 		</operation>
+		<operation>
+			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
+			<add position="replace"><![CDATA[$this->config->get('config_mail_smtp_hostname')]]></add>
+		</operation>
 	</file>
 	<file path="catalog/model/openbay/ebay_order.php">
 		<operation>
@@ -83,6 +87,10 @@
 		<operation>
 			<search><![CDATA[$language->load('default');]]></search>
 			<add position="replace"><![CDATA[$language->load($order_info['language_directory']);]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
+			<add position="replace"><![CDATA[$this->config->get('config_mail_smtp_hostname')]]></add>
 		</operation>
 	</file>
 	<file path="admin/model/sale/return.php">
