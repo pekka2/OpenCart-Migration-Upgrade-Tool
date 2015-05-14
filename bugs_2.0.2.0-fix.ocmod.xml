@@ -123,4 +123,10 @@
 			<add position="replace"><![CDATA[if (($this->cart->getSubTotal() >]]></add>
 		</operation>
 	</file>
+	<file path="catalog/controller/payment/pp_express.php">
+		<operation>
+			<search><![CDATA[/template/payment/not_found.tpl]]></search>
+			<add position="replace"><![CDATA[/template/error/not_found.tpl]]></add>
+		</operation>
+	</file>
 </modification>
