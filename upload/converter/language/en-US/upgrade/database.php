@@ -26,6 +26,8 @@ $_['entry_adminDir']	        = 'Name of directory for adminfiles';
 $_['entry_imageDir']		= 'Name of  image directory';
 $_['entry_oldDir']		= 'Path of old installation';
 $_['entry_perms']		= 'Your server writing permission';
+$_['entry_up_201_202']		= 'Upgrade database to version 2.0.1 - 2.0.2.0';
+$_['entry_up_2030']		= 'Upgrade database to  version 2.0.3.0';
 // Header
 $_['header_step_2']		= 'Database successfully updated to latest version';
 // help
