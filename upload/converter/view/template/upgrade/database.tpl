@@ -46,6 +46,19 @@
 						<?php echo $help_ops; ?>
 					</label>
 				</div>
+				
+				<div class="block">
+					<label>
+						<input type="checkbox" value="true" name="upgrade2020" />
+						<?php echo $entry_up_201_202; ?>
+					</label>
+				</div>
+				<div class="block">
+					<label>
+						<input type="checkbox" value="true" name="upgrade2030" />
+						<?php echo $entry_up_2030; ?>
+					</label>
+				</div>
 				<div class="block">
 					<label><?php echo $text_update_theme;?>
 					<select name="theme">
