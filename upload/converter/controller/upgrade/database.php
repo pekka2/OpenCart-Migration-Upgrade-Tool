@@ -60,6 +60,8 @@ class ControllerUpgradeDatabase extends Controller {
                 $this->data['help_simulate'] = $this->language->get('help_simulate');
                 $this->data['help_ops'] = $this->language->get('help_ops');
                 $this->data['button_database'] = $this->language->get('button_database');
+                $this->data['entry_up_2030'] = $this->language->get('entry_up_2030');
+                $this->data['entry_up_201_202'] = $this->language->get('entry_up_201_202');
                 $this->data['entry_adminDir'] = $this->language->get('entry_adminDir');
                 $this->data['help_adminDir'] = $this->language->get('help_adminDir');
                 $this->data['entry_oldDir'] = $this->language->get('entry_oldDir');
