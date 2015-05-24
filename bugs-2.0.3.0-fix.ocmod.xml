@@ -1,0 +1,59 @@
+<modification>
+	<name>Bugs 2.0.3.0 fix</name>
+	<version>1.0</version>
+	<vqmver>2.3.2</vqmver>
+	<author>peku</author>
+	<code>aADw9893w</code>
+	<file path="admin/controller/sale/order.php">
+		<operation>
+			<search><![CDATA[public function info() {]]></search>
+			<add position="after"><![CDATA[                                              $data['totals'] = array();]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[public function api() {]]></search>
+			<add position="after"><![CDATA[                                              $json = array();]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/module/html.php">
+		<operation>
+			<search><![CDATA[$data['module_description'] = '';]]></search>
+			<add position="replace"><![CDATA[$data['module_description'] = array();]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/payment/amazon_checkout.php">
+		<operation>
+			<search><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token']);]]></search>
+			<add position="replace"><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/payment/amazon_login_pay.php">
+		<operation>
+			<search><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token']);]]></search>
+			<add position="replace"><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/payment/securetrading_pp.php">
+		<operation>
+			<search><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token']);]]></search>
+			<add position="replace"><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/payment/securetrading_ws.php">
+		<operation>
+			<search><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token']);]]></search>
+			<add position="replace"><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file path="admin/view/template/module/google_hangouts.tpl">
+		<operation>
+			<search><![CDATA[<?php echo $code; ?>]]></search>
+			<add position="replace"><![CDATA[<?php echo $google_hangouts_code; ?>]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/payment/pp_express.php">
+		<operation>
+			<search><![CDATA[/template/payment/not_found.tpl]]></search>
+			<add position="replace"><![CDATA[/template/error/not_found.tpl]]></add>
+		</operation>
+	</file>
+</modification>
