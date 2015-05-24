@@ -27,6 +27,31 @@
 			<add position="replace"><![CDATA['href' => $this->url->link('module/bestseller',]]></add>
 		</operation>
 	</file>
+	
+	<file path="admin/controller/payment/amazon_checkout.php">
+		<operation>
+			<search><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token']);]]></search>
+			<add position="replace"><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/payment/amazon_login_pay.php">
+		<operation>
+			<search><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token']);]]></search>
+			<add position="replace"><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/payment/securetrading_pp.php">
+		<operation>
+			<search><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token']);]]></search>
+			<add position="replace"><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/payment/securetrading_ws.php">
+		<operation>
+			<search><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token']);]]></search>
+			<add position="replace"><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
 	<file path="admin/view/template/module/google_hangouts.tpl">
 		<operation>
 			<search><![CDATA[<?php echo $code; ?>]]></search>
