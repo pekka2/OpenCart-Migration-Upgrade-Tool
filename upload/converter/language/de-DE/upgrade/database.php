@@ -22,6 +22,8 @@ $_['entry_adminDir']    	= 'Name des Adminordners';
 $_['entry_imageDir']		= 'Name of  image directory';
 $_['entry_oldDir']		= 'Pfad der alten Installation';
 $_['entry_perms']		= 'Schreibrechte Server';
+$_['entry_up_201_202']		= 'Upgrade database to version 2.0.1 - 2.0.2.0';
+$_['entry_up_2030']		= 'Upgrade database to  version 2.0.3.0';
 // Btn
 $_['btn_config']		= 'Konfigurationsdateien aktualisieren';
 $_['btn_skip']			= 'Überspringen';
