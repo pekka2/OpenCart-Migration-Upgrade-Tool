@@ -3,6 +3,12 @@
 	<version>1.3</version>
 	<author>peku</author>
 	<code>aADw9893</code>
+	<file path="admin/controller/sale/info.php">
+		<operation>
+			<search><![CDATA[public function info() {]]></search>
+			<add position="after"><![CDATA[                                              $data['totals'] = array();]]></add>
+		</operation>
+	</file>
 	<file path="admin/controller/sale/order.php">
 		<operation>
 			<search><![CDATA[public function api() {]]></search>
