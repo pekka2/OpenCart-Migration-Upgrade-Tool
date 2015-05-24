@@ -9,6 +9,8 @@ class ModelUpgradeTableColumns extends Model{
 
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
+        $this->upgrade2020  = ( !empty( $data['upgrade2020'] ) ? true : false );
+        $this->upgrade2030  = ( !empty( $data['upgrade2030'] ) ? true : false );
 
     $vars = array(
 		array(
@@ -1164,6 +1166,9 @@ class ModelUpgradeTableColumns extends Model{
                      'store_description'
 		);
 
+  if( $this->upgrade2030 ){
+                         $droptable[] = 'order_fraud';
+  }
        foreach( $droptable as $table ) {
 	  if( array_search( DB_PREFIX . $table, $this->getTables() ) ) {
 		$sql = 'DROP TABLE `' . DB_PREFIX . $table . '`';
