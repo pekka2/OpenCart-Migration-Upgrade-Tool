@@ -3,6 +3,12 @@
 	<version>1.1</version>
 	<author>peku</author>
 	<code>aADw9893zcu7</code>
+	<file path="admin/controller/sale/order.php">
+		<operation>
+			<search><![CDATA[public function info() {]]></search>
+			<add position="after"><![CDATA[                                              $data['totals'] = array();]]></add>
+		</operation>
+	</file>
 	<file path="admin/controller/sale/custom_field.php">
 		<operation>
 			<search><![CDATA[if ($custom_field_customer_group['required']) {]]></search>
@@ -21,6 +27,30 @@
 			<add position="replace"><![CDATA['href' => $this->url->link('module/bestseller',]]></add>
 		</operation>
 	</file>
+	<file path="admin/controller/payment/amazon_checkout.php">
+		<operation>
+			<search><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token']);]]></search>
+			<add position="replace"><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/payment/amazon_login_pay.php">
+		<operation>
+			<search><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token']);]]></search>
+			<add position="replace"><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/payment/securetrading_pp.php">
+		<operation>
+			<search><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token']);]]></search>
+			<add position="replace"><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/payment/securetrading_ws.php">
+		<operation>
+			<search><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token']);]]></search>
+			<add position="replace"><![CDATA[$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
 	<file path="admin/view/template/module/google_hangouts.tpl">
 		<operation>
 			<search><![CDATA[<?php echo $code; ?>]]></search>
@@ -31,6 +61,12 @@
 		<operation>
 			<search><![CDATA[if (($this->cart->getSubTotal() <]]></search>
 			<add position="replace"><![CDATA[if (($this->cart->getSubTotal() >]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/payment/pp_express.php">
+		<operation>
+			<search><![CDATA[/template/payment/not_found.tpl]]></search>
+			<add position="replace"><![CDATA[/template/error/not_found.tpl]]></add>
 		</operation>
 	</file>
 </modification>
