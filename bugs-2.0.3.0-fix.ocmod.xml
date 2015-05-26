@@ -56,6 +56,12 @@
 			<add position="replace"><![CDATA[<?php echo $google_hangouts_code; ?>]]></add>
 		</operation>
 	</file>
+	<file path="catalog/controller/feed/google_sitemap.php">
+		<operation>
+			<search><![CDATA[$output .= '<loc>' . $this->url->link('product/product', 'manufacturer_id=' . $manufacturer['manufacturer_id'] . '&amp;product_id=' . $product['product_id']) . '</loc>';]]></search>
+			<add position="replace"><![CDATA[$output .= '<loc>' . $this->url->link('product/product', 'manufacturer_id=' . $manufacturer['manufacturer_id'] . '&product_id=' . $product['product_id']) . '</loc>';]]></add>
+		</operation>
+	</file>
 	<file path="catalog/controller/payment/pp_express.php">
 		<operation>
 			<search><![CDATA[/template/payment/not_found.tpl]]></search>
