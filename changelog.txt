@@ -20,7 +20,7 @@ CONVERTER
 ---------
 1.3.6   2015.05.24      + Upgrade to version 2.0.3.0
                         + option upgrade to version 2.0.1-2.0.2.0 or to version 2.0.3.0
-1.3.5   2015.05.24      # removed blank characters at the end of a php file in directory controller/common
+1.3.5   2015.05.03      # removed blank characters at the end of a php file in directory controller/common
 1.3.4   2015.04.04      # method getSalt() in file converter/system/library/user.php
                         # columns to tables `affiliate`, `category_description`, `product` and `product_description` in version 1.4.x
                         # table `banner` simulation  in version 1.4.x
