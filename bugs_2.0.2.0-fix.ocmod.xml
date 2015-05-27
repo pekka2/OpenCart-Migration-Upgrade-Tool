@@ -118,6 +118,12 @@
 			<add position="replace"><![CDATA[$language->load($order_info['language_directory']);]]></add>
 		</operation>
 	</file>
+	<file path="admin/model/openbay/amazonus.php">
+		<operation>
+			<search><![CDATA[) DEFAULT COLLATE=utf8_general_ci;;");]]></search>
+			<add position="replace"><![CDATA[) DEFAULT COLLATE=utf8_general_ci;");]]></add>
+		</operation>
+	</file>
 	<file path="admin/model/sale/voucher.php">
 		<operation>
 			<search><![CDATA[$language->load('default');]]></search>
