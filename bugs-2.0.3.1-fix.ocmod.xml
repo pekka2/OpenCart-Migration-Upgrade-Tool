@@ -1,0 +1,23 @@
+<modification>
+	<name>Bugs 2.0.3.1 fix</name>
+	<version>1.0</version>
+	<vqmver>2.3.2</vqmver>
+	<author>peku</author>
+	<code>3daADw989</code>
+	<file path="admin/controller/sale/order.php">
+		<operation>
+			<search><![CDATA[public function info() {]]></search>
+			<add position="after"><![CDATA[                                              $data['totals'] = array();]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[public function api() {]]></search>
+			<add position="after"><![CDATA[                                              $json = array();]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/openbay/amazonus.php">
+		<operation>
+			<search><![CDATA[) DEFAULT COLLATE=utf8_general_ci;;");]]></search>
+			<add position="replace"><![CDATA[) DEFAULT COLLATE=utf8_general_ci;");]]></add>
+		</operation>
+	</file>
+</modification>
