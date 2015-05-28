@@ -6,10 +6,6 @@
 	<code>3daADw989</code>
 	<file path="admin/controller/sale/order.php">
 		<operation>
-			<search><![CDATA[public function info() {]]></search>
-			<add position="after"><![CDATA[                                              $data['totals'] = array();]]></add>
-		</operation>
-		<operation>
 			<search><![CDATA[public function api() {]]></search>
 			<add position="after"><![CDATA[                                              $json = array();]]></add>
 		</operation>
