@@ -1,8 +1,13 @@
 <modification>
 	<name>Bugs 2.0.2.0 Fix</name>
-	<version>1.5</version>
+	<version>1.6</version>
 	<author>peku</author>
 	<code>aADw9893</code>
+        <description>
+               If your store in admin is bug 'undefined variable json', your edit this file in line 18
+               and change '// $json = array();' to  '$json = array();'
+                      
+        </description>
 	<file path="admin/controller/sale/order.php">
 		<operation>
 			<search><![CDATA[public function info() {]]></search>
@@ -10,7 +15,7 @@
 		</operation>
 		<operation>
 			<search><![CDATA[public function api() {]]></search>
-			<add position="after"><![CDATA[                                              $json = array();]]></add>
+			<add position="after"><![CDATA[                                             // $json = array();]]></add>
 		</operation>
 	</file>
 	<file path="admin/controller/sale/custom_field.php">
