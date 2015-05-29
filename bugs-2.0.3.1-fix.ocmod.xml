@@ -1,13 +1,17 @@
 <modification>
 	<name>Bugs 2.0.3.1 fix</name>
 	<version>1.0</version>
-	<vqmver>2.3.2</vqmver>
 	<author>peku</author>
-	<code>3daADw989</code>
+	<code>2d3daADw989</code>
+        <description>
+                If your store in admin is bug 'undefined variable json', your edit this file in line 14
+                 and change '// $json = array();' to  '$json = array();'
+                      
+       </description>
 	<file path="admin/controller/sale/order.php">
 		<operation>
 			<search><![CDATA[public function api() {]]></search>
-			<add position="after"><![CDATA[                                              $json = array();]]></add>
+			<add position="after"><![CDATA[                                             // $json = array();]]></add>
 		</operation>
 	</file>
 	<file path="admin/model/openbay/amazonus.php">
