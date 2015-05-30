@@ -8,6 +8,7 @@ class ModelUpgradeConfiguration extends Model{
        $dirImage =  ( !empty( $data['dirImage'] ) ? true : 'image' ) . '/';
        $dirOld = ( !empty( $data['dirOld'] ) ? true : false );
        $showOps  = ( !empty( $data['showOps'] ) ? true : false );
+       $this->upgrade2030  = ( !empty( $data['upgrade2030'] ) ? true : false );
     
         $text = '';
 
@@ -46,6 +47,9 @@ class ModelUpgradeConfiguration extends Model{
 		   }
 			array_splice( $fp, 18, 0, $modification . "\r\n" );
 			array_splice( $fp, 19, 0, $upload . "\r\n" );
+		    if($this->upgrade2030 &&  !strpos( $content, 'DB_PORT' )) {
+			  array_splice( $fp, 20, 0, $db_port . "\r\n" );
+		   }
 
 			$content = implode( '', $fp );
 
@@ -91,6 +95,9 @@ class ModelUpgradeConfiguration extends Model{
 		   }
 			array_splice( $fp2, 21, 0, $modification . "\r\n" );
 			array_splice( $fp2, 22, 0, $upload . "\r\n" );
+		    if($this->upgrade2030 &&  !strpos( $content, 'DB_PORT' )) {
+			  array_splice( $fp, 25, 0, $db_port . "\r\n" );
+		   }
 
 			$content = implode( '', $fp2 );
 
