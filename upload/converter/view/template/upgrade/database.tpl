@@ -116,7 +116,6 @@
    <?php if( isset( $add_columns ) ) { echo $add_columns; } ?>
    <?php if( isset( $drop_columns ) ) { echo $drop_columns; } ?>
    <?php if( isset( $change_columns ) ) { echo $change_columns; } ?>
-   <?php if( isset( $change_options ) ) { echo $change_options; } ?>
    <?php if( isset( $drop_tables ) ) { echo $drop_tables; } ?>
    <?php if( isset( $add_settings ) ) { echo $add_settings; } ?>
 
