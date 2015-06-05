@@ -18,6 +18,8 @@ class Language {
                                $language = explode(';',$browser_languages[2]);
                         } elseif( isset($browser_languages[1]) ) {
                                 $language = explode(';',$browser_languages[1]);
+                         } elseif( isset($browser_languages[0]) ) {
+                                $language = $browser_languages[0];
                          } else {
                              $browser_languages2 = explode( ';', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
                               if( isset($browser_languages2[2]) ){
