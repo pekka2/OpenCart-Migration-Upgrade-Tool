@@ -24,6 +24,8 @@ class Language {
                                       $language = explode(';',$browser_languages2[2]);
                                } elseif( isset($browser_languages2[1]) ) {
                                        $language = explode(';',$browser_languages2[1]);
+                               } else {
+                                       $language = explode(';',$browser_languages2[0]);
                                }
                     }
                         $arr_language = explode('-',$language[0]);
