@@ -1139,6 +1139,94 @@ class ModelUpgradeTableColumns extends Model{
         return $text;
 
   }
+  public changeOptions(){
+           $text = '';               
+      if( array_search( DB_PREFIX . 'store_description' , $this->getTables()) ) {
+        /* Opencart version 1.4.x is Found */
+        /* Change product options to Qphoria way */
+    $sql = "
+              SELECT
+                     MIN(product_option_id) AS option_id
+              FROM
+                     `" . DB_PREFIX . "product_option`;";
+	      $option = $this->db->query( $sql );
+
+      if( isset($option->row['option_id']) && !$this->hasOption($option->row['option_id']) ){
+     $sql = "
+            INSERT INTO
+                       `" . DB_PREFIX . "option` (`option_id`, `type`, `sort_order`)
+            SELECT
+                       `product_option_id`, 'select', `sort_order`
+            FROM
+                       `" . DB_PREFIX . "product_option`;";
+
+                if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ){
+                     $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->tablecounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'option' ) );
+                                              
+     $sql = "
+             INSERT INTO
+                        `" . DB_PREFIX . "option_description`  (`option_id`, `language_id`, `name`)
+             SELECT
+                        `product_option_id`, `language_id`, `name`
+             FROM
+                        `" . DB_PREFIX . "product_option_description`;";
+
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ){
+                       $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->tablecounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'option_description' ) );
+                                              
+     $sql = "
+             INSERT INTO
+                        `" . DB_PREFIX . "option_value`   (`option_value_id`, `option_id`, `sort_order`)
+             SELECT
+                        `product_option_value_id`, `product_option_id`, `sort_order`
+             FROM
+                        `" . DB_PREFIX . "product_option_value`;";
+
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ){
+                       $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->tablecounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'option_value' ) );
+
+      $sql = "
+              INSERT INTO
+                         `" . DB_PREFIX . "option_value_description` (`option_value_id`, `language_id`, `option_id`, `name`)
+              SELECT
+                          `pov`.`product_option_value_id` ,  `language_id` ,  `pov`.`product_option_id` ,  `name`
+              FROM
+                          `" . DB_PREFIX . "product_option_value_description` AS `povd`
+              INNER JOIN
+                          `" . DB_PREFIX . "product_option_value` AS `pov`
+              ON
+                          `pov`.`product_option_value_id` =  `povd`.`product_option_value_id`";
+
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ){
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->tablecounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'option_value_description' ) );
+              }
+        return $text;
+     }
+  }
 	/** delete tables */
   public function deleteTables( $data ){
   
@@ -1308,6 +1396,24 @@ class ModelUpgradeTableColumns extends Model{
         }
      }
   }
+  private function hasOption( $val ) {
+                        
+	$sql = '
+	SELECT
+		*
+	FROM
+		`' . DB_PREFIX . 'option`
+	WHERE
+		`option_id` = \'' . $val . '\'';
+
+	$result = $this->db->query( $sql );
+
+	if( count( $result->row ) == 0 ) {
+		return false;
+	}
+
+	return true;
+}
 
   public function getTables() {
        $query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
