@@ -1166,7 +1166,6 @@ class ModelUpgradeTableColumns extends Model{
                 if( $this->showOps ){
                      $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
-		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'option' ) );
                                               
      $sql = "
@@ -1183,7 +1182,6 @@ class ModelUpgradeTableColumns extends Model{
                 if( $this->showOps ){
                        $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
-		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'option_description' ) );
                                               
      $sql = "
@@ -1200,7 +1198,6 @@ class ModelUpgradeTableColumns extends Model{
                 if( $this->showOps ){
                        $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
-		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'option_value' ) );
 
       $sql = "
@@ -1221,7 +1218,6 @@ class ModelUpgradeTableColumns extends Model{
                 if( $this->showOps ){
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
-		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'option_value_description' ) );
               }
         return $text;
