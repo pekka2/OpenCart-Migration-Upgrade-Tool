@@ -459,6 +459,7 @@ class ModelUpgradeTableColumns extends Model{
 	$text .= '<div class="header round"> ';
 	$text .= sprintf( $this->lang['msg_col_counter'], $altercounter, '' );
         $text .= ' </div>';
+        $text .= $this->changeOptions();
         $text .= $this->deleteColumns();
         $text .= $this->changeColumns();
 
