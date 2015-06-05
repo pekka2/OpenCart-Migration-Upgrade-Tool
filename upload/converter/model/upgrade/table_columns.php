@@ -1151,13 +1151,13 @@ class ModelUpgradeTableColumns extends Model{
               FROM
                      `" . DB_PREFIX . "product_option`;";
             if( !$this->simulate ) {
-	      $query = $this->db->query( $sql );
-                             $option = $query->row['option_id'];
+	         $query = $this->db->query( $sql );
+                  $option = $query->row['option_id'];
                 } else {
-                                       $option = 0;
+                        $option = 0;
               }
 
-      if( isset($option->row['option_id']) && !$this->hasOption($option)  || $this->simulate){
+      if( isset($query->row['option_id']) && !$this->hasOption($option)  || $this->simulate){
      $sql = "
             INSERT INTO
                        `" . DB_PREFIX . "option` (`option_id`, `type`, `sort_order`)
