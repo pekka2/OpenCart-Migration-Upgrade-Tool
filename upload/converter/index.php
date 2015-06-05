@@ -14,7 +14,7 @@
  * @todo move to mysqli
  */
 
-define('VERSION', '1.3.6');
+define('VERSION', '1.3.7');
 
 // Configuration
 if (is_file('config.php')) {
