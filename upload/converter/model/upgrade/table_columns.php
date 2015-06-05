@@ -1139,7 +1139,7 @@ class ModelUpgradeTableColumns extends Model{
         return $text;
 
   }
-  public changeOptions(){
+  public function changeOptions(){
            $text = '';               
       if( array_search( DB_PREFIX . 'store_description' , $this->getTables()) ) {
         /* Opencart version 1.4.x is Found */
@@ -1149,9 +1149,14 @@ class ModelUpgradeTableColumns extends Model{
                      MIN(product_option_id) AS option_id
               FROM
                      `" . DB_PREFIX . "product_option`;";
-	      $option = $this->db->query( $sql );
+            if( !$this->simulate ) {
+	      $query = $this->db->query( $sql );
+                             $option = $query->row['option_id'];
+                } else {
+                                       $option = 0;
+              }
 
-      if( isset($option->row['option_id']) && !$this->hasOption($option->row['option_id']) ){
+      if( isset($option->row['option_id']) && !$this->hasOption($option)  || $this->simulate){
      $sql = "
             INSERT INTO
                        `" . DB_PREFIX . "option` (`option_id`, `type`, `sort_order`)
