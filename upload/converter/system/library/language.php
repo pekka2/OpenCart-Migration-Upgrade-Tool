@@ -16,9 +16,16 @@ class Language {
                         $browser_languages = explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
                         if( isset($browser_languages[2]) ){
                                $language = explode(';',$browser_languages[2]);
-                        }else {
+                        } elseif( isset($browser_languages[1]) ) {
                                 $language = explode(';',$browser_languages[1]);
-                         }
+                         } else {
+                             $browser_languages2 = explode( ';', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+                              if( isset($browser_languages2[2]) ){
+                                      $language = explode(';',$browser_languages2[2]);
+                               } elseif( isset($browser_languages2[1]) ) {
+                                       $language = explode(';',$browser_languages2[1]);
+                               }
+                    }
                         $arr_language = explode('-',$language[0]);
                         if(isset($arr_language[1])){
                                 $arr_language[1] = strtoupper($arr_language[1]);
