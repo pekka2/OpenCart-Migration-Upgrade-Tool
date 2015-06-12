@@ -577,7 +577,7 @@ class ModelUpgradeTableColumns extends Model{
     $deletecol = 0;
     $text = '';
     foreach( $delcols as $k => $v ) {
-	   if( array_search( DB_PREFIX . $v['table'], $this->getTables() ) ) {
+	   if( array_search( DB_PREFIX . $v['table'], $this->getTables() )  ||   $v['table'] == 'address') {
 		if( array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) ) {
 
 			$sql = '
