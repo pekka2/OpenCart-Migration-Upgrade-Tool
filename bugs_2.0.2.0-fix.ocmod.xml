@@ -187,4 +187,9 @@
 			<add position="replace"><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "setting SET `value` = '" . $this->db->escape($value) . "', serialized = '0' WHERE `code` = '" . $this->db->escape($code) . "' AND `key` = '" . $this->db->escape($key) . "' AND store_id = '" . (int)$store_id . "']]></add>
 		</operation>
 	</file>
+	<file path="system/library/openbay.php">
+		<operation>
+			<search><![CDATA[$language->load('default');]]></search>
+			<add position="replace"><![CDATA[$language->load($order_info['language_directory']);]]></add>
+	</file>	
 </modification>
