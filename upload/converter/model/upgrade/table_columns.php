@@ -526,6 +526,10 @@ class ModelUpgradeTableColumns extends Model{
 		),
 		array(
                         'table'         => 'order',
+			'field'		=> 'payment_company_id'
+		),
+		array(
+                        'table'         => 'order',
 			'field'		=> 'payment_tax_id'
 		),
 		array(
