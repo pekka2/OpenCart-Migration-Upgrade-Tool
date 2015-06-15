@@ -513,6 +513,10 @@ class ModelUpgradeTableColumns extends Model{
 			'field'		=> 'remaining'
 		),
 		array(
+                        'table'         => 'language',
+			'field'		=> 'filename'
+		),
+		array(
                         'table'         => 'order',
 			'field'		=> 'coupon_id'
 		),
