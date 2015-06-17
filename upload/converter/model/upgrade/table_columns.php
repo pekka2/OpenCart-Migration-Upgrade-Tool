@@ -1273,8 +1273,6 @@ class ModelUpgradeTableColumns extends Model{
                      'order_field',
                      'order_misc',
                      'product_featured',
-                     'product_option_description',
-                     'product_option_value_description',
 		     'product_profile',
                      'product_tag',
                      'product_tags',
