@@ -2308,12 +2308,13 @@ class ModelUpgradeDatabase extends Model{
 	WHERE
 		`name` = \'' . $val . '\'';
 
-	$result = $this->db->query( $sql );
+       if( array_search('layout', $this->getTables() ) ){
+	 $result = $this->db->query( $sql );
 
-	if( count( $result->row ) == 0 ) {
+	 if( count( $result->row ) == 0 ) {
 		return false;
-	}
-
+	 }
+       }
 	return true;
    }
   public function msg( $data ){
