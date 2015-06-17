@@ -1248,7 +1248,7 @@ class ModelUpgradeTableColumns extends Model{
                    `top` = '1'
              WHERE parent_id = '0'";
 		if( !$this->simulate ) {
-                       $this->db->quety($sql);
+                       $this->db->query($sql);
                 }
                 if( $this->showOps ){
                 $text .= '<p><pre>' . $sql .'</pre></p>';
