@@ -1234,6 +1234,25 @@ class ModelUpgradeTableColumns extends Model{
                 }
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'option_value_description' ) );
               }
+             if( !$this->simulate ) {
+                    $this->db->query("UPDATE `" . DB_PREFIX . "product_option` SET `option_id` = `product_option_id`, `required` = 1");
+                    $this->db->query("UPDATE `" . DB_PREFIX . "product_option_value` SET `option_id` = `product_option_id`, `option_value_id` = `product_option_value_id`");
+  
+                    $this->db->query("UPDATE `" . DB_PREFIX . "language` SET `status` = '1'");
+                    }
+       
+     $sql = "
+             UPDATE
+                   `" . DB_PREFIX . "category`
+             SET
+                   `top` = '1'
+             WHERE parent_id = '0'";
+		if( !$this->simulate ) {
+                       $this->db->quety($sql);
+                }
+                if( $this->showOps ){
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                } 
         return $text;
      }
   }
