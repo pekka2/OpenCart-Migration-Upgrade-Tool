@@ -1,6 +1,6 @@
 /**
- * @version		$Id: readme.txt 2014-10-17 16:35Z mic $
- * @package		OpenCart Shopconverter 1.4.7-2.0.0.0 to 2.0.1.0
+ * @version		$Id: readme.txt 2015-06-01 16:35Z peku $
+ * @package		OpenCart Shopconverter 1.4.7-2.0.0.0 to 2.0.1.0 - 2.0.x
  * @author		Pekka Mansikka - http://pm-netti.com & mic - http://pixelnbit.com
  * @copyright	        2014 peku & mic
  * @license		MIT http://opensource.org/licenses/MIT
@@ -13,10 +13,9 @@ Lisenssi	MIT
 Tekijä		Pekka Mansikka - http://pm-netti.com & mic - http://pixelnbit.com
 Copyright	2014 Pekka Mansikka - http://pm-netti.com & mic - http://pixelnbit.com
 
-
 Kuvaus
 ======
-Tämä ohjelma muuntaa OpenCart versiot 1.4.7 - 2.0.0.0 versioon 2.0.1.x, sopii myös versioon 2.0.2.0
+Tämä ohjelma muuntaa OpenCart versiot 1.4.7 - 2.0.0.0 versioon 2.0.1 - 2.0.x.
 
 Ominaisuudet
 ------------
@@ -42,7 +41,8 @@ Ensimmäinen kirjautuminen:
  * =============================================================================== 
  * Versio 1.47-1.5.6.4:Kopioi tiedosto user.php hakemistosta your-store/system/libary hakemistoon your-store/converter/system/library
  * Versio 2.0.0.0: Kopioi tiedosto user.php hakemistosta upload/help-2.0/ hakemistoon your-store/converter/system/library
- 
+ * Jos ongelma jatkuu tämän jälkeenkin ja sinulla on käytössä VPS palvelin ja siinä ModSecurity™ ja Comamdo WAF, korjaa palvelimen  
+   säätöjä seuraavasti: ModSecurity™ Configuration -> Rules Engine SecRuleEngine -> (Select) Do not process the rules -> save
 Toiminnot:
 ---------
 1. Kun olet kirjautunut, aseta käyttöoikeudet Administrator ryhmälle
