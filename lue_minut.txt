@@ -139,6 +139,14 @@ Päivityksen toisto:
      tietokantaan. Taulut, jotka olet vaihtanut, päivitetään versioon 2.0.x.
    - Huomioitavaa: Muista ajaa myös vaihe 2 ja vaihe 3.
    - Poista huoltotila.
+
+403 Forbidden tai vastaavat virheilmoitukset
+--------------------------------------------
+Jos jostakin syystä et voi käyttää tätä laajennusta palvelimen rajoitusten vuoksi, voit toimia seuraavasti.
+Kopioi esim. version 2.0.3.1 uusien taulujen lisäys skriptit, ( CREATE TABLE ... ) tiedostosta install/opencart.sql ja lisää ne
+sinun kaupan tietokantaan esim. Adminin Varmuuskopiointi/Palauta sivulta.
+Muuta kuvatiedostojen polkua lataamalla tämän paketin mukana oleva tiedosto SQL/replace.sql samalla tavoin.
+Jos käytössäsi on versio 1.4.x, siirrä tuote valinnat lataamalla tiedosto SQL/options.sql.
   
 Tuki:
 -----
