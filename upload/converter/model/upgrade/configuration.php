@@ -3,7 +3,7 @@ class ModelUpgradeConfiguration extends Model{
     private $lang;
    public function editConfig( $data ){
        $this->lang = $this->lmodel->get('upgrade_configuration');
-       $simulate = ( !empty( $data['simulate'] ) ? true : false );
+       $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
        $dirAdmin = ( !empty( $data['dirAdmin'] ) ? true : 'admin' ) .'/';
        $dirImage =  ( !empty( $data['dirImage'] ) ? true : 'image' ) . '/';
        $dirOld = ( !empty( $data['dirOld'] ) ? true : false );
@@ -23,6 +23,7 @@ class ModelUpgradeConfiguration extends Model{
 		$http_server = 'define(\'HTTP_SERVER\', \'http://' . $server . '/\'); // OC 1.4+';
 		$https_server = 'define(\'HTTPS_SERVER\', \'https://' .$server . '/\'); // OC 1.4+';
 		$https_catalog = 'define(\'HTTPS_CATALOG\', \'https://' .$server . '/\'); // OC 1.4+';
+		$db_port = 'define(\'DB_PORT\', \'3306\'); // OC 2 +';
 
 		// frontend
 	    $content = file_get_contents( DIR_DOCUMENT_ROOT . 'config.php' );
@@ -54,8 +55,7 @@ class ModelUpgradeConfiguration extends Model{
 			$content = implode( '', $fp );
 
 			if( is_writable( DIR_DOCUMENT_ROOT . 'config.php' ) ) {
-				if( !$simulate ) {
-					$content = str_replace( '/system/database/', '/system/library/db/', $content );
+				if( !$this->simulate ) {
 					$fw = fopen( DIR_DOCUMENT_ROOT . 'config.php', 'wb' );
 					fwrite( $fw, $content );
 					fclose( $fw );
@@ -81,7 +81,7 @@ class ModelUpgradeConfiguration extends Model{
 		if( $dirOld ) {
 			if( strpos( $content, $dirOld ) !== false ) {
 		    	$content = str_replace( $dirOld, $root, $content );
-			if( !$simulate ) {
+			if( !$this->simulate ) {
 		    	   file_put_contents( DIR_DOCUMENT_ROOT . $file, $content );
                         }
 		    	 $text .= $this->msg( sprintf(  $this->lang['msg_config_replace'], 'config.php', '' ) );
@@ -95,15 +95,14 @@ class ModelUpgradeConfiguration extends Model{
 		   }
 			array_splice( $fp2, 21, 0, $modification . "\r\n" );
 			array_splice( $fp2, 22, 0, $upload . "\r\n" );
-		    if($this->upgrade2030 &&  !strpos( $content, 'DB_PORT' )) {
+		    if( $this->upgrade2030 &&  !strpos( $content, 'DB_PORT' )) {
 			  array_splice( $fp, 25, 0, $db_port . "\r\n" );
 		   }
 
 			$content = implode( '', $fp2 );
 
 			if( is_writable( DIR_DOCUMENT_ROOT. $file ) ) {
-				if( !$simulate ) {
-					$content = str_replace( '/system/database/', '/system/library/db/', $content );
+				if( !$this->simulate ) {
 					$fw = fopen( DIR_DOCUMENT_ROOT . $file, 'wb' );
 					fwrite( $fw, $content );
 					fclose( $fw );
