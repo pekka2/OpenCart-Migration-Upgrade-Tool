@@ -5,7 +5,6 @@ $_['heading_title']	= 'Verwaltung';
 // Text
 $_['text_heading']	= 'Verwaltung';
 $_['text_login']	= 'Anmeldung Verwaltung';
-$_['text_forgotten']= 'Passwort vergessen';
 
 // Entry
 $_['entry_username']= 'Benutzername';
