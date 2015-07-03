@@ -21,7 +21,6 @@ class Language {
                              $this->lang = $this->default;
                         }
                       return $this->lang;
-             
 	}
 
 	public function load($filename) {
@@ -38,11 +37,7 @@ class Language {
 			return $this->data;
 		}
 
-                if( preg_match( '/\//', $filename) ){
-                        $file = DIR_LANGUAGE . $language . '/' . $filename . '.php';
-                } else {
-                        $file = DIR_LANGUAGE . $this->default . '/' .  $filename . '.php';
-                }
+		$file = DIR_LANGUAGE . $this->default . '/' . $filename . '.php';
 
 		if (file_exists($file)) {
 			$_ = array();
