@@ -14,7 +14,7 @@
  * @todo move to mysqli
  */
 
-define('VERSION', '1.3.8');
+define('VERSION', '1.3.9');
 
 // Configuration
 if (is_file('config.php')) {
@@ -177,7 +177,7 @@ $config->set('config_language_id', $languages[$config->get('config_admin_languag
 
 // Language
 $language = new Language($languages[$config->get('config_admin_language')]['directory']);
-$language->load( $language->getlang );
+$language->load( $language->getLang() );
 $registry->set('language', $language);
 
 // Document
