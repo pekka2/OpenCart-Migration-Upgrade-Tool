@@ -5,7 +5,6 @@ $_['heading_title']  = 'Ylläpito';
 // Text
 $_['text_heading']   = 'Ylläpito';
 $_['text_login']     = 'Syötä kirjautumistiedot.';
-$_['text_forgotten'] = 'Unohdin salasanani';
 
 // Entry
 $_['entry_username'] = 'Käyttäjänimi:';
