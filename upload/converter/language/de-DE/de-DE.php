@@ -1,14 +1,23 @@
 <?php
-/**
- * @version		$Id: NAME.xxx 2014-10-17 9:18Z mic $
- * @package		_PROJECT_NAME
- * @author		mic - http://osworx.net
- * @copyright	2014 OSWorX - http://osworx.net
- * @license		AGPL - www.gnu.org/licenses/agpl-3.0.html
- */
+// Locale
+$_['code']                          = 'de-DE';
+$_['direction']                     = 'ltr';
 
-$_['code']			= 'de';
-$_['name']			= 'Deutsch (DE)';
-$_['direction']			= 'ltr';
-$_['button_save']		= 'Speichern';
-$_['text_home']                 = 'Home';
+// Text
+$_['text_home']                     = 'Home';
+
+// Button
+$_['button_database']               = 'To Upgrade Database';
+$_['button_permission']             = 'Administrative permission';
+$_['button_save']                   = 'Speichern';
+$_['button_upgrade']                = 'Initial Upgrade';
+
+// Btn
+$_['btn_skip']		= 'Überspringen';
+$_['btn_continue']	= 'Weiter';
+
+// Entry
+$_['entry_perms']		= 'Schreibrechte Server';
+// Help
+$_['help_perms']		= '(Schreibrechte des Ordners <b>system/logs</b>)';
+?>
