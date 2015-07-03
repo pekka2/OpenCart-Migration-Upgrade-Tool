@@ -1,7 +1,7 @@
 <?php
 class Language {
 	private $default = 'en-US';
-	public $getlang = '';
+	public $lang = '';
 	private $data = array();
 
 	public function __construct($directory) {
@@ -14,25 +14,19 @@ class Language {
 	}
 	public function getLang() {
                         $browser_languages = explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-                        if( isset($browser_languages[2]) ){
-                               $language = explode(';',$browser_languages[2]);
-                        } elseif( isset($browser_languages[1]) ) {
-                                $language = explode(';',$browser_languages[1]);
-                         } else {
-                                $language = $browser_languages[0];
-                         } 
-                        $arr_language = explode('-',$language[0]);
-                        if(isset($arr_language[1])){
-                                $arr_language[1] = strtoupper($arr_language[1]);
-                        $this->getlang = implode("-",$arr_language);
+                      
+                        if(is_dir(DIR_LANGUAGE . $browser_languages[0])){
+                             $this->lang = $browser_languages[0];
                         } else {
-                        	$this->getlang = $this->default;
+                             $this->lang = $this->default;
                         }
+                      return $this->lang;
              
 	}
 
 	public function load($filename) {
-		$file = DIR_LANGUAGE . $this->getlang . '/' . $filename . '.php';
+                $language = $this->getLang();
+		$file = DIR_LANGUAGE . $language . '/' . $filename . '.php';
 
 		if (file_exists($file)) {
 			$_ = array();
@@ -44,10 +38,10 @@ class Language {
 			return $this->data;
 		}
 
-                 if( preg_match( '/\//', $filename) ){
-                        $file = DIR_LANGUAGE . $this->default . '/' . $filename . '.php';
+                if( preg_match( '/\//', $filename) ){
+                        $file = DIR_LANGUAGE . $language . '/' . $filename . '.php';
                 } else {
-                        $file = DIR_LANGUAGE . $this->default . '/' .  $this->default . '.php';
+                        $file = DIR_LANGUAGE . $this->default . '/' .  $filename . '.php';
                 }
 
 		if (file_exists($file)) {
