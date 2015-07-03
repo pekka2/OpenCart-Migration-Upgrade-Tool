@@ -21,13 +21,10 @@ class ControllerCommonHome extends Controller {
 
 	        $this->data['start_status'] = $this->model_tool_database->hasSetting('simulation_status');
 
-
-		$this->data['button_language'] = $this->language->get('button_language');
 		$this->data['button_permission'] = $this->language->get('button_permission');
 		$this->data['button_upgrade'] = $this->language->get('button_upgrade');
 
                 $this->data['permission'] = $this->url->link('common/home/user', 'token=' . $this->session->data['token'], 'SSL');
-                $this->data['language'] = $this->url->link('setting/setting', 'token=' . $this->session->data['token'], 'SSL');
                 $this->data['upgrade_info'] = $this->url->link('upgrade/info', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['breadcrumbs'] = array();
 
