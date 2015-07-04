@@ -13,7 +13,7 @@ class Language {
 	}
 	public function getLang() {
                         $browser_language = $this->http_language();
-                        $languages = $$browser_language[0];
+                        $languages = $browser_language[0];
 
                         if( is_dir( DIR_LANGUAGE . $languages[0] ) ){
                              $this->lang = $languages[0];
