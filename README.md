@@ -1,6 +1,6 @@
 /**
  * @version		$Id: readme.txt 2014-10-17 16:35Z mic $
- * @package		OpenCart Shopconverter 1.4.7-2.0.0.0 to 2.0.1.x / 2.0.2.x
+ * @package		OpenCart Shopconverter 1.4.7-2.0.0.0 to 2.0.1.x - 2.0.3.x
  * @author		Pekka Mansikka - http://pm-netti.com & mic - http://pixelnbit.com
  * @copyright	        2014 peku & mic
  * @license		MIT http://opensource.org/licenses/MIT
