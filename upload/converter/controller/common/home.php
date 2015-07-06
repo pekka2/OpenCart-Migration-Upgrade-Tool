@@ -31,6 +31,7 @@ class ControllerCommonHome extends Controller {
 		$this->data['sub_title_13'] = $this->language->get('sub_title_13');
 		$this->data['sub_title_14'] = $this->language->get('sub_title_14');
 		$this->data['sub_title_15'] = $this->language->get('sub_title_15');
+		$this->data['text_description'] = $this->language->get('text_description');
 		$this->data['text_features_1'] = $this->language->get('text_features_1');
 		$this->data['text_features_2'] = $this->language->get('text_features_2');
 		$this->data['text_features_3'] = $this->language->get('text_features_3');
