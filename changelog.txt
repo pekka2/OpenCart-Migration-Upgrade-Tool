@@ -18,6 +18,12 @@ legend
 
 CONVERTER
 ---------
+1.4.0_rc 2015.07.06     ⁺ readme.php language packages
+                        + file converter/readme.php
+                        + file view/stylesheet/tutorial.css
+                        + file converter/dir.txt
+                        + print readme languages also to page converter/index.php?route=common/home
+                        + method http_language to library system/library/language
 1.3.9   2015.07.03      # configuration in simulate status
                         ^ Simplified language library
                         - admin language change
