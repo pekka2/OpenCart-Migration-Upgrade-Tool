@@ -3,14 +3,10 @@
 $_['heading_title']             = 'Copying Image Files and Upgrade Image paths';
 
 // Text
-$_['text_home']                     = 'Home';
 $_['text_error']		= 'Error';
 $_['text_finish']		= 'Finish';
 $_['text_finish_note']  	= '<b>Note</b>: do not forget to delete the folder <b>converter</b> afterwards!!';
 $_['text_finish_text']	        = 'Congratulation!<br />Your old shop is successfully updated to the latest version. Please use the buttons below to navigate further.';
-$_['text_off']			= 'OFF';
-$_['text_on']			= 'ON';
-$_['text_simulation']	        = 'Simulation is';
 $_['text_upgrade_images']       = 'Upgrade of Imagepaths';
 $_['text_upgrade_info']         = 'Upgrade Info';
 // msg
