@@ -2,7 +2,6 @@
 // Heading
 $_['heading_title']                 = 'Päivitys Info';
 // Text
-$_['text_home']                     = 'Koti';
 $_['text_database_info']            = 'Sinun tietokannan tiedot';
 $_['text_expired_tables']           = 'Vanhentuneita tai muita tauluja yhteensä:';
 $_['text_missing_tables']           = 'Puuttuvia tauluja yhteensä:';
