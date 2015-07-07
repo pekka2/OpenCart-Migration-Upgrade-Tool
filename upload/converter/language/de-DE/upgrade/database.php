@@ -2,13 +2,9 @@
 // Heading
 $_['heading_title']                 = 'Upgrade of Database';
 // Text
-$_['text_exa_store_path']       = '<br><span class="script-filename">Help: The path to the file to your server is: <em>%s</em>.</span>';
 $_['text_intro_1']		= 'Dieses Programm ist nur zum Update von OpenCart-Versionen 1.5.0 - 1.5.6.4 auf OpenCart 2.0';
 $_['text_intro_2']		= 'Der folgende Updateprozess besteht aus 3 Schritten:<ol><li>Datenbak überprüfen und fehlende Tabellen hinzufügen, Felder anpassen</li><li>Aktualisierung der Konfigurationsdateien (Shop &amp; Admin)</li><li>Anpassung der Bilderpfade</li></ol>';
 $_['text_intro_3']		= 'Der Aktualisierungsprozess kann simuliert werden.<br />Dazu unterstehende Option aktivieren, es werden dann keine wirklichen Operationen durchgeführt';
-$_['text_off']			= 'AUS';
-$_['text_on']			= 'AN';
-$_['text_simulation']	        = 'Simulation ist';
 $_['text_step_1_3']		= 'Schritt 1 / 3';
 $_['text_step_2_3']		= 'Schritt 2 / 3';
 $_['text_toggle_help']	        = 'Hilfe Anzeigen/Verbergen';
