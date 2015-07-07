@@ -5,6 +5,9 @@ $_['direction']                     = 'ltr';
 
 // Text
 $_['text_home']                     = 'Home';
+$_['text_off']			= 'OFF';
+$_['text_on']			= 'ON';
+$_['text_simulation']	        = 'Simulation is';
 
 // Button
 $_['button_database']               = 'To Upgrade The Database';
