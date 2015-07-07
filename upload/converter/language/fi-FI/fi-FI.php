@@ -5,6 +5,9 @@ $_['direction']                     = 'ltr';
 
 // Text
 $_['text_home']                     = 'Etusivu';
+$_['text_off']			= 'POIS PÄÄLTÄ';
+$_['text_on']			= 'PÄÄLLÄ';
+$_['text_simulation']	        = 'Testitila on';
 
 // Button
 $_['button_database']               = 'Päivitä tietokanta';
