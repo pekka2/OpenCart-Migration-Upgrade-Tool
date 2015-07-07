@@ -2,14 +2,10 @@
 // Heading
 $_['heading_title']             = 'Päivitä tietokanta';
 // Text
-$_['text_home']                     = 'Koti';
 $_['text_exa_store_path']       = '<br><span class="script-filename">Vihje: Tämän tiedoston polku sinun palvelimella on: <em>%s</em>.</span>';
 $_['text_intro_1']		= 'Tämä ohjelma on tarkoitettu ainostaan OpenCart versioiden 1.5.0 - 1.5.6.4 päivittämiseen versioon 2.0';
 $_['text_intro_2']		= 'Seuraava päivitys prosessi tehdään kolmessa vaiheessa:<ol><li>Tarkistetaan tietokannan taulut, lisätään puuttuvat taulut ja päivitetään muuttunut taulujen rakenne.</li><li>Muokkaa config.php tiedostot (etu- &amp; admin sivulla)</li><li>Muokkaa kuvatiedostojen polut</li></ol>';
 $_['text_intro_3']		= 'Tässä muuntajassa voit käyttää myös <b>simulointi</b> eli päivityksen esikatselutilaa.';
-$_['text_off']			= 'POIS PÄÄLTÄ';
-$_['text_on']			= 'PÄÄLLÄ';
-$_['text_simulation']	        = 'Testitila on ';
 $_['text_step_1_3']		= 'Vaihe 1 / 3';
 $_['text_step_2_3']		= 'Vaihe 2 / 3';
 $_['text_toggle_help']     	= 'Näytä/Piilota Ohje';
