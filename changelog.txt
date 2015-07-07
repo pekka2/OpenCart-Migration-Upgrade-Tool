@@ -18,7 +18,7 @@ legend
 
 CONVERTER
 ---------
-1.4.0_rc 2015.07.06     ⁺ readme.php language packages
+1.4.0_rc 2015.07.06     + readme.php language packages
                         + file converter/readme.php
                         + file view/stylesheet/tutorial.css
                         + file converter/dir.txt
