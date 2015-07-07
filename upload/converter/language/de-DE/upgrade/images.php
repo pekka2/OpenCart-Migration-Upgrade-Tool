@@ -7,9 +7,6 @@ $_['text_error']		= 'Fehler';
 $_['text_finish']		= 'Fertig';
 $_['text_finish_text']	        = 'Glückwunsch!<br />Der alte Shop wurde erfolgreich auf die neueste Version aktualisiert. Bitte untenstehende Buttons zum Fortfahren verwenden.';
 $_['text_finish_note']   	= '<b>Hinweis</b>: nicht vergessen den Ordner <b>converter</b> zu löschen!';
-$_['text_off']			= 'AUS';
-$_['text_on']			= 'AN';
-$_['text_simulation']	        = 'Simulation ist';
 $_['text_update_config']        = 'Falls noch nicht bereits erledigt, können jetzt die <b>Konfiguationsdateien</b> aktualisiert werden';
 // msg
 $_['msg_change_path']	        = 'Erfolgreich <b>%s</b> Bildpfad(e) angepasst';
