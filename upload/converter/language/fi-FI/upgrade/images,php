@@ -3,14 +3,10 @@
 $_['heading_title']             = 'Kuvatiedostojen polkujen muutos';
 
 // Text
-$_['text_home']                     = 'Koti';
 $_['text_error']		= 'Virhe';
 $_['text_finish']		= 'Lopetus';
 $_['text_finish_note']  	= '<b>Huomaa</b>: älä unohda poistaa hakemistoa <b>converter</b> jälkeenpäin!!';
 $_['text_finish_text']	        = 'Onnittelut!<br />Vanha kauppa on onnistuneesti päivitetty uusimpaan versioon. Voit käyttää alla olevia painikkeita navigoidaksesi edelleen.';
-$_['text_off']			= 'POIS PÄÄLTÄ';
-$_['text_on']			= 'PÄÄLLÄ';
-$_['text_simulation']	        = 'Testitila on ';
 $_['text_upgrade_images']       = 'Kuvapolkujen päivitys';
 $_['text_upgrade_info']         = 'Päivitys Informaatio';
 // msg
