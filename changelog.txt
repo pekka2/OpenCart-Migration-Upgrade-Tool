@@ -60,7 +60,7 @@ CONVERTER
                         + settings config_location_image width&height
 1.2.3   2015.01.20      + product name add to column meta_title
                         + category name add to column meta_title
-1.2.2   2014.15.06      ^ code field store_id check in table setting
+1.2.2   2014.12.06      ^ code field store_id check in table setting
                         + help files, library/user.php before and after field 'salt' in table user
                         # layout_id and layout_route_id
 1.2.1   2014.12.06      ^ up Opencart version 2.0.1.1
