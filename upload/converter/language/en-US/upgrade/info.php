@@ -2,7 +2,6 @@
 // Heading
 $_['heading_title']                 = 'Upgrade Info';
 // Text
-$_['text_home']                     = 'Home';
 $_['text_database_info']            = 'To your database information';
 $_['text_expired_tables']           = 'Expired or other tables in total:';
 $_['text_missing_tables']           = 'Missing tables in total:';
