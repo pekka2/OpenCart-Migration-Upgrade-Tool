@@ -8,10 +8,7 @@ $_['text_images_info']          = 'Päivitä kuvatiedostojen polut';
 $_['text_intro_3']		= 'Tässä muuntajassa voit käyttää myös <b>simulointi</b> eli päivityksen esikatselutilaa.
 ';
 $_['text_intro_step_3']	        = 'Tämä nimeää <b>image/data</b> hakemistot sekä vaihtaa kuvatiedostojen polut tietokannassa.';
-$_['text_off']			= 'POIS PÄÄLTÄ';
-$_['text_on']			= 'PÄÄLLÄ';
 $_['text_upgrade_info']         = 'Kofigurointi asetusten päivitys';
-$_['text_simulation']	        = 'Testitila on';
 $_['text_step_3_3']		= 'Vaihe 3 / 3';
 $_['text_update_config']        = 'Nyt voit myös päivittää  <b>config.php</b> tiedostoja, jos sitä ei ole vielä tehty';
 // Header
