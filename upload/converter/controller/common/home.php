@@ -60,6 +60,7 @@ class ControllerCommonHome extends Controller {
 		$this->data['text_step_1_10'] = $this->language->get('text_step_1_10');
 		$this->data['text_step_2_1'] = $this->language->get('text_step_2_1');
 		$this->data['text_step_2_2'] = $this->language->get('text_step_2_2');
+		$this->data['text_step_2_3'] = $this->language->get('text_step_2_3');
 		$this->data['text_step_3_1'] = $this->language->get('text_step_3_1');
 		$this->data['text_step_3_2'] = $this->language->get('text_step_3_2');
 		$this->data['text_plan_1_1'] = $this->language->get('text_plan_1_1');
