@@ -60,6 +60,7 @@
 		<div class="sub_title"><?php echo $sub_title_9;?></div>
 		<div class="text_description"><?php echo $text_step_2_1;?></div>
 		<div class="text_description"><?php echo $text_step_2_2;?></div>
+		<div class="text_description"><?php echo $text_step_2_3;?></div>
 		<div class="sub_title"><?php echo $sub_title_10;?></div>
 		<div class="text_description"><?php echo $text_step_3_1;?></div>
 		<div class="text_description"><?php echo $text_step_3_2;?></div>
