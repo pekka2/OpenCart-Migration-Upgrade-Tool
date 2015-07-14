@@ -253,7 +253,7 @@ class ModelUpgradeSettings extends Model{
                        UPDATE
                              `' . DB_PREFIX . 'layout_module`
                        SET
-                             `code`= \'' . $mod . '.' . $this->module . '\'
+                             `code`= \'' . $this->db->escape($mod . '.' . $this->module) . '\'
                 WHERE
                       `layout_module_id` = \''. $layouts[$mod][$i] . '\'';
 
@@ -272,9 +272,9 @@ class ModelUpgradeSettings extends Model{
 			`' . DB_PREFIX . 'module`
 		SET
                         `module_id` = \'' . $this->module . '\',
-			`name` = \'' . ucwords($mod) .  ' - '. $name . '\',
-			`code` = \'' . $mod . '\',
-			`setting` = \'' . serialize($module) . '\'';
+			`name` = \'' . $this->db->escape(ucwords($mod) .  ' - '. $name) . '\',
+			`code` = \'' . $this->db->escape($mod) . '\',
+			`setting` = \'' . $this->db->escape(serialize($module)) . '\'';
             ++$this->module;if( !$this->simulate ) {
                        $this->db->query( $sql );
                 }
@@ -296,7 +296,7 @@ class ModelUpgradeSettings extends Model{
 				`' . DB_PREFIX . 'layout_module`
 			SET
                                `layout_id` = \'' . $modul['layout_id'] . '\',
-                               `code`= \'' .  $mod . '.' . $this->module . '\',
+                               `code`= \'' .  $this->db->escape($mod . '.' . $this->module) . '\',
                                `position` = \'' . $modul['position'] . '\',
                                `sort_order` = \'' . $modul['sort_order'] . '\'';
             if( !$this->simulate ) {
@@ -318,9 +318,9 @@ class ModelUpgradeSettings extends Model{
 			`' . DB_PREFIX . 'module`
 		SET
                         `module_id` = \'' . $this->module . '\',
-			`name` = \'' . ucwords($mod) .  ' - '. $name . '\',
-			`code` = \'' . $mod . '\',
-			`setting` = \'' . serialize($module) . '\'';
+			`name` = \'' . $this->db->escape(ucwords($mod)) .  ' - '. $name . '\',
+			`code` = \'' . $this->db->escape($mod) . '\',
+			`setting` = \'' . $this->db->escape(serialize($module)) . '\'';
             ++$this->module;
 		if( !$this->simulate ) {
                        $this->db->query( $sql );
@@ -1602,14 +1602,14 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_image_location_height', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_file_extension_allowed' ) ) {
+	if( !$this->hasSetting( 'config_file_ext_allowed' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
 		SET
 			`store_id` = \'0\',
 			`code` = \'config\',
-			`key` = \'config_file_extension_allowed\',
+			`key` = \'config_file_ext_allowed\',
 			`value` = \'' . $this->db->escape( "txt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc\r\nrtf\r\nxls\r\nppt\r\nodt\r\nods" ) . '\',
 			`serialized` = \'0\'';
 
