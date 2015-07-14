@@ -1,5 +1,6 @@
 <?php
 $dir = 'language/';
+
 $languages = array();
 $open = opendir($dir);
  while(($file = readdir($open) ) != false) {  
@@ -12,24 +13,28 @@ $default = 'en-US';
 $lang = $default;
 if( !isset($_GET['lang']) ){
    $file = $languages[$default];
+   $fp = $default;
 }
 if( isset($_GET['lang']) ){
   if( file_exists($languages[$_GET['lang']] ) ){
-   $file = $languages[$_GET['lang']];
-    $lang = $_GET['lang'];
+    $file = $languages[$_GET['lang']];
+    $fp = $_GET['lang'];
   } else {
     $file = $languages[$default];
+    $fp = $default;
   }
 }
 
 require_once($file. 'readme.php');
+require_once($file. $fp . '.php');
 require_once($file. 'common/footer.php');
 extract($_);
-
+$ex = explode('-',$code);
+$lang = $ex[0];
 ?>
 
 <!DOCTYPE html>
-<html>
+<html dir="<?php echo $direction; ?>" lang="<?php echo $lang;?">
 <head>
 <meta charset="UTF-8" />
 <title>README</title>
@@ -127,6 +132,7 @@ extract($_);
 		<div class="text_description"><?php echo $text_repeat_4_1;?></div>
 		<div class="text_description"><?php echo $text_repeat_4_2;?></div>
 		<div class="text_description"><?php echo $text_repeat_4_3;?></div>
+		<div class="text_description"><?php echo $text_repeat_4_4;?></div>
 		<div class="text_description"><?php echo $text_repeat_4_5;?></div>
 		<div class="text_description"><?php echo $text_repeat_4_6;?></div>
 		<div class="text_description"><?php echo $text_repeat_4_7;?></div>
