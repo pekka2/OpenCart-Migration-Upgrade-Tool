@@ -10,7 +10,6 @@ $open = opendir($dir);
  }
    closedir($open);
 $default = 'en-US';
-$lang = $default;
 if( !isset($_GET['lang']) ){
    $file = $languages[$default];
    $fp = $default;
