@@ -1,19 +1,9 @@
 <?php
 class ModelUpgradeImages extends Model{
     private $lang;
-
 /**
  * adopting image paths
  */
-  public function getTables() {
-       $query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
-
-        $table_list = array();
-        foreach($query->rows as $table){
-                      $table_list[] = $table['Tables_in_'. DB_DATABASE];
-          }
-        return $table_list;
-  }
    public function imagePaths( $data ) {
        $this->lang = $this->lmodel->get('upgrade_images');
 
@@ -387,24 +377,6 @@ class ModelUpgradeImages extends Model{
 	$text .= sprintf( $this->lang['msg_renamed_total_dir'], $dir, '' );
         $text .= '</div>';
      return $text;
-   }
-
-   public function hasSetting( $val ) {
-	$sql = '
-	SELECT
-		*
-	FROM
-		`' . DB_PREFIX . 'setting`
-	WHERE
-		`key` = \'' . $val . '\'';
-
-	$result = $this->db->query( $sql );
-
-	if( count( $result->row ) == 0 ) {
-		return false;
-	}
-
-	return true;
    }
   public function msg( $data ){
        return str_replace( $data, '<div class="msg round">' . $data .'</div>', $data);
