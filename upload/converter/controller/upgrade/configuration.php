@@ -11,12 +11,12 @@ class ControllerUpgradeConfiguration extends Controller {
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('common/home'),
 			'separator' => false
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_configuration_files'),
-			'href'      => $this->url->link('upgrade/configuration', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('upgrade/configuration''),
 			'separator' => false
 		);
                  $simulate = 1;
@@ -47,8 +47,8 @@ class ControllerUpgradeConfiguration extends Controller {
 	$this->data['perm']	  = array( '755', '775', '777' );
 	$this->data['data']       = $images . '/data';
 
-                $this->data['database'] = $this->url->link('upgrade/database', 'token=' . $this->session->data['token'], 'SSL');
-                $this->data['imagepaths'] = $this->url->link('upgrade/images', 'token=' . $this->session->data['token'], 'SSL');
+                $this->data['database'] = $this->url->link('upgrade/database');
+                $this->data['imagepaths'] = $this->url->link('upgrade/images');
                 $this->data['text_step_3_3'] = $this->language->get('text_step_3_3');
                 $this->data['text_intro_step_3'] = $this->language->get('text_intro_step_3');
                 $this->data['entry_perms'] = $this->language->get('entry_perms');
