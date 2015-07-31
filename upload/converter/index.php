@@ -14,7 +14,7 @@
  * @todo move to mysqli
  */
 
-define('VERSION', '1.4.0_rc');
+define('VERSION', '2.0_rc');
 
 // Configuration
 if (is_file('config.php')) {
@@ -160,6 +160,10 @@ $registry->set('cache', $cache);
 $lcache = new LModel();
 $registry->set('lmodel', $lcache);
 
+// Database Structure
+$structure = new Structure($registry);
+$registry->set('structure', $structure);
+
 // Session
 $session = new Session();
 $registry->set('session', $session);
@@ -188,9 +192,6 @@ $registry->set('user', new User($registry));
 
 // Front Controller
 $controller = new Front($registry);
-
-// Login
-$controller->addPreAction(new Action('common/home/login'));
 
 // Permission
 $controller->addPreAction(new Action('common/home/permission'));
