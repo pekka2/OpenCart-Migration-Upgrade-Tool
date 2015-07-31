@@ -7,16 +7,15 @@ class ControllerCommonLogin extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {
-			$this->redirect($this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'));
+		if ($this->user->isLogged()) {
+			$this->redirect($this->url->link('common/home'));
 		}
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->session->data['token'] = md5(mt_rand());
 			if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], HTTP_SERVER) === 0 || strpos($this->request->post['redirect'], HTTPS_SERVER) === 0 )) {
-				$this->redirect($this->request->post['redirect'] . '&token=' . $this->session->data['token']);
+				$this->redirect($this->request->post['redirect']);
 			} else {
-				$this->redirect($this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'));
+				$this->redirect($this->url->link('common/home'));
 			}
 		}
 
@@ -29,10 +28,6 @@ class ControllerCommonLogin extends Controller {
 		$this->data['entry_password'] = $this->language->get('entry_password');
 
 		$this->data['button_login'] = $this->language->get('button_login');
-
-		if ((isset($this->session->data['token']) && !isset($this->request->get['token'])) || ((isset($this->request->get['token']) && (isset($this->session->data['token']) && ($this->request->get['token'] != $this->session->data['token']))))) {
-			$this->error['warning'] = $this->language->get('error_token');
-		}
 
 		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
