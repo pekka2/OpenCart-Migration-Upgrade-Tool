@@ -11,12 +11,12 @@ class ControllerUpgradeImages extends Controller{
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('common/home'),
 			'separator' => false
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_upgrade_info'),
-			'href'      => $this->url->link('upgrade/info', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('upgrade/info'),
 			'separator' => false
 		);
 	if( !empty( $this->request->post['skip'] ) ) {
