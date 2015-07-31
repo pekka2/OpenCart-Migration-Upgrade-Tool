@@ -14,12 +14,12 @@ class ControllerUpgradeDatabase extends Controller {
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('common/home'),
 			'separator' => false
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_upgrade_info'),
-			'href'      => $this->url->link('upgrade/info', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('upgrade/info'),
 			'separator' => false
 		);
 
@@ -33,7 +33,7 @@ class ControllerUpgradeDatabase extends Controller {
                  $this->data['upgrade_data'] = $this->model_upgrade_database->addTables( $this->request->post );
                  $this->data['change_taxrate'] = $this->model_upgrade_table_columns->changeTaxRate( $this->request->post );
                  $this->data['add_columns'] = $this->model_upgrade_table_columns->addColumns( $this->request->post );
-                 $modules = $this->model_upgrade_settings->hasModule();
+                 $modules = $this->structure->hasModule();
                  if( !$modules ) {
                         $this->data['add_settings'] = $this->model_upgrade_settings->getChangeModule( $this->request->post );
                  } else {
@@ -42,8 +42,8 @@ class ControllerUpgradeDatabase extends Controller {
                  $this->data['drop_tables'] = $this->model_upgrade_table_columns->deleteTables( $this->request->post );
                  $this->model_upgrade_info->addPermissions($this->post['simulate']);
                 }
-                $this->data['database'] = $this->url->link('upgrade/database', 'token=' . $this->session->data['token'], 'SSL');
-                $this->data['configuration'] = $this->url->link('upgrade/configuration', 'token=' . $this->session->data['token'], 'SSL');
+                $this->data['database'] = $this->url->link('upgrade/database');
+                $this->data['configuration'] = $this->url->link('upgrade/configuration');
                 $this->data['text_intro_1'] = $this->language->get('text_intro_1');
                 $this->data['text_intro_2'] = $this->language->get('text_intro_2');
                 $this->data['text_intro_3'] = $this->language->get('text_intro_3');
