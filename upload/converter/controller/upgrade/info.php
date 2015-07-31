@@ -9,12 +9,12 @@ class ControllerUpgradeInfo extends Controller {
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('common/home'),
 			'separator' => false
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_upgrade_info'),
-			'href'      => $this->url->link('upgrade/info', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('upgrade/info'),
 			'separator' => false
 		);
                 $same_tables = array();
@@ -28,8 +28,8 @@ class ControllerUpgradeInfo extends Controller {
                 $this->data['button_database'] = $this->language->get('button_database');
 
 		$this->data['button_permission'] = $this->language->get('button_permission');
-                $this->data['permission'] = $this->url->link('common/home/user', 'token=' . $this->session->data['token'], 'SSL');
-                $this->data['database'] = $this->url->link('upgrade/database', 'token=' . $this->session->data['token'], 'SSL');
+                $this->data['permission'] = $this->url->link('common/home/user');
+                $this->data['database'] = $this->url->link('upgrade/database');
 
                 $tables = $this->model_upgrade_info->listTables();            
                 $new_oc_verions = $this->model_upgrade_info->getVersion2Tables();
