@@ -10,19 +10,19 @@ class ControllerErrorPermission extends Controller {
 		$this->data['text_permission'] = $this->language->get('text_permission');
 
 		$this->data['button_permission'] = $this->language->get('button_permission');
-                $this->data['permission'] = $this->url->link('common/home/user', 'token=' . $this->session->data['token'], 'SSL');
+                $this->data['permission'] = $this->url->link('common/home/user');
 
 		$this->data['breadcrumbs'] = array();
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('common/home'),
 			'separator' => false
 		);
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('error/permission', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('error/permission'),
 			'separator' => ' :: '
 		);
 
