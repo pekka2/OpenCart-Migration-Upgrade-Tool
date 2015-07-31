@@ -123,13 +123,13 @@ class ControllerCommonHome extends Controller {
 		$this->data['button_permission'] = $this->language->get('button_permission');
 		$this->data['button_upgrade'] = $this->language->get('button_upgrade');
 
-                $this->data['permission'] = $this->url->link('common/home/user', 'token=' . $this->session->data['token'], 'SSL');
-                $this->data['upgrade_info'] = $this->url->link('upgrade/info', 'token=' . $this->session->data['token'], 'SSL');
+                $this->data['permission'] = $this->url->link('common/home/user');
+                $this->data['upgrade_info'] = $this->url->link('upgrade/info');
 		$this->data['breadcrumbs'] = array();
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('common/home'),
 			'separator' => false
 		);
 
@@ -143,62 +143,6 @@ class ControllerCommonHome extends Controller {
 
 		$this->response->setOutput($this->render());
 	}
-	public function login() {
-		$route = '';
-
-		if (isset($this->request->get['route'])) {
-            
-			$part = explode('/', $this->request->get['route']);
-
-			if (isset($part[0])) {
-				$route .= $part[0];
-			}
-
-			if (isset($part[1])) {
-				$route .= '/' . $part[1];
-			}
-		}
-
-		$ignore = array(
-			'common/login',
-			'common/forgotten',
-			'common/reset'
-		);	
- 
-		if (!$this->user->isLogged() && !in_array($route, $ignore)) {
-  
-			return $this->forward('common/login');
-		}
-
-		if (isset($this->request->get['route'])) {
-    
-			$ignore = array(
-				'common/login',
-				'common/logout',
-				'common/forgotten',
-				'common/reset',
-                                'common/home/user',
-				'error/not_found',
-				'error/permission'
-			);
-
-			$config_ignore = array();
-
-			if ($this->config->get('config_token_ignore')) {
-				$config_ignore = unserialize($this->config->get('config_token_ignore'));
-			}
-
-			$ignore = array_merge($ignore, $config_ignore);
-
-			if (!in_array($route, $ignore) && (!isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token']))) {
-				return $this->forward('common/login');
-			}
-		} else {
-			if (!isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token'])) {
-				return $this->forward('common/login');
-			}
-		}
-	}
 
 	public function permission() {
 		if (isset($this->request->get['route'])) {
@@ -207,7 +151,7 @@ class ControllerCommonHome extends Controller {
 		$part = explode('/', $this->request->get['route']);
 
 		$this->data['button_permission'] = $this->language->get('button_permission');
-                $this->data['permission'] = $this->url->link('common/home/user', 'token=' . $this->session->data['token'], 'SSL');
+                $this->data['permission'] = $this->url->link('common/home/user');
 			if (isset($part[0])) {
 				$route .= $part[0];
 			}
@@ -222,6 +166,10 @@ class ControllerCommonHome extends Controller {
 				'common/logout',
 				'common/forgotten',
 				'common/reset',
+				'upgrade/info',
+				'upgrade/database',
+				'upgrade/images',
+				'upgrade/configuration',
 				'error/not_found',
 				'error/permission'		
 			);			
@@ -238,12 +186,12 @@ class ControllerCommonHome extends Controller {
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('common/home'),
 			'separator' => false
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_permissions'),
-			'href'      => $this->url->link('common/home/user', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('common/home/user'),
 			'separator' => false
 		);
 
@@ -251,8 +199,8 @@ class ControllerCommonHome extends Controller {
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['text_new_permissions'] = $this->language->get('text_new_permissions');
 		$this->data['button_upgrade'] = $this->language->get('button_upgrade');
-                $this->data['action'] = $this->url->link('common/home/user', 'token=' . $this->session->data['token'], 'SSL');
-                $this->data['upgrade_info'] = $this->url->link('upgrade/info', 'token=' . $this->session->data['token'], 'SSL');
+                $this->data['action'] = $this->url->link('common/home/user');
+                $this->data['upgrade_info'] = $this->url->link('upgrade/info');
 
                 $user_group_info = $this->model_user_user_group->getUserGroups();
                 $this->data['user_group_info'] = $user_group_info;
