@@ -4,16 +4,6 @@ class ModelUpgradeDatabase extends Model{
   private $simulate;
   private $showOps;
   private $tablecounter;
-  public function getTables() {
-       $query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
-
-        $table_list = array();
-        foreach($query->rows as $table){
-                      $table_list[] = $table['Tables_in_'. DB_DATABASE];
-          }
-        return $table_list;
-  }
-
   public function addTables( $data ) {  
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
@@ -25,33 +15,33 @@ class ModelUpgradeDatabase extends Model{
         $this->tablecounter = 0;
         $text = '';
 	
-	if( !array_search( DB_PREFIX . 'affiliate', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'affiliate', $this->structure->tables() ) ) {
            $text .= $this->addUpgradeTo150();
         }
-	if( !array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->structure->tables() ) ) {
            $text .= $this->addUpgradeTo1513();
         }
 	if( !array_search( DB_PREFIX . 'order_fraud', $this->getTables() ) ) {
            $text .= $this->addUpgradeTo152();
         }
-	if( !array_search( DB_PREFIX . 'customer_group_description', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'customer_group_description', $this->structure->tables() ) ) {
            $text .= $this->addUpgradeTo153();
         }
-	if( array_search( DB_PREFIX . 'customer_online', $this->getTables() ) &&
+	if( array_search( DB_PREFIX . 'customer_online', $this->structure->tables() ) &&
             array_search( DB_PREFIX . 'customer_ip_blacklist', $this->getTables() )) {
           // $text .= $this->fixEngineOfTableCustomerOnline();
         }
-	if( !array_search( DB_PREFIX . 'customer_online', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'customer_online', $this->structure->tables() ) ) {
            $text .= $this->addUpgradeTo154();
         }
 
-	if( !array_search( DB_PREFIX . 'category_path', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'category_path', $this->structure->tables() ) ) {
            $text .= $this->addUpgradeTo155();
         }
-	if( !array_search( DB_PREFIX . 'order_recurring', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'order_recurring', $this->structure->tables() ) ) {
            $text .= $this->addUpgradeTo156();
         }
-	if( !array_search( DB_PREFIX . 'module', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'module', $this->structure->tables() ) ) {
            $text .= $this->addUpgradeTo2001();
         }
 	$text .= '<div class="header round"> ';
@@ -64,7 +54,7 @@ class ModelUpgradeDatabase extends Model{
 
         $text = '';
 
-	if( !array_search( DB_PREFIX . 'affiliate' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'affiliate' , $this->structure->tables()) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'affiliate` (
                 `affiliate_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -114,7 +104,7 @@ class ModelUpgradeDatabase extends Model{
 
 
 
-	if( !array_search( DB_PREFIX . 'affiliate_transaction' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'affiliate_transaction' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'affiliate_transaction` (
                 `affiliate_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -136,7 +126,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'affiliate_transaction' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'attribute' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'attribute' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'attribute` (
                 `attribute_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -179,7 +169,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'attribute' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'attribute_description' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'attribute_description' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'attribute_description` (
                 `attribute_id` int(11) NOT NULL,
@@ -221,7 +211,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'attribute_description' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'attribute_group' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'attribute_group' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'attribute_group` (
                 `attribute_group_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -257,7 +247,7 @@ class ModelUpgradeDatabase extends Model{
 	}
 
 
-	if( !array_search( DB_PREFIX . 'attribute_group_description' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'attribute_group_description' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'attribute_group_description` (
                 `attribute_group_id` int(11) NOT NULL,
@@ -293,7 +283,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'attribute_group_description' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'banner' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'banner' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'banner` (
                 `banner_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -312,7 +302,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'banner' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'banner_image' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'banner_image' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'banner_image` (
                 `banner_image_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -333,7 +323,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'banner_image' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'banner_image_description' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'banner_image_description' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'banner_image_description` (
                 `banner_image_id` int(11) NOT NULL,
@@ -354,7 +344,7 @@ class ModelUpgradeDatabase extends Model{
 	}
 
 
-	if( !array_search( DB_PREFIX . 'category_to_layout' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'category_to_layout' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'category_to_layout` (
                 `category_id` int(11) NOT NULL,
@@ -374,7 +364,7 @@ class ModelUpgradeDatabase extends Model{
 	}
 
 
-	if( !array_search( DB_PREFIX . 'coupon_history' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'coupon_history' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'coupon_history` (
                 `coupon_history_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -396,7 +386,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'coupon_history' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'customer_ip' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'customer_ip' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'customer_ip` (
                 `customer_ip_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -417,7 +407,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'customer_ip' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'customer_reward' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'customer_reward' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'customer_reward` (
                 `customer_reward_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -439,7 +429,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'customer_reward' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'customer_transaction' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'customer_transaction' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'customer_transaction` (
                 `customer_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -461,7 +451,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'customer_transaction' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'information_to_layout' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'information_to_layout' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'information_to_layout` (
                 `information_id` int(11) NOT NULL,
@@ -480,7 +470,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'information_to_layout' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'layout' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'layout' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'layout` (
                 `layout_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -521,7 +511,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'layout' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'layout_route' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'layout_route' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'layout_route` (
                 `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -566,7 +556,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'layout_route' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'option' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'option' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'option` (
                 `option_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -652,7 +642,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'option_description' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'option_value' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'option_value' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'option_value` (
                 `option_value_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -699,7 +689,7 @@ class ModelUpgradeDatabase extends Model{
 	}
 
 
-	if( !array_search( DB_PREFIX . 'option_value_description' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'option_value_description' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'option_value_description` (
                 `option_value_id` int(11) NOT NULL,
@@ -746,7 +736,7 @@ class ModelUpgradeDatabase extends Model{
 	}
 
 
-	if( !array_search( DB_PREFIX . 'product_attribute' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'product_attribute' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'product_attribute` (
                 `product_id` int(11) NOT NULL,
@@ -768,7 +758,7 @@ class ModelUpgradeDatabase extends Model{
 	}
 
 
-	if( !array_search( DB_PREFIX . 'product_reward' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'product_reward' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'product_reward` (
                 `product_reward_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -790,7 +780,7 @@ class ModelUpgradeDatabase extends Model{
 	}
 
 
-	if( !array_search( DB_PREFIX . 'product_to_layout' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'product_to_layout' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'product_to_layout` (
                 `product_id` int(11) NOT NULL,
@@ -810,7 +800,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'product_to_layout' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'return' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'return' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'return` (
                 `return_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -846,7 +836,7 @@ class ModelUpgradeDatabase extends Model{
 	}
 
 
-	if( !array_search( DB_PREFIX . 'return_action' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'return_action' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'return_action` (
                `return_action_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -880,7 +870,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'return_action' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'return_history' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'return_history' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'return_history` (
                 `return_history_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -904,7 +894,7 @@ class ModelUpgradeDatabase extends Model{
 	}
 
 
-	if( !array_search( DB_PREFIX . 'return_reason' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'return_reason' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'return_reason` (
                 `return_reason_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -923,7 +913,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'return_reason' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'return_status' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'return_status' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'return_status` (
                 `return_status_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -959,7 +949,7 @@ class ModelUpgradeDatabase extends Model{
 	}
 
 
-	if( !array_search( DB_PREFIX . 'voucher' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'voucher' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'voucher` (
                 `voucher_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -987,7 +977,7 @@ class ModelUpgradeDatabase extends Model{
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'voucher' ) );
 	}
-	if( !array_search( DB_PREFIX . 'voucher_history' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'voucher_history' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'voucher_history` (
                 `voucher_history_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1008,7 +998,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'voucher_history' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'voucher_theme' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'voucher_theme' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'voucher_theme` (
                 `voucher_theme_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1026,7 +1016,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'voucher_theme' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'voucher_theme_description' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'voucher_theme_description' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'voucher_theme_description` (
                 `voucher_theme_id` int(11) NOT NULL,
@@ -1068,7 +1058,7 @@ class ModelUpgradeDatabase extends Model{
   public function addUpgradeTo1513() {  
         $text = '';
 
-	if( !array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'tax_rate_to_customer_group` (
 		`tax_rate_id` int(11) NOT NULL,
@@ -1086,7 +1076,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'tax_rate_to_customer_group' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'tax_rule', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'tax_rule', $this->structure->tables() ) ) {
 		$sql =
 		'CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'tax_rule` (
         `tax_rule_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1114,7 +1104,7 @@ class ModelUpgradeDatabase extends Model{
 
         $text = '';
         if( !$this->upgrade2030 ){
-	if( !array_search( DB_PREFIX . 'order_fraud', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'order_fraud', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'order_fraud` (
 		`order_id` int(11) NOT NULL,
@@ -1184,7 +1174,7 @@ class ModelUpgradeDatabase extends Model{
 	}
             }
 
-	if( !array_search( DB_PREFIX . 'order_voucher', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'order_voucher', $this->structure->tables() ) ) {
 
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'order_voucher` (
@@ -1219,7 +1209,7 @@ class ModelUpgradeDatabase extends Model{
 
   public function addUpgradeTo153() {
         $text = '';
-  	if( !array_search( DB_PREFIX . 'customer_group_description', $this->getTables() ) ) {
+  	if( !array_search( DB_PREFIX . 'customer_group_description', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'customer_group_description` (
 		`customer_group_id` int(11) NOT NULL,
@@ -1270,7 +1260,7 @@ class ModelUpgradeDatabase extends Model{
   }
   public function addUpgradeTo154() {
         $text = '';
-	if( !array_search( DB_PREFIX . 'customer_online', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'customer_online', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'customer_online` (
 		`ip` varchar(40) NOT NULL,
@@ -1296,7 +1286,7 @@ class ModelUpgradeDatabase extends Model{
   public function addUpgradeTo155() {
         $text = '';
 
-	if( !array_search( DB_PREFIX . 'category_filter', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'category_filter', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'category_filter` (
 		`category_id` int(11) NOT NULL,
@@ -1314,7 +1304,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'category_filter' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'category_path', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'category_path', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'category_path` (
 		  `category_id` int(11) NOT NULL,
@@ -1519,7 +1509,7 @@ class ModelUpgradeDatabase extends Model{
 		}
 	}
 
-      if( !array_search( DB_PREFIX . 'coupon_category', $this->getTables() ) ) {
+      if( !array_search( DB_PREFIX . 'coupon_category', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'coupon_category` (
 		`coupon_id` int(11) NOT NULL,
@@ -1537,7 +1527,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'coupon_category' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'customer_ban_ip', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'customer_ban_ip', $this->structure->tables() ) ) {
 		$sql = '
                  CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'customer_ban_ip` (
                   `customer_ban_ip_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1556,7 +1546,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'customer_ban_ip' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'customer_history', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'customer_history', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'customer_history` (
 		`customer_history_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1575,7 +1565,7 @@ class ModelUpgradeDatabase extends Model{
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'customer_history' ) );
 	}
-       if( !array_search( DB_PREFIX . 'custom_field', $this->getTables() ) ) {
+       if( !array_search( DB_PREFIX . 'custom_field', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'custom_field` (
                 `custom_field_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1598,7 +1588,7 @@ class ModelUpgradeDatabase extends Model{
 	}
 
 	
-	if( !array_search( DB_PREFIX . 'custom_field_customer_group', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'custom_field_customer_group', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'custom_field_customer_group` (
 		`custom_field_id` int(11) NOT NULL,
@@ -1615,7 +1605,7 @@ class ModelUpgradeDatabase extends Model{
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'custom_field_customer_group' ) );
 	}
-	if( !array_search( DB_PREFIX . 'custom_field_description', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'custom_field_description', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'custom_field_description` (
 		`custom_field_id` int(11) NOT NULL,
@@ -1634,7 +1624,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'custom_field_description' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'custom_field_value', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'custom_field_value', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'custom_field_value` (
 		`custom_field_value_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1653,7 +1643,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'custom_field_value' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'custom_field_value_description', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'custom_field_value_description', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'custom_field_value_description` (
 		`custom_field_value_id` int(11) NOT NULL,
@@ -1692,7 +1682,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'filter' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'filter_description', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'filter_description', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'filter_description` (
 		`filter_id` int(11) NOT NULL,
@@ -1712,7 +1702,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'filter_description' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'filter_group', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'filter_group', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'filter_group` (
 		`filter_group_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1730,7 +1720,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'filter_group' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'filter_group_description', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'filter_group_description', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'filter_group_description` (
 		`filter_group_id` int(11) NOT NULL,
@@ -1749,7 +1739,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'filter_group_description' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'product_filter', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'product_filter', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'product_filter` (
 		`product_id` int(11) NOT NULL,
@@ -1771,7 +1761,7 @@ class ModelUpgradeDatabase extends Model{
   }
   public function addUpgradeTo156() {
         $text = '';
-	if( !array_search( DB_PREFIX . 'order_recurring', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'order_recurring', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'order_recurring` (
                 `order_recurring_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1806,7 +1796,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'order_recurring' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'order_recurring_transaction', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'order_recurring_transaction', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'order_recurring_transaction` (
                 `order_recurring_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1828,7 +1818,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'order_recurring_transaction' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'product_recurring', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'product_recurring', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'product_recurring` (
 		`product_id` int(11) NOT NULL,
@@ -1851,7 +1841,7 @@ class ModelUpgradeDatabase extends Model{
   }
   public function addUpgradeTo2001() {
         $text = '';
-	if( !array_search( DB_PREFIX . 'affiliate_activity', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'affiliate_activity', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'affiliate_activity` (
 		`activity_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1872,7 +1862,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'affiliate_activity' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'affiliate_login', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'affiliate_login', $this->structure->tables() ) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'affiliate_login` (
                  `affiliate_login_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1895,7 +1885,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'affiliate_login' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'api', $this->getTables() ) ){
+	if( !array_search( DB_PREFIX . 'api', $this->structure->tables() ) ){
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'api` (
 		  `api_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1933,7 +1923,7 @@ class ModelUpgradeDatabase extends Model{
 		  $text .= $this->msg( sprintf( $this->lang['msg_text'],   'api', $this->lang['msg_new_data'] ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'customer_activity', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'customer_activity', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'customer_activity` (
 		`activity_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1955,7 +1945,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'customer_activity' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'customer_login', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'customer_login', $this->structure->tables() ) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'customer_login` (
                  `customer_login_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1979,7 +1969,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'customer_login' ) );
 	}
 
-        if( array_search( DB_PREFIX . 'custom_field_to_customer_group', $this->getTables() ) ) {
+        if( array_search( DB_PREFIX . 'custom_field_to_customer_group', $this->structure->tables() ) ) {
                $sql = '
                 RENAME TABLE
                       `' . DB_PREFIX . 'custom_field_to_customer_group`
@@ -1996,7 +1986,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'custom_field_customer_group' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'event', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'event', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'event` (
 		`event_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2015,7 +2005,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'event' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'layout_module', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'layout_module', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'layout_module` (
 		`layout_module_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2036,7 +2026,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],  'layout_module' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'location', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'location', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'location` (
 		`location_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2082,7 +2072,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'marketing' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'modification', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'modification', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'modification` (
                  `modification_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2107,7 +2097,7 @@ class ModelUpgradeDatabase extends Model{
 	}
 
 
-	if( !array_search( DB_PREFIX . 'module', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'module', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'module` (
                  `module_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2126,7 +2116,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'module' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'order_custom_field', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'order_custom_field', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'order_custom_field` (
 		`order_custom_field_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2149,7 +2139,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'order_custom_field' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'recurring', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'recurring', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'recurring` (
 		`recurring_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2176,7 +2166,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'recurring' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'recurring_description', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'recurring_description', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'recurring_description` (
 		`recurring_id` int(11) NOT NULL,
@@ -2194,7 +2184,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'recurring_description' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'upload', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'upload', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'upload` (
 		`upload_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2214,7 +2204,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'upload' ) );
 	}
 	
-        if( !$this->hasLayout( 'Compare' )  && array_search( DB_PREFIX . 'layout', $this->getTables()) ){
+        if( !$this->hasLayout( 'Compare' )  && array_search( DB_PREFIX . 'layout', $this->structure->tables()) ){
             $sql = 'SELECT MAX(layout_id) as maxim
                      FROM `' . DB_PREFIX . 'layout`'; 
 
@@ -2299,24 +2289,6 @@ class ModelUpgradeDatabase extends Model{
 
      return $text;
   }
-   public function hasLayout( $val ) {
-	$sql = '
-	SELECT
-		*
-	FROM
-		`' . DB_PREFIX . 'layout`
-	WHERE
-		`name` = \'' . $val . '\'';
-
-       if( array_search('layout', $this->getTables() ) ){
-	 $result = $this->db->query( $sql );
-
-	 if( count( $result->row ) == 0 ) {
-		return false;
-	 }
-       }
-	return true;
-   }
   public function msg( $data ){
        return str_replace( $data, '<div class="msg round">' . $data .'</div>', $data);
   }
