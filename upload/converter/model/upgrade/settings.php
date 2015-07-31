@@ -48,7 +48,7 @@ class ModelUpgradeSettings extends Model{
   private function getFeaturedProducts($limit = '4') {
 	$info = array();
 
-      if( array_search( DB_PREFIX . 'product_featured', $this->getTables() ) ){
+      if( array_search( DB_PREFIX . 'product_featured', $this->structure->tables() ) ){
 
         $i= 0;
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_featured");
@@ -175,7 +175,7 @@ class ModelUpgradeSettings extends Model{
                        WHERE
                                   `code` LIKE \'' . $mod .'%\' ORDER BY `code` DESC';
   
-    if( array_search( DB_PREFIX . 'layout_module' , $this->getTables()) ) {                                
+    if( array_search( DB_PREFIX . 'layout_module' , $this->structure->tables()) ) {                                
     $query = $this->db->query( $sql );
         if( count($query->rows) >  $count){
                             $array = $modules;
@@ -186,7 +186,7 @@ class ModelUpgradeSettings extends Model{
           $count = count( $modules );
           foreach( $modules as $modul ){
        
-    if( array_search( DB_PREFIX . 'layout' , $this->getTables()) ) {
+    if( array_search( DB_PREFIX . 'layout' , $this->structure->tables()) ) {
          $sql = '
 		SELECT * FROM
 			     `' . DB_PREFIX . 'layout`
@@ -231,14 +231,14 @@ class ModelUpgradeSettings extends Model{
              $module['limit']  = $this->config->get( $mod . '_0_limit' );
          }
      
-  if( $this->hasLayout( $mod ) ){
+  if( $this->structure->hasLayout( $mod ) ){
  
         /*
          * version 2.0.0.0
          */
          $sql = '
                        SELECT * FROM
-                                                  `' . DB_PREFIX . 'layout_module`
+                                   `' . DB_PREFIX . 'layout_module`
                        WHERE
                                   `code` LIKE \'' . $mod .'%\' ORDER BY `layout_module_id` ASC';
                                   
@@ -275,7 +275,8 @@ class ModelUpgradeSettings extends Model{
 			`name` = \'' . $this->db->escape(ucwords($mod) .  ' - '. $name) . '\',
 			`code` = \'' . $this->db->escape($mod) . '\',
 			`setting` = \'' . $this->db->escape(serialize($module)) . '\'';
-            ++$this->module;if( !$this->simulate ) {
+            ++$this->module;
+                if( !$this->simulate ) {
                        $this->db->query( $sql );
                 }
                 if( $this->showOps ) {
@@ -289,7 +290,7 @@ class ModelUpgradeSettings extends Model{
         if($this->config->get( $mod . '_status' ) ){
                                $modul['status'] =$this->config->get( $mod . '_status' );
           }
-         if( !$this->hasLayout( $mod )  ) {
+         if( !$this->structure->hasLayout( $mod )  ) {
   
                $sql = '
 			INSERT INTO
@@ -468,7 +469,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_status', DB_PREFIX . 'setting' ) );
           } 
 
-	if( $this->hasSetting( $mod . '_sort_order' ) &&  $this->config->get( $mod . '_position' )) {
+	if( $this->structure->hasSetting( $mod . '_sort_order' ) &&  $this->config->get( $mod . '_position' )) {
            /* versions 1.4.7 - 1.4.9.5 */
              $status = $this->config->get( $mod .'_status');
              $position = $this->config->get( $mod .'_position');
@@ -531,7 +532,7 @@ class ModelUpgradeSettings extends Model{
 
     foreach( $module as $k => $v ) {
 
-	if( !$this->hasLayout( $v['module'] ) ) {
+	if( !$this->structure->hasLayout( $v['module'] ) ) {
                  $sql = '
 			INSERT INTO
 				   `' . DB_PREFIX . 'layout_module`
@@ -573,7 +574,7 @@ class ModelUpgradeSettings extends Model{
           );
     foreach( $setting as $k => $v ) {
 
-	if( !$this->hasSetting( $v['key'] ) ) {
+	if( !$this->structure->hasSetting( $v['key'] ) ) {
          $sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -602,7 +603,7 @@ class ModelUpgradeSettings extends Model{
           );
     foreach( $exten as $k => $v ) {
 
-	if( !$this->hasExtension( $v['mod'] ) ) {
+	if( !$this->structure->hasExtension( $v['mod'] ) ) {
          $sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'extension`
@@ -625,7 +626,7 @@ class ModelUpgradeSettings extends Model{
 
    private function getConfigMail(){
      $text = '';
-    if( $this->config->get('config_mail_protocol') && !$this->hasSetting('config_mail') ){
+    if( $this->config->get('config_mail_protocol') && !$this->structure->hasSetting('config_mail') ){
       $config_mail = array();
 
        $configs = $this->config->get('config_mail_protocol');
@@ -670,7 +671,7 @@ class ModelUpgradeSettings extends Model{
    private function newSettings(){
   
         $text ='';
-	if( !$this->hasSetting( 'config_ftp_status' ) ) {
+	if( !$this->structure->hasSetting( 'config_ftp_status' ) ) {
 
 		$sql = '
 		INSERT INTO
@@ -692,7 +693,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_customer_ftp_status', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_ftp_root' ) ) {
+	if( !$this->structure->hasSetting( 'config_ftp_root' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -712,7 +713,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_ftp_root', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_ftp_password' ) ) {
+	if( !$this->structure->hasSetting( 'config_ftp_password' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -735,7 +736,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_ftp_password', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_ftp_username' ) ) {
+	if( !$this->structure->hasSetting( 'config_ftp_username' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -755,7 +756,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_ftp_username', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_ftp_port' ) ) {
+	if( !$this->structure->hasSetting( 'config_ftp_port' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -776,7 +777,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_ftp_port', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_ftp_hostname' ) ) {
+	if( !$this->structure->hasSetting( 'config_ftp_hostname' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -797,7 +798,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_ftp_hostname', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_fraud_status_id' ) ) {
+	if( !$this->structure->hasSetting( 'config_fraud_status_id' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -818,7 +819,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_fraud_status_id', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_fraud_score' ) ) {
+	if( !$this->structure->hasSetting( 'config_fraud_score' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -838,7 +839,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_fraud_score', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_fraud_key' ) ) {
+	if( !$this->structure->hasSetting( 'config_fraud_key' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -858,7 +859,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_fraud_key', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_fraud_detection' ) ) {
+	if( !$this->structure->hasSetting( 'config_fraud_detection' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -878,7 +879,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_fraud_detection', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_mail_alert' ) ) {
+	if( !$this->structure->hasSetting( 'config_mail_alert' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -898,7 +899,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_mail_alert', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_meta_title' ) ) {
+	if( !$this->structure->hasSetting( 'config_meta_title' ) ) {
 		$sql = '
 		SELECT
 			*
@@ -935,7 +936,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_meta_title', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_meta_keyword' ) ) {
+	if( !$this->structure->hasSetting( 'config_meta_keyword' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -955,7 +956,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_meta_keyword', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_product_count' ) ) {
+	if( !$this->structure->hasSetting( 'config_product_count' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -976,7 +977,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_product_count', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_product_limit' ) ) {
+	if( !$this->structure->hasSetting( 'config_product_limit' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -997,7 +998,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_product_limit', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_product_description_length' ) ) {
+	if( !$this->structure->hasSetting( 'config_product_description_length' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1018,7 +1019,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_product_description_length', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_limit_admin' ) ) {
+	if( !$this->structure->hasSetting( 'config_limit_admin' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1039,7 +1040,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_limit_admin', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_review_mail' ) ) {
+	if( !$this->structure->hasSetting( 'config_review_mail' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1060,7 +1061,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_review_mail', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_voucher_min' ) ) {
+	if( !$this->structure->hasSetting( 'config_voucher_min' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1081,7 +1082,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_voucher_min', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_voucher_max' ) ) {
+	if( !$this->structure->hasSetting( 'config_voucher_max' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1102,7 +1103,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_voucher_max', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_tax_default' ) ) {
+	if( !$this->structure->hasSetting( 'config_tax_default' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1123,7 +1124,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_tax_default', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_tax_customer' ) ) {
+	if( !$this->structure->hasSetting( 'config_tax_customer' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1144,7 +1145,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_tax_customer', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_customer_online' ) ) {
+	if( !$this->structure->hasSetting( 'config_customer_online' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1165,7 +1166,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_customer_online', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_customer_group_id' ) ) {
+	if( !$this->structure->hasSetting( 'config_customer_group_id' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1186,7 +1187,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_customer_group_id', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_customer_group_display' ) ) {
+	if( !$this->structure->hasSetting( 'config_customer_group_display' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1207,7 +1208,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_customer_group_display', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_api_id' ) ) {
+	if( !$this->structure->hasSetting( 'config_api_id' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1228,7 +1229,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_api_id', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_checkout_guest' ) ) {
+	if( !$this->structure->hasSetting( 'config_checkout_guest' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1249,7 +1250,7 @@ class ModelUpgradeSettings extends Model{
 		$this->msg( sprintf( $this->lang['msg_config'], 'config_checkout_guest', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_processing_status' ) ) {
+	if( !$this->structure->hasSetting( 'config_processing_status' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1270,7 +1271,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_processing_status', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_complete_status' ) ) {
+	if( !$this->structure->hasSetting( 'config_complete_status' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1291,7 +1292,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_complete_status', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_order_mail' ) ) {
+	if( !$this->structure->hasSetting( 'config_order_mail' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1312,7 +1313,7 @@ class ModelUpgradeSettings extends Model{
 		$this->msg( sprintf( $this->lang['msg_config'], 'config_order_mail', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_affiliate_approval' ) ) {
+	if( !$this->structure->hasSetting( 'config_affiliate_approval' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1333,7 +1334,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_affiliate_approval', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_affiliate_auto' ) ) {
+	if( !$this->structure->hasSetting( 'config_affiliate_auto' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1354,7 +1355,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_affiliate_auto', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_affiliate_commission' ) ) {
+	if( !$this->structure->hasSetting( 'config_affiliate_commission' ) ) {
 		$sql =  '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1375,7 +1376,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_affiliate_commission', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_affiliate_id' ) ) {
+	if( !$this->structure->hasSetting( 'config_affiliate_id' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1396,7 +1397,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_affiliate_id', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_affiliate_mail' ) ) {
+	if( !$this->structure->hasSetting( 'config_affiliate_mail' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1417,7 +1418,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_affiliate_mail', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_return_id' ) ) {
+	if( !$this->structure->hasSetting( 'config_return_id' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1438,7 +1439,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_return_id', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_comment' ) ) {
+	if( !$this->structure->hasSetting( 'config_comment' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1458,7 +1459,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_comment', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_open' ) ) {
+	if( !$this->structure->hasSetting( 'config_open' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1478,7 +1479,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_open', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_image' ) ) {
+	if( !$this->structure->hasSetting( 'config_image' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1498,7 +1499,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_image', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_geocode' ) ) {
+	if( !$this->structure->hasSetting( 'config_geocode' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1518,7 +1519,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_geocode', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_file_max_size' ) ) {
+	if( !$this->structure->hasSetting( 'config_file_max_size' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1539,7 +1540,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_file_max_size', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_customer_group_display' ) ) {
+	if( !$this->structure->hasSetting( 'config_customer_group_display' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1560,7 +1561,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_customer_group_display', '' ) );
 	}
 
-           if( !$this->hasSetting( 'config_image_location_width' ) ) {
+           if( !$this->structure->hasSetting( 'config_image_location_width' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1581,7 +1582,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_image_location_width', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_image_location_height' ) ) {
+	if( !$this->structure->hasSetting( 'config_image_location_height' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1602,7 +1603,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_image_location_height', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_file_ext_allowed' ) ) {
+	if( !$this->structure->hasSetting( 'config_file_ext_allowed' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1623,7 +1624,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_file_extension_allowed', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_file_mime_allowed' ) ) {
+	if( !$this->structure->hasSetting( 'config_file_mime_allowed' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1644,7 +1645,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_file_mime_allowed', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_password' ) ) {
+	if( !$this->structure->hasSetting( 'config_password' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1665,7 +1666,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_password', '' ) );
 	}
 
-	if( !$this->hasSetting( 'config_robots' ) ) {
+	if( !$this->structure->hasSetting( 'config_robots' ) ) {
         $sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1702,7 +1703,7 @@ class ModelUpgradeSettings extends Model{
                       $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
       }
-	if( !$this->hasSetting( 'config_secure' ) ) {
+	if( !$this->structure->hasSetting( 'config_secure' ) ) {
 		$sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'setting`
@@ -1732,7 +1733,7 @@ class ModelUpgradeSettings extends Model{
   public function deleteSettings(){
 	$settingdelete = 0;
         $text = '';
-	if( $this->hasSetting( 'account_module' ) ) {
+	if( $this->structure->hasSetting( 'account_module' ) ) {
 		$sql = '
 		DELETE FROM
 			`' . DB_PREFIX . 'setting`
@@ -1749,7 +1750,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config_delete'], 'account_module',  'setting' ) );
 	}
 
-	if( $this->hasSetting( 'affiliate_module' ) ) {
+	if( $this->structure->hasSetting( 'affiliate_module' ) ) {
 		$sql = '
 		DELETE FROM
 			`' . DB_PREFIX . 'setting`
@@ -1766,7 +1767,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config_delete'], 'affiliate_module',  'setting' ) );
 	}
 
-	if( $this->hasSetting( 'category_module' ) ) {
+	if( $this->structure->hasSetting( 'category_module' ) ) {
 		$sql = '
 		DELETE FROM
 			`' . DB_PREFIX . 'setting`
@@ -1783,7 +1784,7 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config_delete'], 'category_module',  'setting' ) );
 	}
 
-	if( $this->hasSetting( 'information_module' ) ) {
+	if( $this->structure->hasSetting( 'information_module' ) ) {
 		$sql = '
 		DELETE FROM
 			`' . DB_PREFIX . 'setting`
@@ -1804,82 +1805,6 @@ class ModelUpgradeSettings extends Model{
        return $text;
      
   }
-   public function hasSetting( $val ) {
-	$sql = '
-	SELECT
-		*
-	FROM
-		`' . DB_PREFIX . 'setting`
-	WHERE
-		`key` = \'' . $val . '\'';
-
-	$result = $this->db->query( $sql );
-
-	if( count( $result->row ) == 0 ) {
-		return false;
-	}
-
-	return true;
-   }
-   private function hasLayout( $val ) {
- 
-	$sql = '
-	SELECT
-		*
-	FROM
-		`' . DB_PREFIX . 'layout_module`
-	WHERE
-		`code` LIKE  \'' . $val . '%\'';
-       if( array_search( DB_PREFIX . 'layout_module' , $this->getTables())){
-	$result = $this->db->query( $sql );
-	if( count( $result->row ) == 0 ) {
-		return false;
-	}
-              } else {
-		return false;
-            }
-	return true;
-   }
-   public function hasModule() {
- 
-	$sql = '
-	SELECT
-		*
-	FROM
-		`' . DB_PREFIX . 'module`';
-       if( array_search( DB_PREFIX . 'module' , $this->getTables())){
-	$result = $this->db->query( $sql );
-	if( count( $result->row ) == 0 ) {
-		return false;
-	}
-              } else {
-		return false;
-            }
-	return true;
-   }
-   private function hasExtension( $val ) {
-    if( array_search( 'code', $this->getDbColumns( 'extension' ) ) ){
-      $field = 'code';
-    }
-    if( array_search( 'key', $this->getDbColumns( 'extension' ) ) ){
-      $field = 'key';
-    }
-	$sql = '
-	SELECT
-		*
-	FROM
-		`' . DB_PREFIX . 'extension`
-	WHERE
-		`' . $field . '` = \'' . $val . '\'';
-
-	$result = $this->db->query( $sql );
-
-	if( count( $result->row ) == 0 ) {
-		return false;
-	}
-
-	return true;
-   }
 
   private function getBannerName($banner_id){
   $sql = '
@@ -1889,7 +1814,7 @@ class ModelUpgradeSettings extends Model{
 		`' . DB_PREFIX . 'banner`
 	 WHERE
 		`banner_id` = \'' . $banner_id . '\'';
-      if( array_search( DB_PREFIX . 'banner', $this->getTables() ) ){
+      if( array_search( DB_PREFIX . 'banner', $this->structure->tables() ) ){
 	$result = $this->db->query( $sql );
         if( isset($result->row['name']) ){
          return '-' . $result->row['name'];
@@ -1899,35 +1824,6 @@ class ModelUpgradeSettings extends Model{
   public function msg( $data ){
        return str_replace( $data, '<div class="msg round">' . $data .'</div>', $data);
   }
-
-  public function getDbColumns( $table ) {
-	if( $data =  $this->cache->get( $table ) ) {
-		return $data;
-	}else{
-		global $link;
-
-        if( array_search( DB_PREFIX . $table, $this->getTables() ) || $table == 'address'){
-                $colums = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`");
-
-		$ret		= array();
-
-               foreach( $colums->rows as $field){
-                 $ret[] = $field['Field'];
-               }
-          return $ret;	
-         }
-    }
-  }
-
-  public function getTables() {
-       $query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
-
-        $table_list = array();
-        foreach($query->rows as $table){
-                      $table_list[] = $table['Tables_in_'. DB_DATABASE];
-          }
-        return $table_list;
-   }
 
    public function deleteSettingGroup($group) {
    	$text = '';
