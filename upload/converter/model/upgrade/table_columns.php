@@ -405,8 +405,8 @@ class ModelUpgradeTableColumns extends Model{
   
     foreach( $vars as $k => $v ) {
      
-	   if( array_search( DB_PREFIX . $v['table'], $this->getTables() ) || $v['table'] == 'address' ){
-             if( !array_search( $v['field'], $this->getDbColumns( $v['table'] ) )) {
+	   if( array_search( DB_PREFIX . $v['table'], $this->structure->tables() ) || $v['table'] == 'address' ){
+             if( !array_search( $v['field'], $this->structure->columns( $v['table'] ) )) {
 
 			$sql = '
 			ALTER TABLE
@@ -585,8 +585,8 @@ class ModelUpgradeTableColumns extends Model{
     $deletecol = 0;
     $text = '';
     foreach( $delcols as $k => $v ) {
-	   if( array_search( DB_PREFIX . $v['table'], $this->getTables() )  ||   $v['table'] == 'address') {
-		if( array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) ) {
+	   if( array_search( DB_PREFIX . $v['table'], $this->structure->tables() )  ||   $v['table'] == 'address') {
+		if( array_search( $v['field'], $this->structure->columns( $v['table'] ) ) ) {
 
 			$sql = '
 			ALTER TABLE
@@ -917,8 +917,8 @@ class ModelUpgradeTableColumns extends Model{
 
           foreach( $keyset as $k => $v ) {
 
-        if( array_search( DB_PREFIX . $v['table'] , $this->getTables()) ) {
-	     if( !$this->getColumnKey( $v['field'], $v['table'] ) ) { 
+        if( array_search( DB_PREFIX . $v['table'] , $this->structure->tables()) ) {
+	     if( !$this->structure->getColumnKey( $v['field'], $v['table'] ) ) { 
 			$sql = '
 			ALTER TABLE
 				`' . DB_PREFIX . $v['table'] . '`
@@ -936,7 +936,7 @@ class ModelUpgradeTableColumns extends Model{
 		}
              }
          }
-	if( array_search( 'currency_value', $this->getDbColumns( 'order' ) ) ){
+	if( array_search( 'currency_value', $this->structure->columns( 'order' ) ) ){
 	  $sql = '
                  ALTER TABLE
                            `' . DB_PREFIX . 'order`
@@ -958,11 +958,11 @@ class ModelUpgradeTableColumns extends Model{
 
 
      foreach( $changecols as $k => $v ) {
-        if( array_search( DB_PREFIX . $v['table'] , $this->getTables()) ) {
+        if( array_search( DB_PREFIX . $v['table'] , $this->structure->tables()) ) {
 
-	   if( array_search( DB_PREFIX . $v['table'], $this->getTables() ) || $v['table'] == 'address' ) {
+	   if( array_search( DB_PREFIX . $v['table'], $this->structure->tables() ) || $v['table'] == 'address' ) {
                       
-		if( array_search( $v['oldfield'], $this->getDbColumns( $v['table'] ) ) && !array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) ) {
+		if( array_search( $v['oldfield'], $this->structure->columns( $v['table'] ) ) && !array_search( $v['field'], $this->structure->columns( $v['table'] ) ) ) {
 			$sql = '
 			ALTER TABLE
 				  `' . DB_PREFIX . $v['table'] . '`
@@ -987,8 +987,8 @@ class ModelUpgradeTableColumns extends Model{
 
      foreach( $changetype as $k => $v ) {
            $this->cache->delete( $v['table'] );
-        if( array_search( DB_PREFIX . $v['table'] , $this->getTables()) ) {
-	   if( array_search( $v['field'], $this->getDbColumns( $v['table'] ) ) && !$this->getColumnType( $v['field'], $v['type'], $v['table']) ) {
+        if( array_search( DB_PREFIX . $v['table'] , $this->structure->tables()) ) {
+	   if( array_search( $v['field'], $this->structure->columns( $v['table'] ) ) && !$this->structure->getColumnType( $v['field'], $v['type'], $v['table']) ) {
 			$sql = '
 			ALTER TABLE
 				`' . DB_PREFIX . $v['table'] . '`
@@ -1026,7 +1026,7 @@ class ModelUpgradeTableColumns extends Model{
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
       $text = '';
 
-	if( array_search( 'tax_class_id', $this->getDbColumns( 'tax_rate' ) ) && !array_search( 'name', $this->getDbColumns( 'tax_rate' )) ) {
+	if( array_search( 'tax_class_id', $this->structure->columns( 'tax_rate' ) ) && !array_search( 'name', $this->structure->columns( 'tax_rate' )) ) {
 
 		$sql = '
 		SELECT
@@ -1087,7 +1087,7 @@ class ModelUpgradeTableColumns extends Model{
 			WHERE
 				`tax_rate_id` = \'' . $rate['tax_rate_id'] . '\'';
 
-	   if( array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->getTables() ) ) {
+	   if( array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->structure->tables() ) ) {
 			$result = $this->db->query( $sql );
 
 			if( !isset( $result->row['tax_rate_id'] ) ) {
@@ -1115,7 +1115,7 @@ class ModelUpgradeTableColumns extends Model{
 		CHANGE
 			`description` `name` varchar(255) NOT NULL';
 
-		if( array_search( 'description', $this->getDbColumns( 'tax_rate' ) ) ) {
+		if( array_search( 'description', $this->structure->columns( 'tax_rate' ) ) ) {
 
 		  if( !$this->simulate ) {
                          $this->db->query( $sql );
@@ -1132,7 +1132,7 @@ class ModelUpgradeTableColumns extends Model{
 		SET
 			`type` = \'P\'';
 
-		if( array_search( 'type', $this->getDbColumns( 'tax_rate' ) ) ) {
+		if( array_search( 'type', $this->structure->columns( 'tax_rate' ) ) ) {
 
 		  if( !$this->simulate ) {
                          $this->db->query( $sql );
@@ -1150,7 +1150,7 @@ class ModelUpgradeTableColumns extends Model{
   }
   public function changeOptions(){
            $text = '';               
-      if( array_search( DB_PREFIX . 'store_description' , $this->getTables()) ) {
+      if( array_search( DB_PREFIX . 'store_description' , $this->structure->tables()) ) {
         /* Opencart version 1.4.x is Found */
         /* Change product options to Qphoria way */
     $sql = "
@@ -1165,7 +1165,7 @@ class ModelUpgradeTableColumns extends Model{
                         $option = 0;
               }
 
-      if( isset($query->row['option_id']) && !$this->hasOption($option)  || $this->simulate){
+      if( isset($query->row['option_id']) && !$this->structure->hasOption($option)  || $this->simulate){
      $sql = "
             INSERT INTO
                        `" . DB_PREFIX . "option` (`option_id`, `type`, `sort_order`)
@@ -1285,7 +1285,7 @@ class ModelUpgradeTableColumns extends Model{
                          $droptable[] = 'order_fraud';
   }
        foreach( $droptable as $table ) {
-	  if( array_search( DB_PREFIX . $table, $this->getTables() ) ) {
+	  if( array_search( DB_PREFIX . $table, $this->structure->tables() ) ) {
 		$sql = 'DROP TABLE `' . DB_PREFIX . $table . '`';
 
 		if( !$this->simulate ) {
@@ -1301,7 +1301,7 @@ class ModelUpgradeTableColumns extends Model{
 	  }
  
        }
-	if( array_search( DB_PREFIX . 'return_product', $this->getTables() ) ) {
+	if( array_search( DB_PREFIX . 'return_product', $this->structure->tables() ) ) {
 
                 $sql = '
                 SELECT 
@@ -1371,84 +1371,4 @@ class ModelUpgradeTableColumns extends Model{
        $data = str_replace( $data, '<div class="msg round"> ' . $data .' </div>', $data);
        return $data;
   }
-
-  public function getDbColumns( $table ) {
-	if( $data =  $this->cache->get( $table ) ) {
-		return $data;
-	}else{
-
-        if( array_search( DB_PREFIX . $table, $this->getTables() ) || $table == 'address'){
-                $colums = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`");
-
-		$ret		= array();
-
-               foreach( $colums->rows as $field){
-                 $ret[] = $field['Field'];
-               }
-          return $ret;	
-         }
-    }
-  }
-
-  private function getColumnKey( $column, $table ) {
-
-     if( array_search( DB_PREFIX . $table, $this->getTables() ) || $table == 'address'){
-                $fields = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`");
-
-        if( array_search( $column, $this->getDbColumns( $table ) ) ){
-           foreach( $fields->rows as $field){
-              if($field['Field'] == $column){
-   
-                 return ( !empty( $field['Key'] ) ? true : false );
-    
-             }
-          }
-        }  	
-     }
-  }
-
-  private function getColumnType( $column, $type, $table ) {
- 
-     if( array_search( DB_PREFIX . $table, $this->getTables() ) || $table == 'address'){
-            $fields = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`" );
-
-        if( array_search( $column, $this->getDbColumns( $table ) ) ){
-           foreach( $fields->rows as $field){
-              if($field['Field'] == $column ){
-  
-                 return strpos($field['Type'], $type);
-    
-              }
-           }
-        }
-     }
-  }
-  private function hasOption( $val ) {
-                        
-	$sql = '
-	SELECT
-		*
-	FROM
-		`' . DB_PREFIX . 'option`
-	WHERE
-		`option_id` = \'' . $val . '\'';
-
-	$result = $this->db->query( $sql );
-
-	if( count( $result->row ) == 0 ) {
-		return false;
-	}
-
-	return true;
-}
-
-  public function getTables() {
-       $query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
-
-        $table_list = array();
-        foreach($query->rows as $table){
-                      $table_list[] = $table['Tables_in_'. DB_DATABASE];
-          }
-        return $table_list;
-   }
 }
