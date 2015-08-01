@@ -17,6 +17,9 @@ class ControllerUpgradeInfo extends Controller {
 			'href'      => $this->url->link('upgrade/info'),
 			'separator' => false
 		);
+		   if( !isset($_COOKIE['UpgradeMigration']) ){
+			$this->redirect($this->url->link('common/login'));
+	 	   }
                 $same_tables = array();
 		$this->data['text_database_info'] = $this->language->get('text_database_info');
                 $this->data['text_missing_tables'] = $this->language->get('text_missing_tables');
