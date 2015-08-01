@@ -21,11 +21,11 @@ class ControllerUpgradeConfiguration extends Controller {
 		);
                  $simulate = 1;
 
-                 $images = ( !empty( $_POST['images'] ) ? true : 'image' );
-                if( isset( $this->request->post ) )
 	  	   if( !isset($_COOKIE['UpgradeMigration']) ){
 			$this->redirect($this->url->link('common/login'));
 	 	   }
+                 $images = ( !empty( $_POST['images'] ) ? true : 'image' );
+                if( isset( $this->request->post ) )
                   $simulate = ( !empty( $_POST['simulate'] ) ? true : false );
                   $showOps = ( !empty( $_POST['showOps'] ) ? true : false );
                   $dirOld = ( !empty( $_POST['dirOld'] ) ? true : false );
