@@ -38,8 +38,6 @@
 		<div class="sub_title"><?php echo $sub_title_3;?></div>
 		<div class="text_description"><?php echo $text_install;?></div>
 		<div class="sub_title"><?php echo $sub_title_4;?></div>
-		<div class="sub_sub_title"><?php echo $sub_title_5;?></div>
-		<div class="text_description"><?php echo $text_error_token;?></div>
 		<div class="sub_title"><?php echo $sub_title_6;?></div>
 		<div class="text_description"><?php echo $text_functions;?></div>
 		<div class="sub_title"><?php echo $sub_title_7;?></div>
