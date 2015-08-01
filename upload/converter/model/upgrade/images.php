@@ -79,7 +79,7 @@ class ModelUpgradeImages extends Model{
        
           }
 
-	if( $this->hasSetting( 'config_logo' ) ) {
+	if( $this->structure->hasSetting( 'config_logo' ) ) {
 		$sql = '
 		UPDATE
 			`' . DB_PREFIX . 'setting`
@@ -96,7 +96,7 @@ class ModelUpgradeImages extends Model{
 		++$imagepath;
 	}
 
-	if( $this->hasSetting( 'config_icon' ) ) {
+	if( $this->structure->hasSetting( 'config_icon' ) ) {
 		$sql = '
 		UPDATE
 			`' . DB_PREFIX . 'setting`
@@ -143,7 +143,7 @@ class ModelUpgradeImages extends Model{
  */
    $imageInfo = array();
 
-  if( array_search( DB_PREFIX . 'banner_image' , $this->getTables()) ) {
+  if( array_search( DB_PREFIX . 'banner_image' , $this->structure->tables()) ) {
      $sql = '
 	    SELECT
 	          *
