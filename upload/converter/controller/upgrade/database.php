@@ -24,6 +24,9 @@ class ControllerUpgradeDatabase extends Controller {
 		);
 
                 if( isset( $this->request->post['step1']) && $this->validate() ){
+		   if( !isset($_COOKIE['UpgradeMigration']) ){
+			$this->redirect($this->url->link('common/login'));
+	 	   }
                  $this->data['dirOld'] = ( !empty( $_POST['dirOld'] ) ? true : false );
                  $this->data['images'] = ( !empty( $_POST['images'] ) ? true : 'image' );
                  $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
