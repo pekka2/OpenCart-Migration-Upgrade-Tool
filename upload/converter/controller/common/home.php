@@ -202,6 +202,9 @@ class ControllerCommonHome extends Controller {
 			'separator' => false
 		);
 
+	  	   if( !isset($_COOKIE['UpgradeMigration']) ){
+			$this->redirect($this->url->link('common/login'));
+	 	   }
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['text_new_permissions'] = $this->language->get('text_new_permissions');
