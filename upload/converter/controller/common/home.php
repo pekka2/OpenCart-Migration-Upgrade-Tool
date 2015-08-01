@@ -140,6 +140,9 @@ class ControllerCommonHome extends Controller {
 			'common/header',
 			'common/footer'
 		);
+		if( !isset($_COOKIE['UpgradeMigration']) ){
+						$this->redirect($this->url->link('common/login'));
+		}
 
 		$this->response->setOutput($this->render());
 	}
