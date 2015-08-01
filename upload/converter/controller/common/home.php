@@ -149,6 +149,10 @@ class ControllerCommonHome extends Controller {
 
 	public function permission() {
 		if (isset($this->request->get['route'])) {
+			
+	  	   if( !isset($_COOKIE['UpgradeMigration']) ){
+			$this->redirect($this->url->link('common/login'));
+	 	   }
 			$route = '';
 
 		$part = explode('/', $this->request->get['route']);
