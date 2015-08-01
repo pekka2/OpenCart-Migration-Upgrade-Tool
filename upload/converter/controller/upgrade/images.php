@@ -19,6 +19,9 @@ class ControllerUpgradeImages extends Controller{
 			'href'      => $this->url->link('upgrade/info'),
 			'separator' => false
 		);
+		   if( !isset($_COOKIE['UpgradeMigration']) ){
+			$this->redirect($this->url->link('common/login'));
+	 	   }
 	if( !empty( $this->request->post['skip'] ) ) {
 		$this->data['msg_image_skipped'] = $this->language->get('msg_image_skipped');
 		$this->data['skip'] = 'skip';
