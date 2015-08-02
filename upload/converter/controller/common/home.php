@@ -27,7 +27,6 @@ class ControllerCommonHome extends Controller {
 		$this->data['sub_title_10'] = $this->language->get('sub_title_10');
 		$this->data['sub_title_11'] = $this->language->get('sub_title_11');
 		$this->data['sub_title_12'] = $this->language->get('sub_title_12');
-		$this->data['sub_title_13'] = $this->language->get('sub_title_13');
 		$this->data['sub_title_14'] = $this->language->get('sub_title_14');
 		$this->data['sub_title_15'] = $this->language->get('sub_title_15');
 		$this->data['text_description'] = $this->language->get('text_description');
@@ -102,8 +101,6 @@ class ControllerCommonHome extends Controller {
 		$this->data['text_repeat_4_15'] = $this->language->get('text_repeat_4_15');
 		$this->data['text_repeat_4_16'] = $this->language->get('text_repeat_4_16');
 		$this->data['text_repeat_4_17'] = $this->language->get('text_repeat_4_17');
-		$this->data['text_forbidden_1'] = $this->language->get('text_forbidden_1');
-		$this->data['text_forbidden_2'] = $this->language->get('text_forbidden_2');
 		$this->data['text_email'] = $this->language->get('text_email');
 		$this->data['text_warrantly'] = $this->language->get('text_warrantly');
 
