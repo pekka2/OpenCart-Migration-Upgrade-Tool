@@ -21,7 +21,7 @@ class ModelUpgradeDatabase extends Model{
 	if( !array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->structure->tables() ) ) {
            $text .= $this->addUpgradeTo1513();
         }
-	if( !array_search( DB_PREFIX . 'order_fraud', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'order_fraud', $this->structure-tables() ) ) {
            $text .= $this->addUpgradeTo152();
         }
 	if( !array_search( DB_PREFIX . 'customer_group_description', $this->structure->tables() ) ) {
