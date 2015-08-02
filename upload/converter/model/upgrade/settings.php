@@ -349,7 +349,7 @@ class ModelUpgradeSettings extends Model{
         $str = '';
         $status = 0;
          $module = array();
-	if( $this->config->get( $mod . '_module' ) && !$this->hasSetting( $mod . '_0_position' ) && !$this->hasSetting( $mod . '_1_position' )) {
+	if( $this->config->get( $mod . '_module' ) && !$this->structure->hasSetting( $mod . '_0_position' ) && !$this->structure->hasSetting( $mod . '_1_position' )) {
         /*
          * version 1.5.1 or newer
          */
