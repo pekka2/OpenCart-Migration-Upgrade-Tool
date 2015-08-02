@@ -15,7 +15,6 @@ $_['sub_title_9'] =  'Vaihe 2:';
 $_['sub_title_10'] =  'Vaihe 3:';
 $_['sub_title_11'] =  'Siirtyminen versioon 2.0.x nopeasti:';
 $_['sub_title_12'] =  'Päivityksen toisto:';
-$_['sub_title_13'] =  '403 Forbidden tai vastaavat virheilmoitukset';
 $_['sub_title_14'] =  'Tuki';
 $_['sub_title_15'] =  'Takuuehdot';
 $_['text_description'] =  'Tämä ohjelma muuntaa OpenCart versiot 1.4.7 - 2.0.0.0 versioon 2.0.1.x, sopii myös versioon 2.0.x';
@@ -89,8 +88,5 @@ $_['text_repeat_4_13'] = '- Vaihda kaupan config.php tiedostoihin uuden tietokan
 $_['text_repeat_4_14'] = '- Siirrä ohjelma OpenCart Migration & Upgrade Tool hakemistoon www.sinunkauppa.fi/converter.';
 $_['text_repeat_4_15'] = '- Siirry takaisin ohjelmaan OpenCart Migration & Upgrade Tool osoitteessa www.sinunkauppa.fi/converter ja aja uusi päivitys uuteen tietokantaan. Taulut, jotka olet vaihtanut, päivitetään versioon 2.0.x.';
 $_['text_repeat_4_16'] = '- Huomioitavaa: Muista ajaa myös vaihe 2 ja vaihe 3.';
-$_['text_repeat_4_17'] = '- Poista huoltotila.';
-$_['text_forbidden_1'] = 'Jos jostakin syystä et voi käyttää tätä laajennusta palvelimen rajoitusten vuoksi, voit toimia seuraavasti. Kopioi esim. version 2.0.3.1 uusien taulujen lisäys skriptit, ( CREATE TABLE ... ) tiedostosta install/opencart.sql ja lisää ne sinun kaupan tietokantaan esim. Adminin Varmuuskopiointi/Palauta sivulta.';
-$_['text_forbidden_2'] = 'Muuta kuvatiedostojen polkua lataamalla tämän paketin mukana oleva tiedosto SQL/replace.sql samalla tavoin. Jos käytössäsi on versio 1.4.x, siirrä tuote valinnat lataamalla tiedosto SQL/options.sql.';
-$_['text_email']   = 'Pekka Mansikka, peku@pm-netti.com';
+$_['text_repeat_4_17'] = '- Poista huoltotila.';$_['text_email']   = 'Pekka Mansikka, peku@pm-netti.com';
 $_['text_warrantly']   = 'Tämän ohjelman käyttäminen ohjeiden mukaisesti on turvallista. Jokainen käyttäjä on kuitenkin itse vastuussa virheellisestä käytöstä, esim. varmuuskopioiden puuttumisesta tai vanhan kaupan tiedostojen kopioiden puuttumisesta.';
