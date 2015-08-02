@@ -15,7 +15,6 @@ $_['sub_title_9'] =  'Step 2:';
 $_['sub_title_10'] =  'Step 3:';
 $_['sub_title_11'] =  'The transition to version 2.0.x  quickly:';
 $_['sub_title_12'] =  'Repeat of Upgrade:';
-$_['sub_title_13'] =  '403 Forbidden or similar error messages';
 $_['sub_title_14'] =  'Support';
 $_['sub_title_15'] =  'Warranty Terms';
 $_['text_description'] =  'This extension converts OpenCart versions 1.4.7-2.0.0.0 to version 2.0.1 - 2.0.x.';
@@ -88,8 +87,5 @@ $_['text_repeat_4_13'] = '- Change database connect to correct in root config.ph
 $_['text_repeat_4_14'] = '- Upload extension OpenCart Migration & Upgrade Tool to directory www.yourstore.fi/converter.';
 $_['text_repeat_4_15'] = '- Go back to extension OpenCart Migration & Upgrade Tool www.yourstore.fi/converter and run new upgrade to new database. Tables, that you switched, is updated to version 2.0.x.';
 $_['text_repeat_4_16'] = '-Please note: be sure to run the step 2 and step 3.';
-$_['text_repeat_4_17'] = '-Remove maintenance status.';
-  $_['text_forbidden_1'] = 'If for some reason you can not use this extension due to server limitations, you can eg. do the following. Copy version 2.0.x new tables add scripts, (CREATE TABLE ...) from file install/opencart.sql. Add those your database in page admin > bakup/restore';
-$_['text_forbidden_2'] = 'Change path of image file in database for download file SQL/replace.sql (with in this package) to same way. If your store version is 1.4.x, change product options, download file SQL/options.sql.';
-$_['text_email']   = 'Pekka Mansikka, peku@pm-netti.com';
+$_['text_repeat_4_17'] = '-Remove maintenance status.';$_['text_email']   = 'Pekka Mansikka, peku@pm-netti.com';
 $_['text_warrantly']   = 'Using this program use in accordance with guidelines to be safe. Each user is, however, itself responsible for the incorrect use, eg. the missing of backups or the missing of copies of the old trade files.';
