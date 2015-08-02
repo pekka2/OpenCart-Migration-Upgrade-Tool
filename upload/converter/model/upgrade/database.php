@@ -599,7 +599,7 @@ class ModelUpgradeDatabase extends Model{
 	}
 
 
-	if( !array_search( DB_PREFIX . 'option_description' , $this->getTables()) ) {
+	if( !array_search( DB_PREFIX . 'option_description' , $this->structure->tables()) ) {
 		$sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'option_description` (
                 `option_id` int(11) NOT NULL,
@@ -1663,7 +1663,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'custom_field_value_description' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'filter', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'filter', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'filter` (
 		`filter_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2051,7 +2051,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'location' ) );
 	}
 
-	if( !array_search( DB_PREFIX . 'marketing', $this->getTables() ) ) {
+	if( !array_search( DB_PREFIX . 'marketing', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'marketing` (
 		`marketing_id` int(11) NOT NULL AUTO_INCREMENT,
