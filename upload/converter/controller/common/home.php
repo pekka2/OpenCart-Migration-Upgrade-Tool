@@ -128,13 +128,12 @@ class ControllerCommonHome extends Controller {
 			'separator' => false
 		);
 
-		$this->data['token'] = $this->session->data['token'];
-
 		$this->template = 'common/home.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
 		);
+
 		if( !isset($_COOKIE['UpgradeMigration']) ){
 						$this->redirect($this->url->link('common/login'));
 		}
