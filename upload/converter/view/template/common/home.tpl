@@ -104,9 +104,6 @@
 		<div class="text_description"><?php echo $text_repeat_4_15;?></div>
 		<div class="text_description"><?php echo $text_repeat_4_16;?></div>
 		<div class="text_description"><?php echo $text_repeat_4_17;?></div>
-		<div class="sub_title"><?php echo $sub_title_13;?></div>
-		<div class="text_description"><?php echo $text_forbidden_1;?></div>
-		<div class="text_description"><?php echo $text_forbidden_2;?></div>
 		<div class="sub_title"><?php echo $sub_title_14;?></div>
 		<div class="text_description"><?php echo $text_email;?></div>
 		<div class="sub_title"><?php echo $sub_title_15;?></div>
