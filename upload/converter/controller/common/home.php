@@ -117,9 +117,12 @@ class ControllerCommonHome extends Controller {
 
 		$this->data['button_permission'] = $this->language->get('button_permission');
 		$this->data['button_upgrade'] = $this->language->get('button_upgrade');
+		$this->data['button_logout'] = $this->language->get('button_logout');
 
                 $this->data['permission'] = $this->url->link('common/home/user');
                 $this->data['upgrade_info'] = $this->url->link('upgrade/info');
+                $this->data['logout'] = $this->url->link('common/logout');
+
 		$this->data['breadcrumbs'] = array();
 
 		$this->data['breadcrumbs'][] = array(
