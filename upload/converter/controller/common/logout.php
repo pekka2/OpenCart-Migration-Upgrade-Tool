@@ -1,11 +1,9 @@
 <?php       
 class ControllerCommonLogout extends Controller {   
 	public function index() { 
-		$this->user->logout();
+		setcookie("UpgradeMigration", HTTP_SERVER, time() - 3600);
 
-		unset($this->session->data['token']);
-
-		$this->redirect($this->url->link('common/login', '', 'SSL'));
+		$this->redirect($this->url->link('common/login');
 	}
 }  
 ?>
