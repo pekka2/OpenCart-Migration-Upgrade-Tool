@@ -18,7 +18,7 @@ legend
 
 CONVERTER
 ---------
-2.0.1 2015.08.03        - system/library/sesssion.php
+2.0.1 2015.08.03        - system/library/session.php
                         - system/library/mail.php
                         + logout link
 2.0.0 2015.08.01        + readme.php language packages
