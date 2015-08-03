@@ -7,8 +7,10 @@ $_['direction']                     = 'ltr';
 $_['text_home']                     = 'Home';
 
 // Button
+$_['button_database']               = 'To Upgrade The Database';
 $_['button_permission']             = 'Administrator rechten';
 $_['button_save']                   = 'Opslaan';
+$_['button_logout']                 = 'Logout';
 $_['button_upgrade']                = 'Start de update';
 
 // Btn
