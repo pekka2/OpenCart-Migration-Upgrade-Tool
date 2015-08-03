@@ -13,6 +13,7 @@ $_['text_simulation']	        = 'הדמיה היא';
 $_['button_database']               = 'לשדרוג מסד הנתונים';
 $_['button_permission']             = 'הרשאה מנהלית';
 $_['button_save']                   = 'שמור';
+$_['button_logout']                 = 'Logout';
 $_['button_upgrade']                = 'שדרוג ראשוני';
 
 // Btn
