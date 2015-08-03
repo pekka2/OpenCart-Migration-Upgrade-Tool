@@ -6,9 +6,6 @@
       <h1><img src="view/image/lockscreen.png" alt="" /> <?php echo $text_login; ?></h1>
     </div>
     <div class="content login" style="min-height: 150px; overflow: hidden;">
-      <?php if ($success) { ?>
-      <div class="success"><?php echo $success; ?></div>
-      <?php } ?>
       <?php if ($error_warning) { ?>
       <div class="warning"><?php echo $error_warning; ?></div>
       <?php } ?>
