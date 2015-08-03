@@ -3,7 +3,7 @@ final class DBMySQL {
 	private $link;
 
 	public function __construct($hostname, $username, $password, $database) {
-		if (!$this->link = mysql_connect($hostname, $username, $password)) {
+		if (!$this->link = @mysql_connect($hostname, $username, $password)) {
 			trigger_error('Error: Could not make a database link using ' . $username . '@' . $hostname);
 		}
 
