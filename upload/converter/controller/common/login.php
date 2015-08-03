@@ -7,10 +7,6 @@ class ControllerCommonLogin extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		if ($this->user->isLogged()) {
-			$this->redirect($this->url->link('common/home'));
-		}
-
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			 setcookie("UpgradeMigration",HTTP_SERVER, time() + 3600);
 			if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], HTTP_SERVER) === 0 || strpos($this->request->post['redirect'], HTTPS_SERVER) === 0 )) {
@@ -34,14 +30,6 @@ class ControllerCommonLogin extends Controller {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
 			$this->data['error_warning'] = '';
-		}
-
-		if (isset($this->session->data['success'])) {
-			$this->data['success'] = $this->session->data['success'];
-
-			unset($this->session->data['success']);
-		} else {
-			$this->data['success'] = '';
 		}
 
 		$this->data['action'] = $this->url->link('common/login', '', 'SSL');
