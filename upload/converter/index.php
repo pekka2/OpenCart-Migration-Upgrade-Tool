@@ -14,7 +14,7 @@
  * @todo move to mysqli
  */
 
-define('VERSION', '2.0.0');
+define('VERSION', '2.0.1');
 
 // Configuration
 if (is_file('config.php')) {
@@ -163,10 +163,6 @@ $registry->set('lmodel', $lcache);
 // Database Structure
 $structure = new Structure($registry);
 $registry->set('structure', $structure);
-
-// Session
-$session = new Session();
-$registry->set('session', $session);
 
 // Language
 $languages = array();
