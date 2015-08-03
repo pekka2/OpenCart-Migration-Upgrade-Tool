@@ -10,6 +10,7 @@ $_['text_home']                     = 'Ana sayfa';
 $_['button_database']               = 'Veritabanı Yükseltme';
 $_['button_permission']             = 'Yönetici izinleri';
 $_['button_save']                   = 'Kaydet';
+$_['button_logout']                 = 'Logout';
 $_['button_upgrade']                = 'Güncelleştirmeyi Başlat';
 
 // Btn
