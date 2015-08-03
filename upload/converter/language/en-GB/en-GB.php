@@ -13,6 +13,7 @@ $_['text_simulation']	        = 'Simulation is';
 $_['button_database']               = 'To Upgrade The Database';
 $_['button_permission']             = 'Administrative permission';
 $_['button_save']                   = 'Save';
+$_['button_logout']                 = 'Logout';
 $_['button_upgrade']                = 'Initial Upgrade';
 
 // Btn
