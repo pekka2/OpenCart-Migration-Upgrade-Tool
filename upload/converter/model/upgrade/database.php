@@ -1231,7 +1231,7 @@ class ModelUpgradeDatabase extends Model{
                 $sql = '
                 SELECT 
                        *
-                FROM  `' . DB_PREFIX . 'customer_group';
+                FROM  `' . DB_PREFIX . 'customer_group`';
  
                 $query = $this->db->query($sql);
 
