@@ -10,6 +10,7 @@ $_['text_home']                     = 'Home';
 $_['button_database']               = 'Para atualizar o banco de dados';
 $_['button_permission']             = 'Permissão administrativa';
 $_['button_save']                   = 'Salvar';
+$_['button_logout']                 = 'Logout';
 $_['button_upgrade']                = 'Iniciar atualização';
 
 // Btn
