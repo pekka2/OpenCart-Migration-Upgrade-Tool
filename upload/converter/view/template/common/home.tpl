@@ -9,6 +9,7 @@
     <div class="heading">
       <h1><img src="view/image/home.png" alt="" /> <?php echo $heading_title; ?></h1>
 <span class="buttons">
+<a href="<?php echo $logout;?>" class="button right"><?php echo $button_logout; ?></a>
 <a href="<?php echo $upgrade_info;?>" class="button right"><?php echo $button_upgrade; ?></a>
 <a href="<?php echo $permission;?>" class="button right"><?php echo $button_permission; ?></a>
 <a href="<?php echo $language;?>" class="button right"><?php echo $button_language; ?></a>
