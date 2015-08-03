@@ -13,6 +13,7 @@ $_['text_simulation']	        = 'Simulation er';
 $_['button_database']               = 'At opgradere databasen';
 $_['button_permission']             = 'Administrativ tilladelse';
 $_['button_save']                   = 'Gem';
+$_['button_logout']                 = 'Logout';
 $_['button_upgrade']                = 'Indledende opgradering';
 
 // Btn
