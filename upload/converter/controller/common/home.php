@@ -7,9 +7,9 @@ class ControllerCommonHome extends Controller {
 		$this->language->load('/readme');
                 $this->lmodel->set('common_home',$this->language->load('common/home'));
 
-		$this->document->setTitle(sprintf($this->language->get('heading_title'),VERSION,''));
+		$this->document->setTitle($this->language->get('heading_title') . ' ' . VERSION );
 
-		$this->data['heading_title'] = sprintf($this->language->get('heading_title'),VERSION,'');
+		$this->data['heading_title'] = $this->language->get('heading_title') . ' ' . VERSION;
                 /* Readme Texts */
 		$this->data['text_title_help'] = $this->language->get('text_title_help');
 		$this->data['text_top_help'] = $this->language->get('text_top_help');
