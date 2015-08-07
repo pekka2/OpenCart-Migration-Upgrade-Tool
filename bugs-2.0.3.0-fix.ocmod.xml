@@ -78,5 +78,9 @@
 			<search><![CDATA[/template/payment/not_found.tpl]]></search>
 			<add position="replace"><![CDATA[/template/error/not_found.tpl]]></add>
 		</operation>
+		<operation>
+			<search><![CDATA[$option['option_value']]]></search>
+			<add position="replace"><![CDATA[$option['value']]]></add>
+		</operation>
 	</file>
 </modification>
