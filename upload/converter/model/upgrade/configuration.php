@@ -4,10 +4,10 @@ class ModelUpgradeConfiguration extends Model{
    public function editConfig( $data ){
        $this->lang = $this->lmodel->get('upgrade_configuration');
        $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
-       $dirAdmin = ( !empty( $data['dirAdmin'] ) ? true : 'admin' ) .'/';
-       $dirImage =  ( !empty( $data['dirImage'] ) ? true : 'image' ) . '/';
-       $dirOld = ( !empty( $data['dirOld'] ) ? true : false );
-       $showOps  = ( !empty( $data['showOps'] ) ? true : false );
+       $this->dirAdmin = ( !empty( $data['dirAdmin'] ) ? true : 'admin' ) .'/';
+       $this->dirImage =  ( !empty( $data['dirImage'] ) ? true : 'image' ) . '/';
+       $this->dirOld = ( !empty( $data['dirOld'] ) ? true : false );
+       $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
        $this->upgrade2030  = ( !empty( $data['upgrade2030'] ) ? true : false );
     
         $text = '';
@@ -28,9 +28,9 @@ class ModelUpgradeConfiguration extends Model{
 		// frontend
 	    $content = file_get_contents( DIR_DOCUMENT_ROOT . 'config.php' );
             $check = $content;
-	    if( $dirOld ) {
-	    	if( strpos( $content, $dirOld ) !== false ) {
-		    	$content = str_replace( $dirOld, $root, $content );
+	    if( $this->dirOld ) {
+	    	if( strpos( $content, $this->dirOld ) !== false ) {
+		    	$content = str_replace( $this->dirOld, $root, $content );
                       
 		    	file_put_contents( $root . 'config.php', $content );
 				$text .= $this->msg( sprintf(  $this->lang, 'config_replace',  'config.php', '' ) );
@@ -75,7 +75,7 @@ class ModelUpgradeConfiguration extends Model{
 		}
 
 		// backend
-		$file		= $dirAdmin . '/config.php';
+		$file		= $this->dirAdmin . '/config.php';
 		$content	= file_get_contents( DIR_DOCUMENT_ROOT . $file );
 
 		if( $dirOld ) {
