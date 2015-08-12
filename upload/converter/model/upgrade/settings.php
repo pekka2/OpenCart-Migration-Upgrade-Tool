@@ -248,7 +248,7 @@ class ModelUpgradeSettings extends Model{
    foreach($query->rows as $rows){
                           $layouts[$mod][] = $rows['layout_module_id'];
    } 
-        
+        if( isset($layouts[$mod][$i])){
              $sql = '
                        UPDATE
                              `' . DB_PREFIX . 'layout_module`
@@ -267,6 +267,8 @@ class ModelUpgradeSettings extends Model{
         $text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module',  DB_PREFIX . 'layout_module' ) );
                                      
         $i++;
+        }
+        
          $sql = '
 		INSERT INTO
 			`' . DB_PREFIX . 'module`
