@@ -61,10 +61,10 @@ class ModelUpgradeConfiguration extends Model{
 					fclose( $fw );
 				}
 
-		    if( !strpos( $check, 'HTTP_SERVER' ) ) {
-				$text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'HTTP_SERVER', 'config.php' ) );
-				$text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'HTTPS_SERVER', 'config.php' ) );
-		   }
+		               if( !strpos( $check, 'HTTP_SERVER' ) ) {
+			        	$text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'HTTP_SERVER', 'config.php' ) );
+				        $text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'HTTPS_SERVER', 'config.php' ) );
+		                }
 				$text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'DIR_UPLOAD', 'config.php' ) );
 				$text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'DIR_MODIFICATION', 'config.php' ) );
 			}else{
@@ -78,9 +78,9 @@ class ModelUpgradeConfiguration extends Model{
 		$file		= $this->dirAdmin . '/config.php';
 		$content	= file_get_contents( DIR_DOCUMENT_ROOT . $file );
 
-		if( $dirOld ) {
-			if( strpos( $content, $dirOld ) !== false ) {
-		    	$content = str_replace( $dirOld, $root, $content );
+		if( $this->dirOld ) {
+			if( strpos( $content, $this->dirOld ) !== false ) {
+		    	$content = str_replace( $this->dirOld, $root, $content );
 			if( !$this->simulate ) {
 		    	   file_put_contents( DIR_DOCUMENT_ROOT . $file, $content );
                         }
