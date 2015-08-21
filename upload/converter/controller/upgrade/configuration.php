@@ -38,7 +38,7 @@ class ControllerUpgradeConfiguration extends Controller {
                 }
                 if( !isset( $this->request->post['skip'] ) && isset( $this->request->post['step2']) ){
                   $this->data['step2'] = 'step2';
-                  $this->data['upgrade_data'] = $this->model_upgrade_configuration->editConfig( $simulate, $dirOld, $dirAdmin );
+                  $this->data['upgrade_data'] = $this->model_upgrade_configuration->editConfig( $this->request->post );
                 } 
                 if( isset( $this->request->post['skip'] ) ){
                  $this->data['skip'] = 'skip';
