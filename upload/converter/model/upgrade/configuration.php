@@ -38,17 +38,19 @@ class ModelUpgradeConfiguration extends Model{
 	    }
 
 	
-		if( !strpos( $content, 'DIR_UPLOAD' ) ) {
+		if( !strpos( $content, 'DIR_UPLOAD' ) || $this->upgrade2030 &&  !strpos( $content, 'DB_PORT' ) ) {
 
 			$fp = file( DIR_DOCUMENT_ROOT . 'config.php' );
 
-		    if( !strpos( $content, 'HTTP_SERVER' ) ) {
+		   if( !strpos( $content, 'HTTP_SERVER' ) ) {
 			  array_splice( $fp, 1, 0, $http_server . "\r\n" );
 			  array_splice( $fp, 2, 0, $https_server . "\r\n" );
 		   }
+	   	  if( !strpos( $content, 'DIR_UPLOAD' ) ) {
 			array_splice( $fp, 18, 0, $modification . "\r\n" );
 			array_splice( $fp, 19, 0, $upload . "\r\n" );
-		    if($this->upgrade2030 &&  !strpos( $content, 'DB_PORT' )) {
+		   }
+		   if($this->upgrade2030 &&  !strpos( $content, 'DB_PORT' )) {
 			  array_splice( $fp, 20, 0, $db_port . "\r\n" );
 		   }
 
