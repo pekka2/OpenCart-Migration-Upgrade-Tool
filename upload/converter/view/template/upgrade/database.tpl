@@ -137,6 +137,7 @@
 				<input type="hidden" name="dirOld" value="<?php echo $dirOld; ?>" />
 				<input type="hidden" name="showOps" value="<?php echo $showOps; ?>" />
 				<input type="hidden" name="dirImage" value="<?php echo $images; ?>" />
+				<input type="hidden" name="upgrade2030" value="<?php echo $upgrade2030;?>"/>
 				<div class="buttons">
 					<input type="submit" name="submit" value="<?php echo $btn_config; ?>" class="submit round green" />
 					<input type="submit" name="skip" value="<?php echo $btn_skip; ?>" class="submit round" />
