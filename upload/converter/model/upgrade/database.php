@@ -1236,28 +1236,46 @@ class ModelUpgradeDatabase extends Model{
                 $query = $this->db->query($sql);
 
                 if( count( $query->rows ) > 0 ){
-                  foreach( $query->rows as $id ){
+                  $sql = '
+                SELECT 
+                       *
+                FROM  `' . DB_PREFIX . 'language`';
 
+                $languages = $this->db->query($sql);
+                
+       if( count( $query->rows ) > 0 ){
+          $customers = array();
+            foreach( $query->rows as $id ){
+            	$customers[] = array("customer_group_id" => $id['customer_group_id'],
+            	                     "name" => $id['name'],
+            	                     "description" => "Group ". $id['customer_group_id'] );
+            }	
+            $i = 0;
+            
+       	     foreach($languages->rows as $language){
 		  $sql = '
 		  INSERT INTO
 		 	   `' . DB_PREFIX . 'customer_group_description` (`customer_group_id`, `language_id`, `name`, `description`)
 		  VALUES
-			   (' . $id['customer_group_id'] . ', 1, \'' . $id['name'] . '\', \'Group '. $id['customer_group_id'] . '\')';
-
-		  if( !$this->simulate ) {
-                     $this->db->query( $sql );
-                  }
-                 if( $this->showOps ) {
-                $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
+			   (' . $customers[$i]['customer_group_id'] . ',
+			    \'' . $language['language_id'] . '\', 
+			    \'' . $customers[$i]['name'] . '\',
+			    \''. $customers[$i]['description'] . '\')';
+					         if( !$this->simulate ) {
+				                     $this->db->query( $sql );
+				                  }
+				                  if( $this->showOps ) {
+						                $text .= '<p><pre>' . $sql .'</pre></p>';
+				                  }
 		  $text .= $this->msg( sprintf( $this->lang['msg_text'],   'customer_group_description', $this->lang['msg_new_data'] ) );
-
-                }
-             }
+             $i++;
+              }
+            }
 	}
 		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '1.5.3.1', '' ) );
     return $text;
   }
+
   public function addUpgradeTo154() {
         $text = '';
 	if( !array_search( DB_PREFIX . 'customer_online', $this->structure->tables() ) ) {
