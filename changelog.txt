@@ -18,6 +18,8 @@ legend
 
 CONVERTER
 ---------
+2.0.2 2015.08.21        # save to table customer group description in old version
+                        # save to config.php files
 2.0.1 2015.08.03        - system/library/session.php
                         - system/library/mail.php
                         + logout link
