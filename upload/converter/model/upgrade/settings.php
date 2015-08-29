@@ -1634,7 +1634,7 @@ class ModelUpgradeSettings extends Model{
 			`store_id` = \'0\',
 			`code` = \'config\',
 			`key` = \'config_file_mime_allowed\',
-			`value` = \'' . $this->db->escape( 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/jpeg\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/vnd.microsoft.icon\r\nimage/tiff\r\nimage/tiff\r\nimage/svg+xml\r\nimage/svg+xml\r\napplication/zip\r\napplication/x-rar-compressed\r\napplication/x-msdownload\r\napplication/vnd.ms-cab-compressed\r\naudio/mpeg\r\nvideo/quicktime\r\nvideo/quicktime\r\napplication/pdf\r\nimage/vnd.adobe.photoshop\r\napplication/postscript\r\napplication/postscript\r\napplication/postscript\r\napplication/msword\r\napplication/rtf\r\napplication/vnd.ms-excel\r\napplication/vnd.ms-powerpoint\r\napplication/vnd.oasis.opendocument.text\r\napplication/vnd.oasis.opendocument.spreadsheet' ) . '\',
+			`value` = \'' . $this->db->escape( "text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/jpeg\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/vnd.microsoft.icon\r\nimage/tiff\r\nimage/tiff\r\nimage/svg+xml\r\nimage/svg+xml\r\napplication/zip\r\napplication/x-rar-compressed\r\napplication/x-msdownload\r\napplication/vnd.ms-cab-compressed\r\naudio/mpeg\r\nvideo/quicktime\r\nvideo/quicktime\r\napplication/pdf\r\nimage/vnd.adobe.photoshop\r\napplication/postscript\r\napplication/postscript\r\napplication/postscript\r\napplication/msword\r\napplication/rtf\r\napplication/vnd.ms-excel\r\napplication/vnd.ms-powerpoint\r\napplication/vnd.oasis.opendocument.text\r\napplication/vnd.oasis.opendocument.spreadsheet" ) . '\',
 			`serialized` = \'0\'';
 
 		if( !$this->simulate ) {
@@ -1645,6 +1645,27 @@ class ModelUpgradeSettings extends Model{
                 }
 		++$this->settingcounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_file_mime_allowed', '' ) );
+	}
+
+	if( !$this->structure->hasSetting( 'config_robots' ) ) {
+        $sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`code` = \'config\',
+			`key` =  \'config_robots\',
+			`value` = \'' . $this->db->escape( "abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai''hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg" ) . '\',
+			`serialized` = \'0\'';
+
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$this->msg( sprintf( $this->lang['msg_config'], 'config_robots', '' ) );
 	}
 
 	if( !$this->structure->hasSetting( 'config_password' ) ) {
@@ -1724,6 +1745,94 @@ class ModelUpgradeSettings extends Model{
                 }
 		++$this->settingcounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_secure', 'setting' ) );
+	}
+
+
+	if( !$this->structure->hasSetting( 'config_image_compare_width' ) ) {
+		$sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`code` = \'config\',
+			`key` = \'config_image_compare_width\',
+			`value` = \'90\',
+			`serialized` = \'0\'';
+
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_image_compare_width', 'setting' ) );
+	}
+
+
+	if( !$this->structure->hasSetting( 'config_image_compare_height' ) ) {
+		$sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`code` = \'config\',
+			`key` = \'config_image_compare_height\',
+			`value` = \'90\',
+			`serialized` = \'0\'';
+
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_image_compare_height', 'setting' ) );
+	}
+
+
+	if( !$this->structure->hasSetting( 'config_image_wishlist_width' ) ) {
+		$sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`code` = \'config\',
+			`key` = \'config_image_wishlist_width\',
+			`value` = \'47\',
+			`serialized` = \'0\'';
+
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_image_wishlist_width', 'setting' ) );
+	}
+
+ 
+	if( !$this->structure->hasSetting( 'config_image_wishlist_height' ) ) {
+		$sql = '
+		INSERT INTO
+			`' . DB_PREFIX . 'setting`
+		SET
+			`store_id` = \'0\',
+			`code` = \'config\',
+			`key` = \'config_image_wishlist_height\',
+			`value` = \'47\',
+			`serialized` = \'0\'';
+
+		if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		++$this->settingcounter;
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_image_wishlist_height', 'setting' ) );
 	}
 
     return $text;
