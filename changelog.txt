@@ -18,6 +18,10 @@ legend
 
 CONVERTER
 ---------
+2.0.3.2015.08.29        # settings config_file_mime_allowed increase script
+                        + settings config_file_ext_allowed
+                        + settings config_image_compare_width & height
+                        + settings config_image_wishlist_width & height
 2.0.2 2015.08.21        # save to table customer group description in old version
                         # save to config.php files
 2.0.1 2015.08.03        - system/library/session.php
