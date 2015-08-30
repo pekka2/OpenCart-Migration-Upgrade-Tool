@@ -1227,6 +1227,43 @@ class ModelUpgradeTableColumns extends Model{
   	 $text .= $this->msg( sprintf( $this->lang['msg_column'], 'code',  'order_total' ) );
          $this->cache->delete( 'order_total' );
       }
+        if( ! $this->structure->hasApproval()) {
+        	
+			$sql = '
+			SELECT
+			      *
+			FROM
+				`' . DB_PREFIX . 'customer_group`';
+
+          $results = $this->db->query( $sql );
+             $row = 1;
+             echo count($results->rows);
+             $app = array();
+         foreach($results->rows as $result){    
+    
+				$sql = '
+				UPDATE
+					`' . DB_PREFIX . 'customer_group`
+				SET
+					`approval` = \'1\',
+					`sort_order` = \'' . $row . '\'';
+				if( !$this->simulate ) {
+	
+				$this->db->query("UPDATE `" . DB_PREFIX . "customer_group` SET
+				 `approval` = '1',
+				 `sort_order` = '" . $row . "'
+				 WHERE
+				 `customer_group_id` = '" . $result['customer_group_id'] . "'");
+
+            }
+            if( $this->showOps ) {
+                   $text .= '<p><pre>' . $sql .'</pre></p>';
+            }     
+	               ++$row;     
+          }
+			$text .= $this->msg( sprintf( $this->lang['msg_column'], 'approval',  'customer_group' ) );
+         $this->cache->delete( 'customer_group' );
+        }
        return $text;
   }	
 
