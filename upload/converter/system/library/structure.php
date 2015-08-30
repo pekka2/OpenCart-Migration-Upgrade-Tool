@@ -47,6 +47,21 @@ class Structure {
       }
 	return true;
    }
+
+
+   public function hasTotal() {
+	$sql = '
+	SELECT
+		*
+	FROM
+		`' . DB_PREFIX . 'order_total`';
+	$result = $this->db->query( $sql );
+			if( count( $result->rows ) == 0 ) {
+				return false;
+			}
+	return true;
+   }
+   
   public function hasOption( $val ) {
                         
 	$sql = '
