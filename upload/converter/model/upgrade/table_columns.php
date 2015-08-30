@@ -1237,7 +1237,6 @@ class ModelUpgradeTableColumns extends Model{
 
           $results = $this->db->query( $sql );
              $row = 1;
-             echo count($results->rows);
              $app = array();
          foreach($results->rows as $result){    
     
