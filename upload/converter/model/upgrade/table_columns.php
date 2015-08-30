@@ -462,6 +462,7 @@ class ModelUpgradeTableColumns extends Model{
         $text .= $this->changeOptions();
         $text .= $this->deleteColumns();
         $text .= $this->changeColumns();
+        $text .= $this->checkColumn14x();
 
       return $text;
   }
@@ -1016,6 +1017,217 @@ class ModelUpgradeTableColumns extends Model{
         $text .= ' </div>';
 
         return $text;
+  }
+
+  public function checkColumn14x(){
+  	        $text = '';
+		$product_option = $this->structure->columns( 'product_option' );
+			
+        if( !array_search( 'value', $product_option ) && !array_search( 'option_value', $product_option ) ) {
+
+			$sql = '
+			ALTER TABLE
+				`' . DB_PREFIX . 'product_option`
+			ADD COLUMN
+				`value` text NOT NULL AFTER option_id' ;
+
+								if( !$this->simulate ) {
+                               $this->db->query( $sql );
+                        }
+                        if( $this->showOps ) {
+                               $text .= '<p><pre>' . $sql .'</pre></p>';
+                        }
+                  
+ 	 $text .= $this->msg( sprintf( $this->lang['msg_column'], 'value',  'product_option' ) );
+         $this->cache->delete( 'product_option' );
+
+	}
+	       
+        if( !array_search( 'code', $this->structure->columns( 'order_total' ) )) {
+
+			$sql = '
+			ALTER TABLE
+				`' . DB_PREFIX . 'order_total`
+			ADD COLUMN
+				`code` varchar(32) NOT NULL AFTER order_id' ;
+
+					if( !$this->simulate ) {
+                      $this->db->query( $sql );
+               }
+               if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+               }
+ 
+              if( $this->structure->hasTotal() ) {
+
+			$sql = '
+			UPDATE
+				`' . DB_PREFIX . 'order_total`
+			SET
+				`code` = \'total\'
+			WHERE
+			    `title` = \'Total:\'' ;
+
+					if( !$this->simulate ) {
+                      $this->db->query( $sql );
+               }
+               if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+               }
+           
+			$sql = '
+			UPDATE
+				`' . DB_PREFIX . 'order_total`
+			SET
+				`code` = \'sub_total\'
+			WHERE
+			    `title` = \'Sub-Total:\'';
+
+					if( !$this->simulate ) {
+                      $this->db->query( $sql );
+               }
+               if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+               }
+           
+			$sql = '
+			UPDATE
+				`' . DB_PREFIX . 'order_total`
+			SET
+				`code` = \'sub_total\'
+			WHERE
+			    `title` LIKE \'%netto%\'';
+
+					if( !$this->simulate ) {
+                      $this->db->query( $sql );
+               }
+               if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+               }
+               
+			$sql = '
+			UPDATE
+				`' . DB_PREFIX . 'order_total`
+			SET
+				`code` = \'shipping\'
+			WHERE
+			    `title` = \'Flat Rate:\'';
+
+					if( !$this->simulate ) {
+                      $this->db->query( $sql );
+               }
+               if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+               }
+          
+			$sql = '
+			UPDATE
+				`' . DB_PREFIX . 'order_total`
+			SET
+				`code` = \'sub_total\'
+			WHERE
+			    `title` LIKE \'%Veroton%\'';
+
+					if( !$this->simulate ) {
+                      $this->db->query( $sql );
+               }
+               if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+               }          
+         
+			$sql = '
+			UPDATE
+				`' . DB_PREFIX . 'order_total`
+			SET
+				`code` = \'sub_total\'
+			WHERE
+			    `title` = \'Subtotaal:\'';
+
+					if( !$this->simulate ) {
+                      $this->db->query( $sql );
+               }
+               if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+               }          
+         
+			$sql = '
+			UPDATE
+				`' . DB_PREFIX . 'order_total`
+			SET
+				`code` = \'total\'
+			WHERE
+			    `title` = \'Yhteensä:\'' ;
+
+					if( !$this->simulate ) {
+                      $this->db->query( $sql );
+               }
+               if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+               }
+            
+			$sql = '
+			UPDATE
+				`' . DB_PREFIX . 'order_total`
+			SET
+				`code` = \'total\'
+			WHERE
+			    `title` = \'Totaal:\'' ;
+
+					if( !$this->simulate ) {
+                      $this->db->query( $sql );
+               }
+               if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+               }
+               
+			$sql = '
+			UPDATE
+				`' . DB_PREFIX . 'order_total`
+			SET
+				`code` = \'tax\'
+			WHERE
+			   `title` LIKE \'%VAT%\'';
+
+					if( !$this->simulate ) {
+                      $this->db->query( $sql );
+               }
+               if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+               }    
+ 
+			$sql = '
+			UPDATE
+				`' . DB_PREFIX . 'order_total`
+			SET
+				`code` = \'tax\'
+			WHERE
+			   `title` LIKE \'%ALV%\'';
+
+					if( !$this->simulate ) {
+                      $this->db->query( $sql );
+               }
+               if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+               }   
+			$sql = '
+			UPDATE
+				`' . DB_PREFIX . 'order_total`
+			SET
+				`code` = \'tax\'
+			WHERE
+			   `title` LIKE \'%BTW%\'';
+
+					if( !$this->simulate ) {
+                      $this->db->query( $sql );
+               }
+               if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+               }                         
+          }          
+  	 $text .= $this->msg( sprintf( $this->lang['msg_column'], 'code',  'order_total' ) );
+         $this->cache->delete( 'order_total' );
+      }
+       return $text;
   }	
 
     /* Tax tables change */
