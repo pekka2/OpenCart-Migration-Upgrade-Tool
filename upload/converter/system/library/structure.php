@@ -80,6 +80,22 @@ class Structure {
 
 	return true;
   }
+
+   public function hasApproval() {
+	$sql = '
+	SELECT
+		*
+	FROM
+		`' . DB_PREFIX . 'customer_group`
+	WHERE
+	   `approval` = \'1\'';
+	   
+			$result = $this->db->query( $sql );
+			if( count( $result->rows ) == 0 ) {
+				return false;
+			}
+	return true;
+   }
   
   public function getColumnType( $column, $type, $table ) {
      if( array_search( DB_PREFIX . $table, $this->tables() ) || $table == 'address'){
