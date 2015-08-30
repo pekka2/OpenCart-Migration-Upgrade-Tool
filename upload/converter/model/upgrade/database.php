@@ -910,6 +910,29 @@ class ModelUpgradeDatabase extends Model{
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 		++$this->tablecounter;
+		 $sql = '
+                SELECT 
+                       *
+                FROM  `' . DB_PREFIX . 'language`';
+
+          $languages = $this->db->query($sql);
+        foreach($languages as $language){
+
+		$sql = '
+					INSERT INTO `' . DB_PREFIX . 'return_reason` (`return_reason_id`, `language_id`, `name`) VALUES
+					(1, ' . $language['language_id'] . ', \'Dead On Arrival\'),
+					(2, ' . $language['language_id'] . ', \'Received Wrong Item\'),
+					(3, ' . $language['language_id'] . ', \'Order Error\'),
+					(4, ' . $language['language_id'] . ', \'Faulty, please supply details\'),
+					(5, ' . $language['language_id'] . ', \'Other, please supply details\');';
+
+					if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ){
+	                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+       }
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'return_reason' ) );
 	}
 
