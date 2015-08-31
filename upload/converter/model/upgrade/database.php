@@ -852,13 +852,20 @@ class ModelUpgradeDatabase extends Model{
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 
+	 $sql = '
+                SELECT 
+                       *
+                FROM  `' . DB_PREFIX . 'language`';
+
+          $languages = $this->db->query($sql);
+	        foreach($languages as $language){
 		$sql = '
                 INSERT INTO 
                            `' . DB_PREFIX . 'return_action` (`return_action_id`, `language_id`, `name`)
                 VALUES
-                           (1, 1, \'Refunded\'),
-                           (2, 1, \'Credit Issued\'),
-                           (3, 1, \'Replacement Sent\');';
+                           (1, ' . $language['language_id'] . ', \'Refunded\'),
+                           (2, ' . $language['language_id'] . ', \'Credit Issued\'),
+                           (3, ' . $language['language_id'] . ', \'Replacement Sent\');';
 
 		if( !$this->simulate ) {
                        $this->db->query( $sql );
@@ -866,6 +873,7 @@ class ModelUpgradeDatabase extends Model{
                 if( $this->showOps ){
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
+	     }
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'return_action' ) );
 	}
@@ -953,13 +961,20 @@ class ModelUpgradeDatabase extends Model{
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 
+	 $sql = '
+                SELECT 
+                       *
+                FROM  `' . DB_PREFIX . 'language`';
+
+          $languages = $this->db->query($sql);
+	        foreach($languages as $language){
 		$sql = '
                  INSERT INTO
                             `' . DB_PREFIX . 'return_status` (`return_status_id`, `language_id`, `name`)
                  VALUES
-                           (1, 1, \'Pending\'),
-                           (3, 1, \'Complete\'),
-                           (2, 1, \'Awaiting Products\');';
+                           (1, ' . $language['language_id'] . ', \'Pending\'),
+                           (3, ' . $language['language_id'] . ', \'Complete\'),
+                           (2, ' . $language['language_id'] . ', \'Awaiting Products\');';
 
 		if( !$this->simulate ) {
                        $this->db->query( $sql );
@@ -967,6 +982,7 @@ class ModelUpgradeDatabase extends Model{
                 if( $this->showOps ){
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
+	        }
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'return_status' ) );
 	}
