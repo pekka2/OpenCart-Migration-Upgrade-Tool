@@ -1,6 +1,7 @@
 <?php
 class ModelUpgradeConfiguration extends Model{
     private $lang;
+    private $text;
    public function editConfig( $data ){
        $this->lang = $this->lmodel->get('upgrade_configuration');
        $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
@@ -10,7 +11,7 @@ class ModelUpgradeConfiguration extends Model{
        $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
        $this->upgrade2030  = ( !empty( $data['upgrade2030'] ) ? true : false );
     
-        $text = '';
+        $this->text = '';
 
 		$modification = 'define(\'DIR_MODIFICATION\', \'' . DIR_MODIFICATION . '\'); // OC 2';
 		$upload = 'define(\'DIR_UPLOAD\', \'' . DIR_UPLOAD . '\'); // OC 2';
