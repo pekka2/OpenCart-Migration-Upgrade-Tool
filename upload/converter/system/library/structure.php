@@ -28,6 +28,17 @@ class Structure {
           return $ret;	
   }
    
+  public function language() {
+		 $sql = '
+                SELECT 
+                       *
+                FROM  `' . DB_PREFIX . 'language`';
+
+          $languages = $this->db->query($sql);
+          
+          return $languages->rows;	
+  }
+   
    public function hasLayout( $val ) {
  
 	$sql = '
