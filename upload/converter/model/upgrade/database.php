@@ -1265,7 +1265,7 @@ class ModelUpgradeDatabase extends Model{
                        *
                 FROM  `' . DB_PREFIX . 'customer_group`';
  
-                $query = $this->db->query($sql);
+                $customers = $this->db->query($query);
 
                 if( count( $query->rows ) > 0 ){
                   $sql = '
@@ -1275,30 +1275,25 @@ class ModelUpgradeDatabase extends Model{
 
                 $languages = $this->db->query($sql);
                 
-       if( count( $query->rows ) > 0 ){
-          $customers = array();
-            foreach( $query->rows as $id ){
-            	$customers[] = array("customer_group_id" => $id['customer_group_id'],
-            	                     "name" => $id['name'],
-            	                     "description" => "Group ". $id['customer_group_id'] );
-            }	
-            $i = 0;
+       if( count( $customers->rows ) > 0 ){
             
-       	     foreach($languages->rows as $language){
+       	  foreach($languages->rows as $language){
+               foreach( $customers->rows as $customer ){
 		  $sql = '
 		  INSERT INTO
 		 	   `' . DB_PREFIX . 'customer_group_description` (`customer_group_id`, `language_id`, `name`, `description`)
 		  VALUES
-			   (' . $customers[$i]['customer_group_id'] . ',
+			   (' . $customer['customer_group_id'] . ',
 			    \'' . $language['language_id'] . '\', 
-			    \'' . $customers[$i]['name'] . '\',
-			    \''. $customers[$i]['description'] . '\')';
-					         if( !$this->simulate ) {
-				                     $this->db->query( $sql );
-				                  }
-				                  if( $this->showOps ) {
-						                $text .= '<p><pre>' . $sql .'</pre></p>';
-				                  }
+			    \'' . $customer['name'] . '\',
+			    \''. $customer['name'] . '\')';
+		if( !$this->simulate ) {
+		  $this->db->query( $sql );
+		   }
+		if( $this->showOps ) {
+		      $text .= '<p><pre>' . $sql .'</pre></p>';
+		}          
+            }	
 		  $text .= $this->msg( sprintf( $this->lang['msg_text'],   'customer_group_description', $this->lang['msg_new_data'] ) );
              $i++;
               }
