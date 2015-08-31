@@ -28,16 +28,7 @@ class ModelUpgradeConfiguration extends Model{
 		// frontend
 	    $content = file_get_contents( DIR_DOCUMENT_ROOT . 'config.php' );
             $check = $content;
-	    if( $this->dirOld ) {
-	    	if( strpos( $content, $this->dirOld ) !== false ) {
-		    	$content = str_replace( $this->dirOld, $root, $content );
-                      
-		    	file_put_contents( $root . 'config.php', $content );
-				$text .= $this->msg( sprintf(  $this->lang, 'config_replace',  'config.php', '' ) );
-			}
-	    }
 
-	
 		if( !strpos( $content, 'DIR_UPLOAD' ) || $this->upgrade2030 &&  !strpos( $content, 'DB_PORT' ) ) {
 
 		$this->text .= $this->msg('<p><hr/></p>');
@@ -101,16 +92,6 @@ class ModelUpgradeConfiguration extends Model{
 		// FILE yourstore.com/admin/config.php
 		$file		= $this->dirAdmin . 'config.php';
 		$content2	= file_get_contents( DIR_DOCUMENT_ROOT . $file );
-
-		if( $this->dirOld ) {
-			if( strpos( $content, $this->dirOld ) !== false ) {
-		    	$content2 = str_replace( $this->dirOld, $root, $content2 );
-			if( !$this->simulate ) {
-		    	   file_put_contents( DIR_DOCUMENT_ROOT . $file, $content2 );
-                        }
-		    	 $text .= $this->msg( sprintf(  $this->lang['msg_config_replace'], 'config.php', '' ) );
-			}
-	    }
 
 		if( !strpos( $content2, 'DIR_UPLOAD' ) ) {
 			$fp2 = file( DIR_DOCUMENT_ROOT . $file );
