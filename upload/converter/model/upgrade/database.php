@@ -1,6 +1,7 @@
 <?php
 class ModelUpgradeDatabase extends Model{
   private $lang;
+  private $languages;
   private $simulate;
   private $showOps;
   private $tablecounter;
@@ -11,6 +12,7 @@ class ModelUpgradeDatabase extends Model{
         $this->upgrade2030  = ( !empty( $data['upgrade2030'] ) ? true : false );
 
         $this->lang = $this->lmodel->get('upgrade_database');
+        $this->languages = $this->structure->language(); 
 
         $this->tablecounter = 0;
         $text = '';
@@ -185,21 +187,22 @@ class ModelUpgradeDatabase extends Model{
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 
+        foreach($this->languages as $language){
 		$sql = '
                 INSERT INTO
                            `' . DB_PREFIX . 'attribute_description` (`attribute_id`, `language_id`, `name`)
                 VALUES
-                           (1, 1, \'Description\'),
-                           (2, 1, \'No. of Cores\'),
-                           (4, 1, \'test 1\'),
-                           (5, 1, \'test 2\'),
-                           (6, 1, \'test 3\'),
-                           (7, 1, \'test 4\'),
-                           (8, 1, \'test 5\'),
-                           (9, 1, \'test 6\'),
-                           (10, 1, \'test 7\'),
-                           (11, 1, \'test 8\'),
-                           (3, 1, \'Clockspeed\');';
+                           (1, ' . $language['language_id'] . ', \'Description\'),
+                           (2, ' . $language['language_id'] . ', \'No. of Cores\'),
+                           (4, ' . $language['language_id'] . ', \'test 1\'),
+                           (5, ' . $language['language_id'] . ', \'test 2\'),
+                           (6, ' . $language['language_id'] . ', \'test 3\'),
+                           (7, ' . $language['language_id'] . ', \'test 4\'),
+                           (8, ' . $language['language_id'] . ', \'test 5\'),
+                           (9, ' . $language['language_id'] . ', \'test 6\'),
+                           (10, ' . $language['language_id'] . ', \'test 7\'),
+                           (11, ' . $language['language_id'] . ', \'test 8\'),
+                           (3, ' . $language['language_id'] . ', \'Clockspeed\');';
 
 		if( !$this->simulate ) {
                        $this->db->query( $sql );
@@ -207,6 +210,7 @@ class ModelUpgradeDatabase extends Model{
                 if( $this->showOps ){
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
+        }
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'attribute_description' ) );
 	}
@@ -263,14 +267,15 @@ class ModelUpgradeDatabase extends Model{
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 
+        foreach($this->languages as $language){
 		$sql = '
                 INSERT INTO
                            `' . DB_PREFIX . 'attribute_group_description` (`attribute_group_id`, `language_id`, `name`)
                 VALUES
-                           (3, 1, \'Memory\'),
-                           (4, 1, \'Technical\'),
-                           (5, 1, \'Motherboard\'),
-                           (6, 1, \'Processor\');';
+                           (3, ' . $language['language_id'] . ', \'Memory\'),
+                           (4, ' . $language['language_id'] . ', \'Technical\'),
+                           (5, ' . $language['language_id'] . ', \'Motherboard\'),
+                           (6, ' . $language['language_id'] . ', \'Processor\');';
 
 
 		if( !$this->simulate ) {
@@ -608,7 +613,6 @@ class ModelUpgradeDatabase extends Model{
                 PRIMARY KEY (`option_id`,`language_id`)
               ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;';
 
-
 		if( !$this->simulate ) {
                        $this->db->query( $sql );
                 }
@@ -616,21 +620,22 @@ class ModelUpgradeDatabase extends Model{
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 
+        foreach($this->languages as $language){
 		$sql = '
                 INSERT INTO
                            `' . DB_PREFIX . 'option_description` (`option_id`, `language_id`, `name`)
                 VALUES
-                           (1, 1, \'Radio\'),
-                           (2, 1, \'Checkbox\'),
-                           (4, 1, \'Text\'),
-                           (6, 1, \'Textarea\'),
-                           (8, 1, \'Date\'),
-                           (7, 1, \'File\'),
-                           (5, 1, \'Select\'),
-                           (9, 1, \'Time\'),
-                           (10, 1, \'Date &amp; Time\'),
-                           (12, 1, \'Delivery Date\'),
-                           (11, 1, \'Size\');';
+                           (1, ' . $language['language_id'] . ', \'Radio\'),
+                           (2, ' . $language['language_id'] . ', \'Checkbox\'),
+                           (4, ' . $language['language_id'] . ', \'Text\'),
+                           (6, ' . $language['language_id'] . ', \'Textarea\'),
+                           (8, ' . $language['language_id'] . ', \'Date\'),
+                           (7, ' . $language['language_id'] . ', \'File\'),
+                           (5, ' . $language['language_id'] . ', \'Select\'),
+                           (9, ' . $language['language_id'] . ', \'Time\'),
+                           (10, ' . $language['language_id'] . ', \'Date &amp; Time\'),
+                           (12, ' . $language['language_id'] . ', \'Delivery Date\'),
+                           (11, ' . $language['language_id'] . ', \'Size\');';
 
 		if( !$this->simulate ) {
                        $this->db->query( $sql );
@@ -638,6 +643,7 @@ class ModelUpgradeDatabase extends Model{
                 if( $this->showOps ){
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
+        }
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'option_description' ) );
 	}
@@ -706,24 +712,25 @@ class ModelUpgradeDatabase extends Model{
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 
+        foreach($this->languages as $language){
 		$sql = '
                 INSERT INTO
                            `' . DB_PREFIX . 'option_value_description` (`option_value_id`, `language_id`, `option_id`, `name`)
                 VALUES
-                           (43, 1, 1, \'Large\'),
-                           (32, 1, 1, \'Small\'),
-                           (45, 1, 2, \'Checkbox 4\'),
-                           (44, 1, 2, \'Checkbox 3\'),
-                           (31, 1, 1, \'Medium\'),
-                           (42, 1, 5, \'Yellow\'),
-                           (41, 1, 5, \'Green\'),
-                           (39, 1, 5, \'Red\'),
-                           (40, 1, 5, \'Blue\'),
-                           (23, 1, 2, \'Checkbox 1\'),
-                           (24, 1, 2, \'Checkbox 2\'),
-                           (48, 1, 11, \'Large\'),
-                           (47, 1, 11, \'Medium\'),
-                           (46, 1, 11, \'Small\');';
+                           (43, ' . $language['language_id'] . ', 1, \'Large\'),
+                           (32, ' . $language['language_id'] . ', 1, \'Small\'),
+                           (45, ' . $language['language_id'] . ', 2, \'Checkbox 4\'),
+                           (44, ' . $language['language_id'] . ', 2, \'Checkbox 3\'),
+                           (31, ' . $language['language_id'] . ', 1, \'Medium\'),
+                           (42, ' . $language['language_id'] . ', 5, \'Yellow\'),
+                           (41, ' . $language['language_id'] . ', 5, \'Green\'),
+                           (39, ' . $language['language_id'] . ', 5, \'Red\'),
+                           (40, ' . $language['language_id'] . ', 5, \'Blue\'),
+                           (23, ' . $language['language_id'] . ', 2, \'Checkbox 1\'),
+                           (24, ' . $language['language_id'] . ', 2, \'Checkbox 2\'),
+                           (48, ' . $language['language_id'] . ', 11, \'Large\'),
+                           (47, ' . $language['language_id'] . ', 11, \'Medium\'),
+                           (46, ' . $language['language_id'] . ', 11, \'Small\');';
 
 		if( !$this->simulate ) {
                        $this->db->query( $sql );
@@ -731,6 +738,7 @@ class ModelUpgradeDatabase extends Model{
                 if( $this->showOps ){
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
+        }
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'option_value_description' ) );
 	}
@@ -852,13 +860,7 @@ class ModelUpgradeDatabase extends Model{
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 
-	 $sql = '
-                SELECT 
-                       *
-                FROM  `' . DB_PREFIX . 'language`';
-
-          $languages = $this->db->query($sql);
-	        foreach($languages as $language){
+	        foreach($this->languages as $language){
 		$sql = '
                 INSERT INTO 
                            `' . DB_PREFIX . 'return_action` (`return_action_id`, `language_id`, `name`)
@@ -918,13 +920,8 @@ class ModelUpgradeDatabase extends Model{
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 		++$this->tablecounter;
-		 $sql = '
-                SELECT 
-                       *
-                FROM  `' . DB_PREFIX . 'language`';
-
-          $languages = $this->db->query($sql);
-        foreach($languages as $language){
+	
+        foreach($this->languages as $language){
 
 		$sql = '
 					INSERT INTO `' . DB_PREFIX . 'return_reason` (`return_reason_id`, `language_id`, `name`) VALUES
@@ -961,13 +958,7 @@ class ModelUpgradeDatabase extends Model{
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 
-	 $sql = '
-                SELECT 
-                       *
-                FROM  `' . DB_PREFIX . 'language`';
-
-          $languages = $this->db->query($sql);
-	        foreach($languages as $language){
+	        foreach($this->languages as $language){
 		$sql = '
                  INSERT INTO
                             `' . DB_PREFIX . 'return_status` (`return_status_id`, `language_id`, `name`)
@@ -1072,13 +1063,14 @@ class ModelUpgradeDatabase extends Model{
                 }
 
 
+        foreach($this->languages as $language){
 		$sql = '
                 INSERT INTO
                            `' . DB_PREFIX . 'voucher_theme_description` (`voucher_theme_id`, `language_id`, `name`)
                 VALUES
-                           (6, 1, \'Christmas\'),
-                           (7, 1, \'Birthday\'),
-                           (8, 1, \'General\');';
+                           (6, ' . $language['language_id'] . ', \'Christmas\'),
+                           (7, ' . $language['language_id'] . ', \'Birthday\'),
+                           (8, ' . $language['language_id'] . ', \'General\');';
 
 		if( !$this->simulate ) {
                        $this->db->query( $sql );
@@ -1086,6 +1078,7 @@ class ModelUpgradeDatabase extends Model{
                 if( $this->showOps ){
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
+        }
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'voucher_theme_description' ) );
 	}
