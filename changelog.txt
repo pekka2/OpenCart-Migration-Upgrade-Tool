@@ -35,6 +35,8 @@ CONVERTER
                         # table `option_value_description` language_id of data in version 1.4.x
                         # table `voucher_theme_description` language_id of data in version 1.4.x
                         # table `customer_group_description`  data in version 1.4.x - 1.5.1
+                        # constant add to config.php files
+                        + preview script to configuration step
 2.0.2 2015.08.21        # save to table customer group description in old version
                         # save to config.php files
 2.0.1 2015.08.03        - system/library/session.php
