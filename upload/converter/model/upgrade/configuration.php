@@ -61,11 +61,11 @@ class ModelUpgradeConfiguration extends Model{
 						if( $this->showOps ){
 							$this->text .= '<p><pre>'.$http_server.'</pre></p>';
 						}
-			        	$text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'HTTP_SERVER', 'config.php' ) );
+			        	$this->text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'HTTP_SERVER', 'config.php' ) );
 						 if( $this->showOps ){
 						         $this->text .= '<p><pre>'.$https_server.'</pre></p>';
 						 }
-				        $text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'HTTPS_SERVER', 'config.php' ) );
+				        $this->text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'HTTPS_SERVER', 'config.php' ) );
 		                }
                                   if( $this->showOps ){
 				    	$this->text .= '<p><pre>'.$upload.'</pre></p>';
@@ -74,7 +74,7 @@ class ModelUpgradeConfiguration extends Model{
 			          if( $this->showOps ){
 				    	$this->text .= '<p><pre>'.$modification.'</pre></p>';
                                   }
-				$text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'DIR_MODIFICATION', 'config.php' ) );	
+				$this->text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'DIR_MODIFICATION', 'config.php' ) );	
 			    if($this->upgrade2030 &&  !strpos( $content, 'DB_PORT' )) {		
                                  if( $this->showOps ){
 				    	$this->text .= '<p><pre>'.$db_port.'</pre></p>';
@@ -82,10 +82,10 @@ class ModelUpgradeConfiguration extends Model{
 				$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DB_PORT', $file ) );
                              }
 			}else{
-				$text .= $this->msg(  sprintf( $this->lang, 'msg_perm_file', 'config.php' ) );
+				$this->text .= $this->msg(  sprintf( $this->lang, 'msg_perm_file', 'config.php' ) );
 			}
 		}else{
-			$text .= $this->msg( sprintf(  $this->lang['msg_config_uptodate'], 'config.php', '' ) );
+			$this->text .= $this->msg( sprintf(  $this->lang['msg_config_uptodate'], 'config.php', '' ) );
 		}
 
 		$this->text .= $this->msg('<p><hr/></p>');
@@ -118,16 +118,16 @@ class ModelUpgradeConfiguration extends Model{
                                 if( $this->showOps ){
 				    	$this->text .= '<p><pre>'.$https_catalog.'</pre></p>';
                                  }
-				$text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'HTTPS_CATALOG', 'config.php' ) );
+				$this->text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'HTTPS_CATALOG', 'config.php' ) );
 		   }
                                 if( $this->showOps ){
 				    	$this->text .= '<p><pre>'.$upload.'</pre></p>';
                                 }
-				$text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DIR_UPLOAD', $file ) );
+				$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DIR_UPLOAD', $file ) );
                                 if( $this->showOps ){
 				    	$this->text .= '<p><pre>'.$modification.'</pre></p>';
                                 }
-				$text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DIR_MODIFICATION', $file ) );
+				$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DIR_MODIFICATION', $file ) );
 		        if($this->upgrade2030 &&  !strpos( $content2, 'DB_PORT' )) {		
                                if( $this->showOps ){
 				    	$this->text .= '<p><pre>'.$db_port.'</pre></p>';
@@ -136,13 +136,13 @@ class ModelUpgradeConfiguration extends Model{
                        }
 
 			}else{
-				$text .= $this->msg(  sprintf( $this->lang['msg_perm_file'], 'config.php', $file ) );
+				$this->text .= $this->msg(  sprintf( $this->lang['msg_perm_file'], 'config.php', $file ) );
 			}
 		}else{
-			$text .= $this->msg( sprintf(  $this->lang['msg_config_uptodate'], $file, '' ) );
+			$this->text .= $this->msg( sprintf(  $this->lang['msg_config_uptodate'], $file, '' ) );
 		}
 
-	return $text;
+	return $this->text;
    }
   public function msg( $data ){
        return str_replace( $data, '<div class="msg round">' . $data .'</div>', $data);
