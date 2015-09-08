@@ -172,6 +172,10 @@ class ControllerCommonHome extends Controller {
 				'common/reset',
 				'upgrade/info',
 				'upgrade/database',
+                                'upgrade/collate',
+                                'upgrade/column',
+				'upgrade/module',
+			        'upgrade/settings',
 				'upgrade/images',
 				'upgrade/configuration',
 				'error/not_found',
@@ -225,6 +229,11 @@ class ControllerCommonHome extends Controller {
                  $upgrade_access = array(
                                          'upgrade/info',
                                          'upgrade/database',
+                                         'upgrade/collate',
+                                         'upgrade/column',
+                                         'upgrade/configuration',
+					 'upgrade/module',
+					 'upgrade/settings',
                                          'upgrade/configuration',
                                          'upgrade/images'
                   );
