@@ -26,4 +26,11 @@
 			<add position="replace"><![CDATA[$option['value']]]></add>
 		</operation>
 	</file>
+	</file>
+	<file path="catalog/controller/account/success.php">
+		<operation>
+			<search><![CDATA[$data['text_message'] = sprintf($this->language->get('text_message'), $this->url->link('information/contact'));]]></search>
+			<add position="replace"><![CDATA[$data['text_message'] = sprintf($this->language->get('text_message'), $this->url->link('information/contact'), '');]]></add>
+		</operation>
+	</file>
 </modification>
