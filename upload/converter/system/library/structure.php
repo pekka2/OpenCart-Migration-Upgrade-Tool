@@ -203,57 +203,59 @@ class Structure {
    public function getVersion() {
    	$this->version = 0;
    	$this->vdata = 0;
-			if( !array_search( DB_PREFIX . 'affiliate', $this->tables() ) ) {
+	if( !array_search( DB_PREFIX . 'affiliate', $this->tables() ) ) {
 		           ++$this->version;
 		           $this->vdata = '1.4.7-1.4.9';
-		   }
-			if( !array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->tables() ) ) {
+        }
+	if( !array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->tables() ) ) {
 		           ++$this->version;
 		           if($this->vdata == 0){
 		           	$this->vdata = '1.5.0-1.5.1.2';
 		           }
-		   }
-			if( !array_search( DB_PREFIX . 'order_fraud', $this->tables() ) ) {
+	}
+	if( !array_search( DB_PREFIX . 'order_fraud', $this->tables() ) ) {
 		           ++$this->version;
 		           if($this->vdata == 0){
 		           	$this->vdata = '1.5.1.3';
 		           }
-		   }
-			if( !array_search( DB_PREFIX . 'customer_group_description', $this->tables() ) ) {
+	 }
+	if( !array_search( DB_PREFIX . 'customer_group_description', $this->tables() ) ) {
 		           ++$this->version;
 		           if($this->vdata == 0){
 		           	$this->vdata = '1.5.2';
 		           }
-		   }
-			if( !array_search( DB_PREFIX . 'customer_online', $this->tables() ) ) {
+	}
+	if( !array_search( DB_PREFIX . 'customer_online', $this->tables() ) ) {
 		           ++$this->version;
 		           if($this->vdata == 0){
 		           	$this->vdata = '1.5.3';
 		           }
-		   }
-			if( !array_search( DB_PREFIX . 'category_path', $this->tables() ) ) {
+	}
+	if( !array_search( DB_PREFIX . 'category_path', $this->tables() ) ) {
 		           ++$this->version;
 		           if($this->vdata == 0){
 		           	$this->vdata = '1.5.4';
 		           }
          }
-			if( !array_search( DB_PREFIX . 'order_recurring', $this->tables() ) ) {
+	if( !array_search( DB_PREFIX . 'order_recurring', $this->tables() ) ) {
 		           ++$this->version;
 		           if($this->vdata == 0){
 		           	$this->vdata = '1.5.5.1';
 		           }
         }
-			if( !array_search( DB_PREFIX . 'module', $this->tables() ) ) {
+	if( !array_search( DB_PREFIX . 'layout_module', $this->tables() ) ) {
 		           ++$this->version;
 		           if($this->vdata == 0){
 		           	$this->vdata = '1.5.6.x';
 		           }
         }
-			/* if( !array_search( DB_PREFIX . 'api_id', $this->tables() ) ) {
-		           $text .= $this->addUpgradeTo204();
+	if( !array_search( DB_PREFIX . 'module', $this->tables() ) ) {
 		           ++$this->version; 
-	        } */
-		        return array('level' => $this->version, 'vdata' => $this->vdata);
+		           if($this->vdata == 0){
+		           	$this->vdata = '2.0.0.0';
+		           }
+	 }
+	   return array('level' => $this->version, 'vdata' => $this->vdata);
      }
 }
 ?>
