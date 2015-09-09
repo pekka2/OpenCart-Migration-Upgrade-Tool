@@ -8,8 +8,7 @@ class ModelUpgradeDatabase extends Model{
   public function addTables( $data ) {  
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
-        $this->upgrade2020  = ( !empty( $data['upgrade2020'] ) ? true : false );
-        $this->upgrade2030  = ( !empty( $data['upgrade2030'] ) ? true : false );
+        $this->upgrade  = $data['upgrade2020']);
 
         $this->lang = $this->lmodel->get('upgrade_database');
         $this->languages = $this->structure->language(); 
@@ -1135,7 +1134,7 @@ class ModelUpgradeDatabase extends Model{
   public function addUpgradeTo152() {  
 
         $text = '';
-        if( !$this->upgrade2030 ){
+        if( $this->upgrade < 2031 ){
 	if( !array_search( DB_PREFIX . 'order_fraud', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'order_fraud` (
@@ -2249,7 +2248,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'upload' ) );
 	}
 	
-        if( !$this->hasLayout( 'Compare' )  && array_search( DB_PREFIX . 'layout', $this->structure->tables()) ){
+        if( $this->upgrade > 2020 && !$this->hasLayout( 'Compare' )  && array_search( DB_PREFIX . 'layout', $this->structure->tables()) ){
             $sql = 'SELECT MAX(layout_id) as maxim
                      FROM `' . DB_PREFIX . 'layout`'; 
 
