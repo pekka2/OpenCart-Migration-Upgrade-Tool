@@ -60,7 +60,7 @@ class ControllerUpgradeDatabase extends Controller {
                  $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
                  $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
                  $this->data['adminDir'] = ( !empty( $_POST['adminDir'] ) ? true : 'admin' );
-                 $this->data['upgrade2030'] = ( !empty( $_POST['upgrade2030'] ) ? true : false );
+                 $this->data['upgrade'] = $_POST['upgrade'];
                  $this->data['step1'] = 'step1';
                  $this->data['upgrade_data'] = $this->model_upgrade_database->addTables( $this->request->post );
                  $this->data['change_taxrate'] = $this->model_upgrade_table_columns->changeTaxRate( $this->request->post );
