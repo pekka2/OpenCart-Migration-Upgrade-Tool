@@ -43,7 +43,7 @@ class ModelUpgradeDatabase extends Model{
            $text .= $this->addUpgradeTo156();
         }
 	if( !array_search( DB_PREFIX . 'module', $this->structure->tables() ) ) {
-           $text .= $this->addUpgradeTo2001();
+           $text .= $this->addUpgradeTo202();
         }
 	$text .= '<div class="header round"> ';
         $text .=  sprintf( addslashes($this->lang['msg_table_count']), $this->tablecounter, '' );
@@ -1883,7 +1883,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '1.5.6.4', '' ) );
     return $text;
   }
-  public function addUpgradeTo2001() {
+  public function addUpgradeTo202() {
         $text = '';
 	if( !array_search( DB_PREFIX . 'affiliate_activity', $this->structure->tables() ) ) {
 		$sql = '
