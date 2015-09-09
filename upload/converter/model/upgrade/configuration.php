@@ -9,7 +9,7 @@ class ModelUpgradeConfiguration extends Model{
        $this->dirImage =  ( !empty( $data['dirImage'] ) ? true : 'image' ) . '/';
        $this->dirOld = ( !empty( $data['dirOld'] ) ? true : false );
        $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
-       $this->upgrade2030  = ( !empty( $data['upgrade2030'] ) ? true : false );
+       $this->upgrade  = $data['upgrade2030'];
     
         $this->text = '';
 
@@ -30,7 +30,7 @@ class ModelUpgradeConfiguration extends Model{
 	    $content = file_get_contents( DIR_DOCUMENT_ROOT . 'config.php' );
             $check = $content;
 
-		if( !strpos( $content, 'DIR_UPLOAD' ) || $this->upgrade2030 &&  !strpos( $content, 'DB_PORT' ) ) {
+		if( !strpos( $content, 'DIR_UPLOAD' ) || $this->upgrade > 2020 &&  !strpos( $content, 'DB_PORT' ) ) {
 
 		$this->text .= $this->msg('<p><hr/></p>');
           //   FILE yourstore.com/config.php
@@ -75,7 +75,7 @@ class ModelUpgradeConfiguration extends Model{
 				    	$this->text .= '<p><pre>'.$modification.'</pre></p>';
                                   }
 				$this->text .= $this->msg( sprintf(  $this->lang['msg_config_added'],  'DIR_MODIFICATION', 'config.php' ) );	
-			    if($this->upgrade2030 &&  !strpos( $content, 'DB_PORT' )) {		
+			    if($this->upgrade > 2020 &&  !strpos( $check, 'DB_PORT' )) {		
                                  if( $this->showOps ){
 				    	$this->text .= '<p><pre>'.$db_port.'</pre></p>';
                                  }
@@ -101,7 +101,7 @@ class ModelUpgradeConfiguration extends Model{
 		   }
 			array_splice( $fp2, 21, 0, $modification . "\r\n" );
 			array_splice( $fp2, 22, 0, $upload . "\r\n" );
-		    if( $this->upgrade2030 &&  !strpos( $content2, 'DB_PORT' )) {
+		    if( $this->upgrade > 2020 &&  !strpos( $content2, 'DB_PORT' )) {
 			  array_splice( $fp, 25, 0, $db_port . "\r\n" );
 		   }
 
@@ -128,7 +128,7 @@ class ModelUpgradeConfiguration extends Model{
 				    	$this->text .= '<p><pre>'.$modification.'</pre></p>';
                                 }
 				$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DIR_MODIFICATION', $file ) );
-		        if($this->upgrade2030 &&  !strpos( $content2, 'DB_PORT' )) {		
+		        if($this->upgrade > 2020 &&  !strpos( $content2, 'DB_PORT' )) {		
                                if( $this->showOps ){
 				    	$this->text .= '<p><pre>'.$db_port.'</pre></p>';
                                 }
