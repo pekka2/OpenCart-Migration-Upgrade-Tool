@@ -49,13 +49,13 @@
 				
 				<div class="block">
 					<label>
-						<input type="checkbox" value="true" name="upgrade2020" />
+						<input type="radio" value="2020" name="upgrade" />
 						<?php echo $entry_up_201_202; ?>
 					</label>
 				</div>
 				<div class="block">
 					<label>
-						<input type="checkbox" value="true" name="upgrade2030" />
+						<input type="radio" value="2031" name="upgrade" checked="checked"/>
 						<?php echo $entry_up_2030; ?>
 					</label>
 				</div>
