@@ -122,6 +122,18 @@ class Structure {
            }
         }
      }
+  } 
+  public function getColumnTypeVarchar( $table ) {
+     if( array_search( DB_PREFIX . $table, $this->tables() ) || $table == 'address'){
+            $fields = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`" );
+			$col = array();
+           foreach( $fields->rows as $field){
+           	if( strpos($field['Type'], 'char') ||strpos($field['Type'], 'ext') ){
+           	  $col[] = array("field"=>$field['Field'], "type"=>$field['Type'], "null" => str_replace("NO", "NOT NULL", $field['Null']));
+           	}
+           }
+           return $col;
+     }
   }
   
   public function getColumnKey( $column, $table ) {
