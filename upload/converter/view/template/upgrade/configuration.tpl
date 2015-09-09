@@ -25,7 +25,6 @@
 				<input type="hidden" name="lang" value="<?php echo $langCur; ?>" />
 				<input type="hidden" name="step3" value="update" />
 				<input type="hidden" name="simulate" value="<?php echo $simulate; ?>" />
-				<input type="hidden" name="dirOld" value="<?php echo $dirOld; ?>" />
 				<input type="hidden" name="dirImage" value="<?php echo $images; ?>" />
 				<input type="hidden" name="showOps" value="<?php echo $showOps; ?>" />
 				<div>
