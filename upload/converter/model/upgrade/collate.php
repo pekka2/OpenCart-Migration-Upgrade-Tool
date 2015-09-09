@@ -44,7 +44,7 @@ class ModelUpgradeCollate extends Model{
   	  			
   	  			  $sql = "
 		  	     ALTER TABLE `" . $table . " COLLATE `utf8_general_ci`";
-						   if( !$this->simulate )  {
+		     if( !$this->simulate )  {
                             $this->db->query( $sql );
                      }
                      if( $this->showOps ) {
@@ -65,7 +65,7 @@ class ModelUpgradeCollate extends Model{
 		  	    	for( $j = 0; $j<count( $columns[$keys[$i]] ); $j++){
 		  	     $sql = "
 		  	     ALTER TABLE `" . $keys[$i] . "` MODIFY `" . $columns[$keys[$i]][$j]['field'] . "` " . $columns[$keys[$i]][$j]['type'] ." " . $columns[$keys[$i]][$j]['null'] . " COLLATE `utf8_general_ci`";
-									   if( !$this->simulate )  {
+					if( !$this->simulate )  {
 		                               $this->db->query( $sql );
 		                        }
 		                        if( $this->showOps ) {
