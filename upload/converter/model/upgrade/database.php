@@ -8,7 +8,7 @@ class ModelUpgradeDatabase extends Model{
   public function addTables( $data ) {  
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
-        $this->upgrade  = $data['upgrade2020']);
+        $this->upgrade  = $data['upgrade2020'];
 
         $this->lang = $this->lmodel->get('upgrade_database');
         $this->languages = $this->structure->language(); 
