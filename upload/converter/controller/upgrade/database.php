@@ -1,6 +1,8 @@
 <?php
 class ControllerUpgradeDatabase extends Controller {   
         private $error = array();
+        private $max;
+        private $min;
    public function index() {
 		$this->language->load('upgrade/database');
                 $this->lmodel->set('upgrade_database',$this->language->load('upgrade/database'));
@@ -8,6 +10,8 @@ class ControllerUpgradeDatabase extends Controller {
 		$this->load->model('upgrade/database');
 		$this->load->model('upgrade/table_columns');
 		$this->load->model('upgrade/settings');
+                $this->max = 9;
+                $this->min = 4;
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -22,12 +26,36 @@ class ControllerUpgradeDatabase extends Controller {
 			'href'      => $this->url->link('upgrade/info'),
 			'separator' => false
 		);
+		$this->data['breadcrumbs'][] = array(
+			'text'      => $this->language->get('btn_start'),
+			'href'      => $this->url->link('upgrade/database'),
+			'separator' => false
+		);
+
+		$level = $this->structure->getVersion();
+		$version = $level['level'];
+		$vdata = $level['vdata'];
 
 		   if( !isset($_COOKIE['UpgradeMigration']) ){
 			$this->redirect($this->url->link('common/login'));
 	 	   }
+	 	 
+          if( $version <= $this->min ){
+           $this->data['action'] = $this->url->link('upgrade/column');
+           $steps = 8;
+         }
+         if( $version > $this->min ){
+           $this->data['action'] = $this->url->link('upgrade/collate');
+           $steps = 9;
+         }
+        $this->data['text_version'] = sprintf($this->language->get('text_version'),$vdata,'');
+        $version_data = array('level' => $steps, 'oc' => $vdata ); 
+        $cache = $this->cache->get('version');
+
+        if(empty($cache)){
+			  $this->cache->set('version', $version_data );
+	}
                 if( isset( $this->request->post['step1']) && $this->validate() ){
-                 $this->data['dirOld'] = ( !empty( $_POST['dirOld'] ) ? true : false );
                  $this->data['images'] = ( !empty( $_POST['images'] ) ? true : 'image' );
                  $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
                  $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
