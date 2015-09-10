@@ -200,27 +200,32 @@ class ModelUpgradeColumns extends Model{
 			'column'	   => ' varchar(64) NOT NULL'
 		),
 		array(
-         'table'     => 'order',
+                        'table'     => 'order',
 			'field'		=> 'currency_value',
 			'column'	   => ' decimal(15,8) NOT NULL DEFAULT \'1.00000000\''
 		),
 		array(
-         'table'     => 'order_product',
+                        'table'         => 'order_option',
+			'field'		=> 'product_option_id',
+			'column'	=> ' int(11) NOT NULL AFTER order_product_id'
+		),
+		array(
+                        'table'     => 'order_product',
 			'field'		=> 'reward',
 			'column'	   => ' int(8) NOT NULL'
 		),
 		array(
-         'table'     => 'order_recurring_transaction',
+                        'table'     => 'order_recurring_transaction',
 			'field'		=> 'reference',
 			'column'	   => ' varchar(255) NOT NULL AFTER order_recurring_id'
 		),
 		array(
-         'table'     => 'order_total',
+                        'table'     => 'order_total',
 			'field'		=> 'code',
 			'column'	   => ' varchar(32) NOT NULL'
 		),
 		array(
-         'table'     => 'product',
+                        'table'     => 'product',
 			'field'		=> 'mpn',
 			'column'	   => ' varchar(64) NOT NULL AFTER sku'
 		),
