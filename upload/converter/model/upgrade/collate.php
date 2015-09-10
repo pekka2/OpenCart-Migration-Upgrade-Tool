@@ -4,7 +4,7 @@ class ModelUpgradeCollate extends Model {
 	  private $languages;
 	  private $simulate;
 	  private $showOps;
-	public function addCollate($data) {
+   public function addCollate($data) {
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
         $this->upgrade  = $data['upgrade'];
