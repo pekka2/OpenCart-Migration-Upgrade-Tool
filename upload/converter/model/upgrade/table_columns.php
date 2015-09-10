@@ -208,6 +208,11 @@ class ModelUpgradeTableColumns extends Model{
 			'column'	=> ' int(11) NOT NULL AFTER order_product_id'
 		),
 		array(
+                        'table'         => 'order_option',
+			'field'		=> 'type',
+			'column'	=> ' varchar(32) NOT NULL'
+		),
+		array(
                         'table'         => 'order_product',
 			'field'		=> 'reward',
 			'column'	=> ' int(8) NOT NULL'
