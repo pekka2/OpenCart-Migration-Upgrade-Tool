@@ -148,23 +148,6 @@ CREATE TABLE IF NOT EXISTS `oc_attribute_description` (
   PRIMARY KEY (`attribute_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `oc_attribute_description`
---
-
-INSERT INTO `oc_attribute_description` (`attribute_id`, `language_id`, `name`) VALUES
-(1, 1, 'Description'),
-(2, 1, 'No. of Cores'),
-(4, 1, 'test 1'),
-(5, 1, 'test 2'),
-(6, 1, 'test 3'),
-(7, 1, 'test 4'),
-(8, 1, 'test 5'),
-(9, 1, 'test 6'),
-(10, 1, 'test 7'),
-(11, 1, 'test 8'),
-(3, 1, 'Clockspeed');
-
 -- --------------------------------------------------------
 
 --
@@ -176,16 +159,6 @@ CREATE TABLE IF NOT EXISTS `oc_attribute_group` (
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`attribute_group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `oc_attribute_group`
---
-
-INSERT INTO `oc_attribute_group` (`attribute_group_id`, `sort_order`) VALUES
-(3, 2),
-(4, 1),
-(5, 3),
-(6, 4);
 
 -- --------------------------------------------------------
 
@@ -200,16 +173,6 @@ CREATE TABLE IF NOT EXISTS `oc_attribute_group_description` (
   PRIMARY KEY (`attribute_group_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `oc_attribute_group_description`
---
-
-INSERT INTO `oc_attribute_group_description` (`attribute_group_id`, `language_id`, `name`) VALUES
-(3, 1, 'Memory'),
-(4, 1, 'Technical'),
-(5, 1, 'Motherboard'),
-(6, 1, 'Processor');
-
 -- --------------------------------------------------------
 
 --
@@ -222,15 +185,6 @@ CREATE TABLE IF NOT EXISTS `oc_banner` (
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`banner_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `oc_banner`
---
-
-INSERT INTO `oc_banner` (`banner_id`, `name`, `status`) VALUES
-(6, 'HP Products', 1),
-(7, 'Home Page Slideshow', 1),
-(8, 'Manufacturers', 1);
 
 -- --------------------------------------------------------
 
@@ -528,13 +482,6 @@ CREATE TABLE IF NOT EXISTS `oc_customer_group` (
   PRIMARY KEY (`customer_group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `oc_customer_group`
---
-
-INSERT INTO `oc_customer_group` (`customer_group_id`, `approval`, `sort_order`) VALUES
-(1, 0, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -548,13 +495,6 @@ CREATE TABLE IF NOT EXISTS `oc_customer_group_description` (
   `description` text NOT NULL,
   PRIMARY KEY (`customer_group_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `oc_customer_group_description`
---
-
-INSERT INTO `oc_customer_group_description` (`customer_group_id`, `language_id`, `name`, `description`) VALUES
-(1, 1, 'Default', 'test');
 
 -- --------------------------------------------------------
 
@@ -840,14 +780,6 @@ CREATE TABLE IF NOT EXISTS `oc_geo_zone` (
   PRIMARY KEY (`geo_zone_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `oc_geo_zone`
---
-
-INSERT INTO `oc_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`, `date_added`) VALUES
-(3, 'UK VAT Zone', 'UK VAT', '2010-02-26 22:33:24', '2009-01-06 23:26:25'),
-(4, 'UK Shipping', 'UK Shipping Zones', '2010-12-15 15:18:13', '2009-06-23 01:14:53');
-
 -- --------------------------------------------------------
 
 --
@@ -936,25 +868,6 @@ CREATE TABLE IF NOT EXISTS `oc_layout` (
   PRIMARY KEY (`layout_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `oc_layout`
---
-
-INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
-(1, 'Home'),
-(2, 'Product'),
-(3, 'Category'),
-(4, 'Default'),
-(5, 'Manufacturer'),
-(6, 'Account'),
-(7, 'Checkout'),
-(8, 'Contact'),
-(9, 'Sitemap'),
-(10, 'Affiliate'),
-(11, 'Information'),
-(12, 'Compare'),
-(13, 'Search');
-
 -- --------------------------------------------------------
 
 --
@@ -970,22 +883,6 @@ CREATE TABLE IF NOT EXISTS `oc_layout_module` (
   PRIMARY KEY (`layout_module_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `oc_layout_module`
---
-
-INSERT INTO `oc_layout_module` (`layout_module_id`, `layout_id`, `code`, `position`, `sort_order`) VALUES
-(2, 4, '0', 'content_top', 0),
-(3, 4, '0', 'content_top', 1),
-(20, 5, '0', 'column_left', 2),
-(69, 10, 'affiliate', 'column_right', 1),
-(68, 6, 'account', 'column_right', 1),
-(67, 1, 'carousel.29', 'content_top', 3),
-(66, 1, 'slideshow.27', 'content_top', 1),
-(65, 1, 'featured.28', 'content_top', 2),
-(72, 3, 'category', 'column_left', 1),
-(73, 3, 'banner.30', 'column_left', 2);
-
 -- --------------------------------------------------------
 
 --
@@ -999,25 +896,6 @@ CREATE TABLE IF NOT EXISTS `oc_layout_route` (
   `route` varchar(255) NOT NULL,
   PRIMARY KEY (`layout_route_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `oc_layout_route`
---
-
-INSERT INTO `oc_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `route`) VALUES
-(38, 6, 0, 'account/%'),
-(17, 10, 0, 'affiliate/%'),
-(44, 3, 0, 'product/category'),
-(42, 1, 0, 'common/home'),
-(20, 2, 0, 'product/product'),
-(24, 11, 0, 'information/information'),
-(23, 7, 0, 'checkout/%'),
-(31, 8, 0, 'information/contact'),
-(32, 9, 0, 'information/sitemap'),
-(34, 4, 0, ''),
-(45, 5, 0, 'product/manufacturer'),
-(52, 12, 0, 'product/compare'),
-(53, 13, 0, 'product/search');
 
 -- --------------------------------------------------------
 
@@ -1155,23 +1033,6 @@ CREATE TABLE IF NOT EXISTS `oc_option` (
   PRIMARY KEY (`option_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `oc_option`
---
-
-INSERT INTO `oc_option` (`option_id`, `type`, `sort_order`) VALUES
-(1, 'radio', 1),
-(2, 'checkbox', 2),
-(4, 'text', 3),
-(5, 'select', 4),
-(6, 'textarea', 5),
-(7, 'file', 6),
-(8, 'date', 7),
-(9, 'time', 8),
-(10, 'datetime', 9),
-(11, 'select', 10),
-(12, 'date', 11);
-
 -- --------------------------------------------------------
 
 --
@@ -1184,23 +1045,6 @@ CREATE TABLE IF NOT EXISTS `oc_option_description` (
   `name` varchar(128) NOT NULL,
   PRIMARY KEY (`option_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `oc_option_description`
---
-
-INSERT INTO `oc_option_description` (`option_id`, `language_id`, `name`) VALUES
-(1, 1, 'Radio'),
-(2, 1, 'Checkbox'),
-(4, 1, 'Text'),
-(6, 1, 'Textarea'),
-(8, 1, 'Date'),
-(7, 1, 'File'),
-(5, 1, 'Select'),
-(9, 1, 'Time'),
-(10, 1, 'Date &amp; Time'),
-(12, 1, 'Delivery Date'),
-(11, 1, 'Size');
 
 -- --------------------------------------------------------
 
@@ -1216,26 +1060,6 @@ CREATE TABLE IF NOT EXISTS `oc_option_value` (
   PRIMARY KEY (`option_value_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `oc_option_value`
---
-
-INSERT INTO `oc_option_value` (`option_value_id`, `option_id`, `image`, `sort_order`) VALUES
-(43, 1, '', 3),
-(32, 1, '', 1),
-(45, 2, '', 4),
-(44, 2, '', 3),
-(42, 5, '', 4),
-(41, 5, '', 3),
-(39, 5, '', 1),
-(40, 5, '', 2),
-(31, 1, '', 2),
-(23, 2, '', 1),
-(24, 2, '', 2),
-(46, 11, '', 1),
-(47, 11, '', 2),
-(48, 11, '', 3);
-
 -- --------------------------------------------------------
 
 --
@@ -1249,26 +1073,6 @@ CREATE TABLE IF NOT EXISTS `oc_option_value_description` (
   `name` varchar(128) NOT NULL,
   PRIMARY KEY (`option_value_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `oc_option_value_description`
---
-
-INSERT INTO `oc_option_value_description` (`option_value_id`, `language_id`, `option_id`, `name`) VALUES
-(43, 1, 1, 'Large'),
-(32, 1, 1, 'Small'),
-(45, 1, 2, 'Checkbox 4'),
-(44, 1, 2, 'Checkbox 3'),
-(31, 1, 1, 'Medium'),
-(42, 1, 5, 'Yellow'),
-(41, 1, 5, 'Green'),
-(39, 1, 5, 'Red'),
-(40, 1, 5, 'Blue'),
-(23, 1, 2, 'Checkbox 1'),
-(24, 1, 2, 'Checkbox 2'),
-(48, 1, 11, 'Large'),
-(47, 1, 11, 'Medium'),
-(46, 1, 11, 'Small');
 
 -- --------------------------------------------------------
 
@@ -1860,15 +1664,6 @@ CREATE TABLE IF NOT EXISTS `oc_return_action` (
   PRIMARY KEY (`return_action_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `oc_return_action`
---
-
-INSERT INTO `oc_return_action` (`return_action_id`, `language_id`, `name`) VALUES
-(1, 1, 'Refunded'),
-(2, 1, 'Credit Issued'),
-(3, 1, 'Replacement Sent');
-
 -- --------------------------------------------------------
 
 --
@@ -1898,17 +1693,6 @@ CREATE TABLE IF NOT EXISTS `oc_return_reason` (
   PRIMARY KEY (`return_reason_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `oc_return_reason`
---
-
-INSERT INTO `oc_return_reason` (`return_reason_id`, `language_id`, `name`) VALUES
-(1, 1, 'Dead On Arrival'),
-(2, 1, 'Received Wrong Item'),
-(3, 1, 'Order Error'),
-(4, 1, 'Faulty, please supply details'),
-(5, 1, 'Other, please supply details');
-
 -- --------------------------------------------------------
 
 --
@@ -1921,15 +1705,6 @@ CREATE TABLE IF NOT EXISTS `oc_return_status` (
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`return_status_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `oc_return_status`
---
-
-INSERT INTO `oc_return_status` (`return_status_id`, `language_id`, `name`) VALUES
-(1, 1, 'Pending'),
-(3, 1, 'Complete'),
-(2, 1, 'Awaiting Products');
 
 -- --------------------------------------------------------
 
@@ -1967,154 +1742,6 @@ CREATE TABLE IF NOT EXISTS `oc_setting` (
   PRIMARY KEY (`setting_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `oc_setting`
---
-
-INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES
-(1, 0, 'shipping', 'shipping_sort_order', '3', 0),
-(2, 0, 'sub_total', 'sub_total_sort_order', '1', 0),
-(3, 0, 'sub_total', 'sub_total_status', '1', 0),
-(4, 0, 'tax', 'tax_status', '1', 0),
-(5, 0, 'total', 'total_sort_order', '9', 0),
-(6, 0, 'total', 'total_status', '1', 0),
-(7, 0, 'tax', 'tax_sort_order', '5', 0),
-(8, 0, 'free_checkout', 'free_checkout_sort_order', '1', 0),
-(9, 0, 'cod', 'cod_sort_order', '5', 0),
-(10, 0, 'cod', 'cod_total', '0.01', 0),
-(11, 0, 'cod', 'cod_order_status_id', '1', 0),
-(12, 0, 'cod', 'cod_geo_zone_id', '0', 0),
-(13, 0, 'cod', 'cod_status', '1', 0),
-(14, 0, 'shipping', 'shipping_status', '1', 0),
-(15, 0, 'shipping', 'shipping_estimator', '1', 0),
-(27, 0, 'coupon', 'coupon_sort_order', '4', 0),
-(28, 0, 'coupon', 'coupon_status', '1', 0),
-(34, 0, 'flat', 'flat_sort_order', '1', 0),
-(35, 0, 'flat', 'flat_status', '1', 0),
-(36, 0, 'flat', 'flat_geo_zone_id', '0', 0),
-(37, 0, 'flat', 'flat_tax_class_id', '9', 0),
-(41, 0, 'flat', 'flat_cost', '5.00', 0),
-(42, 0, 'credit', 'credit_sort_order', '7', 0),
-(43, 0, 'credit', 'credit_status', '1', 0),
-(53, 0, 'reward', 'reward_sort_order', '2', 0),
-(54, 0, 'reward', 'reward_status', '1', 0),
-(146, 0, 'category', 'category_status', '1', 0),
-(158, 0, 'account', 'account_status', '1', 0),
-(159, 0, 'affiliate', 'affiliate_status', '1', 0),
-(267, 0, 'config', 'config_robots', 'abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai''hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg', 0),
-(266, 0, 'config', 'config_shared', '0', 0),
-(265, 0, 'config', 'config_secure', '0', 0),
-(264, 0, 'config', 'config_fraud_status_id', '7', 0),
-(263, 0, 'config', 'config_fraud_score', '', 0),
-(262, 0, 'config', 'config_fraud_key', '', 0),
-(94, 0, 'voucher', 'voucher_sort_order', '8', 0),
-(95, 0, 'voucher', 'voucher_status', '1', 0),
-(261, 0, 'config', 'config_fraud_detection', '0', 0),
-(260, 0, 'config', 'config_mail_alert', '', 0),
-(103, 0, 'free_checkout', 'free_checkout_status', '1', 0),
-(104, 0, 'free_checkout', 'free_checkout_order_status_id', '1', 0),
-(259, 0, 'config', 'config_mail', 'a:7:{s:8:"protocol";s:4:"mail";s:9:"parameter";s:0:"";s:13:"smtp_hostname";s:0:"";s:13:"smtp_username";s:0:"";s:13:"smtp_password";s:0:"";s:9:"smtp_port";s:0:"";s:12:"smtp_timeout";s:0:"";}', 1),
-(258, 0, 'config', 'config_ftp_status', '0', 0),
-(257, 0, 'config', 'config_ftp_root', '', 0),
-(256, 0, 'config', 'config_ftp_password', '', 0),
-(255, 0, 'config', 'config_ftp_username', '', 0),
-(254, 0, 'config', 'config_ftp_port', '21', 0),
-(253, 0, 'config', 'config_ftp_hostname', '', 0),
-(252, 0, 'config', 'config_image_location_height', '50', 0),
-(251, 0, 'config', 'config_image_location_width', '268', 0),
-(250, 0, 'config', 'config_image_cart_height', '47', 0),
-(249, 0, 'config', 'config_image_cart_width', '47', 0),
-(248, 0, 'config', 'config_image_wishlist_height', '47', 0),
-(181, 0, 'config', 'config_meta_title', 'Your Store', 0),
-(182, 0, 'config', 'config_meta_description', 'My Store', 0),
-(183, 0, 'config', 'config_meta_keyword', '', 0),
-(184, 0, 'config', 'config_template', 'default', 0),
-(185, 0, 'config', 'config_layout_id', '4', 0),
-(186, 0, 'config', 'config_country_id', '222', 0),
-(187, 0, 'config', 'config_zone_id', '3563', 0),
-(188, 0, 'config', 'config_language', 'en', 0),
-(189, 0, 'config', 'config_admin_language', 'en', 0),
-(190, 0, 'config', 'config_currency', 'USD', 0),
-(191, 0, 'config', 'config_currency_auto', '1', 0),
-(192, 0, 'config', 'config_length_class_id', '1', 0),
-(193, 0, 'config', 'config_weight_class_id', '1', 0),
-(194, 0, 'config', 'config_product_count', '1', 0),
-(195, 0, 'config', 'config_product_limit', '15', 0),
-(196, 0, 'config', 'config_product_description_length', '100', 0),
-(197, 0, 'config', 'config_limit_admin', '20', 0),
-(198, 0, 'config', 'config_review_status', '1', 0),
-(199, 0, 'config', 'config_review_guest', '1', 0),
-(200, 0, 'config', 'config_review_mail', '0', 0),
-(201, 0, 'config', 'config_voucher_min', '1', 0),
-(202, 0, 'config', 'config_voucher_max', '1000', 0),
-(203, 0, 'config', 'config_tax', '1', 0),
-(204, 0, 'config', 'config_tax_default', 'shipping', 0),
-(205, 0, 'config', 'config_tax_customer', 'shipping', 0),
-(206, 0, 'config', 'config_customer_online', '0', 0),
-(207, 0, 'config', 'config_customer_group_id', '1', 0),
-(208, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:"1";}', 1),
-(209, 0, 'config', 'config_customer_price', '0', 0),
-(210, 0, 'config', 'config_account_id', '3', 0),
-(211, 0, 'config', 'config_account_mail', '0', 0),
-(212, 0, 'config', 'config_invoice_prefix', 'INV-2013-00', 0),
-(213, 0, 'config', 'config_api_id', '1', 0),
-(214, 0, 'config', 'config_cart_weight', '1', 0),
-(215, 0, 'config', 'config_checkout_guest', '1', 0),
-(216, 0, 'config', 'config_checkout_id', '5', 0),
-(217, 0, 'config', 'config_order_status_id', '1', 0),
-(218, 0, 'config', 'config_processing_status', 'a:1:{i:0;s:1:"2";}', 1),
-(219, 0, 'config', 'config_complete_status', 'a:1:{i:0;s:1:"5";}', 1),
-(220, 0, 'config', 'config_order_mail', '0', 0),
-(221, 0, 'config', 'config_stock_display', '0', 0),
-(222, 0, 'config', 'config_stock_warning', '0', 0),
-(223, 0, 'config', 'config_stock_checkout', '0', 0),
-(224, 0, 'config', 'config_affiliate_approval', '0', 0),
-(225, 0, 'config', 'config_affiliate_auto', '0', 0),
-(226, 0, 'config', 'config_affiliate_commission', '5', 0),
-(227, 0, 'config', 'config_affiliate_id', '4', 0),
-(228, 0, 'config', 'config_affiliate_mail', '0', 0),
-(229, 0, 'config', 'config_return_id', '0', 0),
-(230, 0, 'config', 'config_return_status_id', '2', 0),
-(231, 0, 'config', 'config_logo', 'catalog/logo.png', 0),
-(232, 0, 'config', 'config_icon', 'catalog/cart.png', 0),
-(233, 0, 'config', 'config_image_category_width', '80', 0),
-(234, 0, 'config', 'config_image_category_height', '80', 0),
-(235, 0, 'config', 'config_image_thumb_width', '228', 0),
-(236, 0, 'config', 'config_image_thumb_height', '228', 0),
-(237, 0, 'config', 'config_image_popup_width', '500', 0),
-(238, 0, 'config', 'config_image_popup_height', '500', 0),
-(239, 0, 'config', 'config_image_product_width', '228', 0),
-(240, 0, 'config', 'config_image_product_height', '228', 0),
-(241, 0, 'config', 'config_image_additional_width', '74', 0),
-(242, 0, 'config', 'config_image_additional_height', '74', 0),
-(243, 0, 'config', 'config_image_related_width', '80', 0),
-(244, 0, 'config', 'config_image_related_height', '80', 0),
-(245, 0, 'config', 'config_image_compare_width', '90', 0),
-(246, 0, 'config', 'config_image_compare_height', '90', 0),
-(247, 0, 'config', 'config_image_wishlist_width', '47', 0),
-(180, 0, 'config', 'config_comment', '', 0),
-(179, 0, 'config', 'config_open', '', 0),
-(178, 0, 'config', 'config_image', '', 0),
-(177, 0, 'config', 'config_fax', '', 0),
-(176, 0, 'config', 'config_telephone', '123456789', 0),
-(175, 0, 'config', 'config_email', 'demo@opencart.com', 0),
-(174, 0, 'config', 'config_geocode', '', 0),
-(172, 0, 'config', 'config_owner', 'Your Name', 0),
-(173, 0, 'config', 'config_address', 'Address 1', 0),
-(171, 0, 'config', 'config_name', 'Your Store', 0),
-(268, 0, 'config', 'config_seo_url', '0', 0),
-(269, 0, 'config', 'config_file_max_size', '300000', 0),
-(270, 0, 'config', 'config_file_ext_allowed', 'zip\r\ntxt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc', 0),
-(271, 0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/tiff\r\nimage/svg+xml\r\napplication/zip\r\n&quot;application/zip&quot;\r\napplication/x-zip\r\n&quot;application/x-zip&quot;\r\napplication/x-zip-compressed\r\n&quot;application/x-zip-compressed&quot;\r\napplication/rar\r\n&quot;application/rar&quot;\r\napplication/x-rar\r\n&quot;application/x-rar&quot;\r\napplication/x-rar-compressed\r\n&quot;application/x-rar-compressed&quot;\r\napplication/octet-stream\r\n&quot;application/octet-stream&quot;\r\naudio/mpeg\r\nvideo/quicktime\r\napplication/pdf', 0),
-(272, 0, 'config', 'config_maintenance', '0', 0),
-(273, 0, 'config', 'config_password', '1', 0),
-(274, 0, 'config', 'config_encryption', '87431d38e7edce36d5153707d4cd2bf9', 0),
-(275, 0, 'config', 'config_compression', '0', 0),
-(276, 0, 'config', 'config_error_display', '1', 0),
-(277, 0, 'config', 'config_error_log', '1', 0),
-(278, 0, 'config', 'config_error_filename', 'error.log', 0),
-(279, 0, 'config', 'config_google_analytics', '', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -2127,16 +1754,6 @@ CREATE TABLE IF NOT EXISTS `oc_stock_status` (
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`stock_status_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `oc_stock_status`
---
-
-INSERT INTO `oc_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
-(7, 1, 'In Stock'),
-(8, 1, 'Pre-Order'),
-(5, 1, 'Out Of Stock'),
-(6, 1, '2-3 Days');
 
 -- --------------------------------------------------------
 
