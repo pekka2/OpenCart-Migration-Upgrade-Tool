@@ -7,6 +7,13 @@ $_['text_intro_2']		= 'Seuraava päivitys prosessi tehdään kolmessa vaiheessa:
 $_['text_intro_3']		= 'Tässä muuntajassa voit käyttää myös <b>simulointi</b> eli päivityksen esikatselutilaa.';
 $_['text_step_1_3']		= 'Vaihe 1 / 3';
 $_['text_step_2_3']		= 'Vaihe 2 / 3';
+$_['text_column']           = 'Lisää sarakkeet';
+$_['text_column_info']      = 'Lisää uudet sarakkeet';
+$_['text_data_info']        = 'Lisää data tietokannan uusiin sarakkeisiin';
+$_['text_collate']          = 'Vaihda tietokannan aakkosjärjestys';
+$_['text_module_info']      = 'Siirrä moduulit uusiin tauluihin';
+$_['text_setting_info']     = 'Lisää uudet asetukset tietokantaan';
+$_['text_collate_info']     = 'Vaihda seuraavaksi tietokannan aakkosjärjestys';
 $_['text_toggle_help']     	= 'Näytä/Piilota Ohje';
 $_['text_upgrade_info']         = 'Päivitä tietokanta';
 $_['text_update_theme']         = 'Päivitä teema nyt';
@@ -16,12 +23,19 @@ $_['text_update_config']        = 'Nyt voit myös päivittää  <b>config.php</b
 $_['btn_config']		= 'Päivitä asetus tiedostot';
 $_['btn_start']			= 'Aloita päivitys';
 // Entry
+$_['entry_up_201_202']		 = 'Päivitä tietokanta versioon 2.0.1 - 2.0.2.x';
+$_['entry_up_2030']		     = 'Päivitä tietokanta  versioon 2.0.3.1';
+$_['entry_migration_module'] = 'Siirrä moduulit uudeastaan (tyhjentää ensin taulut `layout_module` ja `module`)';
+$_['entry_up_2100']		     = 'Päivitä tietokanta  versioon 2.1.0.0';
 $_['entry_adminDir']	        = 'Admin tiedostojen hakemiston nimi';
 $_['entry_imageDir']		= 'Kuvahakemiston nimi';
-$_['entry_up_201_202']		= 'Päivitä tietokanta versioon 2.0.1 - 2.0.2.x';
-$_['entry_up_2030']		= 'Päivitä tietokanta  versioon 2.0.3.1';
 // Header
 $_['header_step_2']		= 'Tietokanta on päivitetty onnistuneesti viimeisimpään versioon';
+$_['header_step_1']          = 'Tietokantaan on lisätty uudet taulut onnistuneesti';
+$_['header_step_column']     = 'Tietokantaan on lisätty uudet sarakkeet onnistuneesti';
+$_['header_step_collate']    = 'Tietokanta aakkosjärjestys päivitetty onnistuneesti';
+$_['header_step_module']     = 'Moduulit on siirretty uusiin tauluihin onnistuneesti';
+$_['header_step_8']		     = 'Tietokanta on päivitetty onnistuneesti viimeisimpään versioon';
 // help
 $_['help_adminDir']		= 'Määritä kansion nimi, jos se ei ole Admin';$_['help_ops']			= 'Näytä päivityksen eteneminen <small>(näyttää kaikki tietokantaan tehdyt muutokset)</small>';
 $_['help_simulate']		= 'Testi päivitys <small>(toiminnot ainoastaan testitilassa)</small>';
@@ -45,6 +59,8 @@ $_['msg_new_data']		= 'uusi data lisätty';
 $_['msg_new_setting']	        = 'Lisätty yhteensä <b>%s</b> uutta asetus(ta) <b>%s%s</b> tauluun';
 $_['msg_table']			= 'Taulu <b>%s</b> on Lisätty onnistuneesti tietokantaan';
 $_['msg_table_count']	        = 'Lisätty yhteensä <b>%s</b> taulua onnistuneesti';
+$_['msg_collate_count']	        = 'Muutettu yhteensä <b>%s</b> taulun aakosjärjestystä onnistuneesti';
+$_['msg_column_collate_count']  = 'Päivitetty yhteensä <b>%s</b> sarakkeen aakosjärjestystä onnistuneesti';
 $_['msg_table_engine']		= 'Taulun <b>%s</b> tietokanta-moottoriksi on vaihdettu <em>MyISAM</em>';
 $_['msg_table_engine_checked']	= 'Taulun <b>%s</b> tietokanta-moottori on tarkistettu';
 $_['msg_text']			= 'Taulussa <b>%s</b> - %s';
