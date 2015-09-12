@@ -1,14 +1,18 @@
 <?php
 // Heading
 $_['heading_title']             = 'Kuvatiedostojen polkujen muutos';
+$_['heading_config']             = 'Muokkaa konfigurointi tiedostoja';
 
 // Text
-$_['text_error']		= 'Virhe';
+$_['text_pause']		        = 'Tauko';
+$_['text_upload']		        = 'Et ole vielä siirtänyt Opencart version 2.0.x tiedostoja palvelimelle. Tässä vaiheessa on suositeltavaa, että ennen seuraavaa vaihetta siirrät version 2.0.x tiedostot palvelimelle sinun verkkokauppan';
 $_['text_finish']		= 'Lopetus';
 $_['text_finish_note']  	= '<b>Huomaa</b>: älä unohda poistaa hakemistoa <b>converter</b> jälkeenpäin!!';
 $_['text_finish_text']	        = 'Onnittelut!<br />Vanha kauppa on onnistuneesti päivitetty uusimpaan versioon. Voit käyttää alla olevia painikkeita navigoidaksesi edelleen.';
 $_['text_upgrade_images']       = 'Kuvapolkujen päivitys';
-$_['text_upgrade_info']         = 'Päivitys Informaatio';
+$_['text_upgrade_info']         = 'Päivitys Informaatio';$_['text_upgrade_images']    = 'Kuvapolkujen päivitys';
+$_['text_upgrade_info']      = 'Päivitys Informaatio';
+$_['text_images_info']       = 'Vaihda kuvapolut tietokannassa';
 // msg
 $_['msg_change_path']    	= 'VAIHDETTU yhteensä <b>%s</b> kuvatiedosto(jen) polku(a) tietokannassa onnistuneesti';
 $_['msg_copy_image']	        = 'KOPIOITU yhteensä <b>%s</b> kuvatiedosto(a) onnistuneesti';
