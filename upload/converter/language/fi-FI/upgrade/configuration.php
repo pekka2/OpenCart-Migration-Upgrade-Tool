@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']             = 'Muokkaa konfigurointi tiedostoja';
+$_['heading_database']         = 'Päivitä tietokanta';
 
 // Text
 $_['text_curr_setting']	        = '(nykyinen asetus)';
@@ -10,9 +11,12 @@ $_['text_intro_3']		= 'Tässä muuntajassa voit käyttää myös <b>simulointi</
 $_['text_intro_step_3']	        = 'Tämä nimeää <b>image/data</b> hakemistot sekä vaihtaa kuvatiedostojen polut tietokannassa.';
 $_['text_upgrade_info']         = 'Kofigurointi asetusten päivitys';
 $_['text_step_3_3']		= 'Vaihe 3 / 3';
+$_['text_intro_step_3']	        = 'Tämä nimeää <b>image/data</b> hakemistot sekä vaihtaa kuvatiedostojen polut tietokannassa.';
+$_['text_configuration_info']   = 'Config.php tiedostojen päivitys';
 $_['text_update_config']        = 'Nyt voit myös päivittää  <b>config.php</b> tiedostoja, jos sitä ei ole vielä tehty';
 // Header
 $_['header_step_3']		= 'Säädä kuvatiedostojen polut';
+$_['header_step_setting']  = 'Tietokantaan on lisätty uudet asetukset onnistuneesti';
 // msg
 $_['msg_config_added']  	= 'Asetus <b>%s</b> on onnistuneesti Lisätty <b>%s</b> tauluun';
 $_['msg_config_constant']	= 'Asetus <b>%s</b>  lisätty onnistuneesti tiedostoon <b>%s</b>!';
