@@ -13,7 +13,7 @@ $_['text_step']	        = 'Vaihe %s / %s';
 // Btn
 $_['btn_clean']	        = 'Puhdista asetukset';
 $_['btn_clean_dbase']   = 'Poista vanhat sarakkeet';
-$_['btn_collate']      = 'Vaihda aakkosjärjestys';
+$_['btn_collate']       = 'Vaihda aakkosjärjestys';
 $_['btn_column']        = 'Lisää sarakkeet';
 $_['btn_continue']	= 'Jatka';
 $_['btn_data']          = 'Lisää data';
@@ -26,7 +26,7 @@ $_['btn_permission']    = 'Ylläpitäjän käyttöoikeudet';
 $_['btn_save']          = 'Tallenna';
 $_['btn_setting']       = 'Lisää asetukset';
 $_['btn_skip']		= 'Ohita';
-$_['btn_start']	      = 'Aloita päivitys';
+$_['btn_start']	       = 'Aloita päivitys';
 $_['btn_upgrade']       = 'Päivityksen aloitus';
 
 // Step
