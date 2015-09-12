@@ -13,9 +13,9 @@ $_['text_step']	        = 'Vaihe %s / %s';
 // Btn
 $_['btn_clean']	        = 'Puhdista asetukset';
 $_['btn_clean_dbase']   = 'Poista vanhat sarakkeet';
-$_['btn_collate']	      = 'Vaihda aakkosjärjestys';
+$_['btn_collate']	 = 'Vaihda aakkosjärjestys';
 $_['btn_column']        = 'Lisää sarakkeet';
-$_['btn_continue']	  = 'Jatka';
+$_['btn_continue']	 = 'Jatka';
 $_['btn_data']          = 'Lisää data';
 $_['btn_database']      = 'Päivitä tietokanta';
 $_['btn_images']        = 'Päivitä kuvapolut';
