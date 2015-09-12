@@ -8,8 +8,6 @@ class ControllerUpgradeModule extends Controller {
       $this->lmodel->set('upgrade_database',$this->language->load('upgrade/database'));
 		$this->load->model('upgrade/info');
 		$this->load->model('upgrade/database');
-		$this->load->model('upgrade/columns');
-		$this->load->model('upgrade/settings');
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -27,19 +25,17 @@ class ControllerUpgradeModule extends Controller {
 			'separator' => false
 		);
 		$this->data['breadcrumbs'][] = array(
-			'text'      => $this->language->get('text_module_info'),
-			'href'      => $this->url->link('upgrade/module'),
+			'text'      => $this->language->get('btn_start'),
+			'href'      => $this->url->link('upgrade/start'),
 			'separator' => false
 		);
 
 		$version = $this->structure->getVersion();
 
+		
 		if(isset($this->request->post['steps'])){
 		  $step = $this->request->post['step'];
 		  $steps = $this->request->post['steps'];
-		} else {
-			$steps = 8;
-			$step = 2;
 		}
 		
 		if(isset($this->request->post['upgrade'])){
@@ -53,7 +49,7 @@ class ControllerUpgradeModule extends Controller {
 					}
                  $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
                  $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
-                 $this->data['add_columns'] = $this->model_upgrade_columns->addColumns( $this->request->post );
+                 $this->data['add_columns'] = $this->model_upgrade_database->addData( $this->request->post );
             
              }  
                 $this->data['action'] = $this->url->link('upgrade/settings');
@@ -75,7 +71,23 @@ class ControllerUpgradeModule extends Controller {
                 $this->data['btn_module'] = $this->language->get('btn_module');
                 $this->data['btn_config'] = $this->language->get('btn_config');
                 $this->data['btn_skip'] = $this->language->get('btn_skip');
+                $this->data['text_toggle'] = $this->language->get('text_toggle');
+                $this->data['text_toggle_help'] = $this->language->get('text_toggle_help');
+                $this->data['help_usage'] = $this->language->get('help_usage');
+
+                $this->data['themes'] = $this->model_upgrade_info->getThemes();
+                $this->data['config_theme'] = $this->config->get('config_template');
  
+                $this->data['step_start'] = $this->language->get('step_start');
+                $this->data['step_collate'] = $this->language->get('step_collate');
+                $this->data['step_column'] = $this->language->get('step_column');
+                $this->data['step_data'] = $this->language->get('step_data');
+                $this->data['step_module'] = $this->language->get('step_module');
+                $this->data['step_setting'] = $this->language->get('step_setting');
+                $this->data['step_configuration'] = $this->language->get('step_configuration');
+                $this->data['step_images'] = $this->language->get('step_images');
+                $this->data['step_clean_module'] = $this->language->get('step_clean_module');
+                $this->data['step_clean_table'] = $this->language->get('step_clean_table');
 		$this->template = 'upgrade/module.tpl';
 
 		$this->children = array(
