@@ -8,7 +8,7 @@ $_['text_home']         = 'Etusivu';
 $_['text_off']	        = 'POIS PÄÄLTÄ';
 $_['text_on']		= 'PÄÄLLÄ';
 $_['text_simulation']	= 'Testitila on';
-$_['text_step']	 = 'Vaihe %s / %s';
+$_['text_step']	     = 'Vaihe %s / %s';
 
 // Btn
 $_['btn_clean']	        = 'Puhdista asetukset';
