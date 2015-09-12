@@ -25,8 +25,8 @@ $_['btn_module']        = 'Siirrä moduulit';
 $_['btn_permission']    = 'Ylläpitäjän käyttöoikeudet';
 $_['btn_save']          = 'Tallenna';
 $_['btn_setting']       = 'Lisää asetukset';
-$_['btn_skip']		      = 'Ohita';
-$_['btn_start']			    = 'Aloita päivitys';
+$_['btn_skip']		  = 'Ohita';
+$_['btn_start']			= 'Aloita päivitys';
 $_['btn_upgrade']       = 'Päivityksen aloitus';
 
 // Step
