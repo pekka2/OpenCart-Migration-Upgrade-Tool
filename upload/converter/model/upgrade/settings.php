@@ -6,625 +6,24 @@ class ModelUpgradeSettings extends Model{
          *
 	 */
   private $settincounter = 0;
-  private $module;
-  private $converter_modules = array();
-  private $converter_serialize_modules = array();
   private $lang;
   private $simulate;
   private $showOps;
   private $settings = array();
 
-  public function getChangeModule( $data ){
+  public function addSetting( $data ){
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
-        if( !isset($data['theme'] ) ) $data['theme'] = '';
-        $this->theme  = ( !empty( $data['theme'] ) ? $data['theme'] : false );
+        $this->migration  = ( !empty( $data['modules'] ) ? true : false );
         $this->lang = $this->lmodel->get('upgrade_database');
 
         $text = '';
-        $this->module = 1;
-     /* No serialized modules */
-     $text .= $this->getChangeModules( 'category' );
-     $text .= $this->getChangeModules( 'information' );
-     $text .= $this->getChangeModules( 'account' );
-     $text .= $this->getChangeModules( 'affiliate' );
-     /* Serialized modules */
-     $text .= $this->getChangeSerializeModule( 'banner' );
-     $text .= $this->getChangeSerializeModule( 'featured' );
-     $text .= $this->getChangeSerializeModule( 'carousel' );
-     $text .= $this->getChangeSerializeModule( 'slideshow' );
-     $text .= $this->getChangeSerializeModule( 'bestseller' );
-     $text .= $this->getChangeSerializeModule( 'latest' );
-     $text .= $this->getChangeSerializeModule( 'special' );
      /* new config settings */
      $text .= $this->getConfigMail();
      $text .= $this->newSettings();
-     /* delete old settings */
-     $text .=$this->deleteSettingGroup( 'manufacturer' );
 
      return $text;
   }
-
-  private function getFeaturedProducts($limit = '4') {
-	$info = array();
-
-      if( array_search( DB_PREFIX . 'product_featured', $this->structure->tables() ) ){
-
-        $i= 0;
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_featured");
-
-            if( count( $query->row > 0 ) ){
-		foreach($query->rows as $product){
-                 $info[$i] = $product['product_id'];
-                 $i++;
-                }
-            }
-      }
-
-       return $info;
-  }
-
-  private function getChangeSerializeModule( $mod ){
-     /*
-      * This is modules 'bestseller', 'carousel', 'featured', 'latest', 'slideshow' and 'special'
-      ******************************************************************************************/
-        $text = '';
-        $str = '';
-        $module = array();
-   $modules1 = false;
-   $modules2 = false;
-   $modules3 = false;
-     if( $this->config->get( $mod . '_module' ) ||  $this->config->get( $mod . '_0_status' ) ||  $this->config->get( $mod . '_status' )) {
-         
-       $i = 0;
-       $modules1 = ( !is_null( $this->config->get( $mod . '_module' ) ) && is_null( $this->config->get( $mod . '_0_status' ) ) ? true:false);
-       
-       if( !$modules1 ){
-
-       $modules2 = ( !is_null(  $this->config->get( $mod . '_0_status' ) ) ? true:false);
-
-       }
-       if( !$modules2 ){
-
-       $modules3 = ( !is_null(  $this->config->get( $mod . '_width' )) ||  !is_null(  $this->config->get( $mod . '_position' )) ? true:false);
-
-       }
-       if( $modules1 == true){
-                              $modulesx = $this->config->get( $mod . '_module' );
-                   $k = array_keys($modulesx);
-                   for($i=0;$i<count($k);$i++){
-                                          if(!isset($modulesx[$k[$i]]['banner_id'])){
-                                                       $modulesx[$k[$i]]['banner_id'] = '';
-                                          }
-                                          if(!isset($modulesx[$k[$i]]['sort_order'])){
-                                                       $modulesx[$k[$i]]['sort_order'] = '0';
-                                          }
-                                          if(!isset($modulesx[$k[$i]]['layout_id'])){
-                                                       $modulesx[$k[$i]]['layout_id'] = '1';
-                                          }
-                                          if(!isset($modulesx[$k[$i]]['position'])){
-                                                       $modulesx[$k[$i]]['position'] = 'content_bottom';
-                                          }
-                                          if(!isset($modulesx[$k[$i]]['limit'])){
-                                                       $modulesx[$k[$i]]['limit'] = '4';
-                                          }
-                                          if(isset($modulesx[$k[$i]]['image_width'])){
-                                                       $modulesx[$k[$i]]['width'] = $modulesx[$k[$i]]['image_width'];
-                                          }
-                                          if(isset($modulesx[$k[$i]]['image_height'])){
-                                                       $modulesx[$k[$i]]['height'] = $modulesx[$k[$i]]['image_height'];
-                                          }
-                                     
-                                          
-                   $modules[$i] = array('width' => $modulesx[$k[$i]]['width'],
-                                                   'height' => $modulesx[$k[$i]]['height'],
-                                                  'banner_id' => $modulesx[$k[$i]]['banner_id'],
-                                                   'limit' => $modulesx[$k[$i]]['limit'],
-                                                   'sort_order' => $modulesx[$k[$i]]['sort_order'],
-                                                   'layout_id' => $modulesx[$k[$i]]['layout_id'],
-                                                   'status' => '1',
-                                                   'position' => $modulesx[$k[$i]]['position']);
-                                   
-       }
-     }
-
-       if( $modules2 == true){
-            if( $this->config->get( $mod . '_0_image_width') ){
-                                    $width = $this->config->get( $mod . '_0_image_width');
-                                    $height = $this->config->get( $mod . '_0_image_height');
-            }
-       
-            if( $this->config->get( $mod . '_0_width') ){
-                                    $width = $this->config->get( $mod . '_0_width');
-                                    $height = $this->config->get( $mod . '_0_height');
-        }
-
-       $modules = array(
-                               array('width' => $width,
-                                  'height' => $height,
-                                  'limit' => $this->config->get( $mod . '_0_limit'),
-                                  'banner_id' => $this->config->get( $mod . '_0_banner_id'),
-                                  'layout_id' => $this->config->get( $mod . '_0_layout_id' ),
-                                  'position' => $this->config->get( $mod . '_0_position' ),
-                                  'sort_order' => $this->config->get( $mod . '_0_sort_order' ),
-                                  'status' => $this->config->get( $mod . '_0_status' ) 
-                                  )
-                         );
-    }
-       if( $modules3 == true){
-       $position = str_replace('right', 'column_right', $this->config->get( $mod . '_position' ) );
-       $position = str_replace('left', 'column_left', $position );
-       $position = str_replace('home', 'content_top', $position );
-       $modules = array(
-                               array('width' => '200',
-                                  'height' => '200',
-                                  'limit' => $this->config->get( $mod . '_limit'),
-                                  'banner_id' => '',
-                                  'layout_id' => '1',
-                                  'position' => $position ,
-                                  'sort_order' => $this->config->get( $mod . '_sort_order' ),
-                                  'status' => $this->config->get( $mod . '_status' ) 
-                                  )
-                         );
-    }
-          $i = 0;
-          $count = count( $modules );
-          $sql = '
-                       SELECT * FROM
-                                                  `' . DB_PREFIX . 'layout_module`
-                       WHERE
-                                  `code` LIKE \'' . $mod .'%\' ORDER BY `code` DESC';
-  
-    if( array_search( DB_PREFIX . 'layout_module' , $this->structure->tables()) ) {                                
-    $query = $this->db->query( $sql );
-        if( count($query->rows) >  $count){
-                            $array = $modules;
-                            $modules = array_merge($modules,$array);
-       }
-    }
-
-          $count = count( $modules );
-          foreach( $modules as $modul ){
-       
-    if( array_search( DB_PREFIX . 'layout' , $this->structure->tables()) ) {
-         $sql = '
-		SELECT * FROM
-			     `' . DB_PREFIX . 'layout`
-		WHERE
-		             `layout_id`= \'' . $modul['layout_id'] . '\'';
-		  $query = $this->db->query( $sql );
-     
-         $name = $query->row['name'];
-       } else{
-         $name = 'Home';
-       }
-         if( isset($modul['banner_id']) ){
-                 $banner_name = $this->getBannerName($modul['banner_id']);
-         }else{
-         $banner_name = '';
-        } 
-             
-       $module = array(
-                      'name'   => $name . $banner_name,
-                      'width'  => $modul['width'],
-                      'height' => $modul['height'],
-                      'status' => ( !empty( $modul['status'] )  ? true:false) );
-        if( $mod == 'featured' ){
-             if( $this->config->get('featured_product')){
-               $product = explode(',',$this->config->get('featured_product') );
-             } else {
-               $product = $this->getFeaturedProducts( 4 );
-             }
-          $module['product']  = $product;
-         }
-         if( isset($modul['banner_id']) && $mod !='featured' && $mod !='bestseller'  && $mod !='latest' && $mod !='special'){
-            $module['banner_id']  = $modul['banner_id'];
-         } elseif($this->config->get( $mod . '_0_banner_id') ){
-            $module['banner_id']  = $this->config->get( $mod . '_0_banner_id' );
-       }
-
-         if( isset($modul['limit']) && $mod !='carousel' && $mod !='slideshow' && $mod !='banner'){
-           $module['limit']  = $modul['limit'];
-         } elseif( $mod == 'featured' ){
-             $module['limit']  = '4';
-         } elseif($this->config->get( $mod . '_0_limit' ) ){
-             $module['limit']  = $this->config->get( $mod . '_0_limit' );
-         }
-     
-  if( $this->structure->hasLayout( $mod ) ){
- 
-        /*
-         * version 2.0.0.0
-         */
-         $sql = '
-                       SELECT * FROM
-                                   `' . DB_PREFIX . 'layout_module`
-                       WHERE
-                                  `code` LIKE \'' . $mod .'%\' ORDER BY `layout_module_id` ASC';
-                                  
-    $query = $this->db->query( $sql );
-    
-    $layouts = array();
-   foreach($query->rows as $rows){
-                          $layouts[$mod][] = $rows['layout_module_id'];
-   } 
-        if( isset($layouts[$mod][$i])){
-             $sql = '
-                       UPDATE
-                             `' . DB_PREFIX . 'layout_module`
-                       SET
-                             `code`= \'' . $this->db->escape($mod . '.' . $this->module) . '\'
-                WHERE
-                      `layout_module_id` = \''. $layouts[$mod][$i] . '\'';
-
-            if( !$this->simulate ) {
-		   $this->db->query( $sql );
-            }
-            if( $this->showOps ) {
-                   $text .= '<p><pre>' . $sql .'</pre></p>';
-            }
-
-        $text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module',  DB_PREFIX . 'layout_module' ) );
-                                     
-        $i++;
-        }
-        
-         $sql = '
-		INSERT INTO
-			`' . DB_PREFIX . 'module`
-		SET
-                        `module_id` = \'' . $this->module . '\',
-			`name` = \'' . $this->db->escape(ucwords($mod) .  ' - '. $name) . '\',
-			`code` = \'' . $this->db->escape($mod) . '\',
-			`setting` = \'' . $this->db->escape(serialize($module)) . '\'';
-            ++$this->module;
-                if( !$this->simulate ) {
-                       $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->settingcounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'slideshow_module', DB_PREFIX . 'module' ) );
-
-        
-            }
-        if($this->config->get( $mod . '_status' ) ){
-                               $modul['status'] =$this->config->get( $mod . '_status' );
-          }
-         if( !$this->structure->hasLayout( $mod )  ) {
-  
-               $sql = '
-			INSERT INTO
-				`' . DB_PREFIX . 'layout_module`
-			SET
-                               `layout_id` = \'' . $modul['layout_id'] . '\',
-                               `code`= \'' .  $this->db->escape($mod . '.' . $this->module) . '\',
-                               `position` = \'' . $modul['position'] . '\',
-                               `sort_order` = \'' . $modul['sort_order'] . '\'';
-            if( !$this->simulate ) {
-		   $this->db->query( $sql );
-            }
-            if( $this->showOps ) {
-                   $text .= '<p><pre>' . $sql .'</pre></p>';
-            }
-
-	$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module',  DB_PREFIX . 'layout_module' ) );
-             
-
-         if( !isset($modul['layout_id']) ){
-          $modul['layout_id'] = 1;
-         }   
-
-         $sql = '
-		INSERT INTO
-			`' . DB_PREFIX . 'module`
-		SET
-                        `module_id` = \'' . $this->module . '\',
-			`name` = \'' . $this->db->escape(ucwords($mod)) .  ' - '. $name . '\',
-			`code` = \'' . $this->db->escape($mod) . '\',
-			`setting` = \'' . $this->db->escape(serialize($module)) . '\'';
-            ++$this->module;
-		if( !$this->simulate ) {
-                       $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->settingcounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'slideshow_module', DB_PREFIX . 'module' ) );
-                 
-         }
-
-       }
-     }
-
-     $text .= $this->deleteSettingGroup( $mod );
-   return $text;
-  }
-
-  private function getChangeModules( $mod ){
-     /*
-      * This is modules 'category', 'account', 'affiliate' and 'information'
-      */
-        $text = '';
-        $str = '';
-        $status = 0;
-         $module = array();
-	if( $this->config->get( $mod . '_module' ) && !$this->structure->hasSetting( $mod . '_0_position' ) && !$this->structure->hasSetting( $mod . '_1_position' )) {
-        /*
-         * version 1.5.1 or newer
-         */
-
-          $module = $this->config->get( $mod . '_module' );
-          $status = $module[0]['status'];
-          $layout_id = $module[0]['layout_id'];
-          $sort_order = $module[0]['sort_order'];
-          $position = $module[0]['position'];
-
-         foreach($module as $one){
-          $sql = '
-			INSERT INTO
-				   `' . DB_PREFIX . 'layout_module`
-			SET
-				   `layout_id` = \'' . $one['layout_id'] . '\',
-				   `code`= \'' . $mod . '\',
-				   `position` = \'' . $one['position'] . '\',
-                                   `sort_order` = \'' . $one['sort_order'] . '\'';
-
-            if( !$this->simulate ) {
-		   $this->db->query( $sql );
-            }
-            if( $this->showOps ) {
-                   $text .= '<p><pre>' . $sql .'</pre></p>';
-            }
-	   $text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module',  DB_PREFIX . 'layout_module' ) );
-         }
-
-
-         $this->deleteSettingGroup( $mod );
-         $sql = '
-		INSERT INTO
-			`' . DB_PREFIX . 'setting`
-		SET
-			`store_id` = \'0\',
-			`code` = \'' . $mod . '\',
-			`key` = \'' . $mod . '_status\',
-			`value` = \'' . $status . '\',
-			`serialized`= \'0\'';
-		if( !$this->simulate ) {
-                       $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->settingcounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_status', DB_PREFIX . 'setting' ) );
-        }
-
-	if( $this->config->get( $mod . '_0_layout_id' ) ||  $this->config->get( $mod . '_1_layout_id' )) {
-         /* version 1.5.0 - 1.5.0.5 */
-          $module = $this->config->get( $mod . '_module' );
-          if( $this->config->get( $mod . '_0_layout_id' )){
-           $pos = strpos($module, ',' );
-           $up = array( 0 =>'0');
-           
-          } elseif( $this->config->get( $mod . '_1_layout_id' )){
-       
-           $pos = strpos($module,',');
-
-             if($pos){
-               $up = explode(',',$module);
-             } else {
-              $up = array( 0 =>'1');
-            }
-          }
-
-             for( $i=0;$i<count($up);$i++){
-                 if( $i == 0){
-                   $status = $this->config->get( $mod .'_' . $up[$i] .'_status');
-                }
-
-                if(!$this->config->get( $mod . '_' . $up[$i] . '_sort_order') ){
-                 $sort_order = 1;
-                }else{
-                  $sort_order = $this->config->get( $mod . '_' . $up[$i] . '_sort_order');
-                }
-
-                 $sql = '
-			INSERT INTO
-				   `' . DB_PREFIX . 'layout_module`
-			SET
-				   `layout_id` = \'' . $this->config->get( $mod .'_' . $up[$i] .'_layout_id') . '\',
-				   `code`= \'' . $mod . '\',
-				   `position` = \'' . $this->config->get( $mod .'_' . $up[$i] .'_position') . '\',
-                                   `sort_order` = \'' . $sort_order . '\'';
-
-            if( !$this->simulate ) {
-		   $this->db->query( $sql );
-            }
-            if( $this->showOps ) {
-                   $text .= '<p><pre>' . $sql .'</pre></p>';
-            }
-
-	$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module',  DB_PREFIX . 'layout_module' ) );
-        }
-
-        $this->deleteSettingGroup( $mod );
-
-        $sql = '
-		INSERT INTO
-			`' . DB_PREFIX . 'setting`
-		SET
-			`store_id` = \'0\',
-			`code` = \'' . $mod . '\',
-			`key` = \'' . $mod . '_status\',
-			`value` = \'' . $status . '\',
-			`serialized`= \'0\'';
-		if( !$this->simulate ) {
-                       $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->settingcounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_status', DB_PREFIX . 'setting' ) );
-          } 
-
-	if( $this->structure->hasSetting( $mod . '_sort_order' ) &&  $this->config->get( $mod . '_position' )) {
-           /* versions 1.4.7 - 1.4.9.5 */
-             $status = $this->config->get( $mod .'_status');
-             $position = $this->config->get( $mod .'_position');
-
-             $position = str_replace('left','column_left',$position );
-             $position = str_replace('right','column_right',$position );
-             $position = str_replace('home','content_top',$position );
-             $sort_order = $this->config->get( $mod . '_position' );
-
-    $module = array(
-		array(
-                        'module'        => $mod,
-			'position'	=> $position,
-			'layout_id'	=> 1,
-                        'sort_order'    => $sort_order
-		),
-		array(
-                        'module'        => 'category',
-			'position'	=> $position,
-			'layout_id'	=> 2,
-                        'sort_order'    => 1
-		),
-		array(
-                        'module'        => 'category',
-			'position'	=> $position,
-			'layout_id'	=> 3,
-                        'sort_order'    => 1
-		),
-		array(
-                        'module'        => 'information',
-			'position'	=> $position,
-			'layout_id'	=> 8,
-                        'sort_order'    => 1
-		),
-		array(
-                        'module'        => 'information',
-			'position'	=> $position,
-			'layout_id'	=> 9,
-                        'sort_order'    => 1
-		),
-		array(
-                        'module'        => 'information',
-			'position'	=> $position,
-			'layout_id'	=> 11,
-                        'sort_order'    => 1
-		),
-		array(
-                        'module'        => 'account',
-			'position'	=> 'column_left',
-			'layout_id'	=> 6,
-                        'sort_order'    => 1
-		),
-		array(
-                        'module'        => 'affiliate',
-			'position'	=> 'column_left',
-			'layout_id'	=> 10,
-                        'sort_order'    => 1
-		)
-              );
-
-    foreach( $module as $k => $v ) {
-
-	if( !$this->structure->hasLayout( $v['module'] ) ) {
-                 $sql = '
-			INSERT INTO
-				   `' . DB_PREFIX . 'layout_module`
-			SET
-				   `layout_id` = \'' . $v['layout_id'] . '\',
-				   `code`= \'' . $v['module'] . '\',
-				   `position` = \'' . $v['position'] . '\',
-                                   `sort_order` = \'' . $v['sort_order'] . '\'';
-
-            if( !$this->simulate ) {
-		   $this->db->query( $sql );
-            }
-            if( $this->showOps ) {
-                   $text .= '<p><pre>' . $sql .'</pre></p>';
-            }
-
-	$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_module',  DB_PREFIX . 'layout_module' ) );
-         }
-   }
-
-        $this->deleteSettingGroup( $mod );
-
-    $setting = array(
-		array(
-                        'key'        => $mod . '_status',
-			'group'      => $mod,
-			'value'	     => 1
-		),
-		array(
-                        'key'        => 'account_status',
-			'group'      => 'account',
-			'value'	     => 1
-		),
-		array(
-                        'key'        => 'affiliate_status',
-			'group'      => 'affiliate',
-			'value'	     => 1
-		)
-          );
-    foreach( $setting as $k => $v ) {
-
-	if( !$this->structure->hasSetting( $v['key'] ) ) {
-         $sql = '
-		INSERT INTO
-			`' . DB_PREFIX . 'setting`
-		SET
-			`store_id` = \'0\',
-			`code` = \'' . $v['group'] . '\',
-			`key` = \'' . $v['key'] . '\',
-			`value` = \'' . $v['value'] . '\',
-			`serialized`= \'0\'';
-		if( !$this->simulate ) {
-                       $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->settingcounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_config'], $mod . '_status', DB_PREFIX . 'setting' ) );
-        }
-    }
-    $exten = array(
-                array('mod'        => 'account'
-		),
-		array(
-                      'mod'        => 'affiliate'
-		)
-          );
-    foreach( $exten as $k => $v ) {
-
-	if( !$this->structure->hasExtension( $v['mod'] ) ) {
-         $sql = '
-		INSERT INTO
-			`' . DB_PREFIX . 'extension`
-		SET
-			`type` = \'module\',
-			`code` = \'' . $v['mod'] . '\'';
-		if( !$this->simulate ) {
-                       $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->settingcounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_config'], $v['mod'], DB_PREFIX . 'extension' ) );
-        }
-    }
-   } 
-    return $text;
-   }
 
    private function getConfigMail(){
      $text = '';
@@ -685,7 +84,7 @@ class ModelUpgradeSettings extends Model{
 			`value`= \'0\',
 			`serialized` = \'0\'';
 
-		if( !$this->simulate ) {
+					if( !$this->simulate ) {
                        $this->db->query( $sql );
                 }
                 if( $this->showOps ) {
@@ -705,7 +104,7 @@ class ModelUpgradeSettings extends Model{
 			`key` = \'config_ftp_root\',
 			`serialized` = \'0\'';
 
-		if( !$this->simulate ) {
+					if( !$this->simulate ) {
                        $this->db->query( $sql );
                 }
                 if( $this->showOps ) {
@@ -725,16 +124,13 @@ class ModelUpgradeSettings extends Model{
 			`key` = \'config_ftp_password\',
 			`serialized` = \'0\'';
 
-		if( !$this->simulate ) {
-                       $this->db->query( $sql );
+						if( !$this->simulate ) {
+                    $this->db->query( $sql );
                 }
                 if( $this->showOps ) {
                       $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 		++$this->settingcounter;
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_ftp_password', '' ) );
 	}
 
@@ -1242,14 +638,14 @@ class ModelUpgradeSettings extends Model{
 			`value` = \'1\',
 			`serialized` = \'0\'';
 
-		if( !$this->simulate ) {
+					if( !$this->simulate ) {
                        $this->db->query( $sql );
                 }
                 if( $this->showOps ) {
                       $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 		++$this->settingcounter;
-		$this->msg( sprintf( $this->lang['msg_config'], 'config_checkout_guest', '' ) );
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_checkout_guest', '' ) );
 	}
 
 	if( !$this->structure->hasSetting( 'config_processing_status' ) ) {
@@ -1312,7 +708,7 @@ class ModelUpgradeSettings extends Model{
                       $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 		++$this->settingcounter;
-		$this->msg( sprintf( $this->lang['msg_config'], 'config_order_mail', '' ) );
+		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_order_mail', '' ) );
 	}
 
 	if( !$this->structure->hasSetting( 'config_affiliate_approval' ) ) {
@@ -1647,27 +1043,6 @@ class ModelUpgradeSettings extends Model{
 		$text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_file_mime_allowed', '' ) );
 	}
 
-	if( !$this->structure->hasSetting( 'config_robots' ) ) {
-        $sql = '
-		INSERT INTO
-			`' . DB_PREFIX . 'setting`
-		SET
-			`store_id` = \'0\',
-			`code` = \'config\',
-			`key` =  \'config_robots\',
-			`value` = \'' . $this->db->escape( "abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai''hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg" ) . '\',
-			`serialized` = \'0\'';
-
-		if( !$this->simulate ) {
-                       $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->settingcounter;
-		$this->msg( sprintf( $this->lang['msg_config'], 'config_robots', '' ) );
-	}
-
 	if( !$this->structure->hasSetting( 'config_password' ) ) {
 		$sql = '
 		INSERT INTO
@@ -1737,7 +1112,7 @@ class ModelUpgradeSettings extends Model{
 			`value` = \'0\',
 			`serialized` = \'0\'';
 
-		if( !$this->simulate ) {
+					if( !$this->simulate ) {
                        $this->db->query( $sql );
                 }
                 if( $this->showOps ) {
@@ -1837,119 +1212,7 @@ class ModelUpgradeSettings extends Model{
 
     return $text;
   }
-
-	/**
-	 * delete setting values
-	 */
-  public function deleteSettings(){
-	$settingdelete = 0;
-        $text = '';
-	if( $this->structure->hasSetting( 'account_module' ) ) {
-		$sql = '
-		DELETE FROM
-			`' . DB_PREFIX . 'setting`
-		WHERE
-			`key` = \'account_module\'';
-
-		if( !$this->simulate ) {
-		      $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$settingdelete;
-		$text .= $this->msg( sprintf( $this->lang['msg_config_delete'], 'account_module',  'setting' ) );
-	}
-
-	if( $this->structure->hasSetting( 'affiliate_module' ) ) {
-		$sql = '
-		DELETE FROM
-			`' . DB_PREFIX . 'setting`
-		WHERE
-			`key` = \'affiliate_module\'';
-
-		if( !$this->simulate ) {
-		      $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$settingdelete;
-		$text .= $this->msg( sprintf( $this->lang['msg_config_delete'], 'affiliate_module',  'setting' ) );
-	}
-
-	if( $this->structure->hasSetting( 'category_module' ) ) {
-		$sql = '
-		DELETE FROM
-			`' . DB_PREFIX . 'setting`
-		WHERE
-			`key` = \'category_module\'';
-
-		if( !$this->simulate ) {
-		       $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$settingdelete;
-		$text .= $this->msg( sprintf( $this->lang['msg_config_delete'], 'category_module',  'setting' ) );
-	}
-
-	if( $this->structure->hasSetting( 'information_module' ) ) {
-		$sql = '
-		DELETE FROM
-			`' . DB_PREFIX . 'setting`
-		WHERE
-			`key` = \'information_module\'';
-
-		if( !$this->simulate ) {
-		       $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                      $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$settingdelete;
-		$text .= $this->msg( sprintf( $this->lang['msg_config_delete'], 'information_module',  'setting' ) );
-	}
-
-
-       return $text;
-     
-  }
-
-  private function getBannerName($banner_id){
-  $sql = '
- 	 SELECT
-	 	*
-	 FROM
-		`' . DB_PREFIX . 'banner`
-	 WHERE
-		`banner_id` = \'' . $banner_id . '\'';
-      if( array_search( DB_PREFIX . 'banner', $this->structure->tables() ) ){
-	$result = $this->db->query( $sql );
-        if( isset($result->row['name']) ){
-         return '-' . $result->row['name'];
-        }
-     }
-  }
   public function msg( $data ){
        return str_replace( $data, '<div class="msg round">' . $data .'</div>', $data);
-  }
-
-   public function deleteSettingGroup($group) {
-   	$text = '';
-	$sql = '
-	DELETE FROM
-		`' . DB_PREFIX . 'setting`
-	WHERE
-		`code` = \'' . $group . '\'';
-     if( !$this->simulate ){
-	$this->db->query( $sql );
-     }
-     if( $this->showOps ) {
-        $text = '<p><pre>' . $sql .'</pre></p>';
-     }
-	$text .= $this->msg( sprintf( $this->lang['msg_delete_setting'], $group . '_module', DB_PREFIX . 'setting','' ) );
-     return $text;
   }
 }
