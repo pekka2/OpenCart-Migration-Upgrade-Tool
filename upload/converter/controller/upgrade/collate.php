@@ -34,8 +34,11 @@ class ControllerUpgradeCollate extends Controller {
 		
 		if(isset($this->request->post['steps'])){
 		  $steps = $this->request->post['steps'];
+		  $step = $this->request->post['step'];
 		} else {
-			$steps = 8;
+			$steps = 9;
+			$step = 1;
+     	    $this->data['start'] = true;
 		}
 		
 		if(isset($this->request->post['upgrade'])){
@@ -53,20 +56,21 @@ class ControllerUpgradeCollate extends Controller {
                  $this->data['upgrade_data'] = $this->model_upgrade_database->addTable($this->request->post );
        
                    $this->model_upgrade_info->addPermissions($this->post['simulate']);
-
           }
-          $this->data['action'] = $this->url->link('upgrade/column');
-          $this->data['text_step'] = sprintf($this->language->get('text_step'),2,$steps);  
-          $this->data['text_simulation'] = $this->language->get('text_simulation');
-          $this->data['text_on'] = $this->language->get('text_on');
-          $this->data['text_off'] = $this->language->get('text_off');
-          $this->data['text_collate_info'] = $this->language->get('text_collate_info');
-          $this->data['help_step_1'] = $this->language->get('help_step_1');
-          $this->data['step'] = 3;
-          $this->data['steps'] = $steps;
-          $this->data['header_step_1'] = $this->language->get('header_step_1');
-          $this->data['btn_collate'] = $this->language->get('btn_collate');
-          $this->data['btn_skip'] = $this->language->get('btn_skip');
+                $this->data['action'] = $this->url->link('upgrade/column');
+                $this->data['text_step'] = sprintf($this->language->get('text_step'),$step,$steps);  
+                $this->data['text_simulation'] = $this->language->get('text_simulation');
+                $this->data['text_on'] = $this->language->get('text_on');
+                $this->data['text_off'] = $this->language->get('text_off');
+                $this->data['text_collate_info'] = $this->language->get('text_collate_info');
+                $this->data['help_step_1'] = $this->language->get('help_step_1');
+                $this->data['step'] = 3;
+                $this->data['steps'] = $steps;
+                $this->data['header_step_1'] = $this->language->get('header_step_1');
+                $this->data['btn_collate'] = $this->language->get('btn_collate');
+                $this->data['btn_skip'] = $this->language->get('btn_skip');
+                $this->data['help_simulate'] = $this->language->get('help_simulate');
+                $this->data['help_ops'] = $this->language->get('help_ops');
 
                 $this->data['step_start'] = $this->language->get('step_start');
                 $this->data['step_collate'] = $this->language->get('step_collate');
