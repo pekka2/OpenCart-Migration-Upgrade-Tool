@@ -140,7 +140,7 @@ class ControllerUpgradeClean extends Controller {
 					}
                  $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
                  $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
-                 $this->data['add_columns'] = $this->model_upgrade_database->addColumns( $this->request->post );
+               //  $this->data['drop'] = $this->model_upgrade_database->dropdColumns( $this->request->post );
             
              }  
 
