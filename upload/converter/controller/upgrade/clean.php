@@ -104,7 +104,7 @@ class ControllerUpgradeClean extends Controller {
 		$this->response->setOutput($this->render());
    }
    public function structure() {
-		$this->language->load('upgrade/database');
+		$this->language->load('upgrade/clean');
 		$this->load->model('upgrade/database');
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
