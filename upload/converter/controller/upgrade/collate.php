@@ -1,5 +1,5 @@
 <?php
-class ControllerUpgradeCollate extends Controller {   
+class ControllerUpgradeCollate extends Controller {
         private $error = array();
    public function index() {
 		$this->language->load('upgrade/database');
@@ -31,7 +31,7 @@ class ControllerUpgradeCollate extends Controller {
 			'href'      => $this->url->link('upgrade/start'),
 			'separator' => false
 		);
-		
+
 		if(isset($this->request->post['steps'])){
 		  $steps = $this->request->post['steps'];
 		  $step = $this->request->post['step'];
@@ -40,7 +40,7 @@ class ControllerUpgradeCollate extends Controller {
 			$step = 1;
      	    $this->data['start'] = true;
 		}
-		
+
 		if(isset($this->request->post['upgrade'])){
 		  $this->data['upgrade'] = $this->request->post['upgrade'];
 		} else {
