@@ -1,33 +1,27 @@
 <?php
-class ControllerUpgradeModule extends Controller {   
+class ControllerUpgradeModule extends Controller {
         private $error = array();
     private $max;
     private $min;
    public function index() {
 		$this->language->load('upgrade/database');
-      $this->lmodel->set('upgrade_database',$this->language->load('upgrade/database'));
 		$this->load->model('upgrade/info');
 		$this->load->model('upgrade/database');
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		$this->document->setTitle($this->language->get('heading_title'));
-        $this->max = 8;
-        $this->min = 2;
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),
-			'separator' => false
+			'href'      => $this->url->link('common/home')
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_upgrade_info'),
-			'href'      => $this->url->link('upgrade/info'),
-			'separator' => false
+			'href'      => $this->url->link('upgrade/info')
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('btn_start'),
-			'href'      => $this->url->link('upgrade/start'),
-			'separator' => false
+			'href'      => $this->url->link('upgrade/start')
 		);
 
 		$version = $this->structure->getVersion();
@@ -36,6 +30,9 @@ class ControllerUpgradeModule extends Controller {
 		if(isset($this->request->post['steps'])){
 		  $step = $this->request->post['step'];
 		  $steps = $this->request->post['steps'];
+		}else {
+			$steps = 5;
+			$step = 1;
 		}
 		
 		if(isset($this->request->post['upgrade'])){
@@ -50,7 +47,7 @@ class ControllerUpgradeModule extends Controller {
                  $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
                  $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
                  $this->data['add_columns'] = $this->model_upgrade_database->addData( $this->request->post );
-            
+
              }  
                 $this->data['action'] = $this->url->link('upgrade/settings');
                 $this->data['text_simulation'] = $this->language->get('text_simulation');
@@ -66,7 +63,7 @@ class ControllerUpgradeModule extends Controller {
                 $this->data['entry_migration_module'] = $this->language->get('entry_migration_module');
                 $this->data['step'] = $step+1;
                 $this->data['steps'] = $steps;
-                
+
                 $this->data['text_exa_store_path'] = $this->language->get('text_exa_store_path');
                 $this->data['btn_module'] = $this->language->get('btn_module');
                 $this->data['btn_config'] = $this->language->get('btn_config');
