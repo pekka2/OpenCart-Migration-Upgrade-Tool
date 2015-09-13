@@ -5,14 +5,12 @@
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
     <?php } ?>
   </div>
-
-
     <div class="heading">
       <h1><img src="view/image/user.png" alt="" /> <?php echo $heading_title; ?></h1>   
 
 
      <div class="buttons">
-      <a href="<?php echo $database;?>" class="button right"><?php echo $button_database; ?></a>
+      <a href="<?php echo $database;?>" class="button right"><?php echo $btn_database; ?></a>
      </div>
     </div> 
 
