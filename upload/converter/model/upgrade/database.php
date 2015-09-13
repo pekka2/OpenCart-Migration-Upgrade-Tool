@@ -137,8 +137,8 @@ class ModelUpgradeDatabase extends Model {
 				  }
 			 }
 		}
-
-
+		
+  	  	
         $text .=  $this->header(sprintf( addslashes($this->lang['msg_collate_count']), $this->collatecounter, '' ) );
         $text .=  $this->header(sprintf( addslashes($this->lang['msg_column_collate_count']), $this->columncollatecounter, '' ) );
 		if(!$this->cache->get('table_new_data')){
@@ -535,7 +535,7 @@ $sql = 'SELECT  *  FROM  `' . DB_PREFIX . 'return_product`';
         */
 $sql = "UPDATE `' . DB_PREFIX . 'return` (`product_id`,`product`,`model`,`quantity`,`opened`,`return_reason_id`,`return_action_id`,`comment`)
 SELECT `product_id`, `name`,`model`,`quantity`,`opened`,`return_reason_id`,`return_action_id`,`comment` FROM `' . DB_PREFIX . 'return_product`";
-
+	
 		                if( !$this->simulate ) {
                             $this->db->query( $sql );
                         }
@@ -590,6 +590,7 @@ VALUES
                              $text .= '<p><pre>' . $sql .'</pre></p>';
                         } 
     }
+          $text .= $this->categoryPath();   
           $text .= $this->changeOptions();    
 	  return $text;
    }
@@ -685,6 +686,197 @@ ON
         }
         return $text;
     }
+private function categoryPath(){
+  $text = '';
+		$sql = '
+		SELECT
+			*
+		FROM
+			`' . DB_PREFIX . 'category`
+		ORDER BY
+			category_id ASC';
+
+		$query = $this->db->query( $sql );
+
+		$categories = array();
+
+		if( isset( $query->row['category_id'] ) ) {
+			foreach( $query->rows as $category ){
+				if( $category['parent_id'] == 0 ) {
+					$categories[] = array(
+						'category_id'	=> $category['category_id'],
+						'path_id'		=> $category['category_id'],
+						'level'			=> 0
+					);
+				}else{
+					$path = $category['parent_id'];
+
+					$sql = '
+					SELECT
+						*
+					FROM
+						`' . DB_PREFIX . 'category`
+					WHERE
+						category_id = \'' . (int) $category['parent_id']. '\'';
+
+					$info = $this->db->query( $sql );
+
+					if( $info->row['parent_id'] == 0 ) {
+						$categories[] = array(
+							'category_id'	=> $category['category_id'],
+							'path_id'		=> $category['category_id'],
+							'level'			=> 1
+						);
+
+						$categories[] = array(
+							'category_id'	=> $category['category_id'],
+							'path_id'		=> $category['parent_id'],
+							'level'			=> 0
+						);
+					}elseif( $info->row['parent_id'] > 0 ) {
+						$sql = '
+						SELECT
+							*
+						FROM
+							`' . DB_PREFIX . 'category`
+						WHERE
+							category_id = \'' . (int) $info->row['parent_id'] . '\'';
+
+						$info2 = $this->db->query( $sql );
+
+						if( $info2->row['parent_id'] == 0 ) {
+							$level = 2;
+
+							$categories[] = array(
+								'category_id'	=> $category['category_id'],
+								'path_id'		=> $category['category_id'],
+								'level'			=> 2
+							);
+
+							$categories[] = array(
+								'category_id'	=> $category['category_id'],
+								'path_id'		=> $category['parent_id'],
+								'level'			=> 1
+							);
+
+							$categories[] = array(
+								'category_id'	=> $category['category_id'],
+								'path_id'		=> $info->row['parent_id'],
+								'level' => 0
+							);
+						}elseif( $info2->row['parent_id'] > 0 ) {
+							$sql = '
+							SELECT
+								*
+							FROM
+								`' . DB_PREFIX . 'category`
+							WHERE
+								category_id = \'' . (int) $info2->row['parent_id'] . '\'';
+
+							$info3 = $this->db->query( $sql );
+
+							if( $info3->row['parent_id'] == 0 ) {
+								$categories[] = array(
+									'category_id'	=> $category['category_id'],
+									'path_id'		=> $category['category_id'],
+									'level'			=> 3
+								);
+
+								$categories[] = array(
+									'category_id'	=> $category['category_id'],
+									'path_id'		=>	$category['parent_id'],
+									'level'			=> 2
+								);
+
+								$categories[] = array(
+									'category_id'	=> $category['category_id'],
+									'path_id'		=> $info->row['parent_id'],
+									'level'			=> 1
+								);
+
+								$categories[] = array(
+									'category_id'	=> $category['category_id'],
+									'path_id'		=> $info2->row['parent_id'],
+									'level'			=> 0
+								);
+
+								$level = 3;
+							}elseif( $info3->row['parent_id'] > 0 ) {
+								$sql = '
+								SELECT
+									*
+								FROM
+									`' . DB_PREFIX . 'category`
+								WHERE
+									category_id = \'' . (int) $info3->row['parent_id'] . '\'';
+
+								$info4 = $this->db->query( $sql );
+
+								if( $info4->row['parent_id'] == 0 ) {
+									$categories[] = array(
+										'category_id'	=> $category['category_id'],
+										'path_id'		=> $category['category_id'],
+										'level'			=> 4
+									);
+
+									$categories[] = array(
+										'category_id'	=> $category['category_id'],
+										'path_id'		=> $category['parent_id'],
+										'level'			=> 3
+									);
+
+									$categories[] = array(
+										'category_id'	=> $category['category_id'],
+										'path_id'		=> $info->row['parent_id'],
+										'level'			=> 2
+									);
+
+									$categories[] = array(
+										'category_id'	=> $category['category_id'],
+										'path_id'		=> $info2->row['parent_id'],
+										'level' 		=> 1
+									);
+
+									$categories[] = array(
+										'category_id'	=> $category['category_id'],
+										'path_id'		=> $info3->row['parent_id'],
+										'level'			=> 0
+									);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		if( count( $categories) != 0 ) {
+			$i = 0;
+
+			foreach( $categories as $path ) {
+				$sql = '
+				INSERT INTO
+					`' . DB_PREFIX . 'category_path`
+				SET
+					category_id = \'' . (int) $path['category_id'] . '\',
+					path_id = \'' . (int) $path['path_id'] . '\',
+					level = \'' . (int) $path['level'] . '\'';
+
+				                if( !$this->simulate ) {
+                                  $this->db->query( $sql );
+                                }
+                                if( $this->showOps ) {
+                                  $text .= '<p><pre>' . $sql .'</pre></p>';
+                                }
+				++$i;
+			}
+
+
+		  $text .= $this->msg( sprintf( $this->lang['msg_text'],   'category_path', $this->lang['msg_new_data'] ) );
+			
+		}
+		return $text;
+	}
     private function msg( $data ){
        return str_replace( $data, '<div class="msg round">' . $data .'</div>', $data);
     }
