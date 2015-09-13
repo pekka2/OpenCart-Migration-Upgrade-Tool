@@ -23,6 +23,7 @@ $output .= 'define(\'DIR_UPLOAD\', \'' . DIR_SYSTEM . 'upload/\');' . "\r\n";
 $output .= 'define(\'DIR_MODIFICATION\', \'' . DIR_SYSTEM . 'modification/\');' . "\r\n";
 $output .= 'define(\'DIR_CACHE\', \'' . $root . 'converter/system/cache/\');' . "\r\n";
 $output .= 'define(\'DIR_LANGUAGE_MODEL\', \'' . $root . 'converter/system/language_model/\');' . "\r\n";
+$output .= 'define(\'DIR_SQL\', \''. $root . 'converter/system/sql/\');' . "\r\n";
 $output .= 'define(\'DIR_LOGS\', \''. $root . 'converter/system/logs/\');' . "\r\n";
 $output .= "\r\n";
 $output .= '// DB' . "\r\n";
