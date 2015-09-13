@@ -1,8 +1,6 @@
 <?php
-class ControllerUpgradeStart extends Controller {   
+class ControllerUpgradeStart extends Controller {
         private $error = array();
-    private $max;
-    private $min;
    public function index() {
 		$this->language->load('upgrade/database');
       $this->lmodel->set('upgrade_database',$this->language->load('upgrade/database'));
@@ -10,23 +8,18 @@ class ControllerUpgradeStart extends Controller {
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		$this->document->setTitle($this->language->get('heading_title'));
-        $this->max = 9;
-        $this->min = 4;
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),
-			'separator' => false
+			'href'      => $this->url->link('common/home')
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_upgrade_info'),
-			'href'      => $this->url->link('upgrade/info'),
-			'separator' => false
+			'href'      => $this->url->link('upgrade/info')
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('btn_start'),
-			'href'      => $this->url->link('upgrade/start'),
-			'separator' => false
+			'href'      => $this->url->link('upgrade/start')
 		);
 
 		$level = $this->structure->getVersion();
