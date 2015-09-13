@@ -3,7 +3,7 @@ class ControllerUpgradeCollate extends Controller {
         private $error = array();
    public function index() {
 		$this->language->load('upgrade/database');
-        $this->lmodel->set('upgrade_database',$this->language->load('upgrade/database'));
+                $this->lmodel->set('upgrade_database',$this->language->load('upgrade/database'));
 		$this->load->model('upgrade/info');
 		$this->load->model('upgrade/database');
 
@@ -38,7 +38,7 @@ class ControllerUpgradeCollate extends Controller {
 		} else {
 			$steps = 9;
 			$step = 1;
-     	    $this->data['start'] = true;
+     	                $this->data['start'] = true;
 		}
 
 		if(isset($this->request->post['upgrade'])){
