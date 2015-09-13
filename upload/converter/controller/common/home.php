@@ -176,6 +176,7 @@ class ControllerCommonHome extends Controller {
                                 'upgrade/column',
 				'upgrade/module',
 			        'upgrade/settings',
+                                'upgrade/clean',
 				'upgrade/images',
 				'upgrade/configuration',
 				'error/not_found',
@@ -234,6 +235,7 @@ class ControllerCommonHome extends Controller {
                                          'upgrade/configuration',
 					 'upgrade/module',
 					 'upgrade/settings',
+                                         'upgrade/clean',
                                          'upgrade/configuration',
                                          'upgrade/images'
                   );
