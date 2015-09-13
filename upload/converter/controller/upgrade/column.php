@@ -1,5 +1,5 @@
 <?php
-class ControllerUpgradeColumn extends Controller {   
+class ControllerUpgradeColumn extends Controller {
         private $error = array();
    public function index() {
 		$this->language->load('upgrade/database');
@@ -35,10 +35,10 @@ class ControllerUpgradeColumn extends Controller {
 		  $step = $this->request->post['step'];
 		  $steps = $this->request->post['steps'];
 		} else {
-			$steps = 9;
-			$step = 2;
+			$steps = 7;
+			$step = 1;
 		}
-		
+
 		if(isset($this->request->post['upgrade'])){
 		  $this->data['upgrade'] = $this->request->post['upgrade'];
 		} else {
@@ -118,13 +118,19 @@ class ControllerUpgradeColumn extends Controller {
 			'href'      => $this->url->link('upgrade/column'),
 			'separator' => false
 		);
-		
+
 		if(isset($this->request->post['steps'])){
 		  $step = $this->request->post['step'];
 		  $steps = $this->request->post['steps'];
 		} else {
-			$steps = 9;
-			$step = 2;
+			$steps = 6;
+			$step = 1;
+		}
+
+		if(isset($this->request->post['upgrade'])){
+		  $this->data['upgrade'] = $this->request->post['upgrade'];
+		} else {
+			$this->data['upgrade'] = 2031;
 		}
            if( isset( $this->request->post['step']) && $this->validate() ){
 					if( !isset($_COOKIE['UpgradeMigration']) ){
@@ -133,8 +139,8 @@ class ControllerUpgradeColumn extends Controller {
                  $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
                  $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
                  $this->data['add_columns'] = $this->model_upgrade_database->addColumns( $this->request->post );
-            
-             }  
+
+             }
 
                 $this->data['action'] = $this->url->link('upgrade/module');
                 $this->data['text_on'] = $this->language->get('text_on');
