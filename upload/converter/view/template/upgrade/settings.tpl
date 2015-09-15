@@ -41,6 +41,20 @@
 				<input type="hidden" name="showOps" value="<?php echo $showOps; ?>" />
 				<input type="hidden" name="dirImage" value="<?php echo $images; ?>" />
 				<input type="hidden" name="upgrade" value="<?php echo $upgrade; ?>" />
+				<div class="block">
+					<label><?php echo $text_update_theme;?>
+					<select name="theme">
+                                              <option><?php echo $text_skip_theme;?></option> 
+                                           <?php foreach($themes as $theme){?>
+                                            <?php if($theme['name'] == $config_theme){?>
+                                              <option value="<?php echo $theme['name'];?>" selected="selected"><?php echo $theme['name'];?></option> 
+                                            <?php } else{?>
+                                              <option value="<?php echo $theme['name'];?>"><?php echo $theme['name'];?></option> 
+                                            <?php } ?>
+                                            <?php } ?>
+                                          </select>
+					</label>
+				</div>
 				<div class="buttons">
 					<input type="submit" name="submit" value="<?php echo $btn_setting; ?>" class="submit round green" />
 					<input type="submit" name="skip" value="<?php echo $btn_skip; ?>" class="submit round" />
