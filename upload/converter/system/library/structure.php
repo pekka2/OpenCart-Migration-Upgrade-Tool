@@ -1,13 +1,18 @@
 <?php
 class Structure {
   
-	public function __construct($registry) {
+  private $version;
+  private $vdata;
+  private $tb;
+  private $org;
+  
+  public function __construct($registry) {
 		$this->db = $registry->get('db');
   }
   public function tables() {
        $query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
 
-        $table_list = array();
+        $table_list = array(0=>'//');
         foreach($query->rows as $table){
                       $table_list[] = $table['Tables_in_'. DB_DATABASE];
           }
@@ -16,18 +21,15 @@ class Structure {
 
   public function columns( $table ) {
 
-		$ret		= array();
+		$ret		= array(0 => '//');
         if( array_search( DB_PREFIX . $table, $this->tables() ) || $table == 'address'){
                 $colums = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`");
-
-
                foreach( $colums->rows as $field){
                  $ret[] = $field['Field'];
                }
          }
           return $ret;	
   }
-   
    public function newData($upgrade){
 		$file = DIR_SQL . $upgrade . '.sql';
 
@@ -266,60 +268,17 @@ class Structure {
       }
 	return true;
    }
-  public function language() {
-		 $sql = '
-                SELECT 
-                       *
-                FROM  `' . DB_PREFIX . 'language`';
-
-          $languages = $this->db->query($sql);
-          
-          return $languages->rows;	
-  }
-   
-   public function hasLayout( $val ) {
- 
-	$sql = '
-	SELECT
-		*
-	FROM
-		`' . DB_PREFIX . 'layout_module`
-	WHERE
-		`code` LIKE  \'' . $val . '%\'';
-       if( array_search( DB_PREFIX . 'layout_module' , $this->tables())){
-					$result = $this->db->query( $sql );
-					if( count( $result->row ) == 0 ) {
-						return false;
-					}
-     } else {
-				return false;
-      }
-	return true;
-   }
-
-
    public function hasTotal() {
-	$sql = '
-	SELECT
-		*
-	FROM
-		`' . DB_PREFIX . 'order_total`';
-	$result = $this->db->query( $sql );
+	$sql = 'SELECT * FROM `' . DB_PREFIX . 'order_total`';
+					$result = $this->db->query( $sql );
 			if( count( $result->rows ) == 0 ) {
 				return false;
 			}
 	return true;
    }
-   
-  public function hasOption( $val ) {
-                        
-	$sql = '
-	SELECT
-		*
-	FROM
-		`' . DB_PREFIX . 'option`
-	WHERE
-		`option_id` = \'' . $val . '\'';
+
+  public function hasOption( $val ) {                     
+	$sql = 'SELECT * FROM `' . DB_PREFIX . 'option` WHERE `option_id` = \'' . $val . '\'';
 
 	$result = $this->db->query( $sql );
 
@@ -331,18 +290,17 @@ class Structure {
   }
 
    public function hasApproval() {
-	$sql = '
-	SELECT
-		*
-	FROM
-		`' . DB_PREFIX . 'customer_group`
-	WHERE
-	   `approval` = \'1\'';
-	   
+	$sql = 'SELECT * FROM
+		`' . DB_PREFIX . 'customer_group` WHERE `approval` = \'1\'';
+
+	    if( array_search('approval', $this->columns('customer_group')) ){
 			$result = $this->db->query( $sql );
 			if( count( $result->rows ) == 0 ) {
 				return false;
 			}
+		} else {
+				return false;
+		}
 	return true;
    }
   
@@ -360,7 +318,8 @@ class Structure {
            }
         }
      }
-  } 
+  }
+  
   public function getColumnTypeVarchar( $table ) {
      if( array_search( DB_PREFIX . $table, $this->tables() ) || $table == 'address'){
             $fields = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`" );
@@ -373,7 +332,6 @@ class Structure {
            return $col;
      }
   }
-  
   public function getColumnKey( $column, $table ) {
      if( array_search( DB_PREFIX . $table, $this->tables() ) || $table == 'address'){
                 $fields = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`");
@@ -453,59 +411,113 @@ class Structure {
    public function getVersion() {
    	$this->version = 0;
    	$this->vdata = 0;
-	if( !array_search( DB_PREFIX . 'affiliate', $this->tables() ) ) {
+   	$this->tb = 59;
+   	$this->org = 59;
+			if( !array_search( 'meta_keywords', $this->columns('meta_description') ) && !array_search( DB_PREFIX . 'affiliate', $this->tables())) {
 		           ++$this->version;
-		           $this->vdata = '1.4.7-1.4.9';
-        }
-	if( !array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->tables() ) ) {
+		           $this->vdata = '1.4.7-1.4.8b';
+		           $this->tb = count($this->tables());
+		    }
+			if( array_search( 'meta_keywords', $this->columns('meta_description') ) ) {
+		          ++$this->version;
+		            $this->vdata = '1.4.9';
+		            $this->tb = count($this->tables());
+		    }
+			if( !array_search( 'serialized', $this->columns('setting') ) && !array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->tables() ) ) {
 		           ++$this->version;
 		           if($this->vdata == 0){
-		           	$this->vdata = '1.5.0-1.5.1.2';
+		           	$this->vdata = '1.5.0-1.5.0.5';
+		            $this->tb = count($this->tables());
+		            $this->org = 88;
 		           }
-	}
-	if( !array_search( DB_PREFIX . 'order_fraud', $this->tables() ) ) {
-		           ++$this->version;
+		   }
+			if( !array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->tables() ) ) {
+		          ++$this->version;
+		           if($this->vdata == 0){
+		           	$this->vdata = '1.5.1-1.5.1.2';
+		            $this->tb = count($this->tables());
+		            $this->org = 90;
+		           }
+		   }
+			if( !array_search( DB_PREFIX . 'api', $this->tables()) && !array_search( DB_PREFIX . 'order_fraud', $this->tables()) ) {
+		          ++$this->version;
 		           if($this->vdata == 0){
 		           	$this->vdata = '1.5.1.3';
+		            $this->tb = count($this->tables());
+		            $this->org = 91;
 		           }
-	 }
-	if( !array_search( DB_PREFIX . 'customer_group_description', $this->tables() ) ) {
-		           ++$this->version;
+		   }
+			if( !array_search( DB_PREFIX . 'customer_group_description', $this->tables() ) ) {
+		          ++$this->version;
 		           if($this->vdata == 0){
 		           	$this->vdata = '1.5.2';
+		            $this->tb = count($this->tables());
+		            $this->org = 92;
 		           }
-	}
-	if( !array_search( DB_PREFIX . 'customer_online', $this->tables() ) ) {
-		           ++$this->version;
+		   }
+			if( !array_search( DB_PREFIX . 'customer_online', $this->tables() ) ) {
+		          ++$this->version;
 		           if($this->vdata == 0){
 		           	$this->vdata = '1.5.3';
+		            $this->tb = count($this->tables());
+		            $this->org = 94;
 		           }
-	}
-	if( !array_search( DB_PREFIX . 'category_path', $this->tables() ) ) {
-		           ++$this->version;
+		   }
+			if( !array_search( DB_PREFIX . 'category_path', $this->tables() ) ) {
+		          ++$this->version;
 		           if($this->vdata == 0){
 		           	$this->vdata = '1.5.4';
+		            $this->tb = count($this->tables());
+		            $this->org = 93;
 		           }
          }
-	if( !array_search( DB_PREFIX . 'order_recurring', $this->tables() ) ) {
-		           ++$this->version;
+			if( !array_search( DB_PREFIX . 'order_recurring', $this->tables() ) ) {
+		          ++$this->version;
 		           if($this->vdata == 0){
 		           	$this->vdata = '1.5.5.1';
+		            $this->tb = count($this->tables());
+		            $this->org = 109;
 		           }
         }
-	if( !array_search( DB_PREFIX . 'layout_module', $this->tables() ) ) {
-		           ++$this->version;
+			if( !array_search( DB_PREFIX . 'layout_module', $this->tables() ) ) {
+		          ++$this->version;
 		           if($this->vdata == 0){
-		           	$this->vdata = '1.5.6.x';
+		           	$this->vdata = '1.5.6';
+		            $this->tb = count($this->tables());
+		            $this->org = 115;
 		           }
         }
-	if( !array_search( DB_PREFIX . 'module', $this->tables() ) ) {
-		           ++$this->version; 
+		  if( !array_search( DB_PREFIX . 'module', $this->tables() ) ) {
+		          ++$this->version; 
 		           if($this->vdata == 0){
 		           	$this->vdata = '2.0.0.0';
+		            $this->tb = count($this->tables());
+		            $this->org = 124;
 		           }
-	 }
-	   return array('level' => $this->version, 'vdata' => $this->vdata);
+	     }
+		 if( !array_search( DB_PREFIX . 'api_id', $this->tables() ) ) {
+		          ++$this->version; 
+		           if($this->vdata == 0){
+		           	$this->vdata = '2.0.1.0-2.0.3.1';
+		            $this->tb = count($this->tables());
+		            $this->org = 123;
+		           }
+	     }
+		     return array('level' => $this->version, 'vdata' => $this->vdata, 'tables' => $this->tb, 'oc_tables' => $this->org);
+     }
+     public function getUpgrade(){
+		        $oc_path  = DIR_DOCUMENT_ROOT . 'system/modification';
+		        $oc_path2 = DIR_DOCUMENT_ROOT . 'system/library/db';
+		        $oc_path3 = DIR_DOCUMENT_ROOT . 'catalog/controller/api';
+
+		        if(is_dir($oc_path) && is_dir($oc_path2) && is_dir($oc_path3) ){
+		        	return true;
+		        }
+          return false;
+     }
+     public function getOc2Tables(){
+     	        $tables = array(2020 => 124, 2031 => 123, 2100 => 125);
+               return $tables;
      }
 }
 ?>
