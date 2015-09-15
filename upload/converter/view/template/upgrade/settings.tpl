@@ -11,7 +11,7 @@
     <div class="heading">
       <h1><img src="view/image/user.png" alt="" /> <?php echo $heading_title; ?></h1>   
 
-    </div> 
+    </div>
 </div>
 <div class="note round<?php echo $simulate ? ' bg-green' : ' bg-red'; ?>">
 <?php echo $text_simulation; ?> <span class="<?php echo $simulate ? 'green">' . $text_on : 'red">' . $text_off; ?></span>
@@ -25,11 +25,11 @@
 
 		<h2><?php echo $header_step_module; ?></h2>
 		<div class="step round"><?php echo $text_step; ?></div>
-		
+
 		<div class="clr"></div>
-		
-      <h1><img src="view/image/user.png" alt="" /> <?php echo $text_setting_info; ?></h1>  
-    
+
+      <h1><img src="view/image/user.png" alt="" /> <?php echo $text_setting_info; ?></h1>
+
 		<div class="clr"></div>
 		<div class="block">
 			<form action="<?php echo $action; ?>" method="post">
@@ -50,7 +50,7 @@
 		<div class="clr"></div>
 	</div>
 </div>
-    <div id="column-right">   
+    <div id="column-right">
       <ul class="list-group">
         <li class="list-group-item"><?php echo $step_start; ?></li>
         <li class="list-group-item"><?php echo $step_collate; ?></li>
@@ -58,12 +58,11 @@
         <li class="list-group-item"><?php echo $step_data; ?></li>
         <li class="list-group-item"><?php echo $step_module; ?></li>
         <li class="list-group-item"><b><?php echo $step_setting; ?></b></li>
-        <li class="list-group-item"><?php echo $step_configuration; ?></li>
         <li class="list-group-item"><?php echo $step_images; ?></li>
         <li class="list-group-item"><?php echo $step_clean_module; ?></li>
+        <li class="list-group-item"><?php echo $step_configuration; ?></li>
         <li class="list-group-item"><?php echo $step_clean_table; ?></li>
       </ul>
     </div>
 </div>
-
 <?php echo $footer; ?>
