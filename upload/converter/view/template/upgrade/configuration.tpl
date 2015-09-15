@@ -4,12 +4,30 @@
     <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
     <?php } ?>
   </ul>
-  
+
 <div id="container">
 	<div class="content">
 <div class="msg round">
+
+     <?php  if ($error_warning) { ?>
+
+<div id="column-left" class="error-warning">
+         <div class="warning"><?php echo $error_warning; ?></div>
+			     <form action="<?php echo $previous; ?>" method="post">
+				    <input type="hidden" name="step" value="<?php echo $step;?>" />
+				    <input type="hidden" name="steps" value="<?php echo $steps;?>" />
+				    <input type="hidden" name="simulate" value="<?php echo $simulate; ?>" />
+				    <input type="hidden" name="showOps" value="<?php echo $showOps; ?>" />
+				    <input type="hidden" name="upgrade" value="<?php echo $upgrade;?>" />
+				    <input type="hidden" name="back" value="1" />
+				<div>
+				<div class="block">
+					<input type="submit" name="submit" value="<?php echo $btn_back; ?>" class="submit round green" />
+				</div>
+			</form>
+<?php } else { ?>
     <div class="heading">
-      <h1><img src="view/image/user.png" alt="" /> <?php echo $heading_database; ?></h1>   
+      <h1><img src="view/image/user.png" alt="" /><?php echo $heading; ?> </h1>   
 
     </div> 
 </div>
@@ -19,7 +37,7 @@
 <?php echo $text_simulation; ?> <span class="<?php echo $simulate ? 'green">' . $text_on : 'red">' . $text_off; ?></span>
 </div>
 
-   <?php if( isset( $add_settings ) ) { echo $add_settings; } ?>
+ <?php if( isset( $upgrade_imagepath )){ echo $upgrade_imagepath; } ?>
  <?php } ?>
 </div>
 
@@ -27,14 +45,14 @@
 <div class="msg round">
 
 <?php if(!isset($start) && !isset($back)){?>
-		<h2><?php echo $header_step_setting; ?></h2>
+		<h2><?php echo $header_step; ?></h2>
  <?php } ?>
 		<div class="step round"><?php echo $text_step; ?></div>
-		
+
 		<div class="clr"></div>
-		
-      <h1><img src="view/image/user.png" alt="" /> <?php echo $text_configuration_info; ?></h1>  
-    
+
+      <h1><img src="view/image/user.png" alt="" /> <?php echo $text_configuration_info; ?></h1>
+
 		<div class="clr"></div>
 		<div class="block">
 			<form action="<?php echo $action; ?>" method="post">
@@ -55,10 +73,11 @@
 				</div>
 			</form>
 		</div>
+<?php } ?>
 		<div class="clr"></div>
 	</div>
 </div>
-    <div id="column-right">   
+    <div id="column-right">
       <ul class="list-group">
         <li class="list-group-item"><?php echo $step_start; ?></li>
         <li class="list-group-item"><?php echo $step_collate; ?></li>
@@ -66,8 +85,8 @@
         <li class="list-group-item"><?php echo $step_data; ?></li>
         <li class="list-group-item"><?php echo $step_module; ?></li>
         <li class="list-group-item"><?php echo $step_setting; ?></li>
-        <li class="list-group-item"><b><?php echo $step_configuration; ?></b></li>
         <li class="list-group-item"><?php echo $step_images; ?></li>
+        <li class="list-group-item"><b><?php echo $step_configuration; ?></b></li>
         <li class="list-group-item"><?php echo $step_clean_module; ?></li>
         <li class="list-group-item"><?php echo $step_clean_table; ?></li>
       </ul>
