@@ -15,6 +15,8 @@ class ModelUpgradeSettings extends Model{
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
         $this->migration  = ( !empty( $data['modules'] ) ? true : false );
+        $this->theme  = ( !empty( $data['theme'] ) ? $data['theme'] : false );
+        $this->lang = $this->lmodel->get('upgrade_database');
         $this->lang = $this->lmodel->get('upgrade_database');
 
         $text = '';
