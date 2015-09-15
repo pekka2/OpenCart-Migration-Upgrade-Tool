@@ -1,5 +1,4 @@
 <?php echo $header; ?>
-
   <ul class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
     <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
@@ -15,7 +14,6 @@
 						<?php echo $text_simulation; ?> <span class="<?php echo $simulate ? 'green">' . $text_on : 'red">' . $text_off; ?></span>
 						</div>
 					   <?php if( isset( $upgrade_data ) ) { echo $upgrade_data; } ?>
-
 <?php } ?> 
 		<div id="column-left">
 					<div class="msg round">
@@ -32,10 +30,11 @@
 											<form action="<?php echo $action; ?>" method="post">
 												<input type="hidden" name="step" value="<?php echo $step;?>" />
 												<input type="hidden" name="steps" value="<?php echo $steps;?>" />
+												<input type="hidden" name="upgrade" value="<?php echo $upgrade; ?>" />
+				    <input type="hidden" name="upgrade" value="<?php echo $upgrade;?>" />
 
 <?php if(!isset($start)){?> 
 												<input type="hidden" name="simulate" value="<?php echo $simulate; ?>" />
-												<input type="hidden" name="upgrade" value="<?php echo $upgrade; ?>" />
 												<input type="hidden" name="showOps" value="<?php echo $showOps; ?>" />
 <?php } else{ ?> 
 
@@ -70,8 +69,8 @@
         <li class="list-group-item"><?php echo $step_data; ?></li>
         <li class="list-group-item"><?php echo $step_module; ?></li>
         <li class="list-group-item"><?php echo $step_setting; ?></li>
-        <li class="list-group-item"><?php echo $step_configuration; ?></li>
         <li class="list-group-item"><?php echo $step_images; ?></li>
+        <li class="list-group-item"><?php echo $step_configuration; ?></li>
         <li class="list-group-item"><?php echo $step_clean_module; ?></li>
         <li class="list-group-item"><?php echo $step_clean_table; ?></li>
       </ul>
