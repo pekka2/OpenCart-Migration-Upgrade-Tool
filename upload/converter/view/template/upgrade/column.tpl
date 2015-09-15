@@ -4,7 +4,7 @@
     <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
     <?php } ?>
   </ul>
-  
+
 <div id="container">
 	<div class="content">
 <div class="msg round">
@@ -56,8 +56,8 @@
         <li class="list-group-item"><?php echo $step_data; ?></li>
         <li class="list-group-item"><?php echo $step_module; ?></li>
         <li class="list-group-item"><?php echo $step_setting; ?></li>
-        <li class="list-group-item"><?php echo $step_configuration; ?></li>
         <li class="list-group-item"><?php echo $step_images; ?></li>
+        <li class="list-group-item"><?php echo $step_configuration; ?></li>
         <li class="list-group-item"><?php echo $step_clean_module; ?></li>
         <li class="list-group-item"><?php echo $step_clean_table; ?></li>
       </ul>
