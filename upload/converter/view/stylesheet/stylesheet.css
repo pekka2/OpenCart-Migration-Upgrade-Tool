@@ -267,3 +267,25 @@ a.button {
 	border: 1px solid #F8ACAC;
 	color: #555555;
 }
+.notice {
+	padding: 10px 10px 10px 33px;
+	margin-bottom: 15px;
+	background: #FFD1D1 url('../image/help_28x28.png') 10px center no-repeat;
+	border: 1px solid #F8ACAC;
+	color: #555555;
+}
+.pause{
+	font-weight:bold;
+	font-size:36px;
+	margin-bottom:15px;
+}
+#upgrade-log{
+	position:absolute;
+	width:60%;
+	height:360px;
+	left:20;
+	top:250px;
+	background:#BBDF8D;
+	padding:30px;
+	border:double 6px #eeeeee;
+}
