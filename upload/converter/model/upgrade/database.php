@@ -25,7 +25,9 @@ class ModelUpgradeDatabase extends Model {
 
 		foreach ($table_new_data as $table) {
 			// If table is not found create it
+
 			if (!array_search($table['name'], $this->structure->tables())) {
+
 				$sql = $table['sql'];
 					 if( !$this->simulate ) {
                        $this->db->query( $sql );
@@ -37,7 +39,7 @@ class ModelUpgradeDatabase extends Model {
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   $table['name'] ) );
 			++$this->tablecounter;	
 			}
-	    }	
+	    }
 	        // Upgrade Memory Log
 	        $memory = DIR_DATA . '/upgrade_cache.log';
 	        $cache = array();
@@ -67,11 +69,7 @@ class ModelUpgradeDatabase extends Model {
 	                fclose($fw);
 	            }
         $text .=  $this->header( sprintf( addslashes($this->lang['msg_table_count']), $this->tablecounter, '' ) );
-        
-      
-		if(!$this->cache->get('table_new_data')){  
-	     // $this->cache->set('table_new_data', $table_new_data);
-	    }
+
 		return $text;
 	}
 	public function addCollate($data) {
@@ -101,7 +99,7 @@ class ModelUpgradeDatabase extends Model {
 			} else{
 			  $table_old_data = $this->cache->get('table_old_data');
 			}
-			
+
 		foreach ($table_new_data as $table) {
 			// DB Engine
 				if ( array_key_exists($table['name'],$table_old_data) && isset($table['option']['ENGINE'])) {
@@ -150,7 +148,7 @@ class ModelUpgradeDatabase extends Model {
 						} else {
 							$sql .= " FIRST";
 						}
-	
+
                 ++$this->columncollatecounter;
 					 if( !$this->simulate ) {
                        $this->db->query( $sql );
@@ -200,7 +198,7 @@ class ModelUpgradeDatabase extends Model {
 		foreach ($table_new_data as $table) {
 			// If table is not found create it
 			if (array_search($table['name'], $this->structure->tables())) {
-           $i = 0;     
+           $i = 0;
 				foreach ($table['field'] as $field) {
 					// If field is not found create it
 					if (!in_array($field['name'], $table_old_data[$table['name']])) {
@@ -380,6 +378,7 @@ class ModelUpgradeDatabase extends Model {
 		    }
 		 }
 		// setting
+		if( array_search('group',$this->structure->columns('setting'))){
 		$sql = "UPDATE " . DB_PREFIX . "setting SET `code` = `group`";
 		
 					 if( !$this->simulate ) {
@@ -389,6 +388,7 @@ class ModelUpgradeDatabase extends Model {
 			                $text .= '<p><pre>' . $sql .'</pre></p>';
 		                }
 			$text .= $this->msg( sprintf( $this->lang['msg_text'], 'setting',$this->lang['msg_new_data'] ) );
+		 }
 		// layout and layout_route in version 1.4.x
 		if( !$this->structure->getLayout()){
 $sql = "INSERT INTO `" . DB_PREFIX . "layout` (`layout_id`, `name`) VALUES
@@ -468,7 +468,7 @@ VALUES
 	}
 	// customer_group in version 1.4
     if( ! $this->structure->hasApproval()) {
-        	
+
 $sql = "SELECT * FROM `" . DB_PREFIX . "customer_group`";
 
           $results = $this->db->query( $sql );
@@ -483,7 +483,7 @@ $sql = "UPDATE `" . DB_PREFIX . "customer_group` SET `approval` = '1', `sort_ord
             if( $this->showOps ) {
                    $text .= '<p><pre>' . $sql .'</pre></p>';
             }     
-	               ++$row;     
+	               ++$row;
           }
 			$text .= $this->msg( sprintf( $this->lang['msg_text'], 'customer_group',$this->lang['msg_new_data'] ) );
 			
@@ -602,7 +602,7 @@ VALUES
     }
 
       // category in version 1.4.x
-    if( array_search( DB_PREFIX . 'product_option_description' , $this->structure->tables()) ) {      
+    if( array_search( DB_PREFIX . 'product_option_description' , $this->structure->tables()) ) {
 	     $sql = "UPDATE `" . DB_PREFIX . "category` SET `top` = '1'  WHERE parent_id = '0'";
 
 				        if( !$this->simulate ) {
@@ -613,12 +613,14 @@ VALUES
                         } 
 			$text .= $this->msg( sprintf( $this->lang['msg_text'], 'category',$this->lang['msg_new_data'] ) );
     }
+         if($this->structure->getCategoryPath()){
           $text .= $this->categoryPath();   
-          $text .= $this->changeOptions();    
+      }
+          $text .= $this->changeOptions();
 	  return $text;
    }
   private function changeOptions(){
-           $text = '';               
+           $text = '';
       if( array_search( DB_PREFIX . 'product_option_description' , $this->structure->tables()) ) {
         /* Opencart version 1.4.x is Found */
 $sql = "SELECT MIN(product_option_id) AS option_id
@@ -660,7 +662,7 @@ FROM
                 }
 
 		  $text .= $this->msg( sprintf( $this->lang['msg_text'],   'option_description', $this->lang['msg_new_data'] ) );
-                                              
+
 $sql = "INSERT INTO
         `" . DB_PREFIX . "option_value`   (`option_value_id`, `option_id`, `sort_order`)
  SELECT
@@ -898,48 +900,27 @@ private function categoryPath(){
         $this->lang = $this->lmodel->get('upgrade_database');
 		$text = '';
 
-          $sql = "DELETE FROM `" . DB_PREFIX . "setting` WHERE `key` LIKE '%module%'";
+          $sql = "DELETE FROM `" . DB_PREFIX . "setting` WHERE `key` LIKE '%module'";
 				                if( !$this->simulate ) {
                                   $this->db->query( $sql );
                                 }
                                 if( $this->showOps ) {
                                   $text .= '<p><pre>' . $sql .'</pre></p>';
                                 }
-		if( array_search('group', $this->structure->columns('setting')) ) {
-          $sql = "DELETE FROM `" . DB_PREFIX . "setting` WHERE `group` = 'manufacturer'";
-           } else{
-          $sql = "DELETE FROM `" . DB_PREFIX . "setting` WHERE `code` = 'manufacturer'";
-           }
-				                if( !$this->simulate ) {
-                                  $this->db->query( $sql );
-                                }
-                                if( $this->showOps ) {
-                                  $text .= '<p><pre>' . $sql .'</pre></p>';
-                                }
-          $setting = array();
 
-		if( array_search('group', $this->structure->columns('setting')) ) {
-          $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `group` = 'bestseller'";
-           } else{
-          $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `code` = 'bestseller'";
+           $expireds = array("manufacturer","bestseller","featured","special","latest");
+           foreach($expireds as $key => $expired){
+
+          $sql = "DELETE FROM `" . DB_PREFIX . "setting` WHERE `code` = '" . $expired . "'";
+                                if( !$this->simulate ) {
+                                  $this->db->query( $sql );
+                                }
+                                if( $this->showOps ) {
+                                  $text .= '<p><pre>' . $sql .'</pre></p>';
+                                }
+
            }
-          $results = $this->db->query($sql);
-         if(count($results->rows) > 0){
-	        foreach($results->rows as $result){
-	        	$setting[] = array('setting_id' => $result['setting_id'], 'key' => $result['key']);
-	        }
-         }
-		if( array_search('group', $this->structure->columns('setting')) ) {
-          $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `group` = 'featured'";
-           } else{
-          $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `code` = 'featured'";
-           }
-          $results = $this->db->query($sql);
-         if(count($results->rows) > 0){
-	        foreach($results->rows as $result){
-	        	$setting[] = array('setting_id' => $result['setting_id'], 'key' => $result['key']);
-	        }
-         }
+          $setting = array();
 		if( array_search('group', $this->structure->columns('setting')) ) {
           $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `group` = 'slideshow'";
            } else{
@@ -951,39 +932,14 @@ private function categoryPath(){
 	        	$setting[] = array('setting_id' => $result['setting_id'], 'key' => $result['key']);
 	        }
          }
-		if( array_search('group', $this->structure->columns('setting')) ) {
-          $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `group` = 'carousel'";
-           } else{
-          $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `code` = 'carousel'";
-           } 
+          $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `key` LIKE '%carousel%'";
           $results = $this->db->query($sql);
          if(count($results->rows) > 0){
 	        foreach($results->rows as $result){
 	        	$setting[] = array('setting_id' => $result['setting_id'], 'key' => $result['key']);
 	        }
          }
-		if( array_search('group', $this->structure->columns('setting')) ) {
-          $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `group` = 'special'";
-           } else{
-          $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `code` = 'special'";
-           }
-          $results = $this->db->query($sql);
-         if(count($results->rows) > 0){
-	        foreach($reults->rows as $result){
-	        	$setting[] = array('setting_id' => $result['setting_id'], 'key' => $result['key']);
-	        }
-         }
-		if( array_search('group', $this->structure->columns('setting')) ) {
-          $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `group` = 'latest'";
-           } else{
-          $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `code` = 'latest'";
-           }
-          $results = $this->db->query($sql);
-         if(count($results->rows) > 0){
-	        foreach($results->rows as $result){
-	        	$setting[] = array('setting_id' => $result['setting_id'], 'key' => $result['key']);
-	        }
-         }
+          
 		if( array_search('group', $this->structure->columns('setting')) ) {
           $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `group` = 'banner'";
            } else{
@@ -1056,9 +1012,6 @@ private function categoryPath(){
 
         $text .=  $this->header( sprintf( addslashes($this->lang['msg_table_count']), $this->tablecounter, '' ) );
 
-		if(!$this->cache->get('table_new_data')){  
-	     // $this->cache->set('table_new_data', $table_new_data);
-	    }
          return $text;
 	}
 	public function cleanStructure($data){
