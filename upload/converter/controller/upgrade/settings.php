@@ -3,6 +3,7 @@ class ControllerUpgradeSettings extends Controller {
         private $error = array();
    public function index() {
 		$this->language->load('upgrade/database');
+		$this->load->model('upgrade/info');
 		$this->load->model('upgrade/module');
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
@@ -41,7 +42,7 @@ class ControllerUpgradeSettings extends Controller {
                  $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
                  $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
                 $modules = $this->structure->hasModule();
-                 if( !$modules || $this->request->post['modules'] ) {
+                 if( !$modules || isset($this->request->post['modules']) ) {
                         $this->data['add_modules'] = $this->model_upgrade_module->getChangeModule( $this->request->post );
                  } else {
                         $this->data['add_modules'] = '';
