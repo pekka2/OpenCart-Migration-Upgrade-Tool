@@ -26,7 +26,7 @@
      		<a class="button" href="<?php echo $clean;?>"><?php echo $btn_finish;?></a>
      	</div>
      </div>
-     	     }?>
+     	 <?php    }?>
      <?php } ?>
 
 		<div class="sub_title"><?php echo $sub_title_1;?></div>
