@@ -47,6 +47,7 @@ class ControllerUpgradeSettings extends Controller {
                         $this->data['add_modules'] = '';
                  }
                 } 
+                $this->data['themes'] = $this->model_upgrade_info->getThemes();
 
                 $this->data['action'] = $this->url->link('upgrade/configuration');
                 $this->data['text_intro_1'] = $this->language->get('text_intro_1');
@@ -61,6 +62,8 @@ class ControllerUpgradeSettings extends Controller {
                 $this->data['text_upgrade_info'] = $this->language->get('text_upgrade_info');
                 $this->data['text_setting_info'] = $this->language->get('text_setting_info');
                 $this->data['text_update_config'] = $this->language->get('text_update_config');
+                $this->data['text_update_theme'] = $this->language->get('text_update_theme');
+                $this->data['text_skip_theme'] = $this->language->get('text_skip_theme');
                 $this->data['header_step_module'] = $this->language->get('header_step_module');
                 $this->data['help_simulate'] = $this->language->get('help_simulate');
                 $this->data['help_ops'] = $this->language->get('help_ops');
