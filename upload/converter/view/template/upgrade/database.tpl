@@ -4,15 +4,15 @@
 	    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
 	    <?php } ?>
 	  </ul>
-	  
+
 <div id="container" class="start">
 	<div class="container">
 		<div id="column-left">
-		   <h1><img src="view/image/user.png" alt="" /> <?php echo $heading_title; ?></h1>   
+		   <h1><img src="view/image/user.png" alt="" /> <?php echo $heading_title; ?></h1>
 			<h3> <?php echo $text_version;?>   </h3>   
 
 		 <div class="step round"><?php echo $text_step; ?></div><div class="clr"></div>
-	    <div class="heading"> <h1><img src="view/image/user.png" alt="" /> <?php echo $text_table_info; ?></h1></div> 
+	    <div class="heading"> <h1><img src="view/image/user.png" alt="" /> <?php echo $text_table_info; ?></h1></div>
     
 		<div class="block"><b><?php echo $text_intro_1; ?></b></div>
 		<div class="block"><?php echo $text_intro_2; ?></div>
@@ -67,8 +67,8 @@
         <li class="list-group-item"><?php echo $step_data; ?></li>
         <li class="list-group-item"><?php echo $step_module; ?></li>
         <li class="list-group-item"><?php echo $step_setting; ?></li>
-        <li class="list-group-item"><?php echo $step_configuration; ?></li>
         <li class="list-group-item"><?php echo $step_images; ?></li>
+        <li class="list-group-item"><?php echo $step_configuration; ?></li>
         <li class="list-group-item"><?php echo $step_clean_module; ?></li>
         <li class="list-group-item"><?php echo $step_clean_table; ?></li>
       </ul>
