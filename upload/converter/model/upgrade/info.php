@@ -12,7 +12,7 @@ class ModelUpgradeInfo extends Model{
   }
   public function getVersion2Tables() {
 
-   $tables = 124;
+   $tables = 123;
    
   return $tables;
   }
@@ -47,6 +47,55 @@ class ModelUpgradeInfo extends Model{
      }
    }
   }
+  public function addInfo(){
+        // Upgrade Memory Log
+          $memory = DIR_DATA . '/upgrade_cache.log';
+          $cache = array();
+          $info = $this->structure->getVersion();
+          $level = $info['level'];
+          $version = $info['vdata'];
+          $tables = $info['tables'];
+          $oc_tables = $info['oc_tables'];
+          if($level > 4){
+            $steps = 10;
+          } else {
+            $steps = 9;
+          }
+       
+              if( !file_exists($memory) ){
+                    $cache = array('version' => $version,
+                                   'tables' => $tables,
+                                   'oc_tables' => $oc_tables,
+                                   'steps' => $steps);
+              } else {
+                   $string = file_get_contents($memory);
+                  if(!empty($string)){
+                    $cache = unserialize($string);
+                    $cache['version'] = $version;
+                    $cache['tables'] = $tables;
+                    $cache['oc_tables'] = $oc_tables;
+                    $cache['steps'] = $steps;
+                  }
+              }
+              if($cache){
+                  $str = serialize($cache);
+                  $fw = fopen($memory,'wb');
+                  fwrite($fw,$str);
+                  fclose($fw);
+              }
+    }
+  public function getInfo(){
+        // Upgrade Memory Log
+          $cache = array();
+          $memory = DIR_DATA . '/upgrade_cache.log';
+           if( file_exists($memory) ){
+                   $string = file_get_contents($memory);
+                  if(!empty($string)){
+                    $cache = unserialize($string);
+                  }
+              }
+          return $cache;
+    }
   public function getThemes(){
     $path = DIR_DOCUMENT_ROOT . 'catalog/view/theme/';
     $themes = array();
