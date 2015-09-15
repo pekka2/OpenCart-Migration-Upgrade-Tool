@@ -111,7 +111,7 @@ class ModelUpgradeModule extends Model{
 
        }
        if( !$modules2 && !$modules1){
-       // version 1.4.9 - 1.4.9.6
+       // version 1.4.7 - 1.4.9.6
        $modules3 = ( !is_null(  $this->config->get( $mod . '_width' )) ||  !is_null(  $this->config->get( $mod . '_position' )) ? true:false);
 
        }
