@@ -1,27 +1,34 @@
 <?php echo $header; ?>
 
-<div class="msg round">
-  <div class="breadcrumb">
+  <ul class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
+    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
     <?php } ?>
-  </div>
-    <div class="heading">
-      <h1><img src="view/image/home.png" alt="" /> <?php echo $heading_title; ?></h1>
-<span class="buttons">
-<a href="<?php echo $logout;?>" class="button right"><?php echo $button_logout; ?></a>
-<a href="<?php echo $upgrade_info;?>" class="button right"><?php echo $button_upgrade; ?></a>
-<a href="<?php echo $permission;?>" class="button right"><?php echo $button_permission; ?></a>
-<a href="<?php echo $language;?>" class="button right"><?php echo $button_language; ?></a>
-</span>
-</div>
+  </ul>
+<div id="container">
+<div id="content">
+   
+      <h1><img src="view/image/logo-30x30.png" alt="" /> <?php echo $heading_title; ?></h1> 
 
-<div class="tutorial" style="background:#666666;padding:3%;margin-top:20px;">
-    <div class="content">
-    	
-     <h1><?php echo $text_title_help;?></h1>
-     
-     
+		<div class="buttons">
+			<a href="<?php echo $logout;?>" class="button right"><?php echo $btn_logout; ?></a>
+			<a href="<?php echo $permission;?>" class="button right"><?php echo $btn_permission; ?></a>
+			<a href="<?php echo $upgrade_info;?>" class="button right"><?php echo $btn_info; ?></a>
+			<a href="<?php echo $upgrade_start;?>" class="button right"><?php echo $btn_start; ?></a>
+		</div>
+		     
+     <?php if( isset($upgrade_log) ){
+     	     if( !$upgrade_log['files'] ){ ?>
+     <div id="upgrade-log">
+     	<h1><?php echo $text_unfinished;?></h1>
+     	<h3><?php echo $text_finishing;?></h3>
+     	<div class="buttons">
+     		<a class="button" href="<?php echo $clean;?>"><?php echo $btn_finish;?></a>
+     	</div>
+     </div>
+     	     }?>
+     <?php } ?>
+
 		<div class="sub_title"><?php echo $sub_title_1;?></div>
 		<div class="text_description"><?php echo $text_description;?></div>
 		<div class="sub_title"><?php echo $sub_title_2;?></div>
@@ -38,7 +45,6 @@
 		<div class="text_description"><?php echo $text_features_11;?></div>
 		<div class="sub_title"><?php echo $sub_title_3;?></div>
 		<div class="text_description"><?php echo $text_install;?></div>
-		<div class="sub_title"><?php echo $sub_title_4;?></div>
 		<div class="sub_title"><?php echo $sub_title_6;?></div>
 		<div class="text_description"><?php echo $text_functions;?></div>
 		<div class="sub_title"><?php echo $sub_title_7;?></div>
@@ -113,7 +119,7 @@
 		<div class="text_description"><?php echo $text_top_help;?></div>
 		<div class="text_description"><?php echo $text_author;?></div>
 		<div class="text_description"><?php echo $text_top_help_2;?></div>
-    </div>
   </div>
-</div>
+  </div>
+
 <?php echo $footer; ?>
