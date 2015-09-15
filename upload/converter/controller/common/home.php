@@ -5,9 +5,9 @@ class ControllerCommonHome extends Controller {
 
 		$this->language->load('common/home');
 		$this->language->load('/readme');
-                $this->lmodel->set('common_home',$this->language->load('common/home'));
+       $this->lmodel->set('common_home',$this->language->load('common/home'));
 
-		$this->document->setTitle($this->language->get('heading_title') . ' ' . VERSION );
+		$this->document->setTitle($this->language->get('heading_title') . ' ' .VERSION );
 
 		$this->data['heading_title'] = $this->language->get('heading_title') . ' ' . VERSION;
                 /* Readme Texts */
@@ -19,8 +19,7 @@ class ControllerCommonHome extends Controller {
 		$this->data['sub_title_1'] = $this->language->get('sub_title_1');
 		$this->data['sub_title_2'] = $this->language->get('sub_title_2');
 		$this->data['sub_title_3'] = $this->language->get('sub_title_3');
-		$this->data['sub_title_4'] = $this->language->get('sub_title_4');
-		$this->data['sub_title_5'] = $this->language->get('sub_title_5');
+		$this->data['sub_title_6'] = $this->language->get('sub_title_6');
 		$this->data['sub_title_7'] = $this->language->get('sub_title_7');
 		$this->data['sub_title_8'] = $this->language->get('sub_title_8');
 		$this->data['sub_title_9'] = $this->language->get('sub_title_9');
@@ -104,25 +103,39 @@ class ControllerCommonHome extends Controller {
 		$this->data['text_email'] = $this->language->get('text_email');
 		$this->data['text_warrantly'] = $this->language->get('text_warrantly');
 
-		// Check install directory exists
-		if (is_dir(dirname(DIR_APPLICATION) . '/install')) {
-			$this->data['error_install'] = $this->language->get('error_install');
-		} else {
-			$this->data['error_install'] = '';
-		}
-
 		$this->load->model('tool/database');
 
 	        $this->data['start_status'] = $this->model_tool_database->hasSetting('simulation_status');
 
-		$this->data['button_permission'] = $this->language->get('button_permission');
-		$this->data['button_upgrade'] = $this->language->get('button_upgrade');
-		$this->data['button_logout'] = $this->language->get('button_logout');
+		$this->data['btn_permission'] = $this->language->get('btn_permission');
+		$this->data['btn_info'] = $this->language->get('btn_info');
+		$this->data['btn_start'] = $this->language->get('btn_start');
+		$this->data['btn_logout'] = $this->language->get('btn_logout');
 
                 $this->data['permission'] = $this->url->link('common/home/user');
                 $this->data['upgrade_info'] = $this->url->link('upgrade/info');
+                $this->data['upgrade_start'] = $this->url->link('upgrade/start');
                 $this->data['logout'] = $this->url->link('common/logout');
 
+		$this->load->model('upgrade/info');
+		$this->model_upgrade_info->addInfo();
+
+        $status = $this->structure->getUpgrade();
+        $upgrade_log = array();
+        $cache = DIR_LOGS . 'upgrade_cache.log';
+        if($status && is_file($cache)){
+        	$cache_content = file_get_contents($cache);
+        	if($cache_content !=''){
+              $upgrade_log = unserialize($cache_content);
+        	}
+        }
+         if(isset($upgrade_log['db']) && isset($upgrade_log['files'])){
+            $this->data['upgrade_log'] = $upgrade_log;
+		    $this->data['btn_finish'] = $this->language->get('btn_finish');
+		    $this->data['text_unfinished'] = $this->language->get('text_unfinished');
+		    $this->data['text_finishing'] = $this->language->get('text_finishing');
+            $this->data['clean'] = $this->url->link('upgrade/clean');
+         }
 		$this->data['breadcrumbs'] = array();
 
 		$this->data['breadcrumbs'][] = array(
@@ -136,25 +149,19 @@ class ControllerCommonHome extends Controller {
 			'common/header',
 			'common/footer'
 		);
-
 		if( !isset($_COOKIE['UpgradeMigration']) ){
 						$this->redirect($this->url->link('common/login'));
 		}
-
 		$this->response->setOutput($this->render());
 	}
 
 	public function permission() {
 		if (isset($this->request->get['route'])) {
-			
-	  	   if( !isset($_COOKIE['UpgradeMigration']) ){
-			$this->redirect($this->url->link('common/login'));
-	 	   }
 			$route = '';
 
 		$part = explode('/', $this->request->get['route']);
 
-		$this->data['button_permission'] = $this->language->get('button_permission');
+		$this->data['btn_permission'] = $this->language->get('btn_permission');
                 $this->data['permission'] = $this->url->link('common/home/user');
 			if (isset($part[0])) {
 				$route .= $part[0];
@@ -171,16 +178,17 @@ class ControllerCommonHome extends Controller {
 				'common/forgotten',
 				'common/reset',
 				'upgrade/info',
-				'upgrade/database',
-                                'upgrade/collate',
-                                'upgrade/column',
-				'upgrade/module',
-			        'upgrade/settings',
-                                'upgrade/clean',
+				'upgrade/start',
 				'upgrade/images',
 				'upgrade/configuration',
+                'upgrade/collate',
+                'upgrade/column',
+                'upgrade/module',
+                'upgrade/settings',
+                'upgrade/clean',
 				'error/not_found',
-				'error/permission'		
+				'error/permission',
+				'upgrade/finish'		
 			);			
 
 			if (!in_array($route, $ignore) && !$this->user->hasPermission('access', $route)) {
@@ -204,19 +212,15 @@ class ControllerCommonHome extends Controller {
 			'separator' => false
 		);
 
-	  	   if( !isset($_COOKIE['UpgradeMigration']) ){
-			$this->redirect($this->url->link('common/login'));
-	 	   }
 		$this->data['heading_title'] = $this->language->get('heading_title');
-		$this->data['button_save'] = $this->language->get('button_save');
+		$this->data['btn_save'] = $this->language->get('btn_save');
 		$this->data['text_new_permissions'] = $this->language->get('text_new_permissions');
-		$this->data['button_upgrade'] = $this->language->get('button_upgrade');
+		$this->data['btn_upgrade'] = $this->language->get('btn_upgrade');
                 $this->data['action'] = $this->url->link('common/home/user');
                 $this->data['upgrade_info'] = $this->url->link('upgrade/info');
 
                 $user_group_info = $this->model_user_user_group->getUserGroups();
                 $this->data['user_group_info'] = $user_group_info;
-
                 $user_groups = array();
                 $user_group_name = array();
                 foreach($user_group_info as $user_group){
@@ -227,30 +231,32 @@ class ControllerCommonHome extends Controller {
                        $user_groups[$user_group['user_group_id']] = array();
                    }                                         
                  }
+
                  $upgrade_access = array(
                                          'upgrade/info',
-                                         'upgrade/database',
+                                         'upgrade/start',
                                          'upgrade/collate',
                                          'upgrade/column',
                                          'upgrade/configuration',
-					 'upgrade/module',
-					 'upgrade/settings',
-                                         'upgrade/clean',
-                                         'upgrade/configuration',
-                                         'upgrade/images'
+										 'upgrade/module',
+										 'upgrade/settings',
+										 'upgrade/clean',
+                                         'upgrade/images',
+                                         'upgrade/finish'
                   );
                
                 $ok = 0;
 
-       if( isset($this->request->post['user_group']) && $this->validate() ){
+       if( isset($this->request->post['user_group'])){
+       	
             $user_group = $this->model_user_user_group->getUserGroup($this->request->post['user_group']);
 
             foreach($upgrade_access as $perm){
                     if( !array_search($perm, $user_group['modify']) ){
                        $user_group['access'][] = $perm;
                        $user_group['modify'][] = $perm;
-                       ++$ok;
                     }
+                    $ok++;
             }
     
 
@@ -258,6 +264,7 @@ class ControllerCommonHome extends Controller {
 
               $this->data['upgrade_access'] = $upgrade_access;  
            } 
+
            if($ok > 0){
                   $this->model_user_user_group->editUserGroup($this->request->post['user_group'], $user_group );
                   $this->data['upgrade_access'] = $upgrade_access;
@@ -286,7 +293,8 @@ class ControllerCommonHome extends Controller {
 		if (!$this->error) {
 			return true;
 		} else { 
-			return false;
+		//	return false;
+		return true;
 		}
    }	
 }
