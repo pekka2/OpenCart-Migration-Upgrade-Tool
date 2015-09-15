@@ -5,7 +5,7 @@
     <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
     <?php } ?>
   </ul>
-  
+
 <div id="container">
 	<div class="content">
 					      <h1><img src="view/image/user.png" alt="" /> <?php echo $heading_title; ?></h1>   
@@ -21,7 +21,7 @@
 										<div class="clr"></div>
 							
 									    <div class="heading">
-									      <h1><img src="view/image/user.png" alt="" /> <?php echo $text_data_info; ?></h1>   
+									      <h1><img src="view/image/user.png" alt="" /> <?php echo $text_data_info; ?></h1>
 									    </div> 
 										<div class="block">
 											<form action="<?php echo $action; ?>" method="post">
@@ -40,7 +40,7 @@
 										<div class="clr"></div>
 										</div>
 		</div>
-    <div id="column-right" class="upgrade">   
+    <div id="column-right" class="upgrade">
       <ul class="list-group">
         <li class="list-group-item"><?php echo $step_start; ?></li>
         <li class="list-group-item"><?php echo $step_collate; ?></li>
@@ -48,8 +48,8 @@
         <li class="list-group-item"><b><?php echo $step_data; ?></b></li>
         <li class="list-group-item"><?php echo $step_module; ?></li>
         <li class="list-group-item"><?php echo $step_setting; ?></li>
-        <li class="list-group-item"><?php echo $step_configuration; ?></li>
         <li class="list-group-item"><?php echo $step_images; ?></li>
+        <li class="list-group-item"><?php echo $step_configuration; ?></li>
         <li class="list-group-item"><?php echo $step_clean_module; ?></li>
         <li class="list-group-item"><?php echo $step_clean_table; ?></li>
       </ul>
