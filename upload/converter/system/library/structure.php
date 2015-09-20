@@ -178,7 +178,7 @@ class Structure {
 			}
 		};
          return $table_old_data;
-	}
+   }
    public function settingData($upgrade){
 		$file = DIR_SQL . $upgrade . '.sql';
 
@@ -229,7 +229,7 @@ class Structure {
 				); 
         }
        return $setting_data;	
-	}
+  }
   public function language() {
 		 $sql = 'SELECT  * FROM  `' . DB_PREFIX . 'language`';
 
