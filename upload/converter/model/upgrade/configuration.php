@@ -117,14 +117,14 @@ class ModelUpgradeConfiguration extends Model{
 				       // Upgrade Cache
 				       $memory = DIR_DATA . 'upgrade_cache.log';
 				       if(file_exists($memory)){
-				       	$cache = unserialize($memory);
-				        $cache['db'] = true;
-				        $cache['files'] = false;
+				       	 $cache = unserialize(file_get_contents($memory));
+				         $cache['db'] = true;
+				         $cache['files'] = false;
 					  } else {
 				       	$cache = array('db' => true,'files' => false );
 					  }
                        if($cache){
-					    $fw = fopen( $cache, 'wb' );
+					    $fw = fopen( $memory, 'wb' );
 					    fwrite( $fw, serialize($cache) );
 					    fclose( $fw );
 					   }
@@ -189,14 +189,14 @@ class ModelUpgradeConfiguration extends Model{
 					  // Upgrade Cache
 				       $memory = DIR_DATA . 'upgrade_cache.log';
 				       if(file_exists($memory)){
-				       	$cache = unserialize($memory);
+				       	$cache = unserialize(file_get_contents($memory));
 				        $cache['db'] = true;
 				        $cache['files'] = true;
 					  } else {
 				       	$cache = array('db' => true,'files' => true );
 					  }
                        if($cache){
-					    $fw = fopen( $cache, 'wb' );
+					    $fw = fopen( $memory, 'wb' );
 					    fwrite( $fw, serialize($cache) );
 					    fclose( $fw );
 					   }
