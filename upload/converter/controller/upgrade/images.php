@@ -1,35 +1,34 @@
 <?php
 class ControllerUpgradeImages extends Controller{
-	private $error = array();
     public function index(){
 		$this->language->load('upgrade/images');
                 $this->lmodel->set('upgrade_images',$this->language->load('upgrade/images'));
 
-		$this->load->model('upgrade/configuration');
+		$this->load->model('upgrade/settings');
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
-		$this->data['heading_config'] = $this->language->get('heading_config');
+		$this->data['heading'] = $this->language->get('heading_database');
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),
-			'separator' => false
+			'href'      => $this->url->link('common/home')
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_upgrade_info'),
-			'href'      => $this->url->link('upgrade/info'),
-			'separator' => false
+			'href'      => $this->url->link('upgrade/info')
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_upgrade_images'),
-			'href'      => $this->url->link('upgrade/images'),
-			'separator' => false
+			'href'      => $this->url->link('upgrade/images')
 		);
 		
 		if(isset($this->request->post['steps'])){
 		  $step = $this->request->post['step'];
 		  $steps = $this->request->post['steps'];
+		} else {
+			$steps = 4;
+			$step = 1;
 		}
 
 	if( !empty( $this->request->post['skip'] ) ) {
@@ -48,9 +47,7 @@ class ControllerUpgradeImages extends Controller{
                   $this->data['showOps'] = $showOps;
                   $this->data['simulate'] = $simulate;
                 }
-	   if( $this->validateAdmin()){
-                  $this->data['update_configuration'] = $this->model_upgrade_configuration->editConfig( $this->request->post );
-       }
+                  $this->data['add_settings'] = $this->model_upgrade_settings->addSetting( $this->request->post );
      }
                 $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
 
@@ -63,9 +60,9 @@ class ControllerUpgradeImages extends Controller{
 		if(isset($this->request->post['back'])){
 			$this->data['back'] = true;
 		}
-                $this->data['action'] = $this->url->link('upgrade/clean');
+                $this->data['action'] = $this->url->link('upgrade/configuration');
                 $this->data['text_images_info'] = $this->language->get('text_images_info');
-                $this->data['header_step'] = $this->language->get('header_step_configuration');
+                $this->data['header_step'] = $this->language->get('header_step_setting');
                 $this->data['text_simulation'] = $this->language->get('text_simulation');
                 $this->data['text_on'] = $this->language->get('text_on');
                 $this->data['text_off'] = $this->language->get('text_off');
@@ -92,13 +89,6 @@ class ControllerUpgradeImages extends Controller{
                 $this->data['step_clean_module'] = $this->language->get('step_clean_module');
                 $this->data['step_clean_table'] = $this->language->get('step_clean_table');
 
- 		if (isset($this->error['warning'])) {
-			$this->data['error_warning'] = $this->error['warning'];
-                $this->data['step'] = $step-1;
-                $this->data['previous'] = $this->url->link('upgrade/configuration');
-		} else {
-			$this->data['error_warning'] = '';
-		}
 		$this->template = 'upgrade/images.tpl';
 
 		$this->children = array(
@@ -115,19 +105,6 @@ class ControllerUpgradeImages extends Controller{
 		if (!$this->error) {
 			return true;
 		} else { 
-			return false;
-		}
-   }
-   protected function validateAdmin(){
-   	if( isset($this->request->post['dirAdmin']) ){
-   		if(!is_dir( DIR_DOCUMENT_ROOT . $this->request->post['dirAdmin'] ) ){
-   			$this->error['warning'] = sprintf($this->language->get('error_admin_not_found'), $this->request->post['dirAdmin'],'');
-   		}
-   	}
-
-		if (!$this->error) {
-			return true; 
-		} else {
 			return false;
 		}
    }
