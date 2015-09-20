@@ -3,27 +3,24 @@ class ControllerUpgradeClean extends Controller {
         private $error = array();
    public function index() {
 		$this->language->load('upgrade/clean');
-		$this->load->model('upgrade/images');
+		$this->load->model('upgrade/configuration');
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
-		$this->data['heading_images'] = $this->language->get('heading_images');
+		$this->data['heading'] = $this->language->get('heading_config');
 		$this->document->setTitle($this->language->get('heading_title'));
 	//	$version = 3;
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),
-			'separator' => false
+			'href'      => $this->url->link('common/home')
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_upgrade_info'),
-			'href'      => $this->url->link('upgrade/info'),
-			'separator' => false
+			'href'      => $this->url->link('upgrade/info')
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_clean_info'),
-			'href'      => $this->url->link('upgrade/clean'),
-			'separator' => false
+			'href'      => $this->url->link('upgrade/clean')
 		);
 
 		if(isset($this->request->post['steps'])){
@@ -31,15 +28,19 @@ class ControllerUpgradeClean extends Controller {
 		  $steps = $this->request->post['steps'];
 		}
 			$this->data['data'] = 'image/data';
-		
+	
+
+		if(isset($this->request->post['upgrade'])){
+		  $this->data['upgrade'] = $this->request->post['upgrade'];
+		} else {
+			$this->data['upgrade'] = 2031;
+		}	
      if(isset($this->request->post['step']) && !isset($this->request->post['back'])){
                 $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
                 $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
-	   if( $this->validateImage()){
-
-                  $this->data['upgrade_imagepath'] = $this->model_upgrade_images->imagePaths( $this->request->post );
-
-	   }
+	   if( $this->validateAdmin()){
+                  $this->data['update_configuration'] = $this->model_upgrade_configuration->editConfig( $this->request->post );
+       }
 	} else {
      	    $this->data['start'] = true;
 			$steps = 2;
@@ -54,7 +55,7 @@ class ControllerUpgradeClean extends Controller {
                 $this->data['text_upload'] = $this->language->get('text_upload'); 
                 $this->data['admin'] = false;
 		 }
-                $this->data['action'] = $this->url->link('upgrade/clean/structure');
+                $this->data['action'] = $this->url->link('upgrade/clean/drop');
                 $this->data['text_clean_info'] = $this->language->get('text_clean_info');
                 $this->data['text_on'] = $this->language->get('text_on');
                 $this->data['text_off'] = $this->language->get('text_off');
@@ -63,11 +64,12 @@ class ControllerUpgradeClean extends Controller {
                 $this->data['text_simulation'] = $this->language->get('text_simulation');
                 $this->data['text_step'] = sprintf($this->language->get('text_step'),$step,$steps); 
 
-                $this->data['header_step'] = $this->language->get('header_step_images');
+                $this->data['header_step'] = $this->language->get('header_step_configuration');
 
                 $this->data['help_imageDir'] = $this->language->get('help_imageDir');
                 $this->data['help_simulate'] = $this->language->get('help_simulate');
                 $this->data['help_ops'] = $this->language->get('help_ops');
+                $this->data['help_config_1_4'] = $this->language->get('help_config_1_4_x');
                 $this->data['steps'] = $steps;
                 $this->data['step'] = $step+1;
                 
@@ -103,12 +105,12 @@ class ControllerUpgradeClean extends Controller {
 		);
 		$this->response->setOutput($this->render());
    }
-   public function structure() {
+   public function drop() {
 		$this->language->load('upgrade/clean');
 		$this->load->model('upgrade/database');
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
-		$this->data['heading_clean'] = $this->language->get('heading_clean');
+		$this->data['heading'] = $this->language->get('heading_clean_setting');
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->data['breadcrumbs'][] = array(
@@ -122,8 +124,8 @@ class ControllerUpgradeClean extends Controller {
 			'separator' => false
 		);
 		$this->data['breadcrumbs'][] = array(
-			'text'      => $this->language->get('text_column'),
-			'href'      => $this->url->link('upgrade/column'),
+			'text'      => $this->language->get('text_clean'),
+			'href'      => $this->url->link('upgrade/clean'),
 			'separator' => false
 		);
 		
@@ -134,26 +136,43 @@ class ControllerUpgradeClean extends Controller {
 			$steps = 9;
 			$step = 9;
 		}
+
+		if(isset($this->request->post['upgrade'])){
+		  $this->data['upgrade'] = $this->request->post['upgrade'];
+		} else {
+			$this->data['upgrade'] = 2031;
+		}
            if( isset( $this->request->post['step']) && $this->validate() ){
+
 					if( !isset($_COOKIE['UpgradeMigration']) ){
 									$this->redirect($this->url->link('common/login'));
 					}
-                 $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
-                 $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
-               //  $this->data['drop'] = $this->model_upgrade_database->dropdColumns( $this->request->post );
-            
+                $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
+                $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
+
+		        if( $this->structure->getUpgrade() || $this->data['simulate'] ){
+
+                 $this->data['clean_setting'] = $this->model_upgrade_database->cleanSetting( $this->request->post );
+ 
+                 if( array_search( DB_PREFIX . 'product_option_value_description', $this->structure->tables())){
+		            if( $this->structure->getUpgrade() ){
+		               $this->load->model('upgrade/configuration');
+		               $this->data['constant_finishing'] = $this->model_upgrade_configuration->constantFinishing( $this->request->post );
+		            }
+                  }
+		        }
              }  
 
-                $this->data['action'] = $this->url->link('upgrade/module');
+                $this->data['action'] = $this->url->link('upgrade/finish');
                 $this->data['text_on'] = $this->language->get('text_on');
                 $this->data['text_off'] = $this->language->get('text_off');
                 $this->data['text_step'] = sprintf($this->language->get('text_step'),$step,$steps); 
                 $this->data['text_simulation'] = $this->language->get('text_simulation');
-                $this->data['text_upgrade_info'] = $this->language->get('text_upgrade_info');
+                $this->data['text_clean_structure'] = $this->language->get('text_clean_structure');
                 $this->data['text_data_info'] = $this->language->get('text_data_info');
                 $this->data['help_simulate'] = $this->language->get('help_simulate');
                 $this->data['help_ops'] = $this->language->get('help_ops');
-                $this->data['header_step'] = $this->language->get('header_step_column');
+                $this->data['header_step'] = $this->language->get('header_step_clean');
                 $this->data['steps'] = $steps;
                 $this->data['step'] = $step;
 
@@ -165,9 +184,12 @@ class ControllerUpgradeClean extends Controller {
                 $this->data['step_setting'] = $this->language->get('step_setting');
                 $this->data['step_configuration'] = $this->language->get('step_configuration');
                 $this->data['step_images'] = $this->language->get('step_images');
-                $this->data['btn_data'] = $this->language->get('btn_data');
+                $this->data['step_clean_module'] = $this->language->get('step_clean_module');
+                $this->data['step_clean_table'] = $this->language->get('step_clean_table');
+
+                $this->data['btn_drop'] = $this->language->get('btn_drop');
                 $this->data['btn_skip'] = $this->language->get('btn_skip');
-		$this->template = 'upgrade/new_data.tpl';
+		$this->template = 'upgrade/drop.tpl';
 
 		$this->children = array(
 			'common/header',
@@ -186,13 +208,13 @@ class ControllerUpgradeClean extends Controller {
 			return false;
 		}
    }
-   protected function validateImage(){
-   	if( isset($this->request->post['dirImage']) ){
-   		if(!is_dir( DIR_DOCUMENT_ROOT . $this->request->post['dirImage'] ) ){
-   			$this->error['warning'] = sprintf($this->language->get('error_image_not_found'), $this->request->post['dirImage'],'');
+   protected function validateAdmin(){
+   	if( isset($this->request->post['dirAdmin']) ){
+   		if(!is_dir( DIR_DOCUMENT_ROOT . $this->request->post['dirAdmin'] ) ){
+   			$this->error['warning'] = sprintf($this->language->get('error_admin_not_found'), $this->request->post['dirAdmin'],'');
    		}
    	}
-   	
+
 		if (!$this->error) {
 			return true; 
 		} else {
