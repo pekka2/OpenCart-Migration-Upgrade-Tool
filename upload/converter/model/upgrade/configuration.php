@@ -115,7 +115,7 @@ class ModelUpgradeConfiguration extends Model{
 					fclose( $fw ); 
                     if( !$this->structure->getUpgrade() ){
 				       // Upgrade Cache
-				       $memory = DIR_DATA . 'upgrade_cache.log';
+				       $memory = DIR_UPGRADE . 'upgrade_cache.log';
 				       if(file_exists($memory)){
 				       	 $cache = unserialize(file_get_contents($memory));
 				         $cache['db'] = true;
@@ -187,7 +187,7 @@ class ModelUpgradeConfiguration extends Model{
 					fclose( $fw );
 
 					  // Upgrade Cache
-				       $memory = DIR_DATA . 'upgrade_cache.log';
+				       $memory = DIR_UPGRADE . 'upgrade_cache.log';
 				       if(file_exists($memory)){
 				       	$cache = unserialize(file_get_contents($memory));
 				        $cache['db'] = true;
