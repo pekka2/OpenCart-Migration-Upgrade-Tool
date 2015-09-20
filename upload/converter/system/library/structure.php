@@ -570,5 +570,37 @@ class Structure {
      	        $tables = array(2020 => 124, 2031 => 123, 2100 => 125);
                return $tables;
      }
+     public function getLayoutModuleId(){
+               $sql = "SELECT MAX(layout_module_id) as `max` FROM `" . DB_PREFIX . "layout_module`";
+          if(array_search('layout_module', $this->tables())){
+	$sql2 = 'SELECT	*FROM `' . DB_PREFIX . 'layout_module`';
+		 $result = $this->db->query( $sql2 );
+		   if( count( $result->rows ) >  0 ) {
+				$query = $this->db->query( $sql );
+				$max = $query->row['max'] + 1;
+		  } else {
+		  $max = 1;
+		  }
+	 }else {
+		  $max = 1;
+	}
+		  return $max;
+     }
+     public function getModuleId(){
+               $sql = "SELECT MAX(module_id) as `max` FROM `" . DB_PREFIX . "module`";
+          if(array_search('module', $this->tables())){
+	$sql2 = 'SELECT	*FROM `' . DB_PREFIX . 'module`';
+		 $result = $this->db->query( $sql2 );
+		   if( count( $result->rows ) >  0 ) {
+				$query = $this->db->query( $sql );
+				$max = $query->row['max'] + 1;
+		  } else {
+		  $max = 1;
+		  }
+	 }else {
+		  $max = 1;
+	}
+		  return $max;
+     }
 }
 ?>
