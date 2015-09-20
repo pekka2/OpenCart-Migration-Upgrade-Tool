@@ -35,6 +35,12 @@
 															</div>
 															<div class="block">
 																<label>
+																	<input type="radio" value="1564" name="upgrade"/>
+																	<?php echo $entry_up_1564; ?>
+																</label>
+															</div>
+															<div class="block">
+																<label>
 																	<input type="radio" value="2020" name="upgrade" />
 																	<?php echo $entry_up_201_202; ?>
 																</label>
