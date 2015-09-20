@@ -1,123 +1,227 @@
 <?php
-class ControllerUpgradeConfiguration extends Controller {
-  private $error = array();
-	public function index() {
-		$this->language->load('upgrade/configuration');
-                $this->lmodel->set('upgrade_configuration',$this->language->load('upgrade/configuration'));
+class ModelUpgradeConfiguration extends Model{
+    private $lang;
+    private $text;
+    private $dirAdmin;
+    private $sowOps;
+    private $upgrade;
+   public function editConfig( $data ){
+       $this->lang = $this->lmodel->get('upgrade_configuration');
+       $this->simulate = ( !empty( $data['simulate'] ) ?  true:false );
+       $this->dirAdmin = ( !empty( $data['dirAdmin'] ) ?  'admin':'admin' ) .'/';
+       $this->showOps  = ( !empty( $data['showOps'] ) ? true:false );
+       $this->upgrade  = $data['upgrade'];
 
-		$this->load->model('upgrade/images');
+        $this->text = '';
 
-		$this->data['heading_title'] = $this->language->get('heading_title');
-    $this->data['heading'] = $this->language->get('heading_images');
-		$this->document->setTitle($this->language->get('heading_title'));
+		$modification = 'define(\'DIR_MODIFICATION\', \'' . DIR_MODIFICATION . '\'); // OC 2';
+		$upload = 'define(\'DIR_UPLOAD\', \'' . DIR_UPLOAD . '\'); // OC 2';
 
-		$this->data['breadcrumbs'][] = array(
-			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home')
-		);
-		$this->data['breadcrumbs'][] = array(
-			'text'      => $this->language->get('text_configuration_files'),
-			'href'      => $this->url->link('upgrade/configuration')
-		);
-    $this->data['breadcrumbs'][] = array(
-      'text'      => $this->language->get('btn_start'),
-      'href'      => $this->url->link('upgrade/start')
-    );
+                $server = $_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['SCRIPT_NAME']));
+                $server = explode('/',$server);
+                array_pop($server);
+                $server = implode('/',$server);
+                
+		$http_server = '//define(\'HTTP_SERVER\', \'http://' . $server . '/\'); // OC 1.4+';
+		$https_server = '//define(\'HTTPS_SERVER\', \'https://' .$server . '/\'); // OC 1.4+';
+		$https_catalog = 'define(\'HTTPS_CATALOG\', \'https://' .$server . '/\'); // OC 1.4+';
+		$db_port = 'define(\'DB_PORT\', \'3306\'); // OC 2.0.3 +';
 
-		if(isset($this->request->post['steps'])){
-		  $step = $this->request->post['step'];
-		  $steps = $this->request->post['steps'];
-		} else {
-			$steps = 3;
-			$step = 1;
-		}
+		// frontend
+	    $content = file_get_contents( DIR_DOCUMENT_ROOT . 'config.php' );
+       $check = $content;
 
-		if(isset($this->request->post['upgrade'])){
-		  $this->data['upgrade'] = $this->request->post['upgrade'];
-		} else {
-			$this->data['upgrade'] = 2031;
-		}
-                 $simulate = 1;
+		if( !strpos( $content, 'DIR_UPLOAD' ) || $this->upgrade > 2020  &&  !strpos( $content, 'DB_PORT') ) {
 
-					if( !isset($_COOKIE['UpgradeMigration']) ){
-									$this->redirect($this->url->link('common/login'));
+		$this->text .= $this->msg('<p><hr/></p>');
+          //   FILE yourstore.com/config.php
+			$fp = file( DIR_DOCUMENT_ROOT . 'config.php' );
+          
+						  if( !strpos( $content, 'HTTP_SERVER' ) ) {
+							  array_splice( $fp, 1, 0, $http_server . "\r\n" );
+							  array_splice( $fp, 2, 0, $https_server . "\r\n" );
+						   }
+					   	if( !strpos( $content, 'DIR_UPLOAD' ) ) {
+								array_splice( $fp, 18, 0, $modification . "\r\n" );
+								array_splice( $fp, 19, 0, $upload . "\r\n" );
+						   }
+						    if($this->upgrade > 2020 &&  !strpos( $content, 'DB_PORT' )) {
+							  array_splice( $fp, 20, 0, $db_port . "\r\n" );
+						   }
+
+			$content = implode( '', $fp );
+
+					if( is_writable( DIR_DOCUMENT_ROOT . 'config.php' ) ) {
+							if( !$this->simulate ) {
+								$fw = fopen( DIR_DOCUMENT_ROOT . 'config.php', 'wb' );
+								fwrite( $fw, $content );
+								fclose( $fw ); 
+							}
+							
+										    if( !strpos( $check, 'HTTP_SERVER' ) ) {
+								                if( $this->showOps ){
+												    	$this->text .= '<div class="notice"><pre>'.$http_server.'</pre></div>';
+								                }
+												$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'HTTP_SERVER', 'config.php' ) );
+								                if( $this->showOps ){
+												    	$this->text .= '<div class="notice"><pre>'.$https_server.'</pre></div>';
+								                }
+												$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'HTTPS_SERVER', 'config.php' ) );
+										   }
+	                if( $this->showOps ){
+					    	$this->text .= '<p><pre>'.$upload.'</pre></p>';
+	                }
+								$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'DIR_UPLOAD', 'config.php' ) );
+	                if( $this->showOps ){
+					    	$this->text .= '<p><pre>'.$modification.'</pre></p>';
+	                }
+							$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'DIR_MODIFICATION', 'config.php' ) );
+								
+					    if($this->upgrade > 2020 &&  !strpos( $content, 'DB_PORT' )) {		
+		                if( $this->showOps ){
+						    	$this->text .= '<p><pre>'.$db_port.'</pre></p>';
+		                }
+								$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DB_PORT', $file ) );
+		            }
+					}else{
+					//	$this->text .= $this->msg(  sprintf( $this->lang, 'msg_perm_file', 'config.php' ) );
 					}
-                if( isset( $this->request->post ) ){
-                  $simulate = ( !empty( $_POST['simulate'] ) ? true : false );
-                  $showOps = ( !empty( $_POST['showOps'] ) ? true : false );
-                  $this->data['showOps'] = $showOps;
-                  $this->data['simulate'] = $simulate;
+		} else {
+			$this->text .= $this->msg( sprintf(  $this->lang['msg_config_uptodate'], 'config.php', '' ) );
+		}
+		$this->text .= $this->msg('<p><hr/></p>');
+		
+		// FILE yourstore.com/admin/config.php		
+		$file		= $this->dirAdmin . 'config.php';
+		$content2	= file_get_contents( DIR_DOCUMENT_ROOT . $file );
+
+		if( !strpos( $content2, 'DIR_UPLOAD' ) ) {
+			$fp2 = file( DIR_DOCUMENT_ROOT . $file );
+		    if( !strpos( $content2, 'HTTPS_CATALOG' ) ) {
+			  array_splice( $fp2, 8, 0, $https_catalog . "\r\n" );
+		   }
+			array_splice( $fp2, 21, 0, $modification . "\r\n" );
+			array_splice( $fp2, 22, 0, $upload . "\r\n" );
+		    if($this->upgrade > 2020 &&  !strpos( $content2, 'DB_PORT' )) {
+			  array_splice( $fp2, 25, 0, $db_port . "\r\n" );
+		   }
+
+			$string = implode( '', $fp2 );
+
+			if( is_writable( DIR_DOCUMENT_ROOT. $file ) ) {
+				if( !$this->simulate ) {
+					$fw = fopen( DIR_DOCUMENT_ROOT . $file, 'wb' );
+					fwrite( $fw, $string );
+					fclose( $fw ); 
+                    if( !$this->structure->getUpgrade() ){
+				       // Upgrade Cache
+				       $memory = DIR_DATA . 'upgrade_cache.log';
+				       if(file_exists($memory)){
+				       	 $cache = unserialize(file_get_contents($memory));
+				         $cache['db'] = true;
+				         $cache['files'] = false;
+					  } else {
+				       	$cache = array('db' => true,'files' => false );
+					  }
+                       if($cache){
+					    $fw = fopen( $memory, 'wb' );
+					    fwrite( $fw, serialize($cache) );
+					    fclose( $fw );
+					   }
+			        }
+				}
+
+				    if( !strpos( $content2, 'HTTPS_CATALOG' ) ) {
+		                if( $this->showOps ){
+						    	$this->text .= '<p><pre>'.$https_catalog.'</pre></p>';
+		                }
+						$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'HTTPS_CATALOG', $file ) );
+				   }
+                if( $this->showOps ){
+				    	$this->text .= '<p><pre>'.$upload.'</pre></p>';
                 }
-                if( !isset( $this->request->post['skip'] ) &&  !isset( $this->request->post['back'] ) && isset( $this->request->post['step']) ){
-
-                   if( $this->validateImage()){
-
-                      $this->data['upgrade_imagepath'] = $this->model_upgrade_images->imagePaths( $this->request->post );
-
-                   }
-                } 
-                if( isset( $this->request->post['skip']) && !isset( $this->request->post['back']) ){
-                 $this->data['skip'] = 'skip';
-                 $this->data['msg_setting_skipped'] = $this->language->get('msg_setting_skipped');
+						$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DIR_UPLOAD', $file ) );
+                if( $this->showOps ){
+				    	$this->text .= '<p><pre>'.$modification.'</pre></p>';
                 }
-    if(isset($this->request->post['back'])){
-      $this->data['back'] = true;
-    }
-                $this->data['action'] = $this->url->link('upgrade/clean');
-                $this->data['text_upgrade_info'] = $this->language->get('text_upgrade_info');
-                $this->data['text_configuration_info'] = $this->language->get('text_configuration_info');
-                $this->data['text_update_config'] = $this->language->get('text_update_config');
-                $this->data['header_step'] = $this->language->get('header_step_images');
-                $this->data['btn_config'] = $this->language->get('btn_config');
-                $this->data['btn_cancel'] = $this->language->get('btn_cancel');
-                $this->data['btn_skip'] = $this->language->get('btn_skip');
-                $this->data['text_simulation'] = $this->language->get('text_simulation');
-                $this->data['text_on'] = $this->language->get('text_on');
-                $this->data['text_off'] = $this->language->get('text_off');
-                $this->data['text_step'] = sprintf($this->language->get('text_step'),$step,$steps);
-                $this->data['step'] = $step+1;
-                $this->data['steps'] = $steps;
-                $this->data['entry_adminDir'] = $this->language->get('entry_adminDir');
-                $this->data['help_adminDir'] = $this->language->get('help_adminDir');
+						$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DIR_MODIFICATION', $file ) );
+		    if($this->upgrade > 2020 &&  !strpos( $content2, 'DB_PORT' )) {		
+                if( $this->showOps ){
+				    	$this->text .= '<p><pre>'.$db_port.'</pre></p>';
+                }
+						$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DB_PORT', $file ) );
+            }
 
-                $this->data['step_start'] = $this->language->get('step_start');
-                $this->data['step_collate'] = $this->language->get('step_collate');
-                $this->data['step_column'] = $this->language->get('step_column');
-                $this->data['step_data'] = $this->language->get('step_data');
-                $this->data['step_module'] = $this->language->get('step_module');
-                $this->data['step_setting'] = $this->language->get('step_setting');
-                $this->data['step_configuration'] = $this->language->get('step_configuration');
-                $this->data['step_images'] = $this->language->get('step_images');
-                $this->data['step_clean_module'] = $this->language->get('step_clean_module');
-                $this->data['step_clean_table'] = $this->language->get('step_clean_table');
+			}else{
+				$this->text .= $this->msg(  sprintf( $this->lang['msg_perm_file'], 'config.php', $file ) );
+			}
+		}else{
+			$this->text .= $this->msg( sprintf(  $this->lang['msg_config_uptodate'], $file, '' ) );
+		}
 
-    if (isset($this->error['warning'])) {
-      $this->data['error_warning'] = $this->error['warning'];
-                $this->data['step'] = $step-1;
-                $this->data['previous'] = $this->url->link('upgrade/configuration');
-    } else {
-      $this->data['error_warning'] = '';
-    }
-		$this->template = 'upgrade/configuration.tpl';
-
-		$this->children = array(
-			'common/header',
-			'common/footer'
-		);
-		$this->response->setOutput($this->render());
-	}
-   protected function validateImage(){
-    if( isset($this->request->post['dirImage']) ){
-      if(!is_dir( DIR_DOCUMENT_ROOT . $this->request->post['dirImage'] ) ){
-        $this->error['warning'] = sprintf($this->language->get('error_image_not_found'), $this->request->post['dirImage'],'');
-      }
-    }
-    
-    if (!$this->error) {
-      return true; 
-    } else {
-      return false;
-    }
+	return $this->text;
    }
+  public function constantFinishing($data){
+       $this->lang = $this->lmodel->get('upgrade_configuration');
+       $this->simulate = ( !empty( $data['simulate'] ) ?  true:false );
+       $this->dirAdmin = ( !empty( $data['dirAdmin'] ) ?  'admin':'admin' ) .'/';
+       $this->showOps  = ( !empty( $data['showOps'] ) ? true:false );
+
+        $this->text = '';
+
+		$http_server = '//define(\'HTTP_SERVER\', \'http://';
+		$http_server2 = 'define(\'HTTP_SERVER\', \'http://';
+		$https_server = '//define(\'HTTPS_SERVER\', \'https://';
+		$https_server2 = 'define(\'HTTPS_SERVER\', \'https://';
+
+		// frontend
+		$file = DIR_DOCUMENT_ROOT . 'config.php';
+	    $content = file_get_contents( $file );
+
+	    $content = str_replace($http_server,$http_server2,$content);
+	    $content = str_replace($https_server,$https_server2,$content);
+
+				if( !$this->simulate ) {
+					$fw = fopen( $file, 'wb' );
+					fwrite( $fw, $content );
+					fclose( $fw );
+
+					  // Upgrade Cache
+				       $memory = DIR_DATA . 'upgrade_cache.log';
+				       if(file_exists($memory)){
+				       	$cache = unserialize(file_get_contents($memory));
+				        $cache['db'] = true;
+				        $cache['files'] = true;
+					  } else {
+				       	$cache = array('db' => true,'files' => true );
+					  }
+                       if($cache){
+					    $fw = fopen( $memory, 'wb' );
+					    fwrite( $fw, serialize($cache) );
+					    fclose( $fw );
+					   }
+				}
+
+                $server = $_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['SCRIPT_NAME']));
+                $server = explode('/',$server);
+                array_pop($server);
+                $server = implode('/',$server);
+		$http_server = 'define(\'HTTP_SERVER\', \'http://' . $server . '/\'); // OC 1.4+';
+		$https_server = 'define(\'HTTPS_SERVER\', \'https://' .$server . '/\'); // OC 1.4+';
+                if( $this->showOps ){
+				    	$this->text .= '<p><pre>'.$http_server.'</pre></p>';
+                }
+				$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'HTTP_SERVER', 'config.php' ) );
+
+                if( $this->showOps ){
+				    	$this->text .= '<p><pre>'.$https_server.'</pre></p>';
+                }
+				$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'HTTPS_SERVER', 'config.php' ) );
+
+      return $this->text;
+
+  }
+  private function msg( $data ){
+       return str_replace( $data, '<div class="msg round">' . $data .'</div>'."\r\n", $data);
+  }
 }
-?>
