@@ -41,7 +41,7 @@ class ModelUpgradeDatabase extends Model {
 			}
 	    }
 	        // Upgrade Memory Log
-	        $memory = DIR_DATA . '/upgrade_cache.log';
+	        $memory = DIR_UPGRADE . '/upgrade_cache.log';
 	        $cache = array();
 	        $oc2 = $this->structure->getOc2Tables();
 	            if( !file_exists($memory) ){
