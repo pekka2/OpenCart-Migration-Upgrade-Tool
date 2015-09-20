@@ -179,6 +179,57 @@ class Structure {
 		};
          return $table_old_data;
 	}
+   public function settingData($upgrade){
+		$file = DIR_SQL . $upgrade . '.sql';
+
+		if (!file_exists($file)) {
+			exit('Could not load sql file: ' . $file);
+		}
+
+		$string = '';
+
+		$lines = file($file);
+
+		$status = false;
+
+
+		foreach($lines as $line) {
+
+			if (substr($line, 0, 6) == 'INSERT') {
+				$status = true;
+			}
+
+			if ($status) {
+				$string .= $line;
+			}
+
+			if (preg_match('/\);/', $line)) {
+				$status = false;
+			}
+		}
+
+		// Start reading each create statement
+		$stat = explode("VALUES", $string);
+		$settings = explode("),", $stat[1]);
+     $setting_data = array();
+		foreach ($settings as $sql) {
+			// Get all config settings
+		$sql_data = explode('\'',$sql); 
+		$sql_data2 = implode('',$sql_data); 
+		$sql_data3 = explode(',',$sql_data2); 
+        $sql_data3[0] = str_replace('(','',$sql_data3[0]);
+        $sql_data3[0] = trim($sql_data3[0]);
+        $sql_data3[5] = str_replace(')','',$sql_data3[5]);
+				$setting_data[] = array(
+					'store_id'     => $sql_data3[1],
+					'code'         => $sql_data3[2],
+					'key'          => $sql_data3[3],
+					'value'        => $sql_data3[4],
+					'serialized'   => $sql_data3[5]
+				); 
+        }
+       return $setting_data;	
+	}
   public function language() {
 		 $sql = 'SELECT  * FROM  `' . DB_PREFIX . 'language`';
 
