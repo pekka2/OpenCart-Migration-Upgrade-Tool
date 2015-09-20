@@ -4,7 +4,7 @@ class ControllerUpgradeSettings extends Controller {
    public function index() {
 		$this->language->load('upgrade/database');
 		$this->load->model('upgrade/info');
-		$this->load->model('upgrade/module');
+        $this->load->model('upgrade/module');
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -43,14 +43,14 @@ class ControllerUpgradeSettings extends Controller {
                  $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
                 $modules = $this->structure->hasModule();
                  if( !$modules || isset($this->request->post['modules']) ) {
-                        $this->data['add_modules'] = $this->model_upgrade_module->getChangeModule( $this->request->post );
+                         $this->data['add_modules'] = $this->model_upgrade_module->getChangeModule( $this->request->post );
                  } else {
                         $this->data['add_modules'] = '';
                  }
                 } 
                 $this->data['themes'] = $this->model_upgrade_info->getThemes();
 
-                $this->data['action'] = $this->url->link('upgrade/configuration');
+                $this->data['action'] = $this->url->link('upgrade/images');
                 $this->data['text_intro_1'] = $this->language->get('text_intro_1');
                 $this->data['text_intro_2'] = $this->language->get('text_intro_2');
                 $this->data['text_intro_3'] = $this->language->get('text_intro_3');
