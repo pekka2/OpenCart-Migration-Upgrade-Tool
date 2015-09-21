@@ -3,7 +3,7 @@ class ControllerUpgradeStart extends Controller {
         private $error = array();
    public function index() {
 		$this->language->load('upgrade/database');
-      $this->lmodel->set('upgrade_database',$this->language->load('upgrade/database'));
+    $this->lmodel->set('upgrade_database',$this->language->load('upgrade/database'));
 		$this->load->model('upgrade/info');
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
@@ -22,16 +22,15 @@ class ControllerUpgradeStart extends Controller {
 			'href'      => $this->url->link('upgrade/start')
 		);
 
-		$level = $this->structure->getVersion();
-		$version = $level['level'];
-		$vdata = $level['vdata'];
-           
-          if( $version <= $this->min ){
+    $info = $this->model_upgrade_info->getInfo();
+    $version = $info['version'];
+    $vdata = $info['version'];
+          if( !$info['collate'] ){
            $this->data['action'] = $this->url->link('upgrade/column');
            $this->data['text_version'] = sprintf($this->language->get('text_version'),$vdata,'');
            $steps = 9;
          }
-         if( $version > $this->min ){
+         if( $info['collate'] ){
            $this->data['action'] = $this->url->link('upgrade/collate');
            $this->data['text_version'] = sprintf($this->language->get('text_version'), $vdata,'');
            $this->data['collate'] = true;
@@ -61,6 +60,7 @@ class ControllerUpgradeStart extends Controller {
  
                 $this->data['header_step_2'] = $this->language->get('header_step_2');
 
+                $this->data['entry_up_1564'] = $this->language->get('entry_up_1564');
                 $this->data['entry_up_2030'] = $this->language->get('entry_up_2030');
                 $this->data['entry_up_201_202'] = $this->language->get('entry_up_201_202');
                 $this->data['entry_up_2100'] = $this->language->get('entry_up_2100');
