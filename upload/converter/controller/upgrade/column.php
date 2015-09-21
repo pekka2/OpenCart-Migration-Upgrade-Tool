@@ -61,15 +61,9 @@ class ControllerUpgradeColumn extends Controller {
                  $this->data['header_step'] = $this->language->get('header_step_collate');
              }
           }
-	            $this->data['database'] = $this->url->link('upgrade/database');
+	        $this->data['database'] = $this->url->link('upgrade/database');
                 $this->data['text_step'] = sprintf($this->language->get('text_step'),$step,$steps); 
-                
-                if($steps == 9){
-                	$this->data['header_step'] = $this->language->get('header_step_1');
-                } 
-                if($steps == 10){
-                	$this->data['header_step'] = $this->language->get('header_step_collate');
-                } 
+
                 $this->data['action'] = $this->url->link('upgrade/column/new_data');
                 $this->data['text_simulation'] = $this->language->get('text_simulation');
                 $this->data['text_on'] = $this->language->get('text_on');
