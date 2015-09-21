@@ -13,6 +13,8 @@ $_['text_on']			= 'AÇIK';
 $_['text_simulation']	        = 'Simülasyon';
 $_['text_upgrade_images']       = 'Resim Yollarını Yükseltme';
 $_['text_upgrade_info']         = 'Yükseltme Bilgisi';
+// Header
+$_['header_step_setting']     = 'New Settings is added succesfully';
 // msg
 $_['msg_change_path']    	= 'Toplam <b>%s</b> resim dosya yolu veritabanında başarıyla değiştirildi';
 $_['msg_copy_image']	        = 'Toplam <b>%s</b> resim dosyası başarıyla KOPYALANDI';
