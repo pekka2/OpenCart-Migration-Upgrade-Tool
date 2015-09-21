@@ -1,0 +1,21 @@
+# ADD COLUMNS TO 2.0.3.1 IN VERSION 1.5.6.4
+ALTER TABLE `oc_address` ADD COLUMN `custom_field` text NOT NULL;
+ALTER TABLE `oc_affiliate` ADD COLUMN `filename` varchar(128) NOT NULL AFTER salt;
+ALTER TABLE `oc_banner_image` ADD COLUMN `sort_order` int(3) NOT NULL;
+ALTER TABLE `oc_category_description` ADD COLUMN `meta_title` varchar(255) NOT NULL AFTER description;
+ALTER TABLE `oc_custom_field` ADD COLUMN `status` tinyint(1) NOT NULL AFTER location;
+ALTER TABLE `oc_custom_field_to_customer_group` ADD COLUMN `required` tinyint(1) NOT NULL;
+ALTER TABLE `oc_customer` ADD COLUMN `custom_field` text NOT NULL AFTER address_id;
+ALTER TABLE `oc_customer` ADD COLUMN `safe` tinyint(1) NOT NULL;
+ALTER TABLE `oc_information_description` ADD COLUMN `meta_title` varchar(255) NOT NULL AFTER description;
+ALTER TABLE `oc_information_description` ADD COLUMN `meta_description` varchar(255) NOT NULL AFTER meta_title;
+ALTER TABLE `oc_information_description` ADD COLUMN `meta_keyword` varchar(255) NOT NULL AFTER meta_description;
+ALTER TABLE `oc_order` ADD COLUMN `custom_field` text NOT NULL;
+ALTER TABLE `oc_order` ADD COLUMN `payment_custom_field` text NOT NULL;
+ALTER TABLE `oc_order` ADD COLUMN `shipping_custom_field` text NOT NULL;
+ALTER TABLE `oc_order` ADD COLUMN `marketing_id` int(11) NOT NULL;
+ALTER TABLE `oc_order` ADD COLUMN `tracking` varchar(64) NOT NULL;
+ALTER TABLE `oc_product_description` ADD COLUMN `meta_title` varchar(255) NOT NULL AFTER description;
+ALTER TABLE `oc_product_recurring` ADD COLUMN `customer_group_id` int(11) NOT NULL;
+ALTER TABLE `oc_product_recurring` ADD COLUMN `recurring_id` int(11) NOT NULL;
+ALTER TABLE `oc_user` ADD COLUMN `image`  varchar(255) NOT NULL AFTER `email`;
