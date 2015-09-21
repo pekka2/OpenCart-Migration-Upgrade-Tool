@@ -98,14 +98,18 @@ class ModelUpgradeModule extends Model{
       ******************************************************************************************/
         $text = '';
         $str = '';
+        $module1 = false;
         $table_layout_module = array();
         $table_module = array();
         $table_setting = array();
         $modules = array();
-    $module1 = !empty($this->structure->hasSetting( $mod . '_module' ) ? true:false);
+    $modulex = !empty($this->structure->hasSetting( $mod . '_module' ) ? true:false);
     $module2 = !empty($this->structure->hasSetting( $mod . '_0_position') ? true:false);
     $module2b = !empty($this->structure->hasSetting( $mod . '_1_position') ? true:false);
     $module3 = !empty($this->structure->hasSetting( $mod . '_position') ? true:false);
+    if( $modulex && !$module3 ){
+      $module1 = true;
+    }
 
     if( array_search('group', $this->structure->columns('setting'))){
      $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `group` = '" . $mod . "'";
