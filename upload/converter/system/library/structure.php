@@ -222,10 +222,10 @@ class Structure {
         $sql_data3[5] = str_replace(')','',$sql_data3[5]);
 				$setting_data[] = array(
 					'store_id'     => $sql_data3[1],
-					'code'         => $sql_data3[2],
-					'key'          => $sql_data3[3],
-					'value'        => $sql_data3[4],
-					'serialized'   => $sql_data3[5]
+					'code'         => trim($sql_data3[2]),
+					'key'          => trim($sql_data3[3]),
+					'value'        => trim($sql_data3[4]),
+					'serialized'   => trim($sql_data3[5])
 				); 
         }
        return $setting_data;	
