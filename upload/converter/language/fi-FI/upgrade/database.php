@@ -19,6 +19,7 @@ $_['text_version']          = 'Sinun kaupan tietokantaversioksi on tunnistettu %
 $_['text_table_info']       = 'Aloita lisäämällä uudet taulut';
 $_['text_update_config']    = 'Nyt voit myös päivittää  <b>config.php</b> tiedostoja, jos sitä ei ole vielä tehty';
 // Entry
+$_['entry_up_1564']          = 'Päivitä tietokanta versioon 1.5.6.4';
 $_['entry_up_201_202']       = 'Päivitä tietokanta versioon 2.0.1 - 2.0.2.x';
 $_['entry_up_2030']          = 'Päivitä tietokanta  versioon 2.0.3.1';
 $_['entry_migration_module'] = 'Siirrä moduulit uudeastaan (tyhjentää ensin taulut `layout_module` ja `module`)';
