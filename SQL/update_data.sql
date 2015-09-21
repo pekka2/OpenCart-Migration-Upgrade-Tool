@@ -2,7 +2,6 @@
 UPDATE `oc_category_description` SET `meta_title` = `name`;
 UPDATE `oc_information_description` SET `meta_title` = `name`;
 UPDATE `oc_product_description` SET `meta_title` = `name`;
-UPDATE `oc_setting` SET `code` = `group`;
 UPDATE `oc_setting` SET `key` = 'config_meta_title' WHERE `key` = 'config_title';
 DELETE FROM `oc_setting` WHERE `key` = 'config_api_id';
 INSERT INTO `oc_setting` SET `code` = 'config', `key` = 'config_api_id', `value` = '1', `serialized` = '0';
