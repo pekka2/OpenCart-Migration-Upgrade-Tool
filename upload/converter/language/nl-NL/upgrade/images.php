@@ -13,6 +13,8 @@ $_['text_on']			= 'AAN';
 $_['text_simulation']	        = 'Simulatie is';
 $_['text_upgrade_images']       = 'Upgrade van Imagepaths';
 $_['text_upgrade_info']         = 'Upgrade Informatie';
+// Header
+$_['header_step_setting']     = 'New Settings is added succesfully';
 // msg
 $_['msg_change_path']    	= 'Totale <b>%s</b> afbeelding filepath (s) in de database met succes wijzigen';
 $_['msg_copy_image']	        = 'Totale <b>%s</b>-afbeeldingsbestanden (s) met succes kopiëren';
