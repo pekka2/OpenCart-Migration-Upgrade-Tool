@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']             = 'Copying Image Files and Upgrade Image paths';
+$_['heading_database']           = 'Opgradering af Database';
 
 // Text
 $_['text_error']		= 'Fejl';
