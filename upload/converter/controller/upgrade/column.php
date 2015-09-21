@@ -4,6 +4,7 @@ class ControllerUpgradeColumn extends Controller {
    public function index() {
 		$this->language->load('upgrade/database');
 		$this->load->model('upgrade/database');
+		$this->load->model('upgrade/info');
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -11,23 +12,19 @@ class ControllerUpgradeColumn extends Controller {
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),
-			'separator' => false
+			'href'      => $this->url->link('common/home')
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_upgrade_info'),
-			'href'      => $this->url->link('upgrade/info'),
-			'separator' => false
+			'href'      => $this->url->link('upgrade/info')
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_column'),
-			'href'      => $this->url->link('upgrade/column'),
-			'separator' => false
+			'href'      => $this->url->link('upgrade/column')
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('btn_start'),
-			'href'      => $this->url->link('upgrade/start'),
-			'separator' => false
+			'href'      => $this->url->link('upgrade/start')
 		);
 
 		
@@ -40,10 +37,13 @@ class ControllerUpgradeColumn extends Controller {
 		}
 
 		if(isset($this->request->post['upgrade'])){
-		  $this->data['upgrade'] = $this->request->post['upgrade'];
+		    $this->data['upgrade'] = $this->request->post['upgrade'];
 		} else {
 			$this->data['upgrade'] = 2031;
 		}
+    $info = $this->model_upgrade_info->getInfo();
+    $version = $info['version'];
+    $vdata = $info['version'];
            if( isset( $this->request->post['step']) && $this->validate() ){
 					if( !isset($_COOKIE['UpgradeMigration']) ){
 									$this->redirect($this->url->link('common/login'));
@@ -51,9 +51,13 @@ class ControllerUpgradeColumn extends Controller {
                  $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
                  $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
                  $this->data['step'] = $step+1;
-                 
+               
+            if( !$info['collate'] ){  
+                 $this->data['upgrade_data'] = $this->model_upgrade_database->addTable($this->request->post );
+             }
+            if( $info['collate'] ){  
                  $this->data['add_collate'] = $this->model_upgrade_database->addCollate( $this->request->post );
-
+             }
           }
 	            $this->data['database'] = $this->url->link('upgrade/database');
                 $this->data['text_step'] = sprintf($this->language->get('text_step'),$step,$steps); 
