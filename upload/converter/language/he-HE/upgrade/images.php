@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']             = 'העתקת קבצי תמונה ושידרוג נתיבי תמונה';
+$_['heading_database']             = 'שדרוג מסד נתונים';
 
 // Text
 $_['text_error']		= 'שגיאה';
