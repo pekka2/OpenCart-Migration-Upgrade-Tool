@@ -77,7 +77,7 @@ class ModelUpgradeSettings extends Model{
             foreach($settings as $setting){
                if(!$this->structure->hasSetting( trim($setting['key'])) ){
                   $sql = "INSERT INTO `" . DB_PREFIX . "setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALUES
-                  ('0', 'config','" . $setting['key'] . "','" . $setting['value'] . "','" . $setting['serialized'] . "')";
+                  ('0', 'config','" . $this->db->escape($setting['key']) . "','" . $this->db->escape($setting['value']) . "','" . $setting['serialized'] . "')";
           
                 if( !$this->simulate ) {
                     $this->db->query( $sql );
