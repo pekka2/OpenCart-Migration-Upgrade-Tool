@@ -49,7 +49,7 @@ class ModelUpgradeInfo extends Model{
   }
   public function addInfo(){
         // Upgrade Memory Log
-          $memory = DIR_DATA . '/upgrade_cache.log';
+          $memory = DIR_UPGRADE . '/upgrade_cache.log';
           $cache = array();
           $info = $this->structure->getVersion();
           $level = $info['level'];
@@ -87,7 +87,7 @@ class ModelUpgradeInfo extends Model{
   public function getInfo(){
         // Upgrade Memory Log
           $cache = array();
-          $memory = DIR_DATA . '/upgrade_cache.log';
+          $memory = DIR_UPGRADE . '/upgrade_cache.log';
            if( file_exists($memory) ){
                    $string = file_get_contents($memory);
                   if(!empty($string)){
