@@ -26,6 +26,8 @@ $_['entry_imageDir']		= 'In de naam van de image map';
 $_['entry_up_1564']		     = 'Upgrade database to version 1.5.6.4';
 $_['entry_up_201_202']		= 'De database een upgrade uitvoert naar versie 2.0.1-2.0.2.0';
 $_['entry_up_2030']		= 'Upgrade van de database naar versie 2.0.3.1';
+$_['entry_migration_module'] = 'Move modules again (truncate first tables `layout_module` ja `module`)';
+$_['entry_up_2100']		     = 'Upgrade database to version 2.1.0.0';
 // Header
 $_['header_step_2']		= 'Database is succesvol bijgewerkt naar de nieuwste versie';
 // help
