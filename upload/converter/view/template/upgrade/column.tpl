@@ -18,6 +18,7 @@
 </div>
 
    <?php if( isset( $add_collate ) ) { echo $add_collate; } ?>
+   <?php if( isset( $upgrade_data ) ) { echo $upgrade_data; } ?>
 
 </div>
 </div>
