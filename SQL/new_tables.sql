@@ -1,4 +1,4 @@
-# NEW TABLES TO VERSION 2.0.3.1
+# NEW TABLES TO VERSION 2.0.3.1 IN VERSION 1.5.6.4
 CREATE TABLE IF NOT EXISTS `oc_affiliate_activity` (
   `activity_id` int(11) NOT NULL AUTO_INCREMENT,
   `affiliate_id` int(11) NOT NULL,
