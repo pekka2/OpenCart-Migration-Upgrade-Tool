@@ -18,9 +18,11 @@ $_['btn_start']			= 'התחל בעידכון';
 // Entry
 $_['entry_adminDir']	        = 'שם ספריית adminfiles';
 $_['entry_imageDir']		= 'Name of  image directory';
-$_['entry_up_1564']		     = 'Upgrade database to version 1.5.6.4';
+$_['entry_up_1564']		     = 'שדרג את מסד הנתונים לגירסה 1.5.6.4';
 $_['entry_up_201_202']		= 'שדרג את מסד הנתונים לגירסה 2.0.1-2.0.2.0';
 $_['entry_up_2030']		= 'שדרג את מסד הנתונים לגירסה 2.0.3.1';
+$_['entry_migration_module'] = 'Move modules again (truncate first tables `layout_module` ja `module`)';
+$_['entry_up_2100']		     = 'שדרג את מסד הנתונים לגירסה 2.1.0.0';
 // Header
 $_['header_step_2']		= 'מסד נתונים עודכן בהצלחה לגרסה העדכנית';
 // help
