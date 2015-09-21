@@ -163,7 +163,10 @@ a.list-group-item.active:focus .list-group-item-text {
 #footer, #container, #content{
 	clear:both;
 }
-.help_28x28{float:right;}
+.help_28x28{
+	float:right;
+	margin-right:30px;
+}
 #column-right{
 	float:right;
 	width:240px;
@@ -182,9 +185,11 @@ a.list-group-item.active:focus .list-group-item-text {
 }
 .bg-green {
     background-color: #CDFFDE;
+    text-indent:10px;
 }
 .bg-red {
-	 background-color: #FFB7B7;
+	background-color: #FFB7B7;
+    text-indent:10px;
 }
 .msg {
 	 background: #DFF9DF;
@@ -249,7 +254,7 @@ a.button {
 }
 .block {
 	margin-top: 5px;
-	width:470px;
+	width:auto;
 }
 .error-warning{
 	height:410px;
@@ -288,4 +293,25 @@ a.button {
 	background:#BBDF8D;
 	padding:30px;
 	border:double 6px #eeeeee;
+}
+table.info{
+	width:500px;
+	background:#ffffff;
+	border: solid #000000;
+	border-width: 1px 1px 0px 0px;
+	border-spacing:0px;
+}
+.info td{
+	border: solid #000000;
+	border-width: 0px 0px 1px 1px;
+	padding:3px;
+}
+.td-right{
+	text-align:right;
+}
+.total, .info-top{
+	font-weight:bold;
+}
+.info-top{
+    background:yellow;
 }
