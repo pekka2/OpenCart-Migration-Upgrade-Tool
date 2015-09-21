@@ -13,6 +13,8 @@ $_['text_on']			= 'Ligado';
 $_['text_simulation']	        = 'Simulador está';
 $_['text_upgrade_images']       = 'Atualização do caminho das imagens';
 $_['text_upgrade_info']         = 'Info de atualização';
+// Header
+$_['header_step_setting']     = 'New Settings is added succesfully';
 // msg
 $_['msg_change_path']    	= 'Total de <b>%s</b> caminhos de imagens alterados com sucesso no banco de dados.';
 $_['msg_copy_image']	        = 'Total de <b>%s</b> arquivos de imagens copiados com sucesso';
