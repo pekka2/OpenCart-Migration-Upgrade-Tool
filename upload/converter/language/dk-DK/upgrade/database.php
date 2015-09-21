@@ -18,6 +18,7 @@ $_['btn_start']			= 'Starte med opdateringen';
 // Entry
 $_['entry_adminDir']	        = 'Name of directory for adminfiles';
 $_['entry_imageDir']		= 'I mappen billede';
+$_['entry_up_1564']		     = 'Upgrade database to version 1.5.6.4';
 $_['entry_up_201_202']		= 'Upgrade database to version 2.0.1 - 2.0.2.0';
 $_['entry_up_2030']		= 'Upgrade database to  version 2.0.3.1';
 // Header
