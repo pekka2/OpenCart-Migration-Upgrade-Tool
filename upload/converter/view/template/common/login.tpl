@@ -1,5 +1,8 @@
 <?php echo $header; ?>
-
+<ul class="breadcrumb">
+  <li><?php echo $btn_login;?></li>
+</ul>
+<div id="container">
 <div class="msg round">
   <div class="box" style="width: 400px; min-height: 300px; margin-top: 40px; margin-left: auto; margin-right: auto;">
     <div class="heading">
@@ -21,17 +24,14 @@
               <br />
               <?php echo $entry_password; ?><br />
               <input type="password" name="password" value="<?php echo $password; ?>" style="margin-top: 4px;" />
-              <?php if ($forgotten) { ?>
-              <br />
-              <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a>
-              <?php } ?>
+              
               </td>
           </tr>
           <tr>
             <td>&nbsp;</td>
           </tr>
           <tr>
-            <td style="text-align: right;"><a onclick="$('#form').submit();" class="button"><?php echo $button_login; ?></a></td>
+            <td style="text-align: right;"><a onclick="$('#form').submit();" class="button"><?php echo $btn_login; ?></a></td>
           </tr>
         </table>
         <?php if ($redirect) { ?>
@@ -48,4 +48,5 @@ $('#form input').keydown(function(e) {
 	}
 });
 //--></script> 
+</div>
 <?php echo $footer; ?>
