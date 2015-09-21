@@ -9,6 +9,8 @@ $_['text_finish_note']  	= '<b>Note</b> : N\'oubliez pas de supprimer le fichier
 $_['text_finish_text']	        = 'Félicitations!<br />Votre ancien magasin à été mis à jour avec succès vers la dernière version. Veuillez utiliser les boutons ci-dessous pour naviguer plus loin.';
 $_['text_upgrade_images']       = 'Mise à jour des chemins d\'image';
 $_['text_upgrade_info']         = 'Informations de mise à jour';
+// Header
+$_['header_step_setting']     = 'New Settings is added succesfully';
 // msg
 $_['msg_change_path']    	= 'CHANGEMENT total de <b>%s</b> chemin(s) de fichier images dans la base de données réalisé avec succès';
 $_['msg_copy_image']	        = 'COPIE total de <b>%s</b> fichier(s) images réalisée avec succès';
