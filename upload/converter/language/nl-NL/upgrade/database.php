@@ -23,6 +23,7 @@ $_['btn_start']			= 'Beginnen met de update';
 // Entry
 $_['entry_adminDir']	        = 'De naam van de map voor adminfiles';
 $_['entry_imageDir']		= 'In de naam van de image map';
+$_['entry_up_1564']		     = 'Upgrade database to version 1.5.6.4';
 $_['entry_up_201_202']		= 'De database een upgrade uitvoert naar versie 2.0.1-2.0.2.0';
 $_['entry_up_2030']		= 'Upgrade van de database naar versie 2.0.3.1';
 // Header
