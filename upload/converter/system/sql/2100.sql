@@ -252,6 +252,25 @@ CREATE TABLE `oc_banner_image_description` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `oc_cart`
+--
+
+CREATE TABLE `oc_cart` (
+  `cart_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
+  `session_id` varchar(32) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `recurring_id` int(11) NOT NULL,
+  `option` text NOT NULL,
+  `quantity` int(5) NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`cart_id`),
+  KEY `cart_id` (`customer_id`,`session_id`,`product_id`,`recurring_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `oc_category`
 --
 
