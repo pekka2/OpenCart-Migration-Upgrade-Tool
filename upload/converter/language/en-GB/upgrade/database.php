@@ -21,6 +21,7 @@ $_['text_version']          = 'Your store database structure have been identifie
 $_['text_table_info']       = 'Start to add new tables';
 $_['text_update_config']    = 'Now you can also update the <b>config.php</b> files if not already done';
 // Entry
+$_['entry_up_1564']		     = 'Upgrade database to version 1.5.6.4';
 $_['entry_up_201_202']	     = 'Upgrade database to version 2.0.1 - 2.0.2.0';
 $_['entry_up_2030']		     = 'Upgrade database to version 2.0.3.1';
 $_['entry_migration_module'] = 'Move modules again (truncate first tables `layout_module` ja `module`)';
