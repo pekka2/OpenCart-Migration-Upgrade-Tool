@@ -21,6 +21,7 @@ $_['btn_data']          = 'Add data';
 $_['btn_database']      = 'To Upgrade The Database';
 $_['btn_images']        = 'Upgrade image paths';
 $_['btn_info']          = 'Database information';
+$_['btn_login']         = 'Login';
 $_['btn_logout']        = 'Logout';
 $_['btn_module']        = 'Move modules';
 $_['button_permission'] = 'Administrative permission';
