@@ -105,18 +105,15 @@ class ControllerUpgradeColumn extends Controller {
 
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),
-			'separator' => false
+			'href'      => $this->url->link('common/home')
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_upgrade_info'),
-			'href'      => $this->url->link('upgrade/info'),
-			'separator' => false
+			'href'      => $this->url->link('upgrade/info')
 		);
 		$this->data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_column'),
-			'href'      => $this->url->link('upgrade/column'),
-			'separator' => false
+			'href'      => $this->url->link('upgrade/column')
 		);
 
 		if(isset($this->request->post['steps'])){
