@@ -562,7 +562,7 @@ if( !array_search( DB_PREFIX . 'layout_module', $this->tables() ) ) {
 if($this->vdata == 0){
 		           	$this->vdata = '1.5.6';
 		            $this->collate = false;
-		            $this->tb = count($this->tables() - 1);
+		            $this->tb = count($this->tables()) - 1;
 		            $this->org = 115;
 }
 }
@@ -571,7 +571,7 @@ if( !array_search( DB_PREFIX . 'module', $this->tables() ) ) {
 if($this->vdata == 0){
 		           	$this->vdata = '2.0.0.0';
 		            $this->collate = false;
-		            $this->tb = count($this->tables() - 1);
+		            $this->tb = count($this->tables()) - 1;
 		            $this->org = 124;
 }
 }
@@ -580,7 +580,7 @@ if( !array_search( DB_PREFIX . 'api_id', $this->tables() ) ) {
 if($this->vdata == 0){
 		           	$this->vdata = '2.0.1.0-2.0.3.1';
 		            $this->collate = false;
-		            $this->tb = count($this->tables() - 1);
+		            $this->tb = count($this->tables()) - 1;
 		            $this->org = 123;
 }
 }
