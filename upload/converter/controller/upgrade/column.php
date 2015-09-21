@@ -54,9 +54,11 @@ class ControllerUpgradeColumn extends Controller {
                
             if( !$info['collate'] ){  
                  $this->data['upgrade_data'] = $this->model_upgrade_database->addTable($this->request->post );
+                 $this->data['header_step'] = $this->language->get('header_step_1');
              }
             if( $info['collate'] ){  
                  $this->data['add_collate'] = $this->model_upgrade_database->addCollate( $this->request->post );
+                 $this->data['header_step'] = $this->language->get('header_step_collate');
              }
           }
 	            $this->data['database'] = $this->url->link('upgrade/database');
