@@ -1,6 +1,7 @@
 <?php
 class ModelUpgradeImages extends Model{
     private $lang;
+
 /**
  * adopting image paths
  */
@@ -8,10 +9,10 @@ class ModelUpgradeImages extends Model{
        $this->lang = $this->lmodel->get('upgrade_images');
 
       $text = '';
-        $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
-        $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
+      $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
+      $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
       $this->dirImage = $data['dirImage'] . '/';
-      $this->permission = $data['permission'];
+      $this->dirOld = ( !empty( $data['dirOld'] ) ? true : false );
 
     if( is_writable( DIR_STORE_IMAGE ) ) {
           $images = $this->getImages();
@@ -28,12 +29,30 @@ class ModelUpgradeImages extends Model{
    *
    */
 
-       $img['path'] = str_replace('data','catalog',$img['path'] );
+       $img['path'] = str_replace('data/','catalog/',$img['path']);
 
        if( $this->simulate ){
-         $img['path'] = str_replace( 'catalog','data', $img['path'] );
+         $img['path'] = str_replace( 'catalog/','data/', $img['path'] );
        }
 
+         if( file_exists( $img['path'] )  && is_dir( $img['newdirpath'] ) ||  file_exists( $img['path']) && $this->simulate ){
+
+         /*
+          * Copy files to Catalog directories banners, product etc.
+          */
+         if( $this->dirOld ){
+              if( !file_exists( $img['newpath'] ) || $this->simulate){
+                 if( !$this->simulate ){
+
+                   copy( $img['path'] , $img['newpath'] );
+
+                 }
+
+		 $text .= $this->msg( sprintf( $this->lang['msg_image_copied'], $img['newpath'], '' ) );
+		 ++$copy;
+             }
+           }
+         } 
            /*
             * Update paths to database
             */
@@ -92,9 +111,6 @@ class ModelUpgradeImages extends Model{
 	$text .= sprintf( $this->lang['msg_perm_dir'], DIR_STORE_IMAGE );
         $text .= '</div>';
    }
-	$text .= '<div class="header round">';
-	$text .= sprintf( $this->lang['msg_copy_image'], $copy );
-        $text .= '</div>';
 	$text .= '<div class="header round">';
 	$text .= sprintf( $this->lang['msg_change_path'], $imagepath );
         $text .= '</div>';
@@ -234,7 +250,7 @@ class ModelUpgradeImages extends Model{
                 array( "curr" => DIR_STORE_IMAGE . 'data/', "comp" => DIR_STORE_IMAGE . 'catalog/'),
                 array( "curr"  => DIR_STORE_IMAGE . 'cache/data/', "comp" => DIR_STORE_IMAGE . 'cache/catalog/' )
           );
-  $text .= $this->setRename($rename);
+  $text = $this->setRename($rename);
 
     return array($imageInfo,$text);
    }
