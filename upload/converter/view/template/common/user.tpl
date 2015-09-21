@@ -1,10 +1,12 @@
 <?php echo $header; ?>
-<div class="msg round">
-  <div class="breadcrumb">
+
+  <ul class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
+    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
     <?php } ?>
-  </div>
+  </ul>
+<div id="container">
+<div class="msg round">
 
   <?php if ($error_warning) { ?>
   <div class="warning round"><?php echo $error_warning; ?></div>
@@ -16,9 +18,9 @@
 <div class="buttons">
 
 <?php if(isset($upgrade_access)){?>
-<a href="<?php echo $upgrade_info;?>" class="button right"><?php echo $button_upgrade; ?></a>
+<a href="<?php echo $upgrade_info;?>" class="button right"><?php echo $btn_upgrade; ?></a>
 <?php }  else {?>
-<a onclick="$('#access').submit();" class="button right"><?php echo $button_save; ?></a>
+<a onclick="$('#access').submit();" class="button right"><?php echo $btn_save; ?></a>
 <?php } ?></div>
     </div>
     <form action="<?php echo $action;?>" method="post" id="access">
@@ -47,5 +49,6 @@
   </ul>
   </form>
 
+</div>
 </div>
 <?php echo $footer; ?>
