@@ -14,6 +14,8 @@ $_['text_finish_note']  	= '<b>Note</b>: do not forget to delete the folder <b>c
 $_['text_finish_text']	    = 'Congratulation!<br />Your old shop is successfully updated to the latest version. Please use the buttons below to navigate further.';
 $_['text_upgrade_images']   = 'Upgrade of Imagepaths';
 $_['text_upgrade_info']     = 'Upgrade Info';
+// Header
+$_['header_step_setting']     = 'New Settings is added succesfully';
 // Hrkp
 $_['help_imageDir']		    = 'Image directory the folder name if not <i>image</i>';
 $_['help_ops']			     = 'Display Operations <small>(display all database operations)</small>';
