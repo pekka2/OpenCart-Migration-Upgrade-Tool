@@ -24,7 +24,7 @@ class ControllerCommonLogin extends Controller {
 		$this->data['entry_username'] = $this->language->get('entry_username');
 		$this->data['entry_password'] = $this->language->get('entry_password');
 
-		$this->data['button_login'] = $this->language->get('button_login');
+		$this->data['btn_login'] = $this->language->get('button_login');
 
 		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
