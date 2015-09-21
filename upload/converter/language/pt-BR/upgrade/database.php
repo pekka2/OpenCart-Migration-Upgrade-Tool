@@ -26,6 +26,8 @@ $_['entry_imageDir']		= 'Nome do diretório de imagens';
 $_['entry_up_1564']		     = 'Upgrade database to version 1.5.6.4';
 $_['entry_up_201_202']		= 'Atualizar o banco de dados para versão 2.0.1-2.0.2.0';
 $_['entry_up_2030']		= 'Atualizar o banco de dados para a versão 2.0.3.1';
+$_['entry_migration_module'] = 'Move modules again (truncate first tables `layout_module` ja `module`)';
+$_['entry_up_2100']		     = 'Upgrade database to version 2.1.0.0';
 // Header
 $_['header_step_2']		= 'Banco de dados atualizado com êxito para a versão mais recente';
 // help
