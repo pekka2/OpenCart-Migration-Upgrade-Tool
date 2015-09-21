@@ -56,7 +56,8 @@ class ModelUpgradeInfo extends Model{
           $version = $info['vdata'];
           $tables = $info['tables'];
           $oc_tables = $info['oc_tables'];
-          if($level > 4){
+          $collate = $info['collate'];
+          if($collate){
             $steps = 10;
           } else {
             $steps = 9;
@@ -66,6 +67,7 @@ class ModelUpgradeInfo extends Model{
                     $cache = array('version' => $version,
                                    'tables' => $tables,
                                    'oc_tables' => $oc_tables,
+                                   'collate' => $collate,
                                    'steps' => $steps);
               } else {
                    $string = file_get_contents($memory);
@@ -74,6 +76,7 @@ class ModelUpgradeInfo extends Model{
                     $cache['version'] = $version;
                     $cache['tables'] = $tables;
                     $cache['oc_tables'] = $oc_tables;
+                    $cache['collate'] = $collate;
                     $cache['steps'] = $steps;
                   }
               }
