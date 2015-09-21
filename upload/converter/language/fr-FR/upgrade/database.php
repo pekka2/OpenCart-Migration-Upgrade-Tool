@@ -18,6 +18,7 @@ $_['btn_start']			= 'Commencer par mettre à jour';
 // Entry
 $_['entry_adminDir']	        = 'Nom du répertoire pour les fichiers d\'admin';
 $_['entry_imageDir']		= 'Nom du répertoire d\'images';
+$_['entry_up_1564']		     = 'Upgrade database to version 1.5.6.4';
 $_['entry_up_201_202']		= 'Mise à niveau de la base de données vers la version 2.0.1-2.0.2.0';
 $_['entry_up_2030']		= 'Mettre a niveau vers la version 2.0.3.1';
 // Header
