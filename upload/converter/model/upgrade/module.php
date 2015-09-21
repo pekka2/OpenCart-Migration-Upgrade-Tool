@@ -68,7 +68,7 @@ class ModelUpgradeModule extends Model{
        $addons = array('banner','featured','carousel','slideshow','bestseller','latest','special');
       
      if($this->upgrade ==1564){
-        $text .= $this->getFeatured_1564();
+        //$text .= $this->getFeatured_1564();
      }
      return $text;
   }
@@ -98,7 +98,9 @@ class ModelUpgradeModule extends Model{
     $module2 = !empty($this->structure->hasSetting( $mod . '_0_position') ? true:false);
     $module2b = !empty($this->structure->hasSetting( $mod . '_1_position') ? true:false);
     $module3 = !empty($this->structure->hasSetting( $mod . '_position') ? true:false);
-    if( $modulex && !$module3 ){
+    $this->load->model('upgrade/info');
+    $info = $this->model_upgrade_info->getInfo();
+    if( $modulex && $info['module'] == 1){
       $module1 = true;
     }
     if( array_search('group', $this->structure->columns('setting'))){
@@ -175,26 +177,35 @@ class ModelUpgradeModule extends Model{
                                                          "position" => $value['position'],
                                                          "sort_order" => $value['sort_order']); 
 
-                      if( isset($value[0]['banner_id']) ){
-                        $banner_name = $this->getBannerName($value[0]['banner_id']);
+                      if( isset($value['banner_id']) ){
+                        $banner_name = $this->getBannerName($value['banner_id']);
                       } else {
                         $banner_name = '';
                       } 
 
                 $name = $this->addModuleName( $value, $banner_name );
 
-                      if( isset($value[0]['banner_id']) ){
+                      if( isset($value['banner_id']) ){
                                                          $setting = array("name" => $name,
                                                                           "banner_id" => $value['banner_id'],
                                                                           "width" => $this->getDimension($value,'width'),
                                                                           "height" => $this->getDimension($value,'height'),
                                                                           "status" => $value['status']);
+                           if( isset($value['limit'])){
+                            $setting['limit'] = $value['limit'];
+                           }
                       }else{
                                                          $setting = array("name" => $name,
                                                                           "width" => $this->getDimension($value,'width'),
                                                                           "height" => $this->getDimension($value,'height'),
                                                                           "status" => $value['status']);
+                           if( isset($value['limit'])){
+                            $setting['limit'] = $value['limit'];
+                           }
                       if($mod == 'featured'){
+                           if( !isset($value['limit'])){
+                            $setting['limit'] = 4;
+                           }
                           if( $this->structure->hasSetting( 'featured_product') ){
                              $products = $this->db->query("SELECT `value` FROM `" . DB_PREFIX . "setting` WHERE `key` = 'featured_product'");
                              $product = explode(',',$products->row['value']);
@@ -212,6 +223,29 @@ class ModelUpgradeModule extends Model{
 
                      }
                if( $this->simulate ) {
+                 if(!in_array($mod,$this->module_ids)){
+                  array_push($this->module_ids,$mod);
+                 }
+                 $module_id = count($this->module_ids);
+                } else {
+                  $module_id = $this->structure->getModuleId();
+                }
+                $id = $module_id;
+                  $sql2 = '';
+          foreach($table_module as $key => $my_module){
+
+                 $sql2 = "INSERT INTO `" . DB_PREFIX . "module` (`module_id`, `name`, `code`, `setting`) VALUES
+                       (" . $id . ",'" . $my_module['name'] . "','" . $this->db->escape($my_module['code']) . "','" . $this->db->escape($my_module['setting']) . "')";
+                if( !$this->simulate ) {
+                       $this->db->query( $sql2 );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql2 .'</pre></p>';
+                }  
+                $id++;
+    $text .= $this->msg( sprintf( $this->lang['msg_config'], $mod, DB_PREFIX . 'module' ) );
+          } 
+               if( $this->simulate ) {
                  if(!in_array($mod,$this->layout_module_ids)){
                   array_push($this->layout_module_ids,$mod);
                  }
@@ -220,12 +254,11 @@ class ModelUpgradeModule extends Model{
                   $layout_module_id = $this->structure->getLayoutModuleId();
                 }
                 $id = $layout_module_id;
+                $id2 = $module_id;
                 $sql = '';
           foreach($table_layout_module as $key => $layout_module){
-
-                      $sql = "INSERT INTO `" . DB_PREFIX . "layout_module` (`layout_module_id`, `layout_id`, `code`, `position`, `sort_order`) VALUES
-                       (" . $id . ",'" . $layout_module['layout_id'] . "','" . $this->db->escape($layout_module['code']) . "','" . $this->db->escape($layout_module['position']) . "', '"  . $layout_module['sort_order'] . "')";
-                        echo $sql.'<br>';
+                 $sql = "INSERT INTO `" . DB_PREFIX . "layout_module` (`layout_module_id`, `layout_id`, `code`, `position`, `sort_order`) VALUES
+                       (" . $id . ",'" . $layout_module['layout_id'] . "','" . $this->db->escape($layout_module['code']) . "." . $id2 ."','" . $this->db->escape($layout_module['position']) . "', '"  . $layout_module['sort_order'] . "')";
                 if( !$this->simulate ) {
                        $this->db->query( $sql );
                 }
@@ -233,31 +266,19 @@ class ModelUpgradeModule extends Model{
                       $text .= '<p><pre>' . $sql .'</pre></p>';
                 }  
                 $id++;
+                $id2++;
         $text .= $this->msg( sprintf( $this->lang['msg_config'],  $mod,  DB_PREFIX . 'layout_module' ) );
           } 
-               if( $this->simulate ) {
-                 if(!in_array($mod,$this->module_ids)){
-                  array_push($this->module_ids,$mod);
-                 }
-                 $module_id = count($this->module_ids);
-                } else {
-                  $module_id = $this->structure->getModuleId();
-                }
-                  $sql2 = '';
-          foreach($table_module as $key => $my_module){
-
-                      $sql2 = "INSERT INTO `" . DB_PREFIX . "module` (`module_id`, `name`, `code`, `setting`) VALUES
-                       (" . $module_id . ",'" . $my_module['name'] . "','" . $this->db->escape($my_module['code']) . '.'. $layout_module_id . "','" . $this->db->escape($my_module['setting']) . "')";
+          if(!$this->structure->hasExtension($mod)){
+            $sql = "INSERT INTO `" . DB_PREFIX . "extension` (`type`, `code`) VALUES ('module', '" . $mod ."')";
                 if( !$this->simulate ) {
-                       $this->db->query( $sql2 );
+                       $this->db->query( $sql );
                 }
                 if( $this->showOps ) {
                       $text .= '<p><pre>' . $sql2 .'</pre></p>';
                 }  
-                $layout_module_id++;
-                $module_id++;
-    $text .= $this->msg( sprintf( $this->lang['msg_config'], $mod, DB_PREFIX . 'module' ) );
-          } 
+    $text .= $this->msg( sprintf( $this->lang['msg_config'], $mod, DB_PREFIX . 'extension' ) );
+          }
         }
       }
      return  $text;
@@ -329,6 +350,27 @@ class ModelUpgradeModule extends Model{
                 $id++;
         $text .= $this->msg( sprintf( $this->lang['msg_config'],  $mod,  DB_PREFIX . 'layout_module' ) );
           } 
+          if(!$this->structure->hasExtension($mod)){
+            $sql = "INSERT INTO `" . DB_PREFIX . "extension` (`type`, `code`) VALUES ('module', '" . $mod ."')";
+                if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql2 .'</pre></p>';
+                }  
+    $text .= $this->msg( sprintf( $this->lang['msg_config'], $mod, DB_PREFIX . 'extension' ) );
+          }
+          if(!$this->structure->hasSetting( $mod .'_status')){
+            $sql = "INSERT INTO `" . DB_PREFIX . "setting` (`code`, `key`, `value`, `serialized`) VALUES
+            ('" . $mod . "', '" . $mod ."_status','1','0')";
+                if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }  
+    $text .= $this->msg( sprintf( $this->lang['msg_config'], $mod, DB_PREFIX . 'extension' ) );
+          }
         }
 
     return $text;
