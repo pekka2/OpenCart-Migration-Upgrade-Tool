@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']             = 'Copie des fichiers d\'images et mise à niveau des chemins d\'image';
+$_['heading_database']             = 'Mise à niveau de la base de données';
 
 // Text
 $_['text_error']		= 'Erreur';
