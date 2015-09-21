@@ -7,8 +7,12 @@ class ControllerCommonLogin extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
+		if (isset($_COOKIE['UpgradeMigration'])) {
+			$this->redirect($this->url->link('common/home'));
+		}
+
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			 setcookie("UpgradeMigration",HTTP_SERVER, time() + 3600);
+			 setcookie("UpgradeMigration", HTTP_SERVER, time() + 3600);
 			if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], HTTP_SERVER) === 0 || strpos($this->request->post['redirect'], HTTPS_SERVER) === 0 )) {
 				$this->redirect($this->request->post['redirect']);
 			} else {
@@ -19,12 +23,10 @@ class ControllerCommonLogin extends Controller {
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['text_login'] = $this->language->get('text_login');
-		$this->data['text_forgotten'] = $this->language->get('text_forgotten');
-
 		$this->data['entry_username'] = $this->language->get('entry_username');
 		$this->data['entry_password'] = $this->language->get('entry_password');
 
-		$this->data['btn_login'] = $this->language->get('button_login');
+		$this->data['btn_login'] = $this->language->get('btn_login');
 
 		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -64,12 +66,6 @@ class ControllerCommonLogin extends Controller {
 			$this->data['redirect'] = $this->url->link($route, $url, 'SSL');
 		} else {
 			$this->data['redirect'] = '';	
-		}
-
-		if ($this->config->get('config_password')) {
-			$this->data['forgotten'] = $this->url->link('common/forgotten', '', 'SSL');
-		} else {
-			$this->data['forgotten'] = '';
 		}
 
 		$this->template = 'common/login.tpl';
