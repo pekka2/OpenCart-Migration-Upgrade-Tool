@@ -15,6 +15,8 @@ $_['text_update_config']        = 'Désormais vous pouvez aussi mettre à jour l
 $_['entry_adminDir']	        = 'Nom du répertoire pour les fichiers d\'admin';
 // Header
 $_['header_step_3']		= 'Ajuster les chemins d\'image';
+// help
+$_['help_adminDir']		= 'Ajuster le nom du fichier si vous n\'êtes pas admin';
 // msg
 $_['msg_config_added']  	= 'Le paramètre <b>%s</b> à été ajouté à <b>%s</b> avec succès';
 $_['msg_config_constant']	= 'Le paramètre <b>%s</b> à été ajouté à <b>%s</b> avec succès!';
