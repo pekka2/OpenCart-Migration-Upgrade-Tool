@@ -10,14 +10,15 @@ $_['text_on']			            = 'ON';
 $_['text_simulation']	        = 'La simulation est';
 
 // Btn
-$_['btn_config']		= 'Mettre à jour les fichiers de config';
+$_['btn_config']	           	= 'Mettre à jour les fichiers de config';
 $_['btn_continue']	             = 'Continuer';
 $_['btn_database']               = 'Pour mettre à niveau la base de données';
+$_['btn_login']                 = 'Se connecter';
 $_['btn_logout']                 = 'Logout';
 $_['btn_permission']             = 'Autorisation d\'administration';
 $_['btn_save']                   = 'Enregistrer';
 $_['btn_skip']		               = 'Passer';
-$_['btn_start']			= 'Commencer par mettre à jour';
+$_['btn_start']		         	= 'Commencer par mettre à jour';
 $_['btn_upgrade']                = 'Mise à niveau initiale';
 
 
