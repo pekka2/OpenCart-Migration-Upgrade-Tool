@@ -10,6 +10,7 @@ $_['text_upgrade_info']         = 'פרטי שדרוג';
 $_['text_update_theme']         = 'עדכן ערכת נושא כעת';
 $_['text_skip_theme']           = 'דלג על ערכת הנושא';
 $_['text_update_config']        = 'Now you can also update the <b>config.php</b> files if not already done';
+$_['text_version']          = 'Your store database structure have been identified %s.';
 // Entry
 $_['entry_up_1564']		     = 'שדרג את מסד הנתונים לגירסה 1.5.6.4';
 $_['entry_up_201_202']		= 'שדרג את מסד הנתונים לגירסה 2.0.1-2.0.2.0';
