@@ -9,7 +9,6 @@ $_['text_images_info']          = 'שדרוג של Imagepaths';
 $_['text_intro_3']		= 'This updater can be operated in a <b>simulation</b> mode also.<br />Enable this option and no real operations are made.';
 $_['text_intro_step_3']	        = 'This will rename <b>image/data</b> directories and update image paths in database';
 $_['text_upgrade_info']         = 'שדרוג תצורה';
-$_['text_step_3_3']		= 'שלב 3/3';
 $_['text_update_config']        = 'כעת באפשרותך גם לעדכן את הקבצים <b>config. php</b> אם טרם עשית זאת';
 // Entry
 $_['entry_adminDir']	        = 'שם ספריית admin files';
