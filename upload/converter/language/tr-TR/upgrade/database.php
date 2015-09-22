@@ -11,6 +11,7 @@ $_['text_toggle_help']     	= 'Yardımı Göster/Sakla';
 $_['text_upgrade_info']         = 'Yükseltme Bilgisi';
 $_['text_update_theme']         = 'Temayı şimdi güncelleştir';
 $_['text_skip_theme']            = 'Temayı Atla';
+$_['text_table_info']       = 'Start to add new tables';
 $_['text_update_config']        = 'Şimdi de <b>config. php</b> dosyaları güncelleyebilirsiniz eğer bitmemişse';
 $_['text_version']          = 'Your store database structure have been identified %s.';
 // Entry
