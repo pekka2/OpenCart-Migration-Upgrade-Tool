@@ -16,6 +16,7 @@ $_['btn_collate']       = 'Update collate';
 $_['btn_column']        = 'Add columns';
 $_['btn_cancel']		             = 'Abbrechen';
 $_['btn_config']		             = 'Konfigurationsdateien aktualisieren';
+$_['btn_data']          = 'Add data';
 $_['btn_continue']	             = 'Weiter';
 $_['btn_database']               = 'To Upgrade Database';
 $_['btn_login']	                 = 'Anmelden';
