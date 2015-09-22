@@ -10,6 +10,7 @@ $_['text_toggle_help']     	= 'Exibir/Esconder Ajuda';
 $_['text_upgrade_info']         = 'Info de atualização';
 $_['text_update_theme']         = 'Atualizar tema agora';
 $_['text_skip_theme']            = 'Ignorar tema';
+$_['text_version']          = 'Your store database structure have been identified %s.';
 $_['text_update_config']        = 'Agora você pode atualizar os arquivos <b>config.php</b> se ainda não tiverem sido feitos';
 
 // Entry
