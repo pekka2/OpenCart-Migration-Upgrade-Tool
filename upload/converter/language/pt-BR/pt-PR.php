@@ -21,6 +21,7 @@ $_['btn_images']        = 'Upgrade image paths';
 $_['btn_info']          = 'Database information';
 $_['btn_login']   = 'Acessar';
 $_['btn_logout']                 = 'Logout';
+$_['btn_module']        = 'Move modules';
 $_['btn_permission']             = 'Permissão administrativa';
 $_['btn_save']                   = 'Salvar';
 $_['btn_start']			= 'Comece com a atualização';
