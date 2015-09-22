@@ -48,5 +48,7 @@ $_['msg_table_engine']		= 'In Table <b>%s</b> is table engine changed <em>MyISAM
 $_['msg_table_engine_checked']	= 'Table Engine in table<b>%s</b> is checked';
 $_['msg_text']			= 'Tabelle <b>%s</b> - %s';
 $_['msg_table_count']	= '+ <b>%s</b> neue Tabelle(n)';
+$_['msg_collate_count']	        = 'Updated total <b>%s</b> tables collate succesfully';
+$_['msg_column_collate_count']  = 'Updated tota <b>%s</b> columns collate succesfully';
 $_['msg_upgrade_to_version']	= 'Database Tables is added to version <b>%s</b> - %s level.';
 ?>
