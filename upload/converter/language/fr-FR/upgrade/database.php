@@ -12,9 +12,6 @@ $_['text_upgrade_info']         = 'Informations de mise à jour';
 $_['text_update_theme']         = 'Mettre à jour le thème maintenant';
 $_['text_skip_theme']           = 'Passer le thème';
 $_['text_update_config']        = 'Désormais vous pouvez aussi mettre à jour le fichier <b>config.php</b> si ce n\'est pas déjà fait';
-// Btn
-$_['btn_config']		= 'Mettre à jour les fichiers de config';
-$_['btn_start']			= 'Commencer par mettre à jour';
 // Entry
 $_['entry_adminDir']	        = 'Nom du répertoire pour les fichiers d\'admin';
 $_['entry_imageDir']		= 'Nom du répertoire d\'images';
