@@ -29,6 +29,7 @@ $_['btn_module']        = 'Move modules';
 $_['btn_permission']             = 'הרשאה מנהלית';
 $_['btn_preview']	    = 'Continue to preview status';
 $_['btn_save']                   = 'שמור';
+$_['btn_setting']       = 'Add settings';
 $_['btn_skip']	              	 = 'דלג';
 $_['btn_start']			             = 'התחל בעידכון';
 $_['btn_upgrade']                = 'שדרוג ראשוני';
