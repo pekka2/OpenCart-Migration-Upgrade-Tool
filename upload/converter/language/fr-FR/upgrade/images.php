@@ -5,7 +5,6 @@ $_['heading_database']             = 'Mise à niveau de la base de données';
 
 // Text
 $_['text_error']		= 'Erreur';
-$_['text_finish']		= 'Finition';
 $_['text_finish_note']  	= '<b>Note</b> : N\'oubliez pas de supprimer le fichier <b>converter</b> par la suite !!';
 $_['text_finish_text']	        = 'Félicitations!<br />Votre ancien magasin à été mis à jour avec succès vers la dernière version. Veuillez utiliser les boutons ci-dessous pour naviguer plus loin.';
 $_['text_upgrade_images']       = 'Mise à jour des chemins d\'image';
