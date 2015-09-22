@@ -21,6 +21,7 @@ $_['btn_config']		             = 'Konfigurationsdateien aktualisieren';
 $_['btn_data']          = 'Add data';
 $_['btn_continue']	             = 'Weiter';
 $_['btn_database']               = 'To Upgrade Database';
+$_['btn_drop']          = 'Drop';
 $_['btn_images']        = 'Upgrade image paths';
 $_['btn_info']          = 'Database information';
 $_['btn_login']	                 = 'Anmelden';
