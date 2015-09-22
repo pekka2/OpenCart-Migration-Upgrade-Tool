@@ -18,6 +18,8 @@ $_['text_update_config']        = 'Şimdi de <b>config. php</b> dosyaları günc
 $_['entry_adminDir']	        = 'Yönetim dosyaları için dizin adı';
 // Header
 $_['header_step_3']		= 'Resim yollarını ayarlama';
+// help
+$_['help_adminDir']		= 'Klasör adını düzelt eğer yönetici değilse';
 // msg
 $_['msg_config_added']  	= '<b>%s</b> ayarı başarıyla şuna eklendi <b>%s</b>';
 $_['msg_config_constant']	= '<b>%s</b> ayarı başarıyla şuna eklendi <b>%s</b>!';
