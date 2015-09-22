@@ -7,6 +7,10 @@ $_['direction']                     = 'ltr';
 $_['text_home']                     = 'Home';
 
 // Btn
+$_['btn_clean']	        = 'Clean settings';
+$_['btn_clean_dbase']   = 'Drop';
+$_['btn_collate']       = 'Update collate';
+$_['btn_column']        = 'Add columns';
 $_['btn_config']		= 'Atualizar os arquivos de configuração';
 $_['btn_start']			= 'Comece com a atualização';
 $_['btn_continue']	            = 'Continuar';
