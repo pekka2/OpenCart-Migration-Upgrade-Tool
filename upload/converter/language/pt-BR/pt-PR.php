@@ -20,6 +20,7 @@ $_['btn_start']			= 'Comece com a atualização';
 $_['btn_continue']	            = 'Continuar';
 $_['btn_data']          = 'Add data';
 $_['btn_database']               = 'Para atualizar o banco de dados';
+$_['btn_drop']          = 'Drop';
 $_['btn_finish']		= 'Finalizar';
 $_['btn_images']        = 'Upgrade image paths';
 $_['btn_info']          = 'Database information';
