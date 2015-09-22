@@ -9,7 +9,7 @@ DELETE FROM `oc_setting` WHERE `key` = 'config_processing_status';
 INSERT INTO `oc_setting` SET `code` = 'config', `key` = 'config_processing_status', `value` = 'a:1:{i:0;s:1:"2";}', `serialized` = '1';
 DELETE FROM `oc_setting` WHERE `key` = 'config_complete_status';
 INSERT INTO `oc_setting` SET `code` = 'config', `key` = 'config_complete_status', `value` = 'a:1:{i:0;s:1:"5";}', `serialized` = '1';
-UPDATE `oc_setting` SET `key` = 'config_limit_catalog' WHERE `key` = 'config_catalog_limit';
+UPDATE `oc_setting` SET `key` = 'config_product_limit' WHERE `key` = 'config_catalog_limit';
 UPDATE `oc_setting` SET `key` = 'config_limit_admin' WHERE `key` = 'config_admin_limit';
 DELETE FROM `oc_setting` WHERE `key` = 'config_image_location_height';
 INSERT INTO `oc_setting` SET `code` = 'config', `key` = 'config_image_location_width', `value` = '268', `serialized` = '0';
