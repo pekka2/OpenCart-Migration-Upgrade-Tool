@@ -20,6 +20,7 @@ $_['btn_config']		= 'Bijwerken van de configuratiebestanden';
 $_['btn_continue']	    = 'Doorgaan';
 $_['btn_data']          = 'Add data';
 $_['btn_database']               = 'To Upgrade The Database';
+$_['btn_drop']          = 'Drop';
 $_['btn_finish']		= 'Voltooien';
 $_['btn_login']   = 'Login';
 $_['btn_images']        = 'Upgrade image paths';
