@@ -9,6 +9,7 @@ $_['text_toggle_help']     	= 'הצג/הסתר עזרה';
 $_['text_upgrade_info']         = 'פרטי שדרוג';
 $_['text_update_theme']         = 'עדכן ערכת נושא כעת';
 $_['text_skip_theme']           = 'דלג על ערכת הנושא';
+$_['text_table_info']       = 'Start to add new tables';
 $_['text_update_config']        = 'Now you can also update the <b>config.php</b> files if not already done';
 $_['text_version']          = 'Your store database structure have been identified %s.';
 // Entry
