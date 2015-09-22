@@ -21,6 +21,7 @@ $_['btn_continue']	= 'Fortsat';
 $_['btn_data']          = 'Add data';
 $_['btn_database']               = 'At opgradere databasen';
 $_['btn_finish']		           = 'Færdig';
+$_['btn_drop']          = 'Drop';
 $_['btn_images']        = 'Upgrade image paths';
 $_['btn_info']          = 'Database information';
 $_['btn_login']                  = 'Login';
