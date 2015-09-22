@@ -6,16 +6,14 @@ $_['direction']                     = 'ltr';
 // Text
 $_['text_home']                     = 'Home';
 
-// Button
-$_['button_database']               = 'Para atualizar o banco de dados';
-$_['button_permission']             = 'Permissão administrativa';
-$_['button_save']                   = 'Salvar';
-$_['button_logout']                 = 'Logout';
-$_['button_upgrade']                = 'Iniciar atualização';
-
 // Btn
-$_['btn_skip']		= 'Ignorar';
-$_['btn_continue']	= 'Continuar';
+$_['btn_continue']	            = 'Continuar';
+$_['btn_database']               = 'Para atualizar o banco de dados';
+$_['btn_logout']                 = 'Logout';
+$_['btn_permission']             = 'Permissão administrativa';
+$_['btn_save']                   = 'Salvar';
+$_['btn_skip']		               = 'Ignorar';
+$_['btn_upgrade']                = 'Iniciar atualização';
 
 // Entry
 $_['entry_perms']		= 'Sua permissão de escrita no servidor';
