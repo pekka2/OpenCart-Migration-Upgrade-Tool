@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']             = 'Bewerken van configuratiebestanden';
+$_['heading_images']             = 'Afbeeldingsbestanden kopiëren en de afbeelding upgradepaden';
 
 // Text
 $_['text_curr_setting']	        = '(huidige instelling)';
