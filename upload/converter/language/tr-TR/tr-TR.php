@@ -29,6 +29,7 @@ $_['btn_module']        = 'Move modules';
 $_['btn_permission']  = 'Yönetici izinleri';
 $_['btn_preview']	    = 'Continue to preview status';
 $_['btn_save']        = 'Kaydet';
+$_['btn_setting']       = 'Add settings';
 $_['btn_skip']	    	= 'Atla';
 $_['btn_start']			= 'Güncelleştirmeyi Başlat';
 $_['btn_upgrade']     = 'Güncelleştirmeyi Başlat';
