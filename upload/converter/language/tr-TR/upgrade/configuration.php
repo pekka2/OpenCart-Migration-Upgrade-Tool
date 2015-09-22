@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']             = 'Yapılandırma Dosyalarını Düzenle';
+$_['heading_images']             = 'Resim dosyaları kopyalanıyor ve resim yolları yükseltiliyor';
 
 // Text
 $_['text_curr_setting']	        = '(geçerli ayar)';
