@@ -1,7 +1,7 @@
 <?php
 // Heading
 $_['heading_title']         = 'Edit of Configuration Files';
-$_['heading_database']      = 'Upgrade of Database';
+$_['heading_images']         = 'Rename Image directories and Upgrade Image paths';
 
 // Text
 $_['text_images_info']      = 'Upgrade of Imagepaths';
