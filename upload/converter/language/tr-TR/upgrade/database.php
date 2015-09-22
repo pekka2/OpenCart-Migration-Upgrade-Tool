@@ -20,6 +20,9 @@ $_['text_update_config']        = 'Şimdi de <b>config. php</b> dosyaları günc
 $_['text_version']          = 'Your store database structure have been identified %s.';
 // header
 $_['header_step_1']          = 'The to database has been added to the new tables successfully';
+$_['header_step_column']     = 'The to database has been added to new columns successfully';
+$_['header_step_collate']    = 'Database collation is updated succesfully';
+$_['header_step_module']     = 'Modules is moved to new tables succesfully';
 // Entry
 $_['entry_up_1564']		     = 'Upgrade database to version 1.5.6.4';
 $_['entry_up_201_202']		= 'Veritabanını 2.0.1 - 2.0.2.0 sürümüne yükselt';
