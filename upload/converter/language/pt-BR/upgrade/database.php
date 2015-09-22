@@ -13,6 +13,7 @@ $_['text_skip_theme']            = 'Ignorar tema';
 $_['text_module_info']      = 'Move modules to the new tables';
 $_['text_setting_info']     = 'Add new settings to database';
 $_['text_collate_info']     = 'Update to the next database collation';
+$_['text_column_info']      = 'Add new columns';
 $_['text_table_info']       = 'Start to add new tables';
 $_['text_version']          = 'Your store database structure have been identified %s.';
 $_['text_update_config']        = 'Agora você pode atualizar os arquivos <b>config.php</b> se ainda não tiverem sido feitos';
