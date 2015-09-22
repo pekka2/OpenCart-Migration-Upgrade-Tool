@@ -9,16 +9,15 @@ $_['text_off']			    = 'FRA';
 $_['text_on']			    = 'TIL';
 $_['text_simulation']	        = 'Simulation er';
 
-// Button
-$_['button_database']               = 'At opgradere databasen';
-$_['button_permission']             = 'Administrativ tilladelse';
-$_['button_save']                   = 'Gem';
-$_['button_logout']                 = 'Logout';
-$_['button_upgrade']                = 'Indledende opgradering';
-
 // Btn
-$_['btn_skip']		= 'Springe';
 $_['btn_continue']	= 'Fortsat';
+$_['btn_database']               = 'At opgradere databasen';
+$_['btn_logout']                 = 'Logout';
+$_['btn_permission']             = 'Administrativ tilladelse';
+$_['btn_save']                   = 'Gem';
+$_['btn_skip']		= 'Springe';
+$_['btn_upgrade']                = 'Indledende opgradering';
+
 
 // Entry
 $_['entry_perms']		= 'Din server skriftlig tilladelse';
