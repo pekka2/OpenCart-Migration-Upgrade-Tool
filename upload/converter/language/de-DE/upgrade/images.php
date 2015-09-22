@@ -12,6 +12,8 @@ $_['text_update_config']        = 'Falls noch nicht bereits erledigt, können je
 $_['entry_imageDir']		= 'Name of  image directory';
 // Header
 $_['header_step_setting']     = 'New Settings is added succesfully';
+// Help
+$_['help_imageDir']		    = 'Image directory the folder name if not <i>image</i>';
 // msg
 $_['msg_change_path']	        = 'Erfolgreich <b>%s</b> Bildpfad(e) angepasst';
 $_['msg_copy_image']    	= 'Erfolgreich <b>%s</b> Bild(er) kopiert';
