@@ -11,6 +11,7 @@ $_['text_simulation']	        = 'La simulation est';
 $_['text_step']		           = 'Etape %s/%s';
 
 // Btn
+$_['btn_back']  	    = 'Back';
 $_['btn_clean']	        = 'Clean settings';
 $_['btn_clean_dbase']   = 'Drop';
 $_['btn_collate']       = 'Update collate';
