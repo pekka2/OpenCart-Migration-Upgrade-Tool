@@ -14,6 +14,7 @@ $_['text_skip_theme']            = 'Temayı Atla';
 $_['text_module_info']      = 'Move modules to the new tables';
 $_['text_setting_info']     = 'Add new settings to database';
 $_['text_collate_info']     = 'Update to the next database collation';
+$_['text_data_info']        = 'Add the data to the new database columns';
 $_['text_column_info']      = 'Add new columns';
 $_['text_table_info']       = 'Start to add new tables';
 $_['text_update_config']        = 'Şimdi de <b>config. php</b> dosyaları güncelleyebilirsiniz eğer bitmemişse';
