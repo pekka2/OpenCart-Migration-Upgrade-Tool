@@ -13,6 +13,8 @@ $_['text_on']			= 'Ligado';
 $_['text_simulation']	        = 'Simulador está';
 $_['text_upgrade_images']       = 'Atualização do caminho das imagens';
 $_['text_upgrade_info']         = 'Info de atualização';
+// entry
+$_['entry_imageDir']	   	 = 'Name of image directory';
 // Header
 $_['header_step_setting']     = 'New Settings is added succesfully';
 // Help
