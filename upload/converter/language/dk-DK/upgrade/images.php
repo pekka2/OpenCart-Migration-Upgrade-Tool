@@ -5,14 +5,12 @@ $_['heading_database']           = 'Opgradering af Database';
 
 // Text
 $_['text_error']		= 'Fejl';
-$_['text_finish']		= 'Færdig';
 $_['text_finish_note']  	= '<b>Note</b>: do not forget to delete the folder <b>converter</b> afterwards!!';
 $_['text_finish_text']	        = 'Congratulation!<br />Your old shop is successfully updated to the latest version. Please use the buttons below to navigate further.';
 $_['text_upgrade_images']       = 'Opgradering af Imagepaths';
 $_['text_upgrade_info']         = 'Opgradere Info';
 // Header
 $_['header_step_setting']     = 'New Settings is added succesfully';
-$_['btn_start']			= 'Starte med opdateringen';
 // Entry
 $_['entry_imageDir']		= 'I mappen billede';
 // Help
