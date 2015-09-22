@@ -12,6 +12,8 @@ $_['text_upgrade_images']       = 'שדרוג Imagepaths';
 $_['text_upgrade_info']         = 'פרטי שדרוג';
 // Header
 $_['header_step_setting']     = 'New Settings is added succesfully';
+// Entry
+$_['entry_adminDir']	        = 'שם ספריית adminfiles';
 // msg
 $_['msg_change_path']    	= 'CHANGE total <b>%s</b> image filepath(s) in database successfully';
 $_['msg_copy_image']	        = 'COPY total <b>%s</b> image(s) files successfully';
