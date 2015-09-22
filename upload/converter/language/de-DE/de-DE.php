@@ -24,6 +24,7 @@ $_['btn_info']          = 'Database information';
 $_['btn_login']	                 = 'Anmelden';
 $_['btn_logout']                 = 'Logout';
 $_['btn_finish']	           	   = 'Fertig';
+$_['btn_module']        = 'Move modules';
 $_['btn_permission']             = 'Administrative permission';
 $_['btn_save']                   = 'Speichern';
 $_['btn_skip']			             = 'Überspringen';
