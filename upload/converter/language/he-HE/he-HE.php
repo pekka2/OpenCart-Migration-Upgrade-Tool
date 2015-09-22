@@ -23,6 +23,7 @@ $_['btn_login']   = 'כניסה';
 $_['btn_images']        = 'Upgrade image paths';
 $_['btn_info']          = 'Database information';
 $_['btn_logout']                 = 'Logout';
+$_['btn_module']        = 'Move modules';
 $_['btn_permission']             = 'הרשאה מנהלית';
 $_['btn_save']                   = 'שמור';
 $_['btn_skip']	              	 = 'דלג';
