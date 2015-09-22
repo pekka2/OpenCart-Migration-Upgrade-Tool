@@ -5,16 +5,12 @@ $_['heading_title']             = 'Mise à niveau de la base de données';
 $_['text_intro_1']		= 'Ce programme s\'adresse aux versions 1.4.7 - 2.0.0.0 d\'OpenCart pour mettre à jour vers la version 2.x';
 $_['text_intro_2']		= 'Le processus de mise à jour suivant est fait en 3 étapes : <ol><li>Vérifie les tables de la base de données et ajoute les tables manquantes, converti les champs requis</li><li>Converti les fichiers des configuration existants (front- &amp; backend)</li><li>Converti les chemins d\'image</li></ol>';
 $_['text_intro_3']		= 'Cette mise à jour peut aussi être effectuée dans un mode <b>simulation</b>.<br />Activer cette option et aucune opération réel n\'est faite.';
-$_['text_step_1_3']		= 'Etape 1/3';
-$_['text_step_2_3']		= 'Etape 2/3';
 $_['text_toggle_help']     	= 'Afficher/Cacher l\'aide';
 $_['text_upgrade_info']         = 'Informations de mise à jour';
 $_['text_update_theme']         = 'Mettre à jour le thème maintenant';
 $_['text_skip_theme']           = 'Passer le thème';
 $_['text_update_config']        = 'Désormais vous pouvez aussi mettre à jour le fichier <b>config.php</b> si ce n\'est pas déjà fait';
 // Entry
-$_['entry_adminDir']	        = 'Nom du répertoire pour les fichiers d\'admin';
-$_['entry_imageDir']		= 'Nom du répertoire d\'images';
 $_['entry_up_1564']		     = 'Upgrade database to version 1.5.6.4';
 $_['entry_up_201_202']		= 'Mise à niveau de la base de données vers la version 2.0.1-2.0.2.0';
 $_['entry_up_2030']		= 'Mettre a niveau vers la version 2.0.3.1';
@@ -23,7 +19,6 @@ $_['entry_up_2100']		     = 'Upgrade database to version 2.1.0.0';
 // Header
 $_['header_step_2']		= 'Base de données mise à jour vers la dernière version avec succès';
 // help
-$_['help_adminDir']		= 'Ajuster le nom du fichier si vous n\'êtes pas admin';
 $_['help_ops']			= 'Afficher les opérations <small>(Affiche toutes les opérations de base de données)</small>';
 $_['help_simulate']		= 'Simuler la conversion <small>(Simulation d\'opérations uniquement)</small>';
 $_['help_usage']		= '<b>Comment utiliser cette outil?</b><ol type="1"><li>Si ce n\'est pas déjà fait, téléchargez le package OpenCart v.2 via <a href="http://www.opencart.com" target="_blank">OpenCart</a></li><li>Décompressez le package en local</li><li>Le script doit être placé dans le sous-dossier <b>converter</b> du dossier de votre magasin (../converter)</li><li>Maintenant vous avez deux (2) options :<ol type="I"><li>Transférez tous les dossiers et fichiers du package OpenCart v.2 <b>vers le magasin installé</b></li><li><b>Créez un nouveau répertoire</b> et copiez tous les dossiers et fichier du package OpenCart v.2 dedans</li></ol></li><li>Si vous avez choisi la deuxième méthode, copiez le dossier <b>image</b> et le fichier <b>config.php</b> de votre ancien magasin</li><li><b>N\'utilisez jamais l\'installer du package OpenCart 2.x!</b></li><li>Définissez vos options ci-dessus et cliquez sur <b>Continuer</b></li><li>Si vous avez fini avec la mise à niveau, n\'oubliez pas de supprimer ce script</li></ol>';
