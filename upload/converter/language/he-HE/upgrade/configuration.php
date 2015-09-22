@@ -14,7 +14,7 @@ $_['text_update_config']        = 'כעת באפשרותך גם לעדכן את 
 // Entry
 $_['entry_adminDir']	        = 'שם ספריית admin files';
 // Header
-$_['header_step_3']		= 'Adjust image paths';
+$_['header_step_images']      = 'Image paths is changed in database succesfullly';
 // help
 $_['help_adminDir']		= 'Adjust the folder name if not admin';
 // msg
