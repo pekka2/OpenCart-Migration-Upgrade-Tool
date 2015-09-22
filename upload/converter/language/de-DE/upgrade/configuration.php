@@ -1,7 +1,7 @@
 <?php
 // Heading
 $_['heading_title']             = 'Edit of Configuration Files';
-$_['heading_images']            = 'Copying Image Files and Upgrade Image paths';
+$_['heading_images']            = 'Rename Image directories and Upgrade Image paths';
 // Text
 $_['text_curr_setting']  	= '(aktuelle Einstellung)';
 $_['text_images_info']          = 'Upgrade of Imagepaths';
