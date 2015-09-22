@@ -17,7 +17,7 @@ $_['text_update_config']        = 'Nu kunt u ook de <b>config. php</b> bestanden
 // Entry
 $_['entry_adminDir']	        = 'De naam van de map voor adminfiles';
 // Header
-$_['header_step_3']		= 'Afbeeldingspaden aanpassen';
+$_['header_step_images']      = 'Image paths is changed in database succesfullly';
 // help
 $_['help_adminDir']		= 'Aanpassen van de mapnaam als niet admin';
 // msg
