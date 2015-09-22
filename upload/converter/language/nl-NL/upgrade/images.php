@@ -3,14 +3,9 @@
 $_['heading_title']             = 'Afbeeldingsbestanden kopiëren en de afbeelding upgradepaden';
 
 // Text
-$_['text_home']                     = 'Home';
 $_['text_error']		= 'Fout';
-$_['text_finish']		= 'Voltooien';
 $_['text_finish_note']  	= '</b>Opmerking:</b> Vergeet niet de map <b>converter</b> te verwijderen!';
 $_['text_finish_text']	        = 'Hoera! < br / > uw oude winkel is bijgewerkt naar de nieuwste versie. Gebruik de knoppen hieronder om te navigeren verder.';
-$_['text_off']			= 'UIT';
-$_['text_on']			= 'AAN';
-$_['text_simulation']	        = 'Simulatie is';
 $_['text_upgrade_images']       = 'Upgrade van Imagepaths';
 $_['text_upgrade_info']         = 'Upgrade Informatie';
 // entry
