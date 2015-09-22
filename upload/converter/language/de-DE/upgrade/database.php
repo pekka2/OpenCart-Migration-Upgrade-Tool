@@ -10,6 +10,7 @@ $_['text_update_config']        = 'Falls noch nicht bereits erledigt, können je
 $_['text_upgrade_info']         = 'Upgrade of Database';
 $_['text_update_theme']         = 'Update theme now';
 $_['text_skip_theme']            = 'Skip theme';
+$_['text_table_info']       = 'Start to add new tables';
 $_['text_upgrade_config']       = 'Upgrade of Configuration';
 $_['text_version']          = 'Your store database structure have been identified %s.';
 // Entry
