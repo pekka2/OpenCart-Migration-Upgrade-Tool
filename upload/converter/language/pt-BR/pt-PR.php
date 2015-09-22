@@ -1,11 +1,11 @@
 <?php
 // Locale
-$_['code']                          = 'pt-BR';
-$_['direction']                     = 'ltr';
+$_['code']               = 'pt-BR';
+$_['direction']           = 'ltr';
 
 // Text
-$_['text_home']                     = 'Home';
-
+$_['text_home']         = 'Home';
+$_['text_step']	     	= 'Passo %s / %s';
 // Btn
 $_['btn_clean']	        = 'Clean settings';
 $_['btn_clean_dbase']   = 'Drop';
