@@ -11,9 +11,7 @@ $_['text_step_3_3']		= 'Schritt 3 / 3';
 $_['text_update_config']        = 'Falls noch nicht bereits erledigt, können jetzt die <b>Konfiguationsdateien</b> aktualisiert werden';
 $_['text_upgrade_info']         = 'Upgrade of Configuration';
 // Entry
-$_['entry_perms']		= 'Schreibrechte Server';
-// Help
-$_['help_perms']		= '(Schreibrechte des Ordners <b>system/logs</b>)';
+$_['entry_adminDir']    	= 'Name des Adminordners';
 // Header
 $_['header_step_3']		= 'Bilderpfade anpassen';
 // Btn
