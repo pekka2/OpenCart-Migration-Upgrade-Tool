@@ -1,13 +1,14 @@
 <?php
 // Locale
-$_['code']                          = 'dk-DK';
-$_['direction']                     = 'ltr';
+$_['code']                  = 'dk-DK';
+$_['direction']             = 'ltr';
 
 // Text
-$_['text_home']                     = 'Hjem';
-$_['text_off']			    = 'FRA';
-$_['text_on']			    = 'TIL';
-$_['text_simulation']	        = 'Simulation er';
+$_['text_home']            = 'Hjem';
+$_['text_off']			       = 'FRA';
+$_['text_on']			         = 'TIL';
+$_['text_simulation']	     = 'Simulation er';
+$_['text_step']		          = 'Trin %s/%s';
 
 // Btn
 $_['btn_clean']	        = 'Clean settings';
