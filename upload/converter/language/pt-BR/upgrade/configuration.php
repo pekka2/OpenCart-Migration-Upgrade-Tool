@@ -8,11 +8,7 @@ $_['text_curr_setting']	        = '(configuração atual)';
 $_['text_images_info']          = 'Atualização do caminho das imagens';
 $_['text_intro_3']		= 'Esta atualização pode ser executada em um modo de <b>simulação</b> também.<br />Habilite esta opção e nenhuma alteração será efetuada.';
 $_['text_intro_step_3']	        = 'Isto irá renomear o diretório <b>image/data</b> e atualizará o caminho das imagens no banco de dados';
-$_['text_off']			= 'Desligado';
-$_['text_on']			= 'Ligado';
 $_['text_upgrade_info']         = 'Atualização da configuração';
-$_['text_simulation']	        = 'Simulador está';
-$_['text_step_3_3']		= 'Passo 3 / 3';
 $_['text_update_config']        = 'Agora você pode atualizar os arquivos <b>config.php</b> se ainda não tiverem sido feitos';
 // Entry
 $_['entry_adminDir']	        = 'O nome do diretório para arquivos do Admin';
