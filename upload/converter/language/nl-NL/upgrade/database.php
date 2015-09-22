@@ -11,6 +11,7 @@ $_['text_upgrade_info']         = 'Upgrade Informatie';
 $_['text_update_theme']         = 'Update thema nu';
 $_['text_version']          = 'Your store database structure have been identified %s.';
 $_['text_skip_theme']            = 'Overslaan thema';
+$_['text_table_info']       = 'Start to add new tables';
 $_['text_update_config']        = 'Nu kunt u ook de <b>config. php</b> bestanden bijwerken indien dat nog niet is gedaan';
 // Entry
 $_['entry_up_1564']		     = 'Upgrade database to version 1.5.6.4';
