@@ -10,6 +10,7 @@ $_['text_on']			    = 'הפעלה';
 $_['text_simulation']	        = 'הדמיה היא';
 
 // Btn
+$_['btn_back']  	    = 'Back';
 $_['btn_clean']	        = 'Clean settings';
 $_['btn_clean_dbase']   = 'Drop';
 $_['btn_collate']       = 'Update collate';
