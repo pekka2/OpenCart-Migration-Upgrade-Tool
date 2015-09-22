@@ -1,11 +1,14 @@
 <?php
 // Locale
-$_['code']                          = 'nl-NL';
-$_['direction']                     = 'ltr';
+$_['code']                   = 'nl-NL';
+$_['direction']             = 'ltr';
 
 // Text
-$_['text_home']                     = 'Home';
-$_['text_step']		= 'Stap %s/%s';
+$_['text_home']            = 'Home';
+$_['text_off']		   	= 'UIT';
+$_['text_on']		    	= 'AAN';
+$_['text_simulation']	     = 'Simulatie is';
+$_['text_step']	       	= 'Stap %s/%s';
 
 // Btn
 $_['btn_clean']	        = 'Clean settings';
@@ -13,7 +16,7 @@ $_['btn_clean_dbase']   = 'Drop';
 $_['btn_collate']       = 'Update collate';
 $_['btn_column']        = 'Add columns';
 $_['btn_config']		= 'Bijwerken van de configuratiebestanden';
-$_['btn_continue']	             = 'Doorgaan';
+$_['btn_continue']	    = 'Doorgaan';
 $_['btn_data']          = 'Add data';
 $_['btn_database']               = 'To Upgrade The Database';
 $_['btn_finish']		= 'Voltooien';
