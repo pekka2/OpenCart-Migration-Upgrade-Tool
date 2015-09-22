@@ -6,16 +6,14 @@ $_['direction']                     = 'ltr';
 // Text
 $_['text_home']                     = 'Ana sayfa';
 
-// Button
-$_['button_database']               = 'Veritabanı Yükseltme';
-$_['button_permission']             = 'Yönetici izinleri';
-$_['button_save']                   = 'Kaydet';
-$_['button_logout']                 = 'Logout';
-$_['button_upgrade']                = 'Güncelleştirmeyi Başlat';
-
 // Btn
-$_['btn_skip']		= 'Atla';
-$_['btn_continue']	= 'Devam';
+$_['btn_continue']	  = 'Devam';
+$_['btn_database']    = 'Veritabanı Yükseltme';
+$_['btn_save']        = 'Kaydet';
+$_['btn_logout']      = 'Logout';
+$_['btn_upgrade']     = 'Güncelleştirmeyi Başlat';
+$_['btn_permission']  = 'Yönetici izinleri';
+$_['btn_skip']	    	= 'Atla';
 
 // Entry
 $_['entry_perms']		= 'Sunucu yazma izinleriniz';
