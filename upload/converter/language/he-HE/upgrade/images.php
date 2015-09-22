@@ -14,6 +14,8 @@ $_['text_upgrade_info']         = 'פרטי שדרוג';
 $_['header_step_setting']     = 'New Settings is added succesfully';
 // Entry
 $_['entry_imageDir']		= 'Name of  image directory';
+// Help
+$_['help_imageDir']		    = 'Image directory the folder name if not <i>image</i>';
 // msg
 $_['msg_change_path']    	= 'CHANGE total <b>%s</b> image filepath(s) in database successfully';
 $_['msg_copy_image']	        = 'COPY total <b>%s</b> image(s) files successfully';
