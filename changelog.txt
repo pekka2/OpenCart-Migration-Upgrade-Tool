@@ -18,7 +18,7 @@ legend
 
 CONVERTER
 ---------
-3.0.0  2015.09.22   ^ Extension scripts structure in converter/model
+3.0.0  2015.09.22   ^ Upgrade scripts structure in converter/model
                     + New features to class library/structure
                     + SQL scripts to directory system/sql
                     + Upgrade cache to directory system/upgrade
