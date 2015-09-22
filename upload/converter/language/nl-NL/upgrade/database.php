@@ -11,6 +11,9 @@ $_['text_upgrade_info']         = 'Upgrade Informatie';
 $_['text_update_theme']         = 'Update thema nu';
 $_['text_version']          = 'Your store database structure have been identified %s.';
 $_['text_skip_theme']            = 'Overslaan thema';
+$_['text_module_info']      = 'Move modules to the new tables';
+$_['text_setting_info']     = 'Add new settings to database';
+$_['text_collate_info']     = 'Update to the next database collation';
 $_['text_table_info']       = 'Start to add new tables';
 $_['text_update_config']        = 'Nu kunt u ook de <b>config. php</b> bestanden bijwerken indien dat nog niet is gedaan';
 // Entry
