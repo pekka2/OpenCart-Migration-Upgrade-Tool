@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']             = 'Edition des fichiers de configuration';
+$_['heading_images']             = 'Copie des fichiers d\'images et mise à niveau des chemins d\'image';
 
 // Text
 $_['text_curr_setting']	        = '(paramètre actuelle)';
