@@ -7,6 +7,10 @@ $_['direction']                     = 'ltr';
 $_['text_home']                     = 'Ana sayfa';
 
 // Btn
+$_['btn_clean']	        = 'Clean settings';
+$_['btn_clean_dbase']   = 'Drop';
+$_['btn_collate']       = 'Update collate';
+$_['btn_column']        = 'Add columns';
 $_['btn_config']		= 'Yapılandırma dosyalarını güncelleştir';
 $_['btn_continue']	  = 'Devam';
 $_['btn_database']    = 'Veritabanı Yükseltme';
