@@ -14,6 +14,8 @@ $_['text_upgrade_info']         = 'Upgrade van de configuratie';
 $_['text_simulation']	        = 'Simulatie is';
 $_['text_step_3_3']		= 'Stap 3/3';
 $_['text_update_config']        = 'Nu kunt u ook de <b>config. php</b> bestanden bijwerken indien dat nog niet is gedaan';
+// Entry
+$_['entry_adminDir']	        = 'De naam van de map voor adminfiles';
 // Header
 $_['header_step_3']		= 'Afbeeldingspaden aanpassen';
 // msg
