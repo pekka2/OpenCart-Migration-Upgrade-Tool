@@ -12,6 +12,7 @@ $_['text_simulation']	        = 'Simulation er';
 // Btn
 $_['btn_continue']	= 'Fortsat';
 $_['btn_database']               = 'At opgradere databasen';
+$_['btn_login']                  = 'Login';
 $_['btn_logout']                 = 'Logout';
 $_['btn_permission']             = 'Administrativ tilladelse';
 $_['btn_save']                   = 'Gem';
