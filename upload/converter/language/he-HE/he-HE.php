@@ -20,6 +20,7 @@ $_['btn_continue']	             = 'המשך';
 $_['btn_data']          = 'Add data';
 $_['btn_database']               = 'לשדרוג מסד הנתונים';
 $_['btn_finish']		= 'סיום';
+$_['btn_drop']          = 'Drop';
 $_['btn_login']   = 'כניסה';
 $_['btn_images']        = 'Upgrade image paths';
 $_['btn_info']          = 'Database information';
