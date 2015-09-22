@@ -5,6 +5,9 @@ $_['direction']                     = 'ltr';
 
 // Text
 $_['text_home']                     = 'Ana sayfa';
+$_['text_off']			= 'KAPALI';
+$_['text_on']			= 'AÇIK';
+$_['text_simulation']	        = 'Simülasyon';
 $_['text_step']		= 'Adım %s/%s';
 // Btn
 $_['btn_clean']	        = 'Clean settings';
