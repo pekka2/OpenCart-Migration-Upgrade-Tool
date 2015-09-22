@@ -33,8 +33,15 @@ $_['btn_skip']	    	= 'Atla';
 $_['btn_start']			= 'Güncelleştirmeyi Başlat';
 $_['btn_upgrade']     = 'Güncelleştirmeyi Başlat';
 
-// Entry
-$_['entry_perms']		= 'Sunucu yazma izinleriniz';
-// Help
-$_['help_perms']		= '(<b>system/logs</b> dizininin yazma izinleri)';
+// Step
+$_['step_start']         = 'Add new tables';
+$_['step_collate']       = 'Database collation';
+$_['step_column']        = 'Add new columns';
+$_['step_data']          = 'Add new data';
+$_['step_module']        = 'Move modules';
+$_['step_setting']       = 'Add new settings';
+$_['step_configuration'] = 'Config.php files';
+$_['step_images']        = 'Change image paths';
+$_['step_clean_module']  = 'Clean settings';
+$_['step_clean_table']   = 'Drop expired structure';
 ?>
