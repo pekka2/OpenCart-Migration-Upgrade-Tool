@@ -1,13 +1,14 @@
 <?php
 // Locale
-$_['code']                          = 'fr-FR';
-$_['direction']                     = 'ltr';
+$_['code']                  = 'fr-FR';
+$_['direction']             = 'ltr';
 
 // Text
-$_['text_home']                     = 'Accueil';
+$_['text_home']              = 'Accueil';
 $_['text_off']			          = 'OFF';
 $_['text_on']			            = 'ON';
 $_['text_simulation']	        = 'La simulation est';
+$_['text_step']		           = 'Etape %s/%s';
 
 // Btn
 $_['btn_clean']	        = 'Clean settings';
