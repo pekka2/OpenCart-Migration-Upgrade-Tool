@@ -51,7 +51,7 @@
 
 		<div class="clr"></div>
 
-      <h1><img src="view/image/user.png" alt="" /> <?php echo $text_configuration_info; ?></h1>
+      <h1><img src="view/image/user.png" alt="" /> <?php echo $heading_title; ?></h1>
 
 		<div class="clr"></div>
 		<div class="block">
