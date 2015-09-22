@@ -3,14 +3,9 @@
 $_['heading_title']             = 'Copiando arquivos de imagem e atualizar os caminhos das imagens';
 
 // Text
-$_['text_home']                     = 'Home';
 $_['text_error']		= 'Erro';
-$_['text_finish']		= 'Finalizar';
 $_['text_finish_note']  	= '<b>Aviso</b>: não se esqueça de apagar a pasta <b>converter</b> depois!';
 $_['text_finish_text']	        = 'Parabéns! <br /> Sua loja antiga foi atualizada com êxito para a versão mais recente. Por favor, use os botões abaixo para navegar mais.';
-$_['text_off']			= 'Desligado';
-$_['text_on']			= 'Ligado';
-$_['text_simulation']	        = 'Simulador está';
 $_['text_upgrade_images']       = 'Atualização do caminho das imagens';
 $_['text_upgrade_info']         = 'Info de atualização';
 // entry
