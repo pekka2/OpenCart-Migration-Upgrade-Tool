@@ -17,7 +17,7 @@ $_['text_update_config']        = 'Agora você pode atualizar os arquivos <b>con
 // Entry
 $_['entry_adminDir']	        = 'O nome do diretório para arquivos do Admin';
 // Header
-$_['header_step_3']		= 'Ajustar os caminhos da imagem';
+$_['header_step_images']      = 'Image paths is changed in database succesfullly';
 // help
 $_['help_adminDir']		= 'Ajustar o nome da pasta, se não for admin';
 // msg
