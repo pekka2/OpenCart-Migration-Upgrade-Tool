@@ -18,6 +18,8 @@ $_['text_update_config']        = 'Nu kunt u ook de <b>config. php</b> bestanden
 $_['entry_adminDir']	        = 'De naam van de map voor adminfiles';
 // Header
 $_['header_step_3']		= 'Afbeeldingspaden aanpassen';
+// help
+$_['help_adminDir']		= 'Aanpassen van de mapnaam als niet admin';
 // msg
 $_['msg_config_added']  	= 'Instellingen <b>%s</b> "succesvol toegevoegd aan <b>%s</b>';
 $_['msg_config_constant']	= 'Instellingen <b>%s</b> "succesvol toegevoegd aan <b>%s</b>!';
