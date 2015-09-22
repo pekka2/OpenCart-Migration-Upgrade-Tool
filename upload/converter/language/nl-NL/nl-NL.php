@@ -6,16 +6,14 @@ $_['direction']                     = 'ltr';
 // Text
 $_['text_home']                     = 'Home';
 
-// Button
-$_['button_database']               = 'To Upgrade The Database';
-$_['button_permission']             = 'Administrator rechten';
-$_['button_save']                   = 'Opslaan';
-$_['button_logout']                 = 'Logout';
-$_['button_upgrade']                = 'Start de update';
-
 // Btn
-$_['btn_skip']		= 'Overslaan';
-$_['btn_continue']	= 'Doorgaan';
+$_['btn_continue']	             = 'Doorgaan';
+$_['btn_database']               = 'To Upgrade The Database';
+$_['btn_logout']                 = 'Logout';
+$_['btn_permission']             = 'Administrator rechten';
+$_['btn_save']                   = 'Opslaan';
+$_['btn_skip']	                 = 'Overslaan';
+$_['btn_upgrade']                = 'Start de update';
 
 // Entry
 $_['entry_perms']		= 'Server schrijfrechten';
