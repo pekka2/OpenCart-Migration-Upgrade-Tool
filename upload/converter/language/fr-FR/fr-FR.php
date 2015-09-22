@@ -10,6 +10,10 @@ $_['text_on']			            = 'ON';
 $_['text_simulation']	        = 'La simulation est';
 
 // Btn
+$_['btn_clean']	        = 'Clean settings';
+$_['btn_clean_dbase']   = 'Drop';
+$_['btn_collate']       = 'Update collate';
+$_['btn_column']        = 'Add columns';
 $_['btn_config']	           	= 'Mettre à jour les fichiers de config';
 $_['btn_continue']	             = 'Continuer';
 $_['btn_database']               = 'Pour mettre à niveau la base de données';
