@@ -20,6 +20,7 @@ $_['btn_config']	           	= 'Mettre à jour les fichiers de config';
 $_['btn_continue']	             = 'Continuer';
 $_['btn_data']          = 'Add data';
 $_['btn_database']               = 'Pour mettre à niveau la base de données';
+$_['btn_drop']          = 'Drop';
 $_['btn_finish']	           	= 'Finition';
 $_['btn_images']        = 'Upgrade image paths';
 $_['btn_info']          = 'Database information';
