@@ -34,8 +34,15 @@ $_['btn_start']			= 'Comece com a atualização';
 $_['btn_skip']		               = 'Ignorar';
 $_['btn_upgrade']                = 'Iniciar atualização';
 
-// Entry
-$_['entry_perms']		= 'Sua permissão de escrita no servidor';
-// Help
-$_['help_perms']		= '(permissão de escrita do diretório <b>system/logs</b>)';
+// Step
+$_['step_start']         = 'Add new tables';
+$_['step_collate']       = 'Database collation';
+$_['step_column']        = 'Add new columns';
+$_['step_data']          = 'Add new data';
+$_['step_module']        = 'Move modules';
+$_['step_setting']       = 'Add new settings';
+$_['step_configuration'] = 'Config.php files';
+$_['step_images']        = 'Change image paths';
+$_['step_clean_module']  = 'Clean settings';
+$_['step_clean_table']   = 'Drop expired structure';
 ?>
