@@ -16,6 +16,7 @@ $_['btn_collate']       = 'Update collate';
 $_['btn_column']        = 'Add columns';
 $_['btn_config']		             = 'עדכן קבצי תצורה';
 $_['btn_continue']	             = 'המשך';
+$_['btn_data']          = 'Add data';
 $_['btn_database']               = 'לשדרוג מסד הנתונים';
 $_['btn_finish']		= 'סיום';
 $_['btn_login']   = 'כניסה';
