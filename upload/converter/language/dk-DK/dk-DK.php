@@ -13,6 +13,7 @@ $_['text_simulation']	        = 'Simulation er';
 $_['btn_config']		= 'Opdater config filer';
 $_['btn_continue']	= 'Fortsat';
 $_['btn_database']               = 'At opgradere databasen';
+$_['btn_finish']		           = 'Færdig';
 $_['btn_login']                  = 'Login';
 $_['btn_logout']                 = 'Logout';
 $_['btn_permission']             = 'Administrativ tilladelse';
