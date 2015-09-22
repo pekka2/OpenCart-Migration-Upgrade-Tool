@@ -21,6 +21,8 @@ $_['entry_up_201_202']		= 'Mise à niveau de la base de données vers la version
 $_['entry_up_2030']		= 'Mettre a niveau vers la version 2.0.3.1';
 $_['entry_migration_module'] = 'Move modules again (truncate first tables `layout_module` ja `module`)';
 $_['entry_up_2100']		     = 'Upgrade database to version 2.1.0.0';
+// header
+$_['header_step_1']          = 'The to database has been added to the new tables successfully';
 // help
 $_['help_ops']			= 'Afficher les opérations <small>(Affiche toutes les opérations de base de données)</small>';
 $_['help_simulate']		= 'Simuler la conversion <small>(Simulation d\'opérations uniquement)</small>';
