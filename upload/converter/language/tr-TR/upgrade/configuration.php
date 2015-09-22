@@ -14,6 +14,8 @@ $_['text_upgrade_info']         = 'Yapılandırma Yükseltme';
 $_['text_simulation']	        = 'Simülasyon';
 $_['text_step_3_3']		= 'Adım 3/3';
 $_['text_update_config']        = 'Şimdi de <b>config. php</b> dosyaları güncelleyebilirsiniz eğer bitmemişse';
+// Entry
+$_['entry_adminDir']	        = 'Yönetim dosyaları için dizin adı';
 // Header
 $_['header_step_3']		= 'Resim yollarını ayarlama';
 // msg
