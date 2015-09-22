@@ -11,6 +11,8 @@ $_['text_intro_step_3']	        = 'This will rename <b>image/data</b> directorie
 $_['text_upgrade_info']         = 'שדרוג תצורה';
 $_['text_step_3_3']		= 'שלב 3/3';
 $_['text_update_config']        = 'כעת באפשרותך גם לעדכן את הקבצים <b>config. php</b> אם טרם עשית זאת';
+// Entry
+$_['entry_adminDir']	        = 'שם ספריית admin files';
 // Header
 $_['header_step_3']		= 'Adjust image paths';
 // msg
