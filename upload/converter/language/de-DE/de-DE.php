@@ -15,6 +15,7 @@ $_['btn_config']		             = 'Konfigurationsdateien aktualisieren';
 $_['btn_continue']	             = 'Weiter';
 $_['btn_database']               = 'To Upgrade Database';
 $_['btn_logout']                 = 'Logout';
+$_['btn_finish']	           	   = 'Fertig';
 $_['btn_permission']             = 'Administrative permission';
 $_['btn_save']                   = 'Speichern';
 $_['btn_skip']			             = 'Überspringen';
