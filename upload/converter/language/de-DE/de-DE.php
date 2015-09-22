@@ -10,6 +10,7 @@ $_['text_on']			= 'AN';
 $_['text_simulation']	        = 'Simulation ist';
 
 // Btn
+$_['btn_cancel']		             = 'Abbrechen';
 $_['btn_config']		             = 'Konfigurationsdateien aktualisieren';
 $_['btn_continue']	             = 'Weiter';
 $_['btn_database']               = 'To Upgrade Database';
