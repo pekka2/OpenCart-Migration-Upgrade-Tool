@@ -16,6 +16,7 @@ $_['btn_collate']       = 'Update collate';
 $_['btn_column']        = 'Add columns';
 $_['btn_config']	           	= 'Mettre à jour les fichiers de config';
 $_['btn_continue']	             = 'Continuer';
+$_['btn_data']          = 'Add data';
 $_['btn_database']               = 'Pour mettre à niveau la base de données';
 $_['btn_finish']	           	= 'Finition';
 $_['btn_login']                 = 'Se connecter';
