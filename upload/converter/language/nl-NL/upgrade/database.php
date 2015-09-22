@@ -31,7 +31,8 @@ $_['entry_up_2100']		     = 'Upgrade database to version 2.1.0.0';
 // Header
 $_['header_step_2']		= 'Database is succesvol bijgewerkt naar de nieuwste versie';
 // help
-$_['help_adminDir']		= 'Aanpassen van de mapnaam als niet admin';$_['help_ops']			= 'Weergeven operaties <small>(weergeven alle databasebewerkingen)</small>';
+$_['help_adminDir']		= 'Aanpassen van de mapnaam als niet admin';
+$_['help_ops']			= 'Weergeven operaties <small>(weergeven alle databasebewerkingen)</small>';
 $_['help_simulate']		= 'Simuleren omzetten <small>(simuleren operaties alleen)</small>';
 $_['help_usage']		= '<b>How to use this tool?</b><ol type="1"><li>If not already done, download the OpenCart v.2 package from <a href="http://www.opencart.com" target="_blank">OpenCart</a></li><li>Unzip that package locally</li><li>This script has to be placed in the subfolder <b>converter</b> folder of your shopinstallation (../converter))</li><li>Now you have two (2) options:<ol type="I"><li>Transfer all folders and files from the OpenCart v.2 package <b>into the installed shop</b></li><li><b>Create a new directory</b> and copy all folders and files from the OpenCart v.2 package into</li></ol></li><li>If you have chosen method II copy the folder <b>image</b> and the <b>2 config.php</b> from the old shop</li><li><b>Never use the installer from the OpenCart 2.x package!</b></li><li>Set your options above and click on <b>Continue</b></li><li>If you are finished with this upgrade, do not to forget to delete this script</li></ol>';
 // Msg
