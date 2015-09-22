@@ -30,6 +30,7 @@ $_['btn_module']        = 'Move modules';
 $_['btn_permission']             = 'Permissão administrativa';
 $_['btn_preview']	    = 'Continue to preview status';
 $_['btn_save']                   = 'Salvar';
+$_['btn_setting']       = 'Add settings';
 $_['btn_start']			= 'Comece com a atualização';
 $_['btn_skip']		               = 'Ignorar';
 $_['btn_upgrade']                = 'Iniciar atualização';
