@@ -10,6 +10,10 @@ $_['text_on']			    = 'הפעלה';
 $_['text_simulation']	        = 'הדמיה היא';
 
 // Btn
+$_['btn_clean']	        = 'Clean settings';
+$_['btn_clean_dbase']   = 'Drop';
+$_['btn_collate']       = 'Update collate';
+$_['btn_column']        = 'Add columns';
 $_['btn_config']		             = 'עדכן קבצי תצורה';
 $_['btn_continue']	             = 'המשך';
 $_['btn_database']               = 'לשדרוג מסד הנתונים';
