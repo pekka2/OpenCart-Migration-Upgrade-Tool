@@ -10,6 +10,7 @@ $_['text_home']                     = 'Ana sayfa';
 $_['btn_config']		= 'Yapılandırma dosyalarını güncelleştir';
 $_['btn_continue']	  = 'Devam';
 $_['btn_database']    = 'Veritabanı Yükseltme';
+$_['btn_login']   = 'Oturum Açma';
 $_['btn_logout']      = 'Logout';
 $_['btn_permission']  = 'Yönetici izinleri';
 $_['btn_save']        = 'Kaydet';
