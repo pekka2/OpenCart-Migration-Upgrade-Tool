@@ -18,8 +18,6 @@ $_['entry_up_201_202']		= 'Veritabanını 2.0.1 - 2.0.2.0 sürümüne yükselt';
 $_['entry_up_2030']		= 'Veritabanını 2.0.3.1 sürümüne yükselt';
 $_['entry_migration_module'] = 'Move modules again (truncate first tables `layout_module` ja `module`)';
 $_['entry_up_2100']		     = 'Upgrade database to version 2.1.0.0';
-// Header
-$_['header_step_2']		= 'Veritabanı başarıyla en son sürümüne güncellendi';
 // help
 $_['help_ops']			= 'İşlemleri Göster <small>(tüm veritabanı işlemleri görüntüleme)</small>';
 $_['help_simulate']		= 'Simülasyon Dönüştürme <small>(yalnızca simülasyon işlemler)</small>';
