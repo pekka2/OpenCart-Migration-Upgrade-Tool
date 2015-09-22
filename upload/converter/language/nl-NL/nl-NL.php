@@ -7,6 +7,10 @@ $_['direction']                     = 'ltr';
 $_['text_home']                     = 'Home';
 
 // Btn
+$_['btn_clean']	        = 'Clean settings';
+$_['btn_clean_dbase']   = 'Drop';
+$_['btn_collate']       = 'Update collate';
+$_['btn_column']        = 'Add columns';
 $_['btn_config']		= 'Bijwerken van de configuratiebestanden';
 $_['btn_continue']	             = 'Doorgaan';
 $_['btn_database']               = 'To Upgrade The Database';
