@@ -13,6 +13,7 @@ $_['text_simulation']	        = 'La simulation est';
 $_['btn_config']	           	= 'Mettre à jour les fichiers de config';
 $_['btn_continue']	             = 'Continuer';
 $_['btn_database']               = 'Pour mettre à niveau la base de données';
+$_['btn_finish']	           	= 'Finition';
 $_['btn_login']                 = 'Se connecter';
 $_['btn_logout']                 = 'Logout';
 $_['btn_permission']             = 'Autorisation d\'administration';
