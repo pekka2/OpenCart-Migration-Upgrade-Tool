@@ -10,12 +10,14 @@ $_['text_on']			= 'AN';
 $_['text_simulation']	        = 'Simulation ist';
 
 // Btn
-$_['btn_continue']	= 'Weiter';
+$_['btn_config']		             = 'Konfigurationsdateien aktualisieren';
+$_['btn_continue']	             = 'Weiter';
 $_['btn_database']               = 'To Upgrade Database';
 $_['btn_logout']                 = 'Logout';
 $_['btn_permission']             = 'Administrative permission';
 $_['btn_save']                   = 'Speichern';
-$_['btn_skip']		= 'Überspringen';
+$_['btn_skip']			             = 'Überspringen';
+$_['btn_start']			             = 'Starte mit Aktualisierung';
 $_['btn_upgrade']                = 'Initial Upgrade';
 
 
