@@ -9,16 +9,15 @@ $_['text_off']			    = 'כיבוי';
 $_['text_on']			    = 'הפעלה';
 $_['text_simulation']	        = 'הדמיה היא';
 
-// Button
-$_['button_database']               = 'לשדרוג מסד הנתונים';
-$_['button_permission']             = 'הרשאה מנהלית';
-$_['button_save']                   = 'שמור';
-$_['button_logout']                 = 'Logout';
-$_['button_upgrade']                = 'שדרוג ראשוני';
-
 // Btn
-$_['btn_skip']		= 'דלג';
-$_['btn_continue']	= 'המשך';
+$_['btn_continue']	             = 'המשך';
+$_['btn_database']               = 'לשדרוג מסד הנתונים'
+$_['btn_logout']                 = 'Logout';;
+$_['btn_permission']             = 'הרשאה מנהלית';
+$_['btn_save']                   = 'שמור';
+$_['btn_skip']	              	 = 'דלג';
+$_['btn_upgrade']                = 'שדרוג ראשוני';
+
 
 // Entry
 $_['entry_perms']		= 'Your server writing permission';
