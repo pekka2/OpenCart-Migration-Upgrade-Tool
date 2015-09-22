@@ -13,6 +13,7 @@ $_['text_simulation']	        = 'הדמיה היא';
 $_['btn_config']		             = 'עדכן קבצי תצורה';
 $_['btn_continue']	             = 'המשך';
 $_['btn_database']               = 'לשדרוג מסד הנתונים';
+$_['btn_finish']		= 'סיום';
 $_['btn_login']   = 'כניסה';
 $_['btn_logout']                 = 'Logout';
 $_['btn_permission']             = 'הרשאה מנהלית';
