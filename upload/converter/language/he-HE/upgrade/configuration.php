@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']             = 'עריכת קבצי תצורה';
+$_['heading_images']             = 'העתקת קבצי תמונה ושידרוג נתיבי תמונה';
 
 // Text
 $_['text_curr_setting']	        = '(הגדרה נוכחית)';
