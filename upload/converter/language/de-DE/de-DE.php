@@ -1,13 +1,14 @@
 <?php
 // Locale
-$_['code']                          = 'de-DE';
-$_['direction']                     = 'ltr';
+$_['code']                    = 'de-DE';
+$_['direction']               = 'ltr';
 
 // Text
-$_['text_home']                     = 'Home';
-$_['text_off']			= 'AUS';
-$_['text_on']			= 'AN';
+$_['text_home']               = 'Home';
+$_['text_off']			          = 'AUS';
+$_['text_on']		       	      = 'AN';
 $_['text_simulation']	        = 'Simulation ist';
+$_['text_step']	          	  = 'Schritt %s / %s';
 
 // Btn
 $_['btn_clean']	        = 'Clean settings';
