@@ -19,6 +19,7 @@ $_['btn_config']		= 'Yapılandırma dosyalarını güncelleştir';
 $_['btn_continue']	  = 'Devam';
 $_['btn_data']          = 'Add data';
 $_['btn_database']    = 'Veritabanı Yükseltme';
+$_['btn_drop']          = 'Drop';
 $_['btn_finish']		= 'Bitiş';
 $_['btn_login']   = 'Oturum Açma';
 $_['btn_images']        = 'Upgrade image paths';
