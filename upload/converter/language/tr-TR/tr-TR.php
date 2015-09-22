@@ -5,7 +5,7 @@ $_['direction']                     = 'ltr';
 
 // Text
 $_['text_home']                     = 'Ana sayfa';
-
+$_['text_step']		= 'Adım %s/%s';
 // Btn
 $_['btn_clean']	        = 'Clean settings';
 $_['btn_clean_dbase']   = 'Drop';
