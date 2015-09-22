@@ -27,6 +27,7 @@ $_['btn_info']          = 'Database information';
 $_['btn_logout']      = 'Logout';
 $_['btn_module']        = 'Move modules';
 $_['btn_permission']  = 'Yönetici izinleri';
+$_['btn_preview']	    = 'Continue to preview status';
 $_['btn_save']        = 'Kaydet';
 $_['btn_skip']	    	= 'Atla';
 $_['btn_start']			= 'Güncelleştirmeyi Başlat';
