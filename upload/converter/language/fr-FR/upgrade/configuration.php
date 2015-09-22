@@ -11,6 +11,8 @@ $_['text_intro_step_3']	        = 'Cela va renommer les répertoires <b>images/d
 $_['text_upgrade_info']         = 'Mise à niveau de la configuration';
 $_['text_step_3_3']		= 'Etape 3/3';
 $_['text_update_config']        = 'Désormais vous pouvez aussi mettre à jour le fichier <b>config.php</b> si ce n\'est pas déjà fait';
+// Entry
+$_['entry_adminDir']	        = 'Nom du répertoire pour les fichiers d\'admin';
 // Header
 $_['header_step_3']		= 'Ajuster les chemins d\'image';
 // msg
