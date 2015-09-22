@@ -16,6 +16,7 @@ $_['btn_collate']       = 'Update collate';
 $_['btn_column']        = 'Add columns';
 $_['btn_config']		= 'Opdater config filer';
 $_['btn_continue']	= 'Fortsat';
+$_['btn_data']          = 'Add data';
 $_['btn_database']               = 'At opgradere databasen';
 $_['btn_finish']		           = 'Færdig';
 $_['btn_login']                  = 'Login';
