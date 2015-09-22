@@ -3,14 +3,9 @@
 $_['heading_title']             = 'Resim dosyaları kopyalanıyor ve resim yolları yükseltiliyor';
 
 // Text
-$_['text_home']                     = 'Ana sayfa';
 $_['text_error']		= 'Hata';
-$_['text_finish']		= 'Bitiş';
 $_['text_finish_note']  	= '<b>Not</b>: Daha sonra <b>converter</b> klasörünü silmeyin unutmayın!!';
 $_['text_finish_text']	        = 'Tebrikler! <br/> Eski mağazanız başarıyla en son sürüme güncelleştirildi. Aşağıdaki butonları sonrası için kullanın.';
-$_['text_off']			= 'KAPALI';
-$_['text_on']			= 'AÇIK';
-$_['text_simulation']	        = 'Simülasyon';
 $_['text_upgrade_images']       = 'Resim Yollarını Yükseltme';
 $_['text_upgrade_info']         = 'Yükseltme Bilgisi';
 // entry
