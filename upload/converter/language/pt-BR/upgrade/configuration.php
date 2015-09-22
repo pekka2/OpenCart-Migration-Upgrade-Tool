@@ -18,6 +18,8 @@ $_['text_update_config']        = 'Agora você pode atualizar os arquivos <b>con
 $_['entry_adminDir']	        = 'O nome do diretório para arquivos do Admin';
 // Header
 $_['header_step_3']		= 'Ajustar os caminhos da imagem';
+// help
+$_['help_adminDir']		= 'Ajustar o nome da pasta, se não for admin';
 // msg
 $_['msg_config_added']  	= 'Configuração <b>%s</b> adicionada com sucesso à <b>%s</b>';
 $_['msg_config_constant']	= 'Configuração <b>%s</b> adicionada com sucesso à <b>%s</b>!';
