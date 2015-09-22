@@ -7,7 +7,6 @@ $_['text_curr_setting']  	= '(aktuelle Einstellung)';
 $_['text_images_info']          = 'Upgrade of Imagepaths';
 $_['text_intro_3']		= 'Der Aktualisierungsprozess kann simuliert werden.<br />Dazu unterstehende Option aktivieren, es werden dann keine wirklichen Operationen durchgeführt';
 $_['text_intro_step_3']	        = 'Aktualisiert die Ordner in <b>image/data</b> sowie die Datenbankeinträge dazu';
-$_['text_step_3_3']		= 'Schritt 3 / 3';
 $_['text_update_config']        = 'Falls noch nicht bereits erledigt, können jetzt die <b>Konfiguationsdateien</b> aktualisiert werden';
 $_['text_upgrade_info']         = 'Upgrade of Configuration';
 // Entry
