@@ -4,7 +4,6 @@ $_['heading_title']             = 'Copying Image Files and Upgrade Image paths';
 
 // Text
 $_['text_error']		= 'Fehler';
-$_['text_finish']		= 'Fertig';
 $_['text_finish_text']	        = 'Glückwunsch!<br />Der alte Shop wurde erfolgreich auf die neueste Version aktualisiert. Bitte untenstehende Buttons zum Fortfahren verwenden.';
 $_['text_finish_note']   	= '<b>Hinweis</b>: nicht vergessen den Ordner <b>converter</b> zu löschen!';
 $_['text_update_config']        = 'Falls noch nicht bereits erledigt, können jetzt die <b>Konfiguationsdateien</b> aktualisiert werden';
