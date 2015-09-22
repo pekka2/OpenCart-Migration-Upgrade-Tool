@@ -30,6 +30,7 @@ $_['btn_module']        = 'Move modules';
 $_['btn_permission']             = 'Administrativ tilladelse';
 $_['btn_preview']	    = 'Continue to preview status';
 $_['btn_save']                   = 'Gem';
+$_['btn_setting']       = 'Add settings';
 $_['btn_skip']		= 'Springe';
 $_['btn_start']			= 'Starte med opdateringen';
 $_['btn_upgrade']          = 'Indledende opgradering';
