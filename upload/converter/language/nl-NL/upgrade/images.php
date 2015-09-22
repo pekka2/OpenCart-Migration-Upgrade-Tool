@@ -15,6 +15,8 @@ $_['text_upgrade_images']       = 'Upgrade van Imagepaths';
 $_['text_upgrade_info']         = 'Upgrade Informatie';
 // Header
 $_['header_step_setting']     = 'New Settings is added succesfully';
+// Help
+$_['help_imageDir']		    = 'Image directory the folder name if not <i>image</i>';
 // msg
 $_['msg_change_path']    	= 'Totale <b>%s</b> afbeelding filepath (s) in de database met succes wijzigen';
 $_['msg_copy_image']	        = 'Totale <b>%s</b>-afbeeldingsbestanden (s) met succes kopiëren';
