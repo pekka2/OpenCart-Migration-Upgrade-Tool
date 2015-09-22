@@ -13,6 +13,7 @@ $_['btn_collate']       = 'Update collate';
 $_['btn_column']        = 'Add columns';
 $_['btn_config']		= 'Yapılandırma dosyalarını güncelleştir';
 $_['btn_continue']	  = 'Devam';
+$_['btn_data']          = 'Add data';
 $_['btn_database']    = 'Veritabanı Yükseltme';
 $_['btn_finish']		= 'Bitiş';
 $_['btn_login']   = 'Oturum Açma';
