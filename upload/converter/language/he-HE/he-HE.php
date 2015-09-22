@@ -12,7 +12,9 @@ $_['text_simulation']	        = 'הדמיה היא';
 // Btn
 $_['btn_config']		             = 'עדכן קבצי תצורה';
 $_['btn_continue']	             = 'המשך';
-$_['button_login']   = 'כניסה';
+$_['btn_database']               = 'לשדרוג מסד הנתונים';
+$_['btn_login']   = 'כניסה';
+$_['btn_logout']                 = 'Logout';
 $_['btn_permission']             = 'הרשאה מנהלית';
 $_['btn_save']                   = 'שמור';
 $_['btn_skip']	              	 = 'דלג';
