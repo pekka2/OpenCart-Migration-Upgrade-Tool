@@ -10,6 +10,7 @@ $_['text_home']                     = 'Home';
 $_['btn_config']		= 'Bijwerken van de configuratiebestanden';
 $_['btn_continue']	             = 'Doorgaan';
 $_['btn_database']               = 'To Upgrade The Database';
+$_['btn_login']   = 'Login';
 $_['btn_logout']                 = 'Logout';
 $_['btn_permission']             = 'Administrator rechten';
 $_['btn_save']                   = 'Opslaan';
