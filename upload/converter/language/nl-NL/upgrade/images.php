@@ -13,6 +13,8 @@ $_['text_on']			= 'AAN';
 $_['text_simulation']	        = 'Simulatie is';
 $_['text_upgrade_images']       = 'Upgrade van Imagepaths';
 $_['text_upgrade_info']         = 'Upgrade Informatie';
+// entry
+$_['entry_imageDir']	   	 = 'Name of image directory';
 // Header
 $_['header_step_setting']     = 'New Settings is added succesfully';
 // Help
