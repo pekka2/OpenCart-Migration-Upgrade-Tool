@@ -10,6 +10,7 @@ $_['text_upgrade_info']         = 'Opgradere Info';
 $_['text_update_theme']         = 'Opdater tema nu';
 $_['text_skip_theme']           = 'Spring tema';
 $_['text_update_config']        = 'Now you can also update the <b>config.php</b> files if not already done';
+$_['text_version']          = 'Your store database structure have been identified %s.';
 // Entry
 $_['entry_up_1564']		     = 'Upgrade database to version 1.5.6.4';
 $_['entry_up_201_202']		= 'Upgrade database to version 2.0.1 - 2.0.2.0';
