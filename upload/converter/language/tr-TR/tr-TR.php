@@ -7,13 +7,15 @@ $_['direction']                     = 'ltr';
 $_['text_home']                     = 'Ana sayfa';
 
 // Btn
+$_['btn_config']		= 'Yapılandırma dosyalarını güncelleştir';
 $_['btn_continue']	  = 'Devam';
 $_['btn_database']    = 'Veritabanı Yükseltme';
-$_['btn_save']        = 'Kaydet';
 $_['btn_logout']      = 'Logout';
-$_['btn_upgrade']     = 'Güncelleştirmeyi Başlat';
 $_['btn_permission']  = 'Yönetici izinleri';
+$_['btn_save']        = 'Kaydet';
 $_['btn_skip']	    	= 'Atla';
+$_['btn_start']			= 'Güncelleştirmeyi Başlat';
+$_['btn_upgrade']     = 'Güncelleştirmeyi Başlat';
 
 // Entry
 $_['entry_perms']		= 'Sunucu yazma izinleriniz';
