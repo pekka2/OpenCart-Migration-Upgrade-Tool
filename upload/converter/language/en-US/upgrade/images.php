@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']         = 'Copying Image Files and Upgrade Image paths';
+$_['heading_title']          = 'Rename Image directories and Upgrade Image paths';
 $_['heading_config']        = 'Edit config.php files';
 $_['heading_database']         = 'Upgrade of Database';
 // entry
