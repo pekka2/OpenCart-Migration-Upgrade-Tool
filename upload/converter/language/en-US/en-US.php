@@ -20,6 +20,7 @@ $_['btn_continue']	    = 'Continue';
 $_['btn_config']        = 'Update config files';
 $_['btn_data']          = 'Add data';
 $_['btn_database']      = 'To Upgrade The Database';
+$_['btn_drop']          = 'Drop';
 $_['btn_images']        = 'Upgrade image paths';
 $_['btn_info']          = 'Database information';
 $_['btn_login']         = 'Login';
