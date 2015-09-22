@@ -5,7 +5,6 @@ $_['heading_database']             = 'שדרוג מסד נתונים';
 
 // Text
 $_['text_error']		= 'שגיאה';
-$_['text_finish']		= 'סיום';
 $_['text_finish_note']  	= '</b>הערה:<b> אל תשכח למחוק את התיקיה <b>converter</b> לאחר מכן!';
 $_['text_finish_text']	        = 'Congratulation!<br />Your old shop is successfully updated to the latest version. Please use the buttons below to navigate further.';
 $_['text_upgrade_images']       = 'שדרוג Imagepaths';
