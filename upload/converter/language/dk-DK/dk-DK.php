@@ -23,6 +23,7 @@ $_['btn_images']        = 'Upgrade image paths';
 $_['btn_info']          = 'Database information';
 $_['btn_login']                  = 'Login';
 $_['btn_logout']                 = 'Logout';
+$_['btn_module']        = 'Move modules';
 $_['btn_permission']             = 'Administrativ tilladelse';
 $_['btn_save']                   = 'Gem';
 $_['btn_skip']		= 'Springe';
