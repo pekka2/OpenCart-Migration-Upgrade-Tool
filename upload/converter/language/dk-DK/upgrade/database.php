@@ -9,6 +9,7 @@ $_['text_toggle_help']     	= 'Vise/skjule hjælp';
 $_['text_upgrade_info']         = 'Opgradere Info';
 $_['text_update_theme']         = 'Opdater tema nu';
 $_['text_skip_theme']           = 'Spring tema';
+$_['text_table_info']       = 'Start to add new tables';
 $_['text_update_config']        = 'Now you can also update the <b>config.php</b> files if not already done';
 $_['text_version']          = 'Your store database structure have been identified %s.';
 // Entry
