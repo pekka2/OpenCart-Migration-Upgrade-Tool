@@ -15,6 +15,8 @@ $_['text_upgrade_images']       = 'Resim Yollarını Yükseltme';
 $_['text_upgrade_info']         = 'Yükseltme Bilgisi';
 // Header
 $_['header_step_setting']     = 'New Settings is added succesfully';
+// Help
+$_['help_imageDir']		    = 'Image directory the folder name if not <i>image</i>';
 // msg
 $_['msg_change_path']    	= 'Toplam <b>%s</b> resim dosya yolu veritabanında başarıyla değiştirildi';
 $_['msg_copy_image']	        = 'Toplam <b>%s</b> resim dosyası başarıyla KOPYALANDI';
