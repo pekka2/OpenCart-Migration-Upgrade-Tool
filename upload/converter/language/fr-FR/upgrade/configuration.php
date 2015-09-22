@@ -9,7 +9,6 @@ $_['text_images_info']          = 'Mise à jour des chemins d\'image';
 $_['text_intro_3']		= 'Cette mise à jour peut aussi être effectuée dans un mode <b>simulation</b>.<br />Activer cette option et aucune opération réel n\'est faite.';
 $_['text_intro_step_3']	        = 'Cela va renommer les répertoires <b>images/data</b> et mettre à jour les chemins d\'image dans la base de données';
 $_['text_upgrade_info']         = 'Mise à niveau de la configuration';
-$_['text_step_3_3']		= 'Etape 3/3';
 $_['text_update_config']        = 'Désormais vous pouvez aussi mettre à jour le fichier <b>config.php</b> si ce n\'est pas déjà fait';
 // Entry
 $_['entry_adminDir']	        = 'Nom du répertoire pour les fichiers d\'admin';
