@@ -16,10 +16,6 @@ $_['entry_adminDir']    	= 'Name des Adminordners';
 $_['header_step_3']		= 'Bilderpfade anpassen';
 // Help
 $_['help_adminDir']		= 'Nur anpassen wenn nicht admin lautet';
-// Btn
-$_['btn_skip']			= 'Überspringen';
-$_['btn_cancel']		= 'Abbrechen';
-$_['btn_continue']		= 'Weiter';
 // Msg
 $_['msg_config_added']  	= 'Einstellung <b>%s</b> erfolgreich zu <b>%s</b> hinzugefügt';
 $_['msg_config_constant']	= 'Setting <b>%s</b>  successfully added to <b>%s</b>!';
