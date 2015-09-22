@@ -13,7 +13,7 @@ $_['text_upgrade_info']         = 'Upgrade of Configuration';
 // Entry
 $_['entry_adminDir']    	= 'Name des Adminordners';
 // Header
-$_['header_step_3']		= 'Bilderpfade anpassen';
+$_['header_step_images']      = 'Image paths is changed in database succesfullly';
 // Help
 $_['help_adminDir']		= 'Nur anpassen wenn nicht admin lautet';
 // Msg
