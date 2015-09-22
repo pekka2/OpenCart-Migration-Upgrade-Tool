@@ -28,6 +28,7 @@ $_['btn_login']                 = 'Se connecter';
 $_['btn_logout']                 = 'Logout';
 $_['btn_module']        = 'Move modules';
 $_['btn_permission']             = 'Autorisation d\'administration';
+$_['btn_preview']	    = 'Continue to preview status';
 $_['btn_save']                   = 'Enregistrer';
 $_['btn_skip']		               = 'Passer';
 $_['btn_start']		         	= 'Commencer par mettre à jour';
