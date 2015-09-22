@@ -20,6 +20,7 @@ $_['btn_login']   = 'Login';
 $_['btn_images']        = 'Upgrade image paths';
 $_['btn_info']          = 'Database information';
 $_['btn_logout']                 = 'Logout';
+$_['btn_module']        = 'Move modules';
 $_['btn_permission']             = 'Administrator rechten';
 $_['btn_save']                   = 'Opslaan';
 $_['btn_skip']	                 = 'Overslaan';
