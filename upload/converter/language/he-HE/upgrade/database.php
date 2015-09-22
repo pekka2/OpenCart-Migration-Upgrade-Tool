@@ -16,8 +16,6 @@ $_['entry_up_201_202']		= 'שדרג את מסד הנתונים לגירסה 2.0.
 $_['entry_up_2030']		= 'שדרג את מסד הנתונים לגירסה 2.0.3.1';
 $_['entry_migration_module'] = 'Move modules again (truncate first tables `layout_module` ja `module`)';
 $_['entry_up_2100']		     = 'שדרג את מסד הנתונים לגירסה 2.1.0.0';
-// Header
-$_['header_step_2']		= 'מסד נתונים עודכן בהצלחה לגרסה העדכנית';
 // help
 $_['help_ops']			= 'Display Operations <small>(display all database operations)</small>';
 $_['help_simulate']		= 'Simulate Converting <small>(simulating operations only)</small>';
