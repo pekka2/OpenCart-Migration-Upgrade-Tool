@@ -20,6 +20,7 @@ $_['btn_login']   = 'Oturum Açma';
 $_['btn_images']        = 'Upgrade image paths';
 $_['btn_info']          = 'Database information';
 $_['btn_logout']      = 'Logout';
+$_['btn_module']        = 'Move modules';
 $_['btn_permission']  = 'Yönetici izinleri';
 $_['btn_save']        = 'Kaydet';
 $_['btn_skip']	    	= 'Atla';
