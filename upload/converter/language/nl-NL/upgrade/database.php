@@ -22,6 +22,8 @@ $_['entry_up_201_202']		= 'De database een upgrade uitvoert naar versie 2.0.1-2.
 $_['entry_up_2030']		= 'Upgrade van de database naar versie 2.0.3.1';
 $_['entry_migration_module'] = 'Move modules again (truncate first tables `layout_module` ja `module`)';
 $_['entry_up_2100']		     = 'Upgrade database to version 2.1.0.0';
+// header
+$_['header_step_1']          = 'The to database has been added to the new tables successfully';
 // help
 $_['help_ops']			= 'Weergeven operaties <small>(weergeven alle databasebewerkingen)</small>';
 $_['help_simulate']		= 'Simuleren omzetten <small>(simuleren operaties alleen)</small>';
