@@ -17,6 +17,8 @@ $_['text_collate_info']     = 'Update to the next database collation';
 $_['text_table_info']       = 'Start to add new tables';
 $_['text_update_config']        = 'Şimdi de <b>config. php</b> dosyaları güncelleyebilirsiniz eğer bitmemişse';
 $_['text_version']          = 'Your store database structure have been identified %s.';
+// header
+$_['header_step_1']          = 'The to database has been added to the new tables successfully';
 // Entry
 $_['entry_up_1564']		     = 'Upgrade database to version 1.5.6.4';
 $_['entry_up_201_202']		= 'Veritabanını 2.0.1 - 2.0.2.0 sürümüne yükselt';
