@@ -24,6 +24,9 @@ $_['entry_migration_module'] = 'Move modules again (truncate first tables `layou
 $_['entry_up_2100']		     = 'Upgrade database to version 2.1.0.0';
 // header
 $_['header_step_1']          = 'The to database has been added to the new tables successfully';
+$_['header_step_column']     = 'The to database has been added to new columns successfully';
+$_['header_step_collate']    = 'Database collation is updated succesfully';
+$_['header_step_module']     = 'Modules is moved to new tables succesfully';
 // help
 $_['help_ops']			= 'Display Operations <small>(display all database operations)</small>';
 $_['help_simulate']		= 'Simulate Converting <small>(simulating operations only)</small>';
