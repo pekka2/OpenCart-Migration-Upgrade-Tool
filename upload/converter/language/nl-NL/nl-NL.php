@@ -13,6 +13,7 @@ $_['btn_collate']       = 'Update collate';
 $_['btn_column']        = 'Add columns';
 $_['btn_config']		= 'Bijwerken van de configuratiebestanden';
 $_['btn_continue']	             = 'Doorgaan';
+$_['btn_data']          = 'Add data';
 $_['btn_database']               = 'To Upgrade The Database';
 $_['btn_finish']		= 'Voltooien';
 $_['btn_login']   = 'Login';
