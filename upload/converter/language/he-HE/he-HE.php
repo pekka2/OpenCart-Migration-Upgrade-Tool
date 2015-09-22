@@ -27,6 +27,7 @@ $_['btn_info']          = 'Database information';
 $_['btn_logout']                 = 'Logout';
 $_['btn_module']        = 'Move modules';
 $_['btn_permission']             = 'הרשאה מנהלית';
+$_['btn_preview']	    = 'Continue to preview status';
 $_['btn_save']                   = 'שמור';
 $_['btn_skip']	              	 = 'דלג';
 $_['btn_start']			             = 'התחל בעידכון';
