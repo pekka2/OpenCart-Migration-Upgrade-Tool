@@ -1,7 +1,7 @@
 <?php
 // Heading
 $_['heading_title']             = 'Redigering af konfigurationsfiler';
-$_['heading_images']             = 'Copying Image Files and Upgrade Image paths';
+$_['heading_images']             = 'Rename Image directories and Upgrade Image paths';
 // Text
 $_['text_curr_setting']	        = '(aktuel indstilling)';
 $_['text_images_info']          = 'Opgradering af Spejl-stier';
