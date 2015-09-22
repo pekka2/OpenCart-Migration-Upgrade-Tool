@@ -14,6 +14,8 @@ $_['text_upgrade_info']         = 'Upgrade of Configuration';
 $_['entry_adminDir']    	= 'Name des Adminordners';
 // Header
 $_['header_step_3']		= 'Bilderpfade anpassen';
+// Help
+$_['help_adminDir']		= 'Nur anpassen wenn nicht admin lautet';
 // Btn
 $_['btn_skip']			= 'Überspringen';
 $_['btn_cancel']		= 'Abbrechen';
