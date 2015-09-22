@@ -14,6 +14,7 @@ $_['btn_column']        = 'Add columns';
 $_['btn_config']		= 'Atualizar os arquivos de configuração';
 $_['btn_start']			= 'Comece com a atualização';
 $_['btn_continue']	            = 'Continuar';
+$_['btn_data']          = 'Add data';
 $_['btn_database']               = 'Para atualizar o banco de dados';
 $_['btn_finish']		= 'Finalizar';
 $_['btn_login']   = 'Acessar';
