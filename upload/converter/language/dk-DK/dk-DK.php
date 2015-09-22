@@ -10,6 +10,10 @@ $_['text_on']			    = 'TIL';
 $_['text_simulation']	        = 'Simulation er';
 
 // Btn
+$_['btn_clean']	        = 'Clean settings';
+$_['btn_clean_dbase']   = 'Drop';
+$_['btn_collate']       = 'Update collate';
+$_['btn_column']        = 'Add columns';
 $_['btn_config']		= 'Opdater config filer';
 $_['btn_continue']	= 'Fortsat';
 $_['btn_database']               = 'At opgradere databasen';
