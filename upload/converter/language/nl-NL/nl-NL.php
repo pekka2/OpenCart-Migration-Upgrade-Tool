@@ -5,6 +5,7 @@ $_['direction']                     = 'ltr';
 
 // Text
 $_['text_home']                     = 'Home';
+$_['text_step']		= 'Stap %s/%s';
 
 // Btn
 $_['btn_clean']	        = 'Clean settings';
