@@ -5,6 +5,9 @@ $_['direction']           = 'ltr';
 
 // Text
 $_['text_home']         = 'Home';
+$_['text_off']			= 'Desligado';
+$_['text_on']			= 'Ligado';
+$_['text_simulation']	        = 'Simulador está';
 $_['text_step']	     	= 'Passo %s / %s';
 // Btn
 $_['btn_clean']	        = 'Clean settings';
