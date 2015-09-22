@@ -18,8 +18,8 @@ $_['btn_logout']                 = 'Logout';
 $_['btn_permission']             = 'Administrativ tilladelse';
 $_['btn_save']                   = 'Gem';
 $_['btn_skip']		= 'Springe';
-$_['btn_upgrade']                = 'Indlede
-$_['btn_start']			= 'Starte med opdateringen';nde opgradering';
+$_['btn_start']			= 'Starte med opdateringen';
+$_['btn_upgrade']          = 'Indledende opgradering';
 
 
 // Entry
