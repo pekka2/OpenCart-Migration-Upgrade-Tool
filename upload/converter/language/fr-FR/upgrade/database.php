@@ -9,6 +9,7 @@ $_['text_toggle_help']     	= 'Afficher/Cacher l\'aide';
 $_['text_upgrade_info']         = 'Informations de mise à jour';
 $_['text_update_theme']         = 'Mettre à jour le thème maintenant';
 $_['text_skip_theme']           = 'Passer le thème';
+$_['text_table_info']       = 'Start to add new tables';
 $_['text_version']          = 'Your store database structure have been identified %s.';
 $_['text_update_config']        = 'Désormais vous pouvez aussi mettre à jour le fichier <b>config.php</b> si ce n\'est pas déjà fait';
 // Entry
