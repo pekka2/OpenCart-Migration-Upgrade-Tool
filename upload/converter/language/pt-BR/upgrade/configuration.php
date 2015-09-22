@@ -14,6 +14,8 @@ $_['text_upgrade_info']         = 'Atualização da configuração';
 $_['text_simulation']	        = 'Simulador está';
 $_['text_step_3_3']		= 'Passo 3 / 3';
 $_['text_update_config']        = 'Agora você pode atualizar os arquivos <b>config.php</b> se ainda não tiverem sido feitos';
+// Entry
+$_['entry_adminDir']	        = 'O nome do diretório para arquivos do Admin';
 // Header
 $_['header_step_3']		= 'Ajustar os caminhos da imagem';
 // msg
