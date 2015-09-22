@@ -15,6 +15,8 @@ $_['header_step_setting']     = 'New Settings is added succesfully';
 $_['btn_start']			= 'Starte med opdateringen';
 // Entry
 $_['entry_imageDir']		= 'I mappen billede';
+// Help
+$_['help_imageDir']		    = 'Image directory the folder name if not <i>image</i>';
 // msg
 $_['msg_change_path']    	= 'CHANGE total <b>%s</b> image filepath(s) in database successfully';
 $_['msg_copy_image']	        = 'COPY total <b>%s</b> image(s) files successfully';
