@@ -10,6 +10,8 @@ $_['text_intro_step_3']	        = 'Dette vil omdøbe mapperne <b>spejl/data</b> 
 $_['text_upgrade_info']         = 'Opgradering af konfiguration';
 $_['text_step_3_3']		= 'Trin 3/3';
 $_['text_update_config']        = 'Nu kan du også opdatere <b>config. php</b>-filer, hvis dette ikke allerede er gjort';
+// Entry
+$_['entry_adminDir']	        = 'Name of directory for admin files';
 // Header
 $_['header_step_3']		= 'Tilret spejl-stier';
 // msg
