@@ -23,11 +23,6 @@ $_['entry_up_201_202']		= 'Upgrade database to version 2.0.1 - 2.0.2.0';
 $_['entry_up_2030']		   = 'Upgrade database to  version 2.0.3.1';
 $_['entry_migration_module'] = 'Move modules again (truncate first tables `layout_module` ja `module`)';
 $_['entry_up_2100']		     = 'Upgrade database to version 2.1.0.0';
-// Btn
-$_['btn_config']		= 'Konfigurationsdateien aktualisieren';
-$_['btn_skip']			= 'Überspringen';
-$_['btn_start']			= 'Starte mit Aktualisierung';
-$_['button_database']           = 'To Upgrade Database';
 // Header
 $_['header_step_2']		= 'Datenbank erfolgreich aktualisiert';
 // Help
