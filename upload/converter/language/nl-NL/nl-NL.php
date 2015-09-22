@@ -29,6 +29,7 @@ $_['btn_logout']                 = 'Logout';
 $_['btn_module']        = 'Move modules';
 $_['btn_permission']             = 'Administrator rechten';
 $_['btn_save']                   = 'Opslaan';
+$_['btn_setting']       = 'Add settings';
 $_['btn_skip']	                 = 'Overslaan';
 $_['btn_start']			= 'Beginnen met de update';
 $_['btn_upgrade']                = 'Start de update';
