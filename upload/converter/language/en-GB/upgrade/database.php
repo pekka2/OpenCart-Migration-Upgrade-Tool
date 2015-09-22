@@ -31,7 +31,6 @@ $_['header_step_1']          = 'The to database has been added to the new tables
 $_['header_step_column']     = 'The to database has been added to new columns successfully';
 $_['header_step_collate']    = 'Database collation is updated succesfully';
 $_['header_step_module']     = 'Modules is moved to new tables succesfully';
-$_['header_step_8']		     = 'Database successfully updated to latest version';
 // help
 $_['help_ops']			     = 'Display Operations <small>(display all database operations)</small>';
 $_['help_simulate']		     = 'Simulate Converting <small>(simulating operations only)</small>';
