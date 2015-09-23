@@ -5,6 +5,7 @@ $_['heading_images']         = 'Rename Image directories and Upgrade Image paths
 
 // Text
 $_['text_images_info']      = 'Upgrade of Imagepaths';
+$_['text_upgrade_info']     = 'Upgrade Info';
 $_['text_intro_step_image']	= 'This will rename <b>image/data</b> directories and update image paths in database';
 $_['text_update_config']    = 'Now you can also update the <b>config.php</b> files if not already done';
 // Header
