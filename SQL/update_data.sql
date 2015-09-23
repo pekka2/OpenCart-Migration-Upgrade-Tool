@@ -17,3 +17,5 @@ DELETE FROM `oc_setting` WHERE `key` = 'config_image_location_width';
 INSERT INTO `oc_setting` SET `code` = 'config', `key` = 'config_image_location_width', `value` = '268', `serialized` = '0';
 DELETE FROM `oc_setting` WHERE `key` = 'config_product_description_length';
 INSERT INTO `oc_setting` SET `code` = 'config', `key` = 'config_product_description_length', `value` = '20', `serialized` = '0';
+TRUNCATE TABLE `oc_api`;
+INSERT INTO `oc_api` (`api_id`, `username`, `firstname`, `lastname`, `password`, `status`, `date_added`, `date_modified`) VALUES ('1', 'WPbSvXd0qWSIs2ZobtQPljO9YMDp7nfU36moUGfAcyJLqizHSGX4ql4Ey8uvmPFf', 'John', 'Doe', 'MsKgzphSdqdKPTShZpcFRWKFV517K7cWqm3fSaxvGR6WkO3A3WGKtRQEMIBWGetwGmSZDGKKXGg8Ua8OwEZgWqkizl55GosNRBmVHxff3CdOccdPh2v3jWbY7XUEBCRTD3pLqLrkNKzqnS5KLrEuDgJB3dF5gWOjQ4v6FcgSnV8Ro4c0mgkpCur6Nx1uJGTaAFWFi3YLPWd4R5u3bVjeFQaTDSDNYXoZdBeB42NKPqFhlzaDKAhQR8kVQojpBNEf', '1', '2015-09-23 12:58:55', '2015-09-23 12:58:55');
