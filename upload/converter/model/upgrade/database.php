@@ -343,6 +343,7 @@ class ModelUpgradeDatabase extends Model {
 
 		$text = '';
 		// category_description
+	  if($data['upgrade'] > 1564){
 		$sql = "UPDATE " . DB_PREFIX . "category_description SET `meta_title` = `name`";
 		
 					 if( !$this->simulate ) {
@@ -389,6 +390,7 @@ class ModelUpgradeDatabase extends Model {
 		                }
 			$text .= $this->msg( sprintf( $this->lang['msg_text'], 'setting',$this->lang['msg_new_data'] ) );
 		 }
+		}
 		// layout and layout_route in version 1.4.x
 		if( !$this->structure->getLayout()){
 $sql = "INSERT INTO `" . DB_PREFIX . "layout` (`layout_id`, `name`) VALUES
