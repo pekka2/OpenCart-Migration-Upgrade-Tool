@@ -297,6 +297,26 @@ class Structure {
       }
 	return true;
    }
+   public function hasLayouts( $val ) {
+ 
+	$sql = '
+	SELECT
+		*
+	FROM
+		`' . DB_PREFIX . 'layout`
+	WHERE
+		`code` LIKE  \'' . $val . '%\'';
+       if( array_search( DB_PREFIX . 'layout' , $this->tables())){
+					$result = $this->db->query( $sql );
+					if( count( $result->row ) == 0 ) {
+						return false;
+					}
+     } else {
+				return false;
+      }
+	return true;
+   }
+
    public function getReturnAction() {
  
 	$sql = 'SELECT	*  FROM	`' . DB_PREFIX . 'return_action`';
