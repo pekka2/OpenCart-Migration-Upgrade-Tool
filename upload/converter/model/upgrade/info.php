@@ -57,6 +57,7 @@ class ModelUpgradeInfo extends Model{
           $tables = $info['tables'];
           $oc_tables = $info['oc_tables'];
           $collate = $info['collate'];
+          $module = $info['module'];
           if($collate){
             $steps = 10;
           } else {
@@ -68,7 +69,8 @@ class ModelUpgradeInfo extends Model{
                                    'tables' => $tables,
                                    'oc_tables' => $oc_tables,
                                    'collate' => $collate,
-                                   'steps' => $steps);
+                                   'steps' => $steps,
+                                   'module' => $module);
               } else {
                    $string = file_get_contents($memory);
                   if(!empty($string)){
@@ -78,6 +80,7 @@ class ModelUpgradeInfo extends Model{
                     $cache['oc_tables'] = $oc_tables;
                     $cache['collate'] = $collate;
                     $cache['steps'] = $steps;
+                    $cache['module'] = $module;
                   }
               }
               if($cache){
