@@ -4,8 +4,8 @@ $_['heading_title']             = 'עריכת קבצי תצורה';
 $_['heading_images']             = 'העתקת קבצי תמונה ושידרוג נתיבי תמונה';
 
 // Text
-$_['text_curr_setting']	        = '(הגדרה נוכחית)';
-$_['text_images_info']          = 'שדרוג של Imagepaths';
+$_['text_images_info']          = 'שדרוג של Image paths';
+$_['text_upgrade_info']                 = 'פרטי שדרוג';
 $_['text_intro_3']		= 'This updater can be operated in a <b>simulation</b> mode also.<br />Enable this option and no real operations are made.';
 $_['text_intro_step_3']	        = 'This will rename <b>image/data</b> directories and update image paths in database';
 $_['text_upgrade_info']         = 'שדרוג תצורה';
