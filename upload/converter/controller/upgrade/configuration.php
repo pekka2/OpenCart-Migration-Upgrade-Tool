@@ -16,8 +16,8 @@ class ControllerUpgradeConfiguration extends Controller {
 			'href'      => $this->url->link('common/home')
 		);
 		$this->data['breadcrumbs'][] = array(
-			'text'      => $this->language->get('text_configuration_files'),
-			'href'      => $this->url->link('upgrade/configuration')
+			'text'      => $this->language->get('text_upgtrade_info),
+			'href'      => $this->url->link('upgrade/info')
 		);
     $this->data['breadcrumbs'][] = array(
       'text'      => $this->language->get('btn_start'),
