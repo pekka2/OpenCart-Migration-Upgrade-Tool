@@ -6,6 +6,7 @@ class Structure {
   private $tb;
   private $org;
   private $collate;
+  private $module_model;
   
   public function __construct($registry) {
 		$this->db = $registry->get('db');
@@ -474,7 +475,7 @@ class Structure {
 
 	return true;
    }
-   
+     
    public function getVersion() {
    	$this->version = 0;
    	$this->vdata = 0;
@@ -484,6 +485,7 @@ if( !array_search( 'meta_keywords', $this->columns('meta_description') ) && !arr
 		           ++$this->version;
 		            $this->vdata = '1.4.7-1.4.8b';
 		            $this->collate = true;
+		            $this->module_model = 3;
 		            $this->tb = count($this->tables()) - 1;
 }
 if( array_search( 'meta_keywords', $this->columns('meta_description') ) ) {
@@ -491,6 +493,7 @@ if($this->vdata == 0){
 		          ++$this->version;
 		            $this->vdata = '1.4.9';
 		            $this->collate = true;
+		            $this->module_model = 3;
 		            $this->tb = count($this->tables()) -1;
 }
 }
@@ -499,6 +502,7 @@ if( !array_search( 'serialized', $this->columns('setting') ) && !array_search( D
 if($this->vdata == 0){
 		           	$this->vdata = '1.5.0-1.5.0.5';
 		            $this->collate = true;
+		            $this->module_model = 2;
 		            $this->tb = count($this->tables()) - 1;
 		            $this->org = 88;
 }
@@ -508,6 +512,7 @@ if( !array_search( DB_PREFIX . 'tax_rate_to_customer_group', $this->tables() ) )
 if($this->vdata == 0){
 		           	$this->vdata = '1.5.1-1.5.1.2';
 		            $this->collate = true;
+		            $this->module_model = 1;
 		            $this->tb = count($this->tables()) - 1;
 		            $this->org = 90;
 }
@@ -517,6 +522,7 @@ if( !array_search( DB_PREFIX . 'api', $this->tables()) && !array_search( DB_PREF
 if($this->vdata == 0){
 		           	$this->vdata = '1.5.1.3';
 		            $this->collate = true;
+		            $this->module_model = 1;
 		            $this->tb = count($this->tables()) - 1;
 		            $this->org = 91;
 }
@@ -526,6 +532,7 @@ if( !array_search( DB_PREFIX . 'customer_group_description', $this->tables() ) )
 if($this->vdata == 0){
 		           	$this->vdata = '1.5.2';
 		            $this->collate = true;
+		            $this->module_model = 1;
 		            $this->tb = count($this->tables()) - 1;
 		            $this->org = 92;
 }
@@ -535,6 +542,7 @@ if( !array_search( DB_PREFIX . 'customer_online', $this->tables() ) ) {
 if($this->vdata == 0){
 		           	$this->vdata = '1.5.3';
 		            $this->collate = true;
+		            $this->module_model = 1;
 		            $this->tb = count($this->tables()) - 1;
 		            $this->org = 94;
 }
@@ -544,6 +552,7 @@ if( !array_search( DB_PREFIX . 'category_path', $this->tables() ) ) {
  if($this->vdata == 0){
 		           	$this->vdata = '1.5.4';
 		            $this->collate = true;
+		            $this->module_model = 1;
 		            $this->tb = count($this->tables()) - 1;
 		            $this->org = 93;
 }
@@ -553,6 +562,7 @@ if( !array_search( DB_PREFIX . 'order_recurring', $this->tables() ) ) {
 if($this->vdata == 0){
 		           	$this->vdata = '1.5.5.1';
 		            $this->collate = false;
+		            $this->module_model = 1;
 		            $this->tb = count($this->tables()) - 1;
 		            $this->org = 109;
 }
@@ -562,6 +572,7 @@ if( !array_search( DB_PREFIX . 'layout_module', $this->tables() ) ) {
 if($this->vdata == 0){
 		           	$this->vdata = '1.5.6';
 		            $this->collate = false;
+		            $this->module_model = 1;
 		            $this->tb = count($this->tables()) - 1;
 		            $this->org = 115;
 }
@@ -571,6 +582,7 @@ if( !array_search( DB_PREFIX . 'module', $this->tables() ) ) {
 if($this->vdata == 0){
 		           	$this->vdata = '2.0.0.0';
 		            $this->collate = false;
+		            $this->module_model = 4;
 		            $this->tb = count($this->tables()) - 1;
 		            $this->org = 124;
 }
@@ -580,12 +592,19 @@ if( !array_search( DB_PREFIX . 'api_id', $this->tables() ) ) {
 if($this->vdata == 0){
 		           	$this->vdata = '2.0.1.0-2.0.3.1';
 		            $this->collate = false;
+		            $this->module_model = 0;
 		            $this->tb = count($this->tables()) - 1;
 		            $this->org = 123;
 }
 }
-		     return array('level' => $this->version, 'vdata' => $this->vdata, 'tables' => $this->tb, 'oc_tables' => $this->org, 'collate' => $this->collate);
-     }
+		     return array('level' => $this->version,
+		     	          'vdata' => $this->vdata,
+		     	          'tables' => $this->tb,
+		     	          'oc_tables' => $this->org,
+		     	          'collate' => $this->collate,
+		     	          'module' => $this->module_model
+		     	          );
+     } 
      public function getUpgrade(){
 		        $oc_path  = DIR_DOCUMENT_ROOT . 'system/modification';
 		        $oc_path2 = DIR_DOCUMENT_ROOT . 'system/library/db';
