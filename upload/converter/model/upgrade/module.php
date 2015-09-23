@@ -12,6 +12,7 @@ class ModelUpgradeModule extends Model{
   private $settings = array();
   private $layout_module_ids = array();
   private $module_ids = array();
+  private $info = array();
 
   public function getChangeModule( $data ){
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
@@ -21,6 +22,9 @@ class ModelUpgradeModule extends Model{
         $this->theme  = ( !empty( $data['theme'] ) ? $data['theme'] : false );
         $this->lang = $this->lmodel->get('upgrade_database');
         $this->upgrade = $data['upgrade'];
+
+    $this->load->model('upgrade/info');
+    $this->info = $this->model_upgrade_info->getInfo();
 
         $text = '';
      if($this->upgrade !=1564){
@@ -98,9 +102,7 @@ class ModelUpgradeModule extends Model{
     $module2 = !empty($this->structure->hasSetting( $mod . '_0_position') ? true:false);
     $module2b = !empty($this->structure->hasSetting( $mod . '_1_position') ? true:false);
     $module3 = !empty($this->structure->hasSetting( $mod . '_position') ? true:false);
-    $this->load->model('upgrade/info');
-    $info = $this->model_upgrade_info->getInfo();
-    if( $modulex && $info['module'] == 1){
+    if( $modulex && $this->info['module'] == 1 ||  $modulex && $this->info['module'] == 4 ){
       $module1 = true;
     }
     if( array_search('group', $this->structure->columns('setting'))){
@@ -172,11 +174,12 @@ class ModelUpgradeModule extends Model{
   
             if($this->upgrade > 1564){
               if(!isset($value['layout_id'])) $value['layout_id'] = 1;
+                      if($this->info['module'] !=4){
                         $table_layout_module[] = array("layout_id" => $value['layout_id'],
                                                          "code" => $mod,
                                                          "position" => $value['position'],
                                                          "sort_order" => $value['sort_order']); 
-
+                       } 
                       if( isset($value['banner_id']) ){
                         $banner_name = $this->getBannerName($value['banner_id']);
                       } else {
@@ -186,6 +189,7 @@ class ModelUpgradeModule extends Model{
                 $name = $this->addModuleName( $value, $banner_name );
 
                       if( isset($value['banner_id']) ){
+                         if($this->info['module'] == 4) $value['status'] = $this->config->get( $mod . '_status');
                                                          $setting = array("name" => $name,
                                                                           "banner_id" => $value['banner_id'],
                                                                           "width" => $this->getDimension($value,'width'),
@@ -195,6 +199,7 @@ class ModelUpgradeModule extends Model{
                             $setting['limit'] = $value['limit'];
                            }
                       }else{
+                         if($this->info['module'] == 4) $value['status'] = $this->config->get( $mod . '_status');
                                                          $setting = array("name" => $name,
                                                                           "width" => $this->getDimension($value,'width'),
                                                                           "height" => $this->getDimension($value,'height'),
@@ -245,6 +250,7 @@ class ModelUpgradeModule extends Model{
                 $id++;
     $text .= $this->msg( sprintf( $this->lang['msg_config'], $mod, DB_PREFIX . 'module' ) );
           } 
+         if($this->info['module'] !=4){
                if( $this->simulate ) {
                  if(!in_array($mod,$this->layout_module_ids)){
                   array_push($this->layout_module_ids,$mod);
@@ -269,6 +275,7 @@ class ModelUpgradeModule extends Model{
                 $id2++;
         $text .= $this->msg( sprintf( $this->lang['msg_config'],  $mod,  DB_PREFIX . 'layout_module' ) );
           } 
+        }
           if(!$this->structure->hasExtension($mod)){
             $sql = "INSERT INTO `" . DB_PREFIX . "extension` (`type`, `code`) VALUES ('module', '" . $mod ."')";
                 if( !$this->simulate ) {
@@ -316,7 +323,7 @@ class ModelUpgradeModule extends Model{
         $table_setting = array();
 
      $modules = $this->moduleStructure($mod);
-      if( isset($modules[$mod])){
+      if( isset($modules[$mod]) && $this->info['module'] !=4){
   
         foreach($modules[$mod] as $key => $value){
   
