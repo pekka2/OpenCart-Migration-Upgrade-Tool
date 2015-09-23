@@ -1,9 +1,9 @@
 <?php
 /**
- * @version		$Id: converter.php 2014-10-16 10:10Z mic $
+ * @version		$Id: index.php 2015-09-23
  * @package		OpenCart Migration & Upgrade Tool
- * @author		Pekka Mansikka - http://pm-netti.com & mic - http://pixelnbit.com
- * @copyright	        2014 Pekka & mic
+ * @author		Pekka Mansikka - http://pm-netti.com
+ * @copyright	        2015 peku
  * @license		MIT http://opensource.org/licenses/MIT
  */
 
