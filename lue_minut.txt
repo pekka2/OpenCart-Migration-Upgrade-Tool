@@ -137,7 +137,7 @@ Kun tätä työkalua ei voi käyttää:
 Joillakin palvelimilla voi tulla eteen tilanne, että skriptejä ei voi suorittaa hakemistossa store.com/converter. Kysessä on jokin palvelimen sisäinen virhe tai muu palvelimen suorittama esto.
 Voit silloin tehdä näin:
 1. Mene admin sivulle System > Backup/Restore
-2. Lisää ensin tietokantaan sql-tiedostot seuraavassa järjestyksessä:
+2. Muuta ensin tarvittaessa sql-tiedostoissa oleva taulun nimen etuliite ('oc_'). Lisää ensin tietokantaan sql-tiedostot seuraavassa järjestyksessä:
    - SQL/new_tables.sql
    - SQL/new_columns.sql
    - SQL/rename_table.sql
@@ -150,6 +150,7 @@ Voit silloin tehdä näin:
    - SQL/replace.sql
    - SQL/clean_settings.sql
 5. TÄRKEÄÄ: Nämä sql scriptit soveltuvat sinun verkkokaupan päivitykseen, jos sen versio on 1.5.6.x
+6. Jos käytössäsi on versio 1.4.7-1.4.9.6 ja onnistut lisäämään loput puuttuvat taulut ja loput puuttuvat sarakkeet, voit päivitää tuotevalinnat tiedostolla SQL/options.sql
 
 Tuki:
 -----
