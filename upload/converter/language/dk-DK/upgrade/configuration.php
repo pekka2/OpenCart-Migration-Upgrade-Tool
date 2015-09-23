@@ -3,8 +3,8 @@
 $_['heading_title']             = 'Redigering af konfigurationsfiler';
 $_['heading_images']             = 'Rename Image directories and Upgrade Image paths';
 // Text
-$_['text_curr_setting']	        = '(aktuel indstilling)';
 $_['text_images_info']          = 'Opgradering af Spejl-stier';
+$_['text_upgrade_info']                 = 'Opgradere Info';
 $_['text_intro_3']		= 'Opdateringsværktøjet kan køres i en <b>simulationstilstand</b> også.<br/>Aktivér tilstanden og ingen reelle handlinger bliver foretaget.';
 $_['text_intro_step_3']	        = 'Dette vil omdøbe mapperne <b>spejl/data</b> og opdatere spejlstier i database';
 $_['text_upgrade_info']         = 'Opgradering af konfiguration';
