@@ -4,8 +4,8 @@ $_['heading_title']             = 'Bewerken van configuratiebestanden';
 $_['heading_images']             = 'Afbeeldingsbestanden kopiëren en de afbeelding upgradepaden';
 
 // Text
-$_['text_curr_setting']	        = '(huidige instelling)';
 $_['text_images_info']          = 'Upgrade van Imagepaths';
+$_['text_upgrade_info']          = 'Upgrade Informatie';
 $_['text_intro_3']		= 'Deze updater kan ook bediend worden in een <b>simulatie</b> mode .<br /> Schakel deze optie inschakelen in en er zullen geen echte bewerkingen worden gemaakt.';
 $_['text_intro_step_3']	        = 'Dit zal de map <b>image/data</b> hernoemen en de image-map paden aanpassen';
 $_['text_upgrade_info']         = 'Upgrade van de configuratie';
