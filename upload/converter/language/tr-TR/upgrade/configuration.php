@@ -4,8 +4,8 @@ $_['heading_title']             = 'Yapılandırma Dosyalarını Düzenle';
 $_['heading_images']             = 'Resim dosyaları kopyalanıyor ve resim yolları yükseltiliyor';
 
 // Text
-$_['text_curr_setting']	        = '(geçerli ayar)';
 $_['text_images_info']          = 'Resimm yollarını yükseltme';
+$_['text_upgrade_info']         = 'Yükseltme Bilgisi';
 $_['text_intro_3']		= 'Bu Güncelleyici <b>simülasyon</b> modunda da işletilebilir. Bu seçeneği <br/> etkinleştirirseniz gerçek hiçbir işlem yapılmaz.';
 $_['text_intro_step_3']	        = 'Bu işlem <b>image/data</b> dizinini yeniden adlandıracak ve resim yollarını veritabanında güncelleştirecek';
 $_['text_upgrade_info']         = 'Yapılandırma Yükseltme';
