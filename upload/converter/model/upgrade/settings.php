@@ -63,7 +63,7 @@ class ModelUpgradeSettings extends Model{
                       $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 		++$this->settingcounter;
-       $text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_mail', '' ) );
+       $text .= $this->msg( sprintf( $this->lang['msg_config'], 'config_mail',  DB_PREFIX .'setting' ) );
 
 
    }
