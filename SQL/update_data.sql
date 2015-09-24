@@ -5,6 +5,7 @@ UPDATE `oc_product_description` SET `meta_title` = `name`;
 UPDATE `oc_setting` SET `key` = 'config_meta_title' WHERE `key` = 'config_title';
 UPDATE `oc_setting` SET `key` = 'config_product_limit' WHERE `key` = 'config_catalog_limit';
 UPDATE `oc_setting` SET `key` = 'config_limit_admin' WHERE `key` = 'config_admin_limit';
+UPDATE `oc_setting` SET `key` = 'config_file_ext_allowed' WHERE `key` = 'config_file_extension_allowed';
 DELETE FROM `oc_setting` WHERE `key` = 'config_api_id';
 INSERT INTO `oc_setting` SET `code` = 'config', `key` = 'config_api_id', `value` = '1', `serialized` = '0';
 DELETE FROM `oc_setting` WHERE `key` = 'config_processing_status';
