@@ -73,6 +73,30 @@ class ModelUpgradeSettings extends Model{
    private function newSettings(){
         $this->lang = $this->lmodel->get('upgrade_database');
            $text = '';
+           if( $this->upgrade > 1564 ) {
+            $update = array(
+                            array('from' => 'title',
+                                  'to' => 'meta_title'),
+                            array('from' => 'catalog_limit',
+                                  'to' => 'product_limit'),
+                            array('from' => 'admin_limit',
+                                  'to' => 'limit_admin'),
+                            array('from' => 'file_extension_allowed',
+                                  'to' => 'file_ext_allowed')
+                         );
+               foreach($update as $up){
+                    $sql = "UPDATE `" . DB_PREFIX . "setting` SET `key` = 'config_" . $up['to'] . "' WHERE `key` = 'config_" . $up['from'] . "'";
+                if( !$this->simulate ) {
+                    $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+
+                   $text .= $this->msg( sprintf( $this->lang['msg_config'], $setting['key'], DB_PREFIX . 'setting' ) );
+              }
+             
+           }
             $settings = $this->structure->settingData($this->upgrade);
             foreach($settings as $setting){
                if(!$this->structure->hasSetting( trim($setting['key'])) ){
