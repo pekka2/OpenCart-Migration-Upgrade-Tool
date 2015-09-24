@@ -93,7 +93,7 @@ class ModelUpgradeSettings extends Model{
                       $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 
-                   $text .= $this->msg( sprintf( $this->lang['msg_config'], $setting['key'], DB_PREFIX . 'setting' ) );
+                   $text .= $this->msg( sprintf( $this->lang['msg_config'],  'config_' . $up['to'], DB_PREFIX . 'setting' ) );
               }
              
            }
