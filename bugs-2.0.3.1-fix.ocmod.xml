@@ -26,5 +26,10 @@
 			<add position="replace"><![CDATA[$option['value']]]></add>
 		</operation>
 	</file>
+	<file path="catalog/model/fraud/maxmind.php">
+		<operation>
+			<search><![CDATA[$fraud_info = $this->getFraud($data['order_id']);]]></search>
+			<add position="replace"><![CDATA[]]></add>
+		</operation>
 	</file>
 </modification>
