@@ -958,17 +958,18 @@ class Structure {
    	$this->vdata = 0;
    	$this->tb = 59;
    	$this->org = 59;
-if( !array_search( 'meta_keywords', $this->columns('meta_description') ) && !array_search( DB_PREFIX . 'affiliate', $this->tables())) {
+if( !array_search( 'meta_keywords', $this->columns('category_description') ) && !array_search( DB_PREFIX . 'affiliate', $this->tables())) {
 		           ++$this->version;
-		            $this->vdata = '1.4.7-1.4.8b';
+		            $this->vdata = '1.4.7';
 		            $this->collate = true;
 		            $this->module_model = 3;
 		            $this->tb = count($this->tables()) - 1;
 }
-if( array_search( 'meta_keywords', $this->columns('meta_description') ) ) {
+if( !array_search( DB_PREFIX . 'affiliate', $this->tables())) {
+		           ++$this->version;
 if($this->vdata == 0){
 		          ++$this->version;
-		            $this->vdata = '1.4.9';
+		            $this->vdata = '1.4.8-1.4.9.6';
 		            $this->collate = true;
 		            $this->module_model = 3;
 		            $this->tb = count($this->tables()) -1;
