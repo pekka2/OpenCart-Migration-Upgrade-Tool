@@ -12,7 +12,6 @@ class ModelUpgradeImages extends Model{
       $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
       $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
       $this->dirImage = $data['dirImage'] . '/';
-      $this->dirOld = ( !empty( $data['dirOld'] ) ? true : false );
 
     if( is_writable( DIR_STORE_IMAGE ) ) {
           $images = $this->getImages();
@@ -35,24 +34,6 @@ class ModelUpgradeImages extends Model{
          $img['path'] = str_replace( 'catalog/','data/', $img['path'] );
        }
 
-         if( file_exists( $img['path'] )  && is_dir( $img['newdirpath'] ) ||  file_exists( $img['path']) && $this->simulate ){
-
-         /*
-          * Copy files to Catalog directories banners, product etc.
-          */
-         if( $this->dirOld ){
-              if( !file_exists( $img['newpath'] ) || $this->simulate){
-                 if( !$this->simulate ){
-
-                   copy( $img['path'] , $img['newpath'] );
-
-                 }
-
-		 $text .= $this->msg( sprintf( $this->lang['msg_image_copied'], $img['newpath'], '' ) );
-		 ++$copy;
-             }
-           }
-         } 
            /*
             * Update paths to database
             */
