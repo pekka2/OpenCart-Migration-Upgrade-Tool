@@ -1074,13 +1074,17 @@ private function categoryPath(){
 			}
 	    }	
 		  $deletecolumn = 0;
+		  $oldcolumns = array();
+		  if($this->upgrade == 1564){
+		  	$oldcolumns = $this->structure->oldColumns1();
+		  }
+		  if($this->upgrade > 1564){
+		  	$oldcolumns = $this->structure->oldColumns2();
+		  }
 
-	        foreach($table_old_data as $key => $col){
-	        	foreach($table_old_data[$key] as $k => $val){
-	        	$i = 0;
-	          if(isset($columns[$key])){
-	        	 if( !array_search( $val,$columns[$key])){
-                     $sql = "ALTER TABLE `" . $key . "` DROP COLUMN `" . $val . "`";
+	        foreach( $oldcolumns as $k => $val){
+	            if(array_search($val['field'],$this->structure->columns($val['table']))){
+                     $sql = "ALTER TABLE `" . $val['table'] . "` DROP COLUMN `" . $val['field'] . "`";
 
 				                if( !$this->simulate ) {
                                   $this->db->query( $sql );
@@ -1089,10 +1093,7 @@ private function categoryPath(){
                                   $text .= '<p><pre>' . $sql .'</pre></p>';
                                 }
                       ++$deletecolumn;
-	        	 }
-                  $i++;
-                }
-	           }
+	        	}
 	        }
 	   $text .= $this->header( sprintf( $this->lang['msg_del_column'], $deletecolumn ) );
 	  return $text;
