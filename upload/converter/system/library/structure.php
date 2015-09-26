@@ -31,6 +31,463 @@ class Structure {
                }
          }
           return $ret;	
+  } 
+  public function oldColumns1(){
+
+    $deletecols = array(
+		array(
+            'table'     => 'customer_group',
+			'field'		=> 'name'
+		),
+		array(
+            'table'     => 'order',
+			'field'		=> 'coupon_id'
+		),
+		array(
+            'table'     => 'order',
+			'field'		=> 'invoice_date'
+		),
+		array(
+            'table'     => 'order',
+			'field'		=> 'reward'
+		),
+		array(
+            'table'     => 'product',
+			'field'		=> 'cost'
+		),
+		array(
+            'table'     => 'product',
+			'field'		=> 'maximum'
+		),
+		array(
+            'table'     => 'product_option',
+			'field'		=> 'sort_order'
+		),
+		array(
+            'table'     => 'product_option_value',
+			'field'		=> 'sort_order'
+		),
+		array(
+            'table'     => 'tax_rate',
+			'field'		=> 'priority'
+        ),
+	    array(
+            'table'     => 'tax_rate',
+			'field'		=> 'description'
+	    ),
+	    array(
+            'table'     => 'tax_rate',
+			'field'		=> 'tax_class_id'
+        ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'meta_description'
+        ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'template'
+        ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'country_id'
+        ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'zone_id'
+        ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'language'
+         ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'currency'
+        ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'tax'
+        ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'customer_group_id'
+             ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'customer_price'
+             ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'customer_approval'
+            ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'guest_checkout'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'account_id'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'checkout_id'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'stock_display'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'stock_check'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'stock_checkout'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'stock_subtract'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'order_status_id'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'logo'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'icon'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_thumb_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_thumb_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_popup_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_popup_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_category_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_category_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_product_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_product_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_additional_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_additional_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_related_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_related_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_cart_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_cart_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'catalog_limit'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'cart_weight'
+                   )
+          );
+       return $deletecols;
+  }
+  public function oldColumns2(){
+
+
+    $deletecols = array(
+		array(
+            'table'     => 'address',
+			'field'		=> 'company_id'
+		),
+		array(
+            'table'     => 'address',
+			'field'		=> 'tax_id'
+		),
+		array(
+            'table'     => 'custom_field',
+			'field'		=> 'position'
+		),
+		array(
+            'table'     => 'custom_field',
+			'field'		=> 'required'
+		),
+		array(
+            'table'     => 'customer_group',
+			'field'		=> 'company_id_display'
+		),
+		array(
+            'table'     => 'customer_group',
+			'field'		=> 'company_id_required'
+		),
+		array(
+            'table'     => 'customer_group',
+			'field'		=> 'name'
+		),
+		array(
+            'table'     => 'customer_group',
+			'field'		=> 'tax_id_display'
+		),
+		array(
+            'table'     => 'customer_group',
+			'field'		=> 'tax_id_required'
+		),
+		array(
+            'table'     => 'download',
+			'field'		=> 'remaining'
+		),
+		array(
+            'table'     => 'language',
+			'field'		=> 'filename'
+		),
+		array(
+            'table'     => 'order',
+			'field'		=> 'coupon_id'
+		),
+		array(
+            'table'     => 'order',
+			'field'		=> 'coupon_id'
+		),
+		array(
+            'table'     => 'order',
+			'field'		=> 'invoice_date'
+		),
+		array(
+            'table'     => 'order',
+			'field'		=> 'payment_company_id'
+		),
+		array(
+            'table'     => 'order',
+			'field'		=> 'payment_tax_id'
+		),
+		array(
+            'table'     => 'order',
+			'field'		=> 'reward'
+		),
+		array(
+            'table'     => 'order',
+			'field'		=> 'value'
+		),
+		array(
+            'table'     => 'order_product',
+			'field'		=> 'subtract'
+		),
+		array(
+            'table'    => 'order_total',
+			'field'	   => 'text'
+		),
+		array(
+            'table'     => 'product',
+			'field'		=> 'cost'
+		),
+		array(
+            'table'     => 'product',
+			'field'		=> 'maximum'
+		),
+		array(
+            'table'     => 'product_recurring',
+			'field'		=> 'store_id'
+		),
+		array(
+            'table'     => 'product_option',
+			'field'		=> 'sort_order'
+		),
+		array(
+            'table'     => 'product_option_value',
+			'field'		=> 'sort_order'
+		),
+		array(
+            'table'     => 'tax_rate',
+			'field'		=> 'description'
+		),
+		array(
+            'table'     => 'tax_rate',
+			'field'		=> 'priority'
+                   ),
+		array(
+            'table'     => 'tax_rate',
+			'field'		=> 'tax_class_id'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'meta_description'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'template'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'country_id'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'zone_id'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'language'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'currency'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'tax'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'customer_group_id'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'customer_price'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'customer_approval'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'guest_checkout'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'account_id'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'checkout_id'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'stock_display'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'stock_check'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'stock_checkout'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'stock_subtract'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'order_status_id'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'logo'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'icon'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_thumb_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_thumb_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_popup_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_popup_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_category_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_category_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_product_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_product_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_additional_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_additional_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_related_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_related_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_cart_width'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'image_cart_height'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'catalog_limit'
+                   ),
+		array(
+            'table'     => 'store',
+			'field'		=> 'cart_weight'
+                   )
+               );
+    return $deletecols;
   }
    public function newData($upgrade){
 		$file = DIR_SQL . $upgrade . '.sql';
