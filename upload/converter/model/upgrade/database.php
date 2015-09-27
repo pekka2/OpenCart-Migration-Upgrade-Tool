@@ -1077,10 +1077,10 @@ private function categoryPath(){
 	    }	
 		  $deletecolumn = 0;
 		  $oldcolumns = array();
-		  if($this->upgrade == 1564){
+		  if($data['upgrade'] == 1564){
 		  	$oldcolumns = $this->structure->oldColumns1();
 		  }
-		  if($this->upgrade > 1564){
+		  if($data['upgrade'] > 1564){
 		  	$oldcolumns = $this->structure->oldColumns2();
 		  }
 
