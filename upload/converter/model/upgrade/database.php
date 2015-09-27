@@ -1025,21 +1025,23 @@ private function categoryPath(){
     $text = '';
         $droptable = array(
                            'coupon_description',
-                           'customer_field',
                            'customer_ip_blacklist',
-                           'order_download',
-                           'order_field',
                            'order_misc',
                            'product_featured',
-                           'product_profile',
                            'product_tag',
                            'product_tags',
-                           'profile',
-                           'profile_description',
                            'return_product',
                            'store_description'
 		             );
 
+        if( $data['upgrade'] > 1564 ){
+            $droptable[] = 'customer_field';
+            $droptable[] = 'order_download';
+            $droptable[] = 'order_field';
+            $droptable[] = 'product_profile';
+            $droptable[] = 'profile';
+            $droptable[] = 'profile_description';
+        }
         if( $data['upgrade'] > 2020 ){
             $droptable[] = 'order_fraud';
         }
