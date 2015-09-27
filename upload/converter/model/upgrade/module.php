@@ -293,11 +293,11 @@ class ModelUpgradeModule extends Model{
   private function getDimension($data,$way){
     if(isset($data[$way])){
       return $data[$way];
-    }
-    if(isset($data['image_'.$way])){
+    }elseif(isset($data['image_'.$way])){
       return $data['image_'.$way];
+    }else{
+    	return 80;
     }
-
   }
   private function addModuleName($data,$banner_name){
     if( array_search( DB_PREFIX . 'layout' , $this->structure->tables()) ) {
