@@ -137,9 +137,9 @@ class ModelUpgradeModule extends Model{
                 }
                 if($module3){
                     $part[1] = str_replace('sort', 'sort_order', $part[1]);
-                    $part[1] = str_replace('left', 'column_left', $part[1]);
-                    $part[1] = str_replace('right', 'column_right', $part[1]);
-                    $part[1] = str_replace('home', 'content_top', $part[1]);
+                    $result['value'] = str_replace('left', 'column_left', $result['value']);
+                    $result['value'] = str_replace('right', 'column_right', $result['value']);
+                    $result['value'] = str_replace('home', 'content_top', $result['value']);
                     $modules[$part[0]][0][$part[1]] = $result['value'];
                          $row++;
                 }
