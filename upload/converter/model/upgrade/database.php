@@ -906,7 +906,8 @@ private function categoryPath(){
         $this->lang = $this->lmodel->get('upgrade_database');
 		$text = '';
 
-          $sql = "DELETE FROM `" . DB_PREFIX . "setting` WHERE `key` LIKE '%module'";
+         if( $data['upgrade'] > 1564){
+            $sql = "DELETE FROM `" . DB_PREFIX . "setting` WHERE `key` LIKE '%module'";
 				                if( !$this->simulate ) {
                                   $this->db->query( $sql );
                                 }
@@ -917,7 +918,7 @@ private function categoryPath(){
            $expireds = array("manufacturer","bestseller","featured","special","latest");
            foreach($expireds as $key => $expired){
 
-          $sql = "DELETE FROM `" . DB_PREFIX . "setting` WHERE `code` = '" . $expired . "'";
+            $sql = "DELETE FROM `" . DB_PREFIX . "setting` WHERE `code` = '" . $expired . "'";
                                 if( !$this->simulate ) {
                                   $this->db->query( $sql );
                                 }
@@ -926,25 +927,25 @@ private function categoryPath(){
                                 }
 
            }
-          $setting = array();
+            $setting = array();
 		if( array_search('group', $this->structure->columns('setting')) ) {
-          $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `group` = 'slideshow'";
+            $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `group` = 'slideshow'";
            } else{
-          $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `code` = 'slideshow'";
+            $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `code` = 'slideshow'";
            }
-          $results = $this->db->query($sql);
-         if(count($results->rows) > 0){
+           $results = $this->db->query($sql);
+          if(count($results->rows) > 0){
 	        foreach($results->rows as $result){
 	        	$setting[] = array('setting_id' => $result['setting_id'], 'key' => $result['key']);
 	        }
-         }
+          }
           $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `key` LIKE '%carousel%'";
           $results = $this->db->query($sql);
-         if(count($results->rows) > 0){
+          if(count($results->rows) > 0){
 	        foreach($results->rows as $result){
 	        	$setting[] = array('setting_id' => $result['setting_id'], 'key' => $result['key']);
 	        }
-         }
+          }
           
 		if( array_search('group', $this->structure->columns('setting')) ) {
           $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `group` = 'banner'";
@@ -952,7 +953,7 @@ private function categoryPath(){
           $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `code` = 'banner'";
            }
           $results = $this->db->query($sql);
-         if(count($results->rows) > 0){
+          if(count($results->rows) > 0){
 	        foreach($results->rows as $result){
 	        	$setting[] = array('setting_id' => $result['setting_id'], 'key' => $result['key']);
 	        }
@@ -963,12 +964,12 @@ private function categoryPath(){
           $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `code` = 'category'";
            }
           $results = $this->db->query($sql);
-         if(count($results->rows) > 0){
+          if(count($results->rows) > 0){
 	        foreach($results->rows as $result){
 	        	$setting[] = array('setting_id' => $result['setting_id'], 'key' => $result['key']);
 	        }
-         }
-		if( array_search('group', $this->structure->columns('setting')) ) {
+          }
+	  if( array_search('group', $this->structure->columns('setting')) ) {
           $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `group` = 'account'";
            } else{
           $sql = "SELECT * FROM `" . DB_PREFIX . "setting` WHERE `code` = 'account'";
@@ -1014,8 +1015,8 @@ private function categoryPath(){
                                   $text .= '<p><pre>' . $sql .'</pre></p>';
                                 }
          	}
+          }
          }
-
         $text .=  $this->header( sprintf( addslashes($this->lang['msg_table_count']), $this->tablecounter, '' ) );
 
          return $text;
