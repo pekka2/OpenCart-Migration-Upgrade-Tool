@@ -129,14 +129,31 @@ class ModelUpgradeDatabase extends Model {
 				foreach ($table['field'] as $field) {		
 					if (array_search($table['name'], $this->structure->tables()) && in_array($field['name'], $table_old_data[$table['name']])) {
 						// Remove auto increment from all fields
-						$sql = "ALTER TABLE `" . $table['name'] . "` CHANGE `" . $field['name'] . "` `" . $field['name'] . "` " . strtoupper($field['type']);
+						$sql = "ALTER TABLE `" . $table['name'] . "` MODIFY `" . $field['name'] . "` " . strtoupper($field['type']);
 
 						if ($field['size']) {
 							$sql .= "(" . $field['size'] . ")";
 						}
+					if($table['name'] != DB_PREFIX . 'customer' && $table['name'] != DB_PREFIX . 'affiliate' && $table['name'] != DB_PREFIX . 'user'){
+						$type = explode('(',$field['type']);
+						    if(isset($type[0])){
+							      if($type[0] == 'VARCHAR' || $type[0] == 'CHAR'){
+							         $int = false;
+						          } else {
+						             $int = true;
+						          }
+						    } else {
+							    $int = false;
+						   }
+
 						if ($field['collation']) {
 							$sql .= " " . $field['collation'];
+						} elseif(!$int){
+						   if(substr(VERSION,0,5) !='1.5.5' && substr(VERSION,0,5) != '1.5.6' && substr(VERSION,0,1) !='2.'){
+							   $sql .= " COLLATE `utf8_general_ci`";
+						    }
 						}
+					}
 						if ($field['notnull']) {
 							$sql .= " " . $field['notnull'];
 						}
