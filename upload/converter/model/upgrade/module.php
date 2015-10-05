@@ -34,7 +34,7 @@ class ModelUpgradeModule extends Model{
      	        TABLE
      	               `' . DB_PREFIX . 'module`';
      	               
-					      if( !$this->simulate ) {
+		if( !$this->simulate ) {
                      $this->db->query( $sql );
                 }
                 if( $this->showOps ) {
@@ -68,12 +68,7 @@ class ModelUpgradeModule extends Model{
         $text .= $this->getChangeModules( 'information' );
         $text .= $this->getChangeModules( 'account' );
         $text .= $this->getChangeModules( 'affiliate' );
-        /* Serialized modules */
-       $addons = array('banner','featured','carousel','slideshow','bestseller','latest','special');
-      
-     if($this->upgrade ==1564){
-        //$text .= $this->getFeatured_1564();
-     }
+
      return $text;
   }
 
