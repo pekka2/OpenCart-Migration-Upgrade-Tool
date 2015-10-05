@@ -93,11 +93,17 @@ class ModelUpgradeModule extends Model{
   private function moduleStructure($mod){
         $module1 = false;
         $modules = array();
-    $modulex = ( !empty( $this->structure->hasSetting($mod . '_module') ) ? true : false);
-    $module2 = ( !empty( $this->structure->hasSetting($mod . '_0_position') ) ? true : false);
-    $module2b = ( !empty( $this->structure->hasSetting($mod . '_1_position') ) ? true : false);
-    $module3 = ( !empty( $this->structure->hasSetting($mod . '_position') ) ? true : false);
-    if( $modulex && $this->info['module'] == 1 ||  $modulex && $this->info['module'] == 4 ){
+        $modules = array();
+    $mod_module = $this->structure->hasSetting($mod . '_module');
+    $mod0_position = $this->structure->hasSetting($mod . '_0_position');
+    $mod1_position = $this->structure->hasSetting($mod . '_1_position');
+    $mod_position = $this->structure->hasSetting($mod . '_position');
+
+    $modulex = ( !empty($mod_module ) ? true:false);
+    $module2 = ( !empty($mod0_position ) ? true:false);
+    $module2b = ( !empty($mod1_position ) ? true:false);
+    $module3 = ( !empty($mod_position ) ? true:false);
+    if( $modulex == true && $this->info['module'] == 1 ||  $modulex == true && $this->info['module'] == 4 ){
       $module1 = true;
     }
     if( array_search('group', $this->structure->columns('setting'))){
