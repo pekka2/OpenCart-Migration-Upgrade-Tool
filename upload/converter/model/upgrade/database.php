@@ -235,8 +235,6 @@ class ModelUpgradeDatabase extends Model {
 						}
 						if (isset($table['field'][$i - 1])) {
 							$sql .= " AFTER `" . $table['field'][$i - 1]['name'] . "`";
-						} else {
-							$sql .= " FIRST";
 						}
 					    if( !$this->simulate ) {
                             $this->db->query( $sql );
