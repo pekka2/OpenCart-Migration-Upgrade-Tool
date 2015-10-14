@@ -162,8 +162,6 @@ class ModelUpgradeDatabase extends Model {
 						}
 						if (isset($table['field'][$i - 1])) {
 							$sql .= " AFTER `" . $table['field'][$i - 1]['name'] . "`";
-						} else {
-							$sql .= " FIRST";
 						}
 
                 ++$this->columncollatecounter;
