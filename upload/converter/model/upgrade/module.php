@@ -93,7 +93,6 @@ class ModelUpgradeModule extends Model{
   private function moduleStructure($mod){
         $module1 = false;
         $modules = array();
-        $modules = array();
     $mod_module = $this->structure->hasSetting($mod . '_module');
     $mod0_position = $this->structure->hasSetting($mod . '_0_position');
     $mod1_position = $this->structure->hasSetting($mod . '_1_position');
