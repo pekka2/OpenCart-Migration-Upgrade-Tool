@@ -252,7 +252,7 @@ class ModelUpgradeDatabase extends Model {
 					if ($result['Key_name'] != 'PRIMARY') {
 						$sql = "ALTER TABLE `" . $table['name'] . "` DROP INDEX `" . $result['Key_name'] . "`";
 					 if( !$this->simulate ) {
-                       $this->db->query( $sql );
+                      // $this->db->query( $sql );
                 }
                 if( $this->showOps ){
 	                $text .= '<p><pre>' . $sql .'</pre></p>';
@@ -266,7 +266,7 @@ class ModelUpgradeDatabase extends Model {
 					$sql = "ALTER TABLE `" . $table['name'] . "` DROP PRIMARY KEY";
 					
 					if( !$this->simulate ) {
-                       $this->db->query( $sql );
+                     //  $this->db->query( $sql );
                     }
                     if( $this->showOps ){
 	                   $text .= '<p><pre>' . $sql .'</pre></p>';
