@@ -283,7 +283,7 @@ class ModelUpgradeDatabase extends Model {
 				if ($primary_data) {
 					$sql = "ALTER TABLE `" . $table['name'] . "` ADD PRIMARY KEY(" . implode(',', $primary_data) . ")";
 					 if( !$this->simulate ) {
-                       $this->db->query( $sql );
+                      // $this->db->query( $sql );
                 }
                 if( $this->showOps ){
 	                $text .= '<p><pre>' . $sql .'</pre></p>';
