@@ -9,8 +9,8 @@ class ModelUpgradeDatabase extends Model{
   public function addTables( $data ) {  
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
-        $this->upgrade2020  = ( !empty( $data['upgrade2020'] ) ? true : false );
         $this->upgrade2030  = ( !empty( $data['upgrade2030'] ) ? true : false );
+        $this->upgrade2101  = ( !empty( $data['upgrade2101'] ) ? true : false );
 
         $this->lang = $this->lmodel->get('upgrade_database');
         $this->languages = $this->structure->language(); 
@@ -43,9 +43,17 @@ class ModelUpgradeDatabase extends Model{
 	if( !array_search( DB_PREFIX . 'order_recurring', $this->structure->tables() ) ) {
            $text .= $this->addUpgradeTo156();
         }
-	if( !array_search( DB_PREFIX . 'module', $this->structure->tables() ) ) {
-           $text .= $this->addUpgradeTo2001();
+  if( !array_search( DB_PREFIX . 'api', $this->structure->tables() ) ) {
+           $text .= $this->addUpgradeTo2000();
         }
+	if( !array_search( DB_PREFIX . 'module', $this->structure->tables() ) ) {
+           $text .= $this->addUpgradeTo2010();
+        }
+  if($this->upgrade2101){
+  if( !array_search( DB_PREFIX . 'api_id', $this->structure->tables() ) ) {
+           $text .= $this->addUpgradeTo2101();
+        }
+  }
 	$text .= '<div class="header round"> ';
         $text .=  sprintf( addslashes($this->lang['msg_table_count']), $this->tablecounter, '' );
         $text .= ' </div>';
@@ -765,7 +773,7 @@ class ModelUpgradeDatabase extends Model{
                 if( $this->showOps ){
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }                  
-		  $text .= $this->msg( sprintf( $this->lang['msg_text'],   'option_valueÂ¯description', $this->lang['msg_new_data'] ) );
+		  $text .= $this->msg( sprintf( $this->lang['msg_text'],   'option_value¯description', $this->lang['msg_new_data'] ) );
 
           }
 
@@ -1318,13 +1326,6 @@ class ModelUpgradeDatabase extends Model{
                 FROM  `' . DB_PREFIX . 'customer_group`';
 
                 $customers = $this->db->query($query);
-                
-					 $sql = '
-                SELECT 
-                       *
-                FROM  `' . DB_PREFIX . 'language`';
-
-                $languages = $this->db->query($sql);
                 
        if( count( $customers->rows ) > 0 ){
             
@@ -2006,7 +2007,7 @@ class ModelUpgradeDatabase extends Model{
 		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '1.5.6.4', '' ) );
     return $text;
   }
-  public function addUpgradeTo2001() {
+  public function addUpgradeTo2000() {
         $text = '';
 	if( !array_search( DB_PREFIX . 'affiliate_activity', $this->structure->tables() ) ) {
 		$sql = '
@@ -2020,38 +2021,14 @@ class ModelUpgradeDatabase extends Model{
 		PRIMARY KEY (`activity_id`)
 		) ENGINE=MyISAM DEFAULT CHARSET=utf8';
 
-		if( !$this->simulate ) { 
+		      if( !$this->simulate ) { 
                        $this->db->query( $sql );
-                } if( $this->showOps ) {
+          } if( $this->showOps ) {
                 $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
+          }
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'affiliate_activity' ) );
 	}
-
-	if( !array_search( DB_PREFIX . 'affiliate_login', $this->structure->tables() ) ) {
-		$sql = '
-                CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'affiliate_login` (
-                 `affiliate_login_id` int(11) NOT NULL AUTO_INCREMENT,
-                 `email` varchar(96) NOT NULL,
-                 `ip` varchar(40) NOT NULL,
-                 `total` int(4) NOT NULL,
-                 `date_added` datetime NOT NULL,
-                 `date_modified` datetime NOT NULL,
-                 PRIMARY KEY (`affiliate_login_id`),
-                 KEY `email` (`email`),
-                 KEY `ip` (`ip`)
-                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;';
-
-		if( !$this->simulate ) { 
-                       $this->db->query( $sql );
-                } if( $this->showOps ) {
-                $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->tablecounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'affiliate_login' ) );
-	}
-
 	if( !array_search( DB_PREFIX . 'api', $this->structure->tables() ) ){
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'api` (
@@ -2066,12 +2043,12 @@ class ModelUpgradeDatabase extends Model{
 		  PRIMARY KEY (`api_id`)
 		) ENGINE=MyISAM DEFAULT CHARSET=utf8';
 
-		if( !$this->simulate ) {
+		    if( !$this->simulate ) {
                    $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
+        }
+        if( $this->showOps ) {
                 $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
+        }
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'api' ) );
 
@@ -2081,12 +2058,12 @@ class ModelUpgradeDatabase extends Model{
 		  VALUES
 			   (1, \'localhost\', \'abcdefghijk\', 1, NOW(), NOW())';
 
-		  if( !$this->simulate ) {
+		     if( !$this->simulate ) {
                      $this->db->query( $sql );
-                  }
-                 if( $this->showOps ) {
+         }
+         if( $this->showOps ) {
                 $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
+         }
 		  $text .= $this->msg( sprintf( $this->lang['msg_text'],   'api', $this->lang['msg_new_data'] ) );
 	}
 
@@ -2110,30 +2087,6 @@ class ModelUpgradeDatabase extends Model{
                 }
 		++ $this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'customer_activity' ) );
-	}
-
-	if( !array_search( DB_PREFIX . 'customer_login', $this->structure->tables() ) ) {
-		$sql = '
-                CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'customer_login` (
-                 `customer_login_id` int(11) NOT NULL AUTO_INCREMENT,
-                 `email` varchar(96) NOT NULL,
-                 `ip` varchar(40) NOT NULL,
-                 `total` int(4) NOT NULL,
-                 `date_added` datetime NOT NULL,
-                 `date_modified` datetime NOT NULL,
-                 PRIMARY KEY (`customer_login_id`),
-                 KEY `email` (`email`),
-                 KEY `ip` (`ip`)
-                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;';
-
-		if( !$this->simulate ) {
-                  $this->db->query( $sql );
-                }
-                if( $this->showOps ) {
-                $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++ $this->tablecounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'customer_login' ) );
 	}
 
         if( array_search( DB_PREFIX . 'custom_field_to_customer_group', $this->structure->tables() ) ) {
@@ -2163,7 +2116,7 @@ class ModelUpgradeDatabase extends Model{
 		PRIMARY KEY (`event_id`)
 		) ENGINE=MyISAM DEFAULT CHARSET=utf8';
 
-		if( !$this->simulate ) {
+	      	if( !$this->simulate ) {
                       $this->db->query( $sql );
                 } if( $this->showOps ) {
                 $text .= '<p><pre>' . $sql .'</pre></p>';
@@ -2183,7 +2136,7 @@ class ModelUpgradeDatabase extends Model{
 		PRIMARY KEY (`layout_module_id`)
 		) ENGINE=MyISAM DEFAULT CHARSET=utf8';
 
-		if( !$this->simulate ) {
+		       if( !$this->simulate ) {
                        $this->db->query( $sql );
                 } if( $this->showOps ) {
                 $text .= '<p><pre>' . $sql .'</pre></p>';
@@ -2209,7 +2162,7 @@ class ModelUpgradeDatabase extends Model{
 		KEY `name` (`name`)
 		) ENGINE=MyISAM DEFAULT CHARSET=utf8';
 
-		if( !$this->simulate ) {
+		        if( !$this->simulate ) {
                        $this->db->query( $sql );
                 } if( $this->showOps ) {
                 $text .= '<p><pre>' . $sql .'</pre></p>';
@@ -2230,9 +2183,10 @@ class ModelUpgradeDatabase extends Model{
 		PRIMARY KEY (`marketing_id`)
 		) ENGINE=MyISAM DEFAULT CHARSET=utf8';
 
-		if( !$this->simulate ) {
+		        if( !$this->simulate ) {
                        $this->db->query( $sql );
-                } if( $this->showOps ) {
+                }
+                 if( $this->showOps ) {
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 		++$this->tablecounter;
@@ -2254,124 +2208,180 @@ class ModelUpgradeDatabase extends Model{
                 PRIMARY KEY (`modification_id`)
 		) ENGINE=MyISAM DEFAULT CHARSET=utf8';
 
-		if( !$this->simulate ) {
+		           if( !$this->simulate ) {
                        $this->db->query( $sql );
-                } if( $this->showOps ) {
+                }
+                 if( $this->showOps ) {
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
 		++$this->tablecounter;
 		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'modification' ) );
 	}
 
+  if( !array_search( DB_PREFIX . 'order_custom_field', $this->structure->tables() ) ) {
+    $sql = '
+    CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'order_custom_field` (
+    `order_custom_field_id` int(11) NOT NULL AUTO_INCREMENT,
+    `order_id` int(11) NOT NULL,
+    `custom_field_id` int(11) NOT NULL,
+    `custom_field_value_id` int(11) NOT NULL,
+    `name` varchar(255) NOT NULL,
+    `value` text NOT NULL,
+    `type` varchar(32) NOT NULL,
+    `location` varchar(16) NOT NULL,
+    PRIMARY KEY (`order_custom_field_id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8';
+
+                if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                 if( $this->showOps ) {
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+    ++$this->tablecounter;
+    $text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'order_custom_field' ) );
+  }
+
+  if( !array_search( DB_PREFIX . 'recurring_description', $this->structure->tables() ) ) {
+    $sql = '
+    CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'recurring_description` (
+    `recurring_id` int(11) NOT NULL,
+    `language_id` int(11) NOT NULL,
+    `name` varchar(255) NOT NULL,
+    PRIMARY KEY (`recurring_id`,`language_id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8';
+
+               if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                } if( $this->showOps ) {
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+    ++$this->tablecounter;
+    $text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'recurring_description' ) );
+  }
+
+  if( !array_search( DB_PREFIX . 'recurring', $this->structure->tables() ) ) {
+    $sql = '
+    CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'recurring` (
+    `recurring_id` int(11) NOT NULL AUTO_INCREMENT,
+    `price` decimal(10,4) NOT NULL,
+    `frequency` enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\') NOT NULL,
+    `duration` int(10) unsigned NOT NULL,
+    `cycle` int(10) unsigned NOT NULL,
+    `trial_status` tinyint(4) NOT NULL,
+    `trial_price` decimal(10,4) NOT NULL,
+    `trial_frequency` enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\') NOT NULL,
+    `trial_duration` int(10) unsigned NOT NULL,
+    `trial_cycle` int(10) unsigned NOT NULL,
+    `status` tinyint(4) NOT NULL,
+    `sort_order` int(11) NOT NULL,
+    PRIMARY KEY (`recurring_id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8';
+
+      if( !$this->simulate ) {
+             $this->db->query( $sql );
+      }
+      if( $this->showOps ) {
+            $text .= '<p><pre>' . $sql .'</pre></p>';
+      }
+    ++$this->tablecounter;
+    $text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'recurring' ) );
+  }
+  if( !array_search( DB_PREFIX . 'upload', $this->structure->tables() ) ) {
+    $sql = '
+    CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'upload` (
+    `upload_id` int(11) NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) NOT NULL,
+    `filename` varchar(255) NOT NULL,
+    `code` varchar(255) NOT NULL,
+    `date_added` datetime NOT NULL,
+    PRIMARY KEY (`upload_id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8';
+
+               if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                 if( $this->showOps ) {
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+    ++$this->tablecounter;
+    $text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'upload' ) );
+  }
+
+    $text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '2.0.0.0', '' ) );
+    return $text;
+  }
+  public function addUpgradeTo2010() {
+        $text = '';
+
+  if( !array_search( DB_PREFIX . 'affiliate_login', $this->structure->tables() ) ) {
+    $sql = '
+                CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'affiliate_login` (
+                 `affiliate_login_id` int(11) NOT NULL AUTO_INCREMENT,
+                 `email` varchar(96) NOT NULL,
+                 `ip` varchar(40) NOT NULL,
+                 `total` int(4) NOT NULL,
+                 `date_added` datetime NOT NULL,
+                 `date_modified` datetime NOT NULL,
+                 PRIMARY KEY (`affiliate_login_id`),
+                 KEY `email` (`email`),
+                 KEY `ip` (`ip`)
+                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;';
+
+               if( !$this->simulate ) { 
+                       $this->db->query( $sql );
+                }
+               if( $this->showOps ) {
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+    ++$this->tablecounter;
+    $text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'affiliate_login' ) );
+  }
+
+  if( !array_search( DB_PREFIX . 'customer_login', $this->structure->tables() ) ) {
+    $sql = '
+                CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'customer_login` (
+                 `customer_login_id` int(11) NOT NULL AUTO_INCREMENT,
+                 `email` varchar(96) NOT NULL,
+                 `ip` varchar(40) NOT NULL,
+                 `total` int(4) NOT NULL,
+                 `date_added` datetime NOT NULL,
+                 `date_modified` datetime NOT NULL,
+                 PRIMARY KEY (`customer_login_id`),
+                 KEY `email` (`email`),
+                 KEY `ip` (`ip`)
+                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;';
+
+                if( !$this->simulate ) {
+                  $this->db->query( $sql );
+                }
+                if( $this->showOps ) {
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+    ++ $this->tablecounter;
+    $text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'customer_login' ) );
+  }
 
 	if( !array_search( DB_PREFIX . 'module', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'module` (
                  `module_id` int(11) NOT NULL AUTO_INCREMENT,
                  `name` varchar(64) NOT NULL,
-                `code` varchar(32) NOT NULL,
-                `setting` text NOT NULL,
+                 `code` varchar(32) NOT NULL,
+                 `setting` text NOT NULL,
                 PRIMARY KEY (`module_id`)
                ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci';
 
-		if( !$this->simulate ) {
+		           if( !$this->simulate ) {
                        $this->db->query( $sql );
-                } if( $this->showOps ) {
-                $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
-		++$this->tablecounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'module' ) );
-	}
-
-	if( !array_search( DB_PREFIX . 'order_custom_field', $this->structure->tables() ) ) {
-		$sql = '
-		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'order_custom_field` (
-		`order_custom_field_id` int(11) NOT NULL AUTO_INCREMENT,
-		`order_id` int(11) NOT NULL,
-		`custom_field_id` int(11) NOT NULL,
-		`custom_field_value_id` int(11) NOT NULL,
-		`name` varchar(255) NOT NULL,
-		`value` text NOT NULL,
-		`type` varchar(32) NOT NULL,
-		`location` varchar(16) NOT NULL,
-		PRIMARY KEY (`order_custom_field_id`)
-		) ENGINE=MyISAM DEFAULT CHARSET=utf8';
-
-		if( !$this->simulate ) {
-                       $this->db->query( $sql );
-                } if( $this->showOps ) {
+               if( $this->showOps ) {
                 $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
+               }
 		++$this->tablecounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'order_custom_field' ) );
-	}
-
-	if( !array_search( DB_PREFIX . 'recurring', $this->structure->tables() ) ) {
-		$sql = '
-		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'recurring` (
-		`recurring_id` int(11) NOT NULL AUTO_INCREMENT,
-		`price` decimal(10,4) NOT NULL,
-		`frequency` enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\') NOT NULL,
-		`duration` int(10) unsigned NOT NULL,
-		`cycle` int(10) unsigned NOT NULL,
-		`trial_status` tinyint(4) NOT NULL,
-		`trial_price` decimal(10,4) NOT NULL,
-		`trial_frequency` enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\') NOT NULL,
-		`trial_duration` int(10) unsigned NOT NULL,
-		`trial_cycle` int(10) unsigned NOT NULL,
-		`status` tinyint(4) NOT NULL,
-		`sort_order` int(11) NOT NULL,
-		PRIMARY KEY (`recurring_id`)
-		) ENGINE=MyISAM DEFAULT CHARSET=utf8';
-
-		if( !$this->simulate ) {
-                       $this->db->query( $sql );
-                } if( $this->showOps ) {
-                $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->tablecounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'recurring' ) );
-	}
-
-	if( !array_search( DB_PREFIX . 'recurring_description', $this->structure->tables() ) ) {
-		$sql = '
-		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'recurring_description` (
-		`recurring_id` int(11) NOT NULL,
-		`language_id` int(11) NOT NULL,
-		`name` varchar(255) NOT NULL,
-		PRIMARY KEY (`recurring_id`,`language_id`)
-		) ENGINE=MyISAM DEFAULT CHARSET=utf8';
-
-		if( !$this->simulate ) {
-                       $this->db->query( $sql );
-                } if( $this->showOps ) {
-                $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->tablecounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'recurring_description' ) );
-	}
-
-	if( !array_search( DB_PREFIX . 'upload', $this->structure->tables() ) ) {
-		$sql = '
-		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'upload` (
-		`upload_id` int(11) NOT NULL AUTO_INCREMENT,
-		`name` varchar(255) NOT NULL,
-		`filename` varchar(255) NOT NULL,
-		`code` varchar(255) NOT NULL,
-		`date_added` datetime NOT NULL,
-		PRIMARY KEY (`upload_id`)
-		) ENGINE=MyISAM DEFAULT CHARSET=utf8';
-
-		if( !$this->simulate ) {
-                       $this->db->query( $sql );
-                } if( $this->showOps ) {
-                $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-		++$this->tablecounter;
-		$text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'upload' ) );
-	}
-	
-        if( !$this->structure->hasLayout( 'Compare' )  && array_search( DB_PREFIX . 'layout', $this->structure->tables()) ){
+    $text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'module' ) );
+  }
+  if( !$this->structure->hasLayout( 'Compare' )  && array_search( DB_PREFIX . 'layout', $this->structure->tables()) ){
             $sql = 'SELECT MAX(layout_id) as maxim
                      FROM `' . DB_PREFIX . 'layout`'; 
 
@@ -2389,7 +2399,7 @@ class ModelUpgradeDatabase extends Model{
                               (' . $layout_id .', \'Compare\'),
                               (' . $layout_id2 . ', \'Search\')';
 
-		if( !$this->simulate ) {
+    if( !$this->simulate ) {
                        $this->db->query( $sql );
                 } if( $this->showOps ) {
                 $text .= '<p><pre>' . $sql .'</pre></p>';
@@ -2409,15 +2419,109 @@ class ModelUpgradeDatabase extends Model{
                               (' . $layout_route_id . ', ' . $layout_id . ', \'product/compare\'),
                               (' . $layout_route_id2 . ', ' . $layout_id2 . ', \'product/search\')';
 
-		if( !$this->simulate ) {
+    if( !$this->simulate ) {
                        $this->db->query( $sql );
                 } if( $this->showOps ) {
                 $text .= '<p><pre>' . $sql .'</pre></p>';
                 }
-	}
-		$text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '2.0.1.0', '' ) );
+  }
+    $text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '2.0.1.0-2.0.3.1', '' ) );
     return $text;
   }
+
+  public function addUpgradeTo2101() {
+        $text = '';
+
+
+  if( !array_search( DB_PREFIX . 'api_id', $this->structure->tables() ) ) {
+    $sql = '            
+    CREATE TABLE `' . DB_PREFIX . 'api_ip` (
+                 `api_ip_id` int(11) NOT NULL AUTO_INCREMENT,
+                 `api_id` int(11) NOT NULL,
+                 `ip` varchar(40) NOT NULL,
+                PRIMARY KEY (`api_ip_id`)
+               ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;';
+
+                 if( !$this->simulate ) { 
+                       $this->db->query( $sql );
+                }
+                 if( $this->showOps ) {
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+    ++$this->tablecounter;
+    $text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'api_id' ) );
+  }
+
+  if( !array_search( DB_PREFIX . 'api_session', $this->structure->tables() ) ) {
+    $sql = '   
+      CREATE TABLE `' . DB_PREFIX . 'api_session` (
+                   `api_session_id` int(11) NOT NULL AUTO_INCREMENT,
+                   `api_id` int(11) NOT NULL,
+                   `token` varchar(32) NOT NULL,
+                   `session_id` varchar(32) NOT NULL,
+                   `session_name` varchar(32) NOT NULL,
+                   `ip` varchar(40) NOT NULL,
+                   `date_added` datetime NOT NULL,
+                   `date_modified` datetime NOT NULL,
+                  PRIMARY KEY (`api_session_id`)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci';
+
+               if( !$this->simulate ) { 
+                       $this->db->query( $sql );
+                } if( $this->showOps ) {
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+    ++$this->tablecounter;
+    $text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'api_session' ) );
+  }
+
+
+  if( !array_search( DB_PREFIX . 'cart', $this->structure->tables() ) ) {
+    $sql = '     
+CREATE TABLE `' . DB_PREFIX . 'cart` (
+  `cart_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
+  `session_id` varchar(32) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `recurring_id` int(11) NOT NULL,
+  `option` text NOT NULL,
+  `quantity` int(5) NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`cart_id`),
+  KEY `cart_id` (`customer_id`,`session_id`,`product_id`,`recurring_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci';
+    if( !$this->simulate ) { 
+                       $this->db->query( $sql );
+                } if( $this->showOps ) {
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+    ++$this->tablecounter;
+    $text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'cart' ) );
+  }
+
+  if( !array_search( DB_PREFIX . 'customer_wishlist', $this->structure->tables() ) ) {
+    $sql = '      
+     CREATE TABLE `' . DB_PREFIX . 'customer_wishlist` (
+                  `customer_id` int(11) NOT NULL,
+                  `product_id` int(11) NOT NULL,
+                  `date_added` datetime NOT NULL,
+                PRIMARY KEY (`customer_id`,`product_id`)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci';
+          if( !$this->simulate ) { 
+                       $this->db->query( $sql );
+          } if( $this->showOps ) {
+                $text .= '<p><pre>' . $sql .'</pre></p>';
+          }
+    ++$this->tablecounter;
+    $text .= $this->msg( sprintf( $this->lang['msg_table'],   DB_PREFIX . 'customer_wishlist' ) );
+  }
+
+    $text .= $this->version( sprintf( $this->lang['msg_upgrade_to_version'],   '2.1.0.1', '' ) );
+
+    return $text;
+  }
+	
+    
   public function fixEngineOfTableCustomerOnline(){
      $text = '';
      $schema = mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die (mysql_error());
