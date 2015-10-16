@@ -27,12 +27,13 @@ class ControllerUpgradeDatabase extends Controller {
 					if( !isset($_COOKIE['UpgradeMigration']) ){
 									$this->redirect($this->url->link('common/login'));
 					}
-                 $this->data['dirOld'] = ( !empty( $_POST['dirOld'] ) ? true : false );
                  $this->data['images'] = ( !empty( $_POST['images'] ) ? true : 'image' );
                  $this->data['showOps'] = ( !empty( $_POST['showOps'] ) ? true : false );
                  $this->data['simulate'] = ( !empty( $_POST['simulate'] ) ? true : false );
                  $this->data['adminDir'] = ( !empty( $_POST['adminDir'] ) ? true : 'admin' );
+                 $this->data['upgrade2020'] = ( !empty( $_POST['upgrade2020'] ) ? true : false );
                  $this->data['upgrade2030'] = ( !empty( $_POST['upgrade2030'] ) ? true : false );
+                 $this->data['upgrade2101'] = ( !empty( $_POST['upgrade2101'] ) ? true : false );
                  $this->data['step1'] = 'step1';
                  $this->data['upgrade_data'] = $this->model_upgrade_database->addTables( $this->request->post );
                  $this->data['change_taxrate'] = $this->model_upgrade_table_columns->changeTaxRate( $this->request->post );
@@ -64,6 +65,7 @@ class ControllerUpgradeDatabase extends Controller {
                 $this->data['help_simulate'] = $this->language->get('help_simulate');
                 $this->data['help_ops'] = $this->language->get('help_ops');
                 $this->data['button_database'] = $this->language->get('button_database');
+                $this->data['entry_up_2101'] = $this->language->get('entry_up_2101');
                 $this->data['entry_up_2030'] = $this->language->get('entry_up_2030');
                 $this->data['entry_up_201_202'] = $this->language->get('entry_up_201_202');
                 $this->data['entry_adminDir'] = $this->language->get('entry_adminDir');
