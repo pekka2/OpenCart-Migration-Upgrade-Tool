@@ -1579,13 +1579,13 @@ class ModelUpgradeTableColumns extends Model{
 		 	   `' . DB_PREFIX . 'return`
                   SET
                            `product_id`       = \'' . $id['product_id'] .'\',
-                           `product`          = \'' . $id['name'] .'\',
-                           `model`            = \'' . $id['model'] .'\',
+                           `product`          = \'' . $this->db->escape($id['name']) .'\',
+                           `model`            = \'' . $this->db->escape($id['model']) .'\',
                            `quantity`         = \'' . $id['quantity'] .'\',
                            `opened`           = \'' . $id['opened'] .'\',
                            `return_reason_id` = \'' . $id['return_reason_id'] .'\',
                            `return_action_id` = \'' . $id['return_action_id'] .'\',
-                           `comment`          = \'' . $id['comment'] .'\'
+                           `comment`          = \'' . $this->db->escape($id['comment']) .'\'
                  WHERE
                            `return_id`        = \'' . $id['return_id'] .'\'';
 		  
