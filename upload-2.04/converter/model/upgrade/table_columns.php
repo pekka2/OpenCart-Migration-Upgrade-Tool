@@ -9,8 +9,8 @@ class ModelUpgradeTableColumns extends Model{
 
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
-        $this->upgrade2020  = ( !empty( $data['upgrade2020'] ) ? true : false );
         $this->upgrade2030  = ( !empty( $data['upgrade2030'] ) ? true : false );
+        $this->upgrade2101  = ( !empty( $data['upgrade2101'] ) ? true : false );
 
     $vars = array(
 		array(
@@ -598,6 +598,16 @@ class ModelUpgradeTableColumns extends Model{
                    )
                );
 
+    if($this->upgrade2101){
+  $delcols[] =  array(
+                      'table'    => 'api',
+			          'field'	 => 'firstname',
+		);
+  $changecols[] = array(
+                        'table'  => 'api',
+			            'field'	 => 'lastname'
+		);
+    }
     $deletecol = 0;
     $text = '';
     foreach( $delcols as $k => $v ) {
@@ -717,6 +727,20 @@ class ModelUpgradeTableColumns extends Model{
 			'column'	=> ' varchar(32) NOT NULL'
 		)
         );
+    if($this->upgrade2101){
+  $changecols[] =  array(
+                      'table'    => 'field',
+			          'field'	 => 'name',
+			          'oldfield' => 'username',
+			          'column'	 => ' varchar(64) NOT NULL'
+		);
+  $changecols[] = array(
+                        'table'     => 'api',
+			            'field'	    => 'key',
+			            'oldfield'	=> 'password',
+			            'column'	=> ' text NOT NULL'
+		);
+    }
 	
 
 
@@ -1169,7 +1193,7 @@ class ModelUpgradeTableColumns extends Model{
 			SET
 				`code` = \'total\'
 			WHERE
-			    `title` = \'YhteensÃ¤:\'' ;
+			    `title` = \'Yhteensä:\'' ;
 
 					if( !$this->simulate ) {
                       $this->db->query( $sql );
@@ -1561,7 +1585,7 @@ class ModelUpgradeTableColumns extends Model{
                            `opened`           = \'' . $id['opened'] .'\',
                            `return_reason_id` = \'' . $id['return_reason_id'] .'\',
                            `return_action_id` = \'' . $id['return_action_id'] .'\',
-                           `comment`          = \'' . $this->db->escape($id['comment']) .'\'
+                           `comment`          = \'' . $id['comment'] .'\'
                  WHERE
                            `return_id`        = \'' . $id['return_id'] .'\'';
 		  
