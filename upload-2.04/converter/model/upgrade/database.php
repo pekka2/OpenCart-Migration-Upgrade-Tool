@@ -1194,7 +1194,7 @@ class ModelUpgradeDatabase extends Model{
   public function addUpgradeTo152() {  
 
         $text = '';
-        if( !$this->upgrade2030 ){
+        if( !$this->upgrade2030 && !$this->upgrade2101){
 	if( !array_search( DB_PREFIX . 'order_fraud', $this->structure->tables() ) ) {
 		$sql = '
 		CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'order_fraud` (
