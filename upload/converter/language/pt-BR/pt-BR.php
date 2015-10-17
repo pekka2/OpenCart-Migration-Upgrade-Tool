@@ -46,4 +46,3 @@ $_['step_configuration'] = 'Config.php files';
 $_['step_images']        = 'Change image paths';
 $_['step_clean_module']  = 'Clean settings';
 $_['step_clean_table']   = 'Drop expired structure';
-?>
