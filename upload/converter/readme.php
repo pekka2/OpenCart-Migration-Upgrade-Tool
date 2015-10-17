@@ -33,7 +33,7 @@ $lang = $ex[0];
 ?>
 
 <!DOCTYPE html>
-<html dir="<?php echo $direction; ?>" lang="<?php echo $lang;?">
+<html dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>">
 <head>
 <meta charset="UTF-8" />
 <title>README</title>
