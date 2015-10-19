@@ -70,12 +70,12 @@ class ModelUpgradeConfiguration extends Model{
 						   if(!strpos( $content, 'DB_PORT' )) {
 						    if($this->upgrade2101 || $this->upgrade2030 ){ 
 							  array_splice( $fp, 20, 0, $db_port . "\r\n" );
-						   }
+						    }
 						   }
 
 			$content = implode( '', $fp );
 
-					if( is_writable( DIR_DOCUMENT_ROOT . 'config.php' ) ) {
+		if( is_writable( DIR_DOCUMENT_ROOT . 'config.php' ) ) {
 							if( !$this->simulate ) {
 								$fw = fopen( DIR_DOCUMENT_ROOT . 'config.php', 'wb' );
 								fwrite( $fw, $content );
@@ -100,7 +100,7 @@ class ModelUpgradeConfiguration extends Model{
 					    	$this->text .= '<p><pre>'.$upload2.'</pre></p>';
 					    }
 	                }
-								$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'DIR_UPLOAD', 'config.php' ) );
+					$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'DIR_UPLOAD', 'config.php' ) );
 	                if( $this->showOps ){
 					   	 if($this->upgrade2020 || $this->upgrade2030) {
 					    	$this->text .= '<p><pre>'.$modification.'</pre></p>';
@@ -111,18 +111,17 @@ class ModelUpgradeConfiguration extends Model{
 	                }
 							$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'DIR_MODIFICATION', 'config.php' ) );
 								
-					    if($this->upgrade2030 &&  !strpos( $content, 'DB_PORT' )) {		
-		                if( $this->showOps ){
+					    if($this->upgrade2101 || $this->upgrade2030){
+					    	if(!strpos( $check, 'DB_PORT' )) {		
+		                      if( $this->showOps ){
 						    	$this->text .= '<p><pre>'.$db_port.'</pre></p>';
-		                }
-								$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DB_PORT', $file ) );
-		            }
-					}else{
-					//	$this->text .= $this->msg(  sprintf( $this->lang, 'msg_perm_file', 'config.php' ) );
-					}
-		} else {
+						      }
+								$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DB_PORT', 'config.php' ) );
+		                    }
+		                  }
+	/*	} else {
 			$this->text .= $this->msg( sprintf(  $this->lang['msg_config_uptodate'], 'config.php', '' ) );
-		}
+		}*/
 		$this->text .= $this->msg('<p><hr/></p>');
 		
 		// FILE yourstore.com/admin/config.php		
@@ -150,13 +149,15 @@ class ModelUpgradeConfiguration extends Model{
 		    if( !strpos( $content2, 'HTTPS_CATALOG' ) ) {
 			  array_splice( $fp2, 8, 0, $https_catalog . "\r\n" );
 		   }
-		  if( !strpos( $content2, 'DIR_UPLOAD' ) ) {
-			if($this->upgrade2020 || $this->upgrade2030) {
+		  if( !strpos( $content2, 'DIR_UPLOAD' || !strpos($content2, 'DB_PORT') || strpos($conten2,'/storage')) ) {
+			if($this->upgrade2020 || $this->upgrade2030 || $this->upgrade2101) {
 			array_splice( $fp2, 21, 0, $modification . "\r\n" );
 			array_splice( $fp2, 22, 0, $upload . "\r\n" );
 	        }
-		    if($this->upgrade2030 &&  !strpos( $content2, 'DB_PORT' )) {
-			  array_splice( $fp2, 25, 0, $db_port . "\r\n" );
+		    if($this->upgrade2101 || $this->upgrade2030){
+		    	if(!strpos( $content2, 'DB_PORT' )) {
+			      array_splice( $fp2, 25, 0, $db_port . "\r\n" );
+			  }
 		   }
 
 			$string = implode( '', $fp2 );
@@ -192,11 +193,13 @@ class ModelUpgradeConfiguration extends Model{
 					    }
                 }
 						$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DIR_MODIFICATION', $file ) );
-		    if($this->upgrade2030 &&  !strpos( $content2, 'DB_PORT' )) {		
+		    if($this->upgrade2101 || $this->upgrade2030){
+		    	if(!strpos( $content2, 'DB_PORT' )) {		
                 if( $this->showOps ){
 				    	$this->text .= '<p><pre>'.$db_port.'</pre></p>';
                 }
 						$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DB_PORT', $file ) );
+				}
             }
 
 			}else{
@@ -204,8 +207,14 @@ class ModelUpgradeConfiguration extends Model{
 			}
 		}else{
 			$this->text .= $this->msg( sprintf(  $this->lang['msg_config_uptodate'], $file, '' ) );
-		}
+		} 
 
+					}else{
+						$this->text .= $this->msg(  sprintf( $this->lang, 'msg_perm_file', 'config.php' ) );
+					}
+		} else {
+			$this->text .= $this->msg( sprintf(  $this->lang['msg_config_uptodate'], 'config.php', '' ) );
+		}
 	return $this->text;
    }
   public function msg( $data ){
