@@ -601,11 +601,11 @@ class ModelUpgradeTableColumns extends Model{
     if($this->upgrade2101){
   $delcols[] =  array(
                       'table'    => 'api',
-			          'field'	 => 'firstname',
+		      'field'	 => 'firstname',
 		);
   $changecols[] = array(
                         'table'  => 'api',
-			            'field'	 => 'lastname'
+			'field'	 => 'lastname'
 		);
     }
     $deletecol = 0;
@@ -729,7 +729,7 @@ class ModelUpgradeTableColumns extends Model{
         );
     if($this->upgrade2101){
   $changecols[] =  array(
-                      'table'    => 'field',
+                      'table'    => 'api',
 			          'field'	 => 'name',
 			          'oldfield' => 'username',
 			          'column'	 => ' varchar(64) NOT NULL'
