@@ -49,11 +49,6 @@ class ModelUpgradeTableColumns extends Model{
 			'column'	=> ' varchar(255) NOT NULL AFTER description'
 		),
 		array(
-                        'table'         => 'category_description',
-			'field'		=> 'meta_keyword',
-			'column'	=> ' varchar(255) NOT NULL AFTER meta_description'
-		),
-		array(
                         'table'         => 'coupon',
 			'field'		=> 'name',
 			'column'	=> ' varchar(128) NOT NULL AFTER coupon_id'
@@ -285,11 +280,6 @@ class ModelUpgradeTableColumns extends Model{
 		),
 		array(
                         'table'         => 'product_description',
-			'field'		=> 'meta_keyword',
-			'column'	=> ' varchar(255) NOT NULL AFTER meta_title'
-		),
-		array(
-                        'table'         => 'product_description',
 			'field'		=> 'tag',
 			'column'	=> ' text NOT NULL AFTER description'
 		),
@@ -415,6 +405,19 @@ class ModelUpgradeTableColumns extends Model{
 		)
 	);
 
+
+	if( !array_search( 'meta_keyword', $this->structure->columns( 'category_description' ) ) && !array_search( 'meta_keywords', $this->structure->columns( 'category_description' ) )) {
+		$vars[] = array(
+            'table'     => 'category_description',
+			'field'		=> 'meta_keyword',
+			'column'	=> ' varchar(255) NOT NULL AFTER meta_description'
+               );
+		$vars[] = array(
+            'table'     => 'product_description',
+			'field'		=> 'meta_keyword',
+			'column'	=> ' varchar(255) NOT NULL AFTER meta_title'
+		     );
+	}
     $altercounter = 0;
     $text = '';
   
