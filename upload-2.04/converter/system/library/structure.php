@@ -9,7 +9,7 @@ class Structure {
 
         $table_list = array();
         foreach($query->rows as $key => $table){
-                      $table_list[] = $key;
+                      $table_list[] = $table;
           }
         return $table_list;
   }
