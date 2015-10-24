@@ -16,8 +16,10 @@ class Structure {
 
         $table_list = array(0=>'//');
         foreach($query->rows as $key => $table){
-                      $table_list[] = $table;
-          }
+             foreach($table as $tb)
+                      $table_list[] = $tb;
+             }
+        }
         return $table_list;
   }
 
@@ -27,7 +29,9 @@ class Structure {
         if( array_search( DB_PREFIX . $table, $this->tables() ) || $table == 'address'){
                 $colums = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`");
                foreach( $colums->rows as $key => $field){
-                 $ret[] = $field;
+               	    foreach($field as $fd){
+                            $ret[] = $fd;
+               	    }
                }
          }
           return $ret;	
@@ -625,14 +629,17 @@ class Structure {
 		$table_query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
 		foreach ($table_query->rows as $key => $table) {
 				$field_data = array();
-
-				$field_query = $this->db->query("SHOW COLUMNS FROM `" . $table . "`");
+                        foreach($table as $tb){
+				$field_query = $this->db->query("SHOW COLUMNS FROM `" . $tb . "`");
 
 				foreach ($field_query->rows as $key => $field) {
-					$field_data[] = $field;
+					foreach($field as $fd){
+				   	      $field_data[] = $fd;
+					}
 				}
 
-				$table_old_data[$table] = $field_data;
+				$table_old_data[$tb] = $field_data;
+                        }
 		};
          return $table_old_data;
 	}
