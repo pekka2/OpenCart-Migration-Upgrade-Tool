@@ -623,17 +623,17 @@ class Structure {
 	public function oldData(){
 		$table_old_data = array();
 		$table_query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
-		foreach ($table_query->rows as $table) {
-			if (utf8_substr($table['Tables_in_' . DB_DATABASE], 0, strlen(DB_PREFIX)) == DB_PREFIX || DB_PREFIX == '' ){
+		foreach ($table_query->rows as $key => $table) {
+			if (utf8_substr($table, 0, strlen(DB_PREFIX)) == DB_PREFIX || DB_PREFIX == '' ){
 				$field_data = array();
 
-				$field_query = $this->db->query("SHOW COLUMNS FROM `" . $table['Tables_in_' . DB_DATABASE] . "`");
+				$field_query = $this->db->query("SHOW COLUMNS FROM `" . $table . "`");
 
 				foreach ($field_query->rows as $field) {
 					$field_data[] = $field['Field'];
 				}
 
-				$table_old_data[$table['Tables_in_' . DB_DATABASE]] = $field_data;
+				$table_old_data[$table = $field_data;
 			}
 		};
          return $table_old_data;
