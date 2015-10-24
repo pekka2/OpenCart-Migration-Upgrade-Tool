@@ -26,8 +26,8 @@ class Structure {
 		$ret		= array(0 => '//');
         if( array_search( DB_PREFIX . $table, $this->tables() ) || $table == 'address'){
                 $colums = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`");
-               foreach( $colums->rows as $field){
-                 $ret[] = $field['Field'];
+               foreach( $colums->rows as $key => $field){
+                 $ret[] = $field;
                }
          }
           return $ret;	
@@ -628,8 +628,8 @@ class Structure {
 
 				$field_query = $this->db->query("SHOW COLUMNS FROM `" . $table . "`");
 
-				foreach ($field_query->rows as $field) {
-					$field_data[] = $field['Field'];
+				foreach ($field_query->rows as $key => $field) {
+					$field_data[] = $field;
 				}
 
 				$table_old_data[$table] = $field_data;
