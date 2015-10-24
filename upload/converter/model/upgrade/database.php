@@ -234,80 +234,80 @@ class ModelUpgradeDatabase extends Model {
 						if (isset($table['field'][$i - 1])) {
 							$sql .= " AFTER `" . $table['field'][$i - 1]['name'] . "`";
 						}
-					    if( !$this->simulate ) {
-                            $this->db->query( $sql );
-                        }
-                        if( $this->showOps ){
-	                       $text .= '<p><pre>' . $sql .'</pre></p>';
-                       }
-					} 
-				}
+				   if( !$this->simulate ) {
+                                         $this->db->query( $sql );
+                                    }
+                                    if( $this->showOps ){
+	                                $text .= '<p><pre>' . $sql .'</pre></p>';
+                                    }
+			} 
+		}
 
-				$status = false;
+		$status = false;
 
 				// Drop primary keys and indexes.
-				$query = $this->db->query("SHOW INDEXES FROM `" . $table['name'] . "`");
+		/*	$query = $this->db->query("SHOW INDEXES FROM `" . $table['name'] . "`");
 
-				foreach ($query->rows as $result) {
-					if ($result['Key_name'] != 'PRIMARY') {
+		foreach ($query->rows as $result) {
+			if ($result['Key_name'] != 'PRIMARY') {
 						$sql = "ALTER TABLE `" . $table['name'] . "` DROP INDEX `" . $result['Key_name'] . "`";
-					 if( !$this->simulate ) {
-                      // $this->db->query( $sql );
-                }
-                if( $this->showOps ){
-	                $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-					} else {
-						$status = true;
-					}
-				}
+				if( !$this->simulate ) {
+                                    // $this->db->query( $sql );
+                                }
+                                if( $this->showOps ){
+	                               $text .= '<p><pre>' . $sql .'</pre></p>';
+                                }
+			} else {
+				$status = true;
+			}
+		}
 
-				if ($status) {
-					$sql = "ALTER TABLE `" . $table['name'] . "` DROP PRIMARY KEY";
+		if ($status) {
+			$sql = "ALTER TABLE `" . $table['name'] . "` DROP PRIMARY KEY";
 					
-					if( !$this->simulate ) {
-                     //  $this->db->query( $sql );
-                    }
-                    if( $this->showOps ){
-	                   $text .= '<p><pre>' . $sql .'</pre></p>';
-                    }
-				}
+			if( !$this->simulate ) {
+                                //  $this->db->query( $sql );
+                        }
+                        if( $this->showOps ){
+	                      $text .= '<p><pre>' . $sql .'</pre></p>';
+                        }
+		}
 
 				// Add a new primary key.
 				$primary_data = array();
 
-				foreach ($table['primary'] as $primary) {
+			foreach ($table['primary'] as $primary) {
 					$primary_data[] = "`" . $primary . "`";
-				}
+			}
 
-				if ($primary_data) {
-					$sql = "ALTER TABLE `" . $table['name'] . "` ADD PRIMARY KEY(" . implode(',', $primary_data) . ")";
-					 if( !$this->simulate ) {
+		if ($primary_data) {
+			$sql = "ALTER TABLE `" . $table['name'] . "` ADD PRIMARY KEY(" . implode(',', $primary_data) . ")";
+			if( !$this->simulate ) {
                       // $this->db->query( $sql );
-                }
-                if( $this->showOps ){
+                        }
+                       if( $this->showOps ){
 	                $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-				}
+                         }
+		}
 
 				// Add the new indexes
-				foreach ($table['index'] as $index) {
+			foreach ($table['index'] as $index) {
 					$index_data = array();
 					foreach ($index as $key) {
 						$index_data[] = '`' . $key . '`';
 					}
 
-					if ($index_data) {
+				if ($index_data) {
 						$sql = "ALTER TABLE `" . $table['name'] . "` ADD INDEX (" . implode(',', $index_data) . ")";
 						
 					 if( !$this->simulate ) {
-                       $this->db->query( $sql );
-                }
-                if( $this->showOps ){
-	                $text .= '<p><pre>' . $sql .'</pre></p>';
-                }
-					}
-				}
+                                              $this->db->query( $sql );
+                                       }
+                                       if( $this->showOps ){
+	                                       $text .= '<p><pre>' . $sql .'</pre></p>';
+                                      }
+			}
+	       } */
 
 				// Add auto increment to primary keys again
 				foreach ($table['field'] as $field) {
