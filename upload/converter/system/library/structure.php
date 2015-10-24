@@ -624,7 +624,6 @@ class Structure {
 		$table_old_data = array();
 		$table_query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
 		foreach ($table_query->rows as $key => $table) {
-			if (utf8_substr($table, 0, strlen(DB_PREFIX)) == DB_PREFIX || DB_PREFIX == '' ){
 				$field_data = array();
 
 				$field_query = $this->db->query("SHOW COLUMNS FROM `" . $table . "`");
@@ -633,8 +632,7 @@ class Structure {
 					$field_data[] = $field['Field'];
 				}
 
-				$table_old_data[$table = $field_data;
-			}
+				$table_old_data[$table] = $field_data;
 		};
          return $table_old_data;
 	}
