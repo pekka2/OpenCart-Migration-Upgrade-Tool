@@ -9,20 +9,22 @@ class Structure {
 
         $table_list = array();
         foreach($query->rows as $key => $table){
-                      $table_list[] = $table;
+        	foreach($table as $tb){
+                      $table_list[] = $tb;
+        	}
           }
         return $table_list;
   }
 
   public function columns( $table ) {
-
-		$ret		= array();
+	$ret	= array();
         if( array_search( DB_PREFIX . $table, $this->tables() ) || $table == 'address'){
                 $colums = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`");
 
-
                foreach( $colums->rows as $field){
-                 $ret[] = $field['Field'];
+               	    foreach($field as $fd){
+                        $ret[] = $fd;
+               	    }
                }
          }
           return $ret;	
