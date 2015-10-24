@@ -15,8 +15,8 @@ class Structure {
        $query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
 
         $table_list = array(0=>'//');
-        foreach($query->rows as $table){
-                      $table_list[] = $table['Tables_in_'. DB_DATABASE];
+        foreach($query->rows as $key => $table){
+                      $table_list[] = $key;
           }
         return $table_list;
   }
