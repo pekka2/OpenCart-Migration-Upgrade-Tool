@@ -357,6 +357,15 @@ class ModelUpgradeDatabase extends Model {
 		$text = '';
 		// category_description
 	  if($data['upgrade'] > 1564){
+		$sql = "UPDATE " . DB_PREFIX . "extension SET `code` = 'ebay' WHERE `type` = 'openbay'";
+			if( !$this->simulate ) {
+                           $this->db->query( $sql );
+		       }
+		       if( $this->showOps ){
+			   $text .= '<p><pre>' . $sql .'</pre></p>';
+		       }
+		$text .= $this->msg( sprintf( $this->lang['msg_text'], 'extension',$this->lang['msg_new_data'] ) );
+		                
 		$sql = "UPDATE " . DB_PREFIX . "category_description SET `meta_title` = `name`";
 		    if(substr(VERSION,0,1) !='2.'){
 				 if( !$this->simulate ) {
