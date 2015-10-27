@@ -29,9 +29,7 @@ class Structure {
         if( array_search( DB_PREFIX . $table, $this->tables() ) || $table == 'address'){
                 $colums = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`");
                foreach( $colums->rows as $key => $field){
-               	    foreach($field as $fd){
-                            $ret[] = $fd;
-               	    }
+                            $ret[] = $field['Field'];
                }
          }
           return $ret;	
@@ -633,14 +631,11 @@ class Structure {
 				$field_query = $this->db->query("SHOW COLUMNS FROM `" . $tb . "`");
 
 				foreach ($field_query->rows as $key => $field) {
-					foreach($field as $fd){
-				   	      $field_data[] = $fd;
-					}
+				   	      $field_data[] = $fdield['Field']
 				}
-
 				$table_old_data[$tb] = $field_data;
                         }
-		};
+		}
          return $table_old_data;
 	}
    public function settingData($upgrade){
