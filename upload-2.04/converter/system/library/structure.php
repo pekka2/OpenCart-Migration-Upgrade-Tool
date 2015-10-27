@@ -22,9 +22,7 @@ class Structure {
                 $colums = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`");
 
                foreach( $colums->rows as $field){
-               	    foreach($field as $fd){
-                        $ret[] = $fd;
-               	    }
+                        $ret[] = $file['Field'];
                }
          }
           return $ret;	
