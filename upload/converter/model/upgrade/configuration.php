@@ -14,8 +14,8 @@ class ModelUpgradeConfiguration extends Model{
 
         $this->text = '';
 
-		$modification = 'define(\'DIR_MODIFICATION\', \'' . DIR_MODIFICATION . '\'); // OC 2';
-		$upload = 'define(\'DIR_UPLOAD\', \'' . DIR_UPLOAD . '\'); // OC 2';
+		$modification = 'define(\'DIR_MODIFICATION\', \'' . DIR_MODIFICATION . '/\'); // OC 2';
+		$upload = 'define(\'DIR_UPLOAD\', \'' . DIR_UPLOAD . '/\'); // OC 2';
 
                 $server = $_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['SCRIPT_NAME']));
                 $server = explode('/',$server);
