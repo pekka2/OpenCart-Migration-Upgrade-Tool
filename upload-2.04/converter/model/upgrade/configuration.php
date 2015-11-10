@@ -15,8 +15,8 @@ class ModelUpgradeConfiguration extends Model{
 
         $this->text = '';
 
-		$modification = 'define(\'DIR_MODIFICATION\', \'' . DIR_MODIFICATION . '\'); // OC 2';
-		$upload = 'define(\'DIR_UPLOAD\', \'' . DIR_UPLOAD . '\'); // OC 2';
+		$modification = 'define(\'DIR_MODIFICATION\', \'' . DIR_MODIFICATION . '/\'); // OC 2';
+		$upload = 'define(\'DIR_UPLOAD\', \'' . DIR_UPLOAD . '/\'); // OC 2';
 		$modification2 = 'define(\'DIR_MODIFICATION\', \'' . DIR_DOCUMENT_ROOT . 'system/storage/modification/\'); // OC 2.1';
 		$upload2 = 'define(\'DIR_UPLOAD\', \'' . DIR_DOCUMENT_ROOT . 'system/storage/upload/\'); // OC 2.1';
 
