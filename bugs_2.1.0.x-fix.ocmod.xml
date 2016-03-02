@@ -1,0 +1,24 @@
+<modification>
+<author>peku</author>
+<code>EPXQ88z212</code>
+<version>1</version>
+<name>Bugs fix 2.1.0.x</name>
+<file path="admin/controller/tool/backup.php">
+<operation>
+<search><![CDATA[$data['entry_backup']]]></search>
+<add position="replace"><![CDATA[$data['entry_export']]]></add>
+</operation>
+</file>
+<file path="catalog/controller/api/login.php">
+<operation>
+<search><![CDATA[$result['ip'];]]></search>
+<add position="replace"><![CDATA[trim($result['ip']);]]></add>
+</operation>
+</file>
+<file path="admin/view/template/design/banner_form.tpl">
+<operation>
+<search><![CDATA[<td class="text-right" style="width: 10%;><input type="text" name="banner_image]]></search>
+<add position="replace"><![CDATA[<td class="text-right" style="width: 10%;"><input type="text" name="banner_image]]></add>
+</operation>
+</file>
+</modification>
