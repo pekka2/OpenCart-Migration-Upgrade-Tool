@@ -2314,6 +2314,32 @@ class ModelUpgradeDatabase extends Model{
   public function addUpgradeTo2010() {
         $text = '';
 
+  if( array_search( 'meta_Title', $this->structure->columns( 'category_description'] ) )) {
+			$sql = '
+			ALTER TABLE
+				`' . DB_PREFIX .  'category_description`
+			CHANGE
+				`meta_Title` `meta_title` VARCHAR(255) NOT NULL';
+			if( !$this->simulate ) {
+                               $this->db->query( $sql );
+                        }
+                        if( $this->showOps ) {
+                               $text .= '<p><pre>' . $sql .'</pre></p>';
+                        }
+  }
+  if( array_search( 'meta_Title', $this->structure->columns( 'product_description'] ) )) {
+			$sql = '
+			ALTER TABLE
+				`' . DB_PREFIX .  'product_description`
+			CHANGE
+				`meta_Title` `meta_title` VARCHAR(255) NOT NULL';
+			if( !$this->simulate ) {
+                               $this->db->query( $sql );
+                        }
+                        if( $this->showOps ) {
+                               $text .= '<p><pre>' . $sql .'</pre></p>';
+                        }
+  }
   if( !array_search( DB_PREFIX . 'affiliate_login', $this->structure->tables() ) ) {
     $sql = '
                 CREATE TABLE IF NOT EXISTS `' . DB_PREFIX . 'affiliate_login` (
@@ -2432,7 +2458,32 @@ class ModelUpgradeDatabase extends Model{
   public function addUpgradeTo2101() {
         $text = '';
 
-
+  if( array_search( 'meta_Title', $this->structure->columns( 'category_description'] ) )) {
+			$sql = '
+			ALTER TABLE
+				`' . DB_PREFIX .  'category_description`
+			CHANGE
+				`meta_Title` `meta_title` VARCHAR(255) NOT NULL';
+			if( !$this->simulate ) {
+                               $this->db->query( $sql );
+                        }
+                        if( $this->showOps ) {
+                               $text .= '<p><pre>' . $sql .'</pre></p>';
+                        }
+  }
+  if( array_search( 'meta_Title', $this->structure->columns( 'product_description'] ) )) {
+			$sql = '
+			ALTER TABLE
+				`' . DB_PREFIX .  'product_description`
+			CHANGE
+				`meta_Title` `meta_title` VARCHAR(255) NOT NULL';
+			if( !$this->simulate ) {
+                               $this->db->query( $sql );
+                        }
+                        if( $this->showOps ) {
+                               $text .= '<p><pre>' . $sql .'</pre></p>';
+                        }
+  }
   if( !array_search( DB_PREFIX . 'api_id', $this->structure->tables() ) ) {
     $sql = '            
     CREATE TABLE `' . DB_PREFIX . 'api_ip` (
