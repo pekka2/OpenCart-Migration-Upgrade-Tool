@@ -1,0 +1,47 @@
+<modification>
+<author>peku</author>
+<code>EPXQ88z212xv</code>
+<version>1</version>
+<name>Bugs fix Opencart 2.2.0.0</name>
+<file path="catalog/controller/account/address.php">
+<operation>
+<search><![CDATA[!empty($custom_field['validation'] && $custom_field['location'] == 'address'))]]></search>
+<add position="replace"><![CDATA[!empty($custom_field['validation']) && $custom_field['location'] == 'address')]]></add>
+</operation>
+</file>
+<file path="catalog/controller/account/voucher.php">
+<operation>
+<search><![CDATA[sprintf($this->language->get('text_for'), $this->currency->format($this->currency->convert($this->request->post['amount'], $this->session->data['currency'], $this->config->get('config_currency'))), $this->request->post['to_name']),]]></search>
+<add position="replace"><![CDATA[sprintf($this->language->get('text_for'), $this->currency->format($this->currency->convert($this->request->post['amount'], $this->session->data['currency'], $this->config->get('config_currency')), $this->session->data['currency']), $this->request->post['to_name']),]]></add>
+</operation>
+</file>
+<file path="admin/controller/customer/customer.php">
+<operation>
+<search><![CDATA[!empty($custom_field['validation'] && $custom_field['location'] == 'address'))]]></search>
+<add position="replace"><![CDATA[!empty($custom_field['validation']) && $custom_field['location'] == 'address')]]></add>
+</operation>
+</file>
+<file path="catalog/view/theme/*/template/payment/pp_standard.tpl">
+<operation>
+<search><![CDATA[<input type="hidden" name="no_shipping" value="1" />]]></search>
+<add position="replace"><![CDATA[<input type="hidden" name="no_shipping" value="2" />]]]></add>
+</operation>
+</file>
+<file path="admin/controller/payment/cardinity.php">
+<operation>
+<search><![CDATA[$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token']));]]></search>
+<add position="replace"><![CDATA[$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token']),true);]]]></add>
+</operation>			
+</file>
+<file path="admin/controller/analytics/google_analytics.php">
+<operation>
+<search><![CDATA[$this->model_setting_setting->editSetting('google_analytics', $this->request->post, $this->request->get['store_id']);]]></search>
+<add position="replace"><![CDATA[
+		   	if (isset($this->request->get['store_id'])) {
+               $this->model_setting_setting->editSetting('google_analytics', $this->request->post, $this->request->get['store_id']);
+            } else {
+                $this->model_setting_setting->editSetting('google_analytics', $this->request->post);
+            }]]></add>
+</operation>			
+</file>
+</modification>
