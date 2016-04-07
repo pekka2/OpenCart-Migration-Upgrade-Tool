@@ -35,13 +35,16 @@
 </file>
 <file path="admin/controller/analytics/google_analytics.php">
 <operation>
-<search><![CDATA[$this->model_setting_setting->editSetting('google_analytics', $this->request->post, $this->request->get['store_id']);]]></search>
-<add position="replace"><![CDATA[
-		   	if (isset($this->request->get['store_id'])) {
-               $this->model_setting_setting->editSetting('google_analytics', $this->request->post, $this->request->get['store_id']);
-            } else {
-                $this->model_setting_setting->editSetting('google_analytics', $this->request->post);
-            }]]></add>
-</operation>			
+<search><![CDATA[$data['action'] = $this->url->link('analytics/google_analytics', 'token=' . $this->session->data['token'], true);]]></search>
+<add position="replace"><![CDATA[$data['action'] = $this->url->link('analytics/google_analytics', 'token=' . $this->session->data['token'] . '&store_id=' . $this->request->get['store_id'], true);]]></add>
+</operation>
+<operation>
+<search><![CDATA[$data['google_analytics_code'] = $this->config->get('google_analytics_code');]]></search>
+<add position="replace"><![CDATA[$data['google_analytics_code'] = $this->model_setting_setting->getSettingValue('google_analytics_code', $this->request->get['store_id']);]]></add>
+</operation>
+<operation>
+<search><![CDATA[$data['google_analytics_status'] = $this->config->get('google_analytics_status');]]></search>
+<add position="replace"><![CDATA[$data['google_analytics_status'] = $this->model_setting_setting->getSettingValue('google_analytics_status', $this->request->get['store_id']);]]></add>
+</operation>
 </file>
 </modification>
