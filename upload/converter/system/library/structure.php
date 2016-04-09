@@ -629,7 +629,7 @@ class Structure {
 				$field_query = $this->db->query("SHOW COLUMNS FROM `" . $tb . "`");
 
 				foreach ($field_query->rows as $key => $field) {
-				   	      $field_data[] = $field['Field']
+				   	      $field_data[] = $field['Field'];
 				}
 				$table_old_data[$tb] = $field_data;
                         }
