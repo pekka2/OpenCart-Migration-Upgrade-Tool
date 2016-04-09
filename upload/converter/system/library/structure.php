@@ -13,7 +13,6 @@ class Structure {
   }
   public function tables() {
        $query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
-
         $table_list = array(0=>'//');
         foreach($query->rows as $key => $table){
              foreach($table as $tb)
@@ -24,8 +23,7 @@ class Structure {
   }
 
   public function columns( $table ) {
-
-		$ret		= array(0 => '//');
+		$ret = array(0 => '//');
         if( array_search( DB_PREFIX . $table, $this->tables() ) || $table == 'address'){
                 $colums = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . $table . "`");
                foreach( $colums->rows as $key => $field){
