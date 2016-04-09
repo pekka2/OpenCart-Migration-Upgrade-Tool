@@ -13,7 +13,7 @@ INSERT INTO `oc_setting` SET `code` = 'config', `key` = 'config_processing_statu
 DELETE FROM `oc_setting` WHERE `key` = 'config_complete_status';
 INSERT INTO `oc_setting` SET `code` = 'config', `key` = 'config_complete_status', `value` = 'a:1:{i:0;s:1:"5";}', `serialized` = '1';
 DELETE FROM `oc_setting` WHERE `key` = 'config_image_location_height';
-INSERT INTO `oc_setting` SET `code` = 'config', `key` = 'config_image_location_width', `value` = '268', `serialized` = '0';
+INSERT INTO `oc_setting` SET `code` = 'config', `key` = 'config_image_location_height', `value` = '268', `serialized` = '0';
 DELETE FROM `oc_setting` WHERE `key` = 'config_image_location_width';
 INSERT INTO `oc_setting` SET `code` = 'config', `key` = 'config_image_location_width', `value` = '268', `serialized` = '0';
 DELETE FROM `oc_setting` WHERE `key` = 'config_product_description_length';
