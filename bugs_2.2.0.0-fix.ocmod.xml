@@ -47,6 +47,12 @@
 <add position="replace"><![CDATA[$json['message'] = $this->language->get('text_capture_failed') . $reason;]]></add>
 </operation>
 </file>
+<file path="admin/controller/payment/laybuy.php">
+<operation>
+<search><![CDATA[if (!$this->error) {]]></search>
+<add position="replace" offset="4"><![CDATA[return !$this->error;]]></add>
+</operation>
+</file>
 <file path="admin/controller/analytics/google_analytics.php">
 <operation>
 <search><![CDATA[$data['action'] = $this->url->link('analytics/google_analytics', 'token=' . $this->session->data['token'], true);]]></search>
