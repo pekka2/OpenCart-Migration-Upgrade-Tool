@@ -33,6 +33,20 @@
 <add position="replace"><![CDATA[$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token']),true);]]]></add>
 </operation>			
 </file>
+<file path="admin/controller/payment/eway.php">
+<operation>
+<search><![CDATA[$reason = $this->config->get('text_unknown_failure');]]></search>
+<add position="replace"><![CDATA[$reason = $this->language->get('text_unknown_failure');]]></add>
+</operation>
+<operation>
+<search><![CDATA[$json['message'] = $this->config->get('text_refund_failed') . $reason;]]></search>
+<add position="replace"><![CDATA[$json['message'] = $this->language->get('text_refund_failed') . $reason;]]></add>
+</operation>
+<operation>
+<search><![CDATA[$json['message'] = $this->config->get('text_capture_failed') . $reason;]]></search>
+<add position="replace"><![CDATA[$json['message'] = $this->language->get('text_capture_failed') . $reason;]]></add>
+</operation>
+</file>
 <file path="admin/controller/analytics/google_analytics.php">
 <operation>
 <search><![CDATA[$data['action'] = $this->url->link('analytics/google_analytics', 'token=' . $this->session->data['token'], true);]]></search>
