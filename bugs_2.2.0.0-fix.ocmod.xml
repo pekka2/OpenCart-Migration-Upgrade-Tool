@@ -53,6 +53,20 @@
 <add position="replace" offset="4"><![CDATA[return !$this->error;]]></add>
 </operation>
 </file>
+<file path="admin/controller/payment/pp_payflow_iframe.php">
+<operation>
+<search><![CDATA[$this->url->link('payment/pp_payflow', 'token=' . $this->session->data['token'], true)]]></search>
+<add position="replace"><![CDATA[$this->url->link('payment/pp_payflow_iframe', 'token=' . $this->session->data['token'], true)]]></add>
+</operation>
+<operation>
+<search><![CDATA[this->url->link('payment/pp_payflow_iframe/refund', 'transaction_reference=' . $result['PNREF'] . '&token=' . $this->session->data['token'])]]></search>
+<add position="replace"><![CDATA[this->url->link('payment/pp_payflow_iframe/refund', 'transaction_reference=' . $result['PNREF'] . '&token=' . $this->session->data['token'], true)]]></add>
+</operation>
+<operation>
+<search><![CDATA[$this->url->link('payment/pp_payflow_iframe/refund', 'transaction_reference=' . $transaction['transaction_reference'] . '&token=' . $this->session->data['token'])]]></search>
+<add position="replace"><![CDATA[$this->url->link('payment/pp_payflow_iframe/refund', 'transaction_reference=' . $transaction['transaction_reference'] . '&token=' . $this->session->data['token'], true)]]></add>
+</operation>
+</file>
 <file path="admin/controller/analytics/google_analytics.php">
 <operation>
 <search><![CDATA[$data['action'] = $this->url->link('analytics/google_analytics', 'token=' . $this->session->data['token'], true);]]></search>
