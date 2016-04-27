@@ -27,6 +27,18 @@
 <add position="replace"><![CDATA[<input type="hidden" name="no_shipping" value="2" />]]]></add>
 </operation>
 </file>
+<file path="admin/controller/openbay/amazon.php">
+<operation>
+<search><![CDATA[$this->url->link('openbay/amazon/itemlinks', 'token=' . $this->session->data['token'], true),]]></search>
+<add position="replace"><![CDATA[$this->url->link('openbay/amazon/itemLinks', 'token=' . $this->session->data['token'], true),]]]></add>
+</operation>
+</file>
+<file path="admin/controller/openbay/fba.php">
+<operation>
+<search><![CDATA[$this->session->data['token'], 'SSL')]]></search>
+<add position="replace"><![CDATA[$this->session->data['token'], true)]]]></add>
+</operation>
+</file>
 <file path="admin/controller/payment/cardinity.php">
 <operation>
 <search><![CDATA[$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token']));]]></search>
