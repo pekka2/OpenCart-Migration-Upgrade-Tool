@@ -1,0 +1,96 @@
+<modification>
+<author>peku</author>
+<code>EPXQ88z212xv</code>
+<version>1</version>
+<name>Bugs fix Opencart 2.2.0.0</name>
+<file path="catalog/controller/account/address.php">
+<operation>
+<search><![CDATA[!empty($custom_field['validation'] && $custom_field['location'] == 'address'))]]></search>
+<add position="replace"><![CDATA[!empty($custom_field['validation']) && $custom_field['location'] == 'address')]]></add>
+</operation>
+</file>
+<file path="catalog/controller/account/voucher.php">
+<operation>
+<search><![CDATA[sprintf($this->language->get('text_for'), $this->currency->format($this->currency->convert($this->request->post['amount'], $this->session->data['currency'], $this->config->get('config_currency'))), $this->request->post['to_name']),]]></search>
+<add position="replace"><![CDATA[sprintf($this->language->get('text_for'), $this->currency->format($this->currency->convert($this->request->post['amount'], $this->session->data['currency'], $this->config->get('config_currency')), $this->session->data['currency']), $this->request->post['to_name']),]]></add>
+</operation>
+</file>
+<file path="admin/controller/customer/customer.php">
+<operation>
+<search><![CDATA[!empty($custom_field['validation'] && $custom_field['location'] == 'address'))]]></search>
+<add position="replace"><![CDATA[!empty($custom_field['validation']) && $custom_field['location'] == 'address')]]></add>
+</operation>
+</file>
+<file path="catalog/view/theme/*/template/payment/pp_standard.tpl">
+<operation>
+<search><![CDATA[<input type="hidden" name="no_shipping" value="1" />]]></search>
+<add position="replace"><![CDATA[<input type="hidden" name="no_shipping" value="2" />]]]></add>
+</operation>
+</file>
+<file path="admin/controller/openbay/amazon.php">
+<operation>
+<search><![CDATA[$this->url->link('openbay/amazon/itemlinks', 'token=' . $this->session->data['token'], true),]]></search>
+<add position="replace"><![CDATA[$this->url->link('openbay/amazon/itemLinks', 'token=' . $this->session->data['token'], true),]]]></add>
+</operation>
+</file>
+<file path="admin/controller/openbay/fba.php">
+<operation>
+<search><![CDATA[$this->session->data['token'], 'SSL')]]></search>
+<add position="replace"><![CDATA[$this->session->data['token'], true)]]]></add>
+</operation>
+</file>
+<file path="admin/controller/payment/cardinity.php">
+<operation>
+<search><![CDATA[$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token']));]]></search>
+<add position="replace"><![CDATA[$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token']),true);]]]></add>
+</operation>
+</file>
+<file path="admin/controller/payment/eway.php">
+<operation>
+<search><![CDATA[$reason = $this->config->get('text_unknown_failure');]]></search>
+<add position="replace"><![CDATA[$reason = $this->language->get('text_unknown_failure');]]></add>
+</operation>
+<operation>
+<search><![CDATA[$json['message'] = $this->config->get('text_refund_failed') . $reason;]]></search>
+<add position="replace"><![CDATA[$json['message'] = $this->language->get('text_refund_failed') . $reason;]]></add>
+</operation>
+<operation>
+<search><![CDATA[$json['message'] = $this->config->get('text_capture_failed') . $reason;]]></search>
+<add position="replace"><![CDATA[$json['message'] = $this->language->get('text_capture_failed') . $reason;]]></add>
+</operation>
+</file>
+<file path="admin/controller/payment/laybuy.php">
+<operation>
+<search><![CDATA[if (!$this->error) {]]></search>
+<add position="replace" offset="4"><![CDATA[return !$this->error;]]></add>
+</operation>
+</file>
+<file path="admin/controller/payment/pp_payflow_iframe.php">
+<operation>
+<search><![CDATA[$this->url->link('payment/pp_payflow', 'token=' . $this->session->data['token'], true)]]></search>
+<add position="replace"><![CDATA[$this->url->link('payment/pp_payflow_iframe', 'token=' . $this->session->data['token'], true)]]></add>
+</operation>
+<operation>
+<search><![CDATA[this->url->link('payment/pp_payflow_iframe/refund', 'transaction_reference=' . $result['PNREF'] . '&token=' . $this->session->data['token'])]]></search>
+<add position="replace"><![CDATA[this->url->link('payment/pp_payflow_iframe/refund', 'transaction_reference=' . $result['PNREF'] . '&token=' . $this->session->data['token'], true)]]></add>
+</operation>
+<operation>
+<search><![CDATA[$this->url->link('payment/pp_payflow_iframe/refund', 'transaction_reference=' . $transaction['transaction_reference'] . '&token=' . $this->session->data['token'])]]></search>
+<add position="replace"><![CDATA[$this->url->link('payment/pp_payflow_iframe/refund', 'transaction_reference=' . $transaction['transaction_reference'] . '&token=' . $this->session->data['token'], true)]]></add>
+</operation>
+</file>
+<file path="admin/controller/analytics/google_analytics.php">
+<operation>
+<search><![CDATA[$data['action'] = $this->url->link('analytics/google_analytics', 'token=' . $this->session->data['token'], true);]]></search>
+<add position="replace"><![CDATA[$data['action'] = $this->url->link('analytics/google_analytics', 'token=' . $this->session->data['token'] . '&store_id=' . $this->request->get['store_id'], true);]]></add>
+</operation>
+<operation>
+<search><![CDATA[$data['google_analytics_code'] = $this->config->get('google_analytics_code');]]></search>
+<add position="replace"><![CDATA[$data['google_analytics_code'] = $this->model_setting_setting->getSettingValue('google_analytics_code', $this->request->get['store_id']);]]></add>
+</operation>
+<operation>
+<search><![CDATA[$data['google_analytics_status'] = $this->config->get('google_analytics_status');]]></search>
+<add position="replace"><![CDATA[$data['google_analytics_status'] = $this->model_setting_setting->getSettingValue('google_analytics_status', $this->request->get['store_id']);]]></add>
+</operation>
+</file>
+</modification>
