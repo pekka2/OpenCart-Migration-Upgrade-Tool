@@ -21,6 +21,12 @@
 <add position="replace"><![CDATA[!empty($custom_field['validation']) && $custom_field['location'] == 'address')]]></add>
 </operation>
 </file>
+<file path="admin/controller/sale/order.php">
+<operation>
+<search><![CDATA[$this->request->server['HTTPS'] ? str_replace("http", "https", $order_info['store_url']) : $order_info['store_url'];]]></search>
+<add position="replace"><![CDATA[$this->request->server['HTTPS'] ? str_replace("http://", "https://", $order_info['store_url']) : $order_info['store_url'];]]></add>
+</operation>
+</file>
 <file path="catalog/view/theme/*/template/payment/pp_standard.tpl">
 <operation>
 <search><![CDATA[<input type="hidden" name="no_shipping" value="1" />]]></search>
