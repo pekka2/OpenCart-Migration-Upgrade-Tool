@@ -21,6 +21,10 @@
 <add position="replace"><![CDATA[$data['store_url'] = $this->request->server['HTTPS'] ? str_replace("http://", "https://", $order_info['store_url']) : $order_info['store_url'];]]></add>
 </operation>
 <operation>
+<search><![CDATA['href'     => HTTP_CATALOG]]></search>
+<add position="replace"><![CDATA['href'     =>  $this->request->server['HTTPS'] ? str_replace("http://", "https://", HTTP_CATALOG) : HTTP_CATALOG]]></add>
+</operation>
+<operation>
 <search><![CDATA[rtrim($order_info['store_url'], '/'),]]]></search>
 <add position="replace"><![CDATA[rtrim($this->request->server['HTTPS'] ? str_replace("http://", "https://", $order_info['store_url']) : $order_info['store_url'] . '/'),]]></add>
 </operation>
