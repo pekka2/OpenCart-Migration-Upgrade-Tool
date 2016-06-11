@@ -15,6 +15,12 @@
 <add position="replace"><![CDATA[trim($result['ip']);]]></add>
 </operation>
 </file>
+<file path="admin/controller/sale/order.php">
+<operation>
+<search><![CDATA[$data['store_url'] = $order_info['store_url'];]]></search>
+<add position="replace"><![CDATA[$data['store_url'] = $this->request->server['HTTPS'] ? str_replace("http://", "https://", $order_info['store_url']) : $order_info['store_url'];]]></add>
+</operation>
+</file>
 <file path="admin/view/template/design/banner_form.tpl">
 <operation>
 <search><![CDATA[<td class="text-right" style="width: 10%;><input type="text" name="banner_image]]></search>
