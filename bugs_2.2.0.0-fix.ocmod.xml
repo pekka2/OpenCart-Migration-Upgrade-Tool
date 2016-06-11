@@ -23,8 +23,30 @@
 </file>
 <file path="admin/controller/sale/order.php">
 <operation>
+<search><![CDATA[$this->request->server['HTTPS'] ? HTTPS_CATALOG : HTTP_CATALOG]]></search>
+<add position="replace"><![CDATA[$this->request->server['HTTPS'] ? str_replace("http://", "https://", HTTP_CATALOG) : HTTP_CATALOG]]></add>
+</operation>
+<operation>
+<search><![CDATA['name'     => $this->language->get('text_default'),]]></search>
+<add position="replace"><![CDATA['name'     => $this->language->get('text_default')]]></add>
+</operation>
+<operation>
 <search><![CDATA[$this->request->server['HTTPS'] ? str_replace("http", "https", $order_info['store_url']) : $order_info['store_url'];]]></search>
 <add position="replace"><![CDATA[$this->request->server['HTTPS'] ? str_replace("http://", "https://", $order_info['store_url']) : $order_info['store_url'];]]></add>
+</operation>
+</file>
+<file path="admin/view/template/customer/customer.tpl">
+<operation>
+<search><![CDATA[index.php?route=customer/customer/addhistory]]></search>
+<add position="replace"><![CDATA[index.php?route=customer/customer/addHistory]]></add>
+</operation>
+<operation>
+<search><![CDATA[index.php?route=customer/customer/addtransaction]]></search>
+<add position="replace"><![CDATA[index.php?route=customer/customer/addTransaction]]></add>
+</operation>
+<operation>
+<search><![CDATA[index.php?route=customer/customer/addreward]]></search>
+<add position="replace"><![CDATA[index.php?route=customer/customer/addReward]]></add>
 </operation>
 </file>
 <file path="catalog/view/theme/*/template/payment/pp_standard.tpl">
@@ -49,7 +71,7 @@
 <operation>
 <search><![CDATA[$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token']));]]></search>
 <add position="replace"><![CDATA[$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token']),true);]]]></add>
-</operation>			
+</operation>
 </file>
 <file path="admin/controller/payment/eway.php">
 <operation>
@@ -85,18 +107,6 @@
 <add position="replace"><![CDATA[$this->url->link('payment/pp_payflow_iframe/refund', 'transaction_reference=' . $transaction['transaction_reference'] . '&token=' . $this->session->data['token'], true)]]></add>
 </operation>
 </file>
-<file path="admin/view/template/openbay/amazon_bulk_listing.tpl.php">
-<operation>
-<search><![CDATA[<?php echo $token ?>]]></search>
-<add position="replace"><![CDATA[<?php echo $token; ?>]]></add>
-</operation>
-</file>
-<file path="admin/view/template/openbay/amazonus_bulk_listing.tpl.php">
-<operation>
-<search><![CDATA[<?php echo $token ?>]]></search>
-<add position="replace"><![CDATA[<?php echo $token; ?>]]></add>
-</operation>
-</file>
 <file path="admin/controller/analytics/google_analytics.php">
 <operation>
 <search><![CDATA[$data['action'] = $this->url->link('analytics/google_analytics', 'token=' . $this->session->data['token'], true);]]></search>
@@ -109,6 +119,154 @@
 <operation>
 <search><![CDATA[$data['google_analytics_status'] = $this->config->get('google_analytics_status');]]></search>
 <add position="replace"><![CDATA[$data['google_analytics_status'] = $this->model_setting_setting->getSettingValue('google_analytics_status', $this->request->get['store_id']);]]></add>
+</operation>
+</file>
+<file path="admin/view/template/feed/google_base.tpl">
+<operation>
+<search><![CDATA[index.php?route=feed/google_base/addcategory&token=]]></search>
+<add position="replace"><![CDATA[index.php?route=feed/google_base/addCategory&token=]]></add>
+</operation>
+<operation>
+<search><![CDATA[index.php?route=feed/google_base/removecategory&token=]]></search>
+<add position="replace"><![CDATA[index.php?route=feed/google_base/removeCategory&token=]]></add>
+</operation>
+</file>
+<file path="admin/view/template/fraud/ip.tpl">
+<operation>
+<search><![CDATA[index.php?route=fraud/ip/addip&token=]]></search>
+<add position="replace"><![CDATA[index.php?route=fraud/ip/addIp&token=]]></add>
+</operation>
+<operation>
+<search><![CDATA[index.php?route=fraud/ip/removeip&token=]]></search>
+<add position="replace"><![CDATA[index.php?route=fraud/ip/removeIp&token=]]></add>
+</operation>
+</file>
+<file path="admin/view/template/marketing/affiliate_form.tpl">
+<operation>
+<search><![CDATA[index.php?route=marketing/affiliate/addtransaction&token=]]></search>
+<add position="replace"><![CDATA[index.php?route=marketing/affiliate/addTransaction&token=]]></add>
+</operation>
+</file>
+<file path="admin/view/template/openbay/amazonus_bulk_listing.tpl">
+<operation>
+<search><![CDATA[index.php?route=openbay/amazonus/dobulksearch&token=]]></search>
+<add position="replace"><![CDATA[index.php?route=openbay/amazonus/doBulkSearch&token=]]></add>
+</operation>
+</file>
+<file path="admin/view/template/catalog/filter_form.tpl">
+<operation>
+<search><![CDATA[<?php echo $entry_name ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $entry_name; ?>]]></add>
+</operation>
+</file>
+<file path="admin/view/template/catalog/product_form.tpl">
+<operation>
+<search><![CDATA[<?php echo $manufacturer ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $manufacturer; ?>]]></add>
+</operation>
+</file>
+<file path="admin/view/template/catalog/recurring_form.tpl">
+<operation>
+<search><![CDATA[<?php echo $text_disabled ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $text_disabled; ?>]]></add>
+</operation>
+</file>
+<file path="admin/view/template/catalog/recurring_list.tpl">
+<operation>
+<search><![CDATA[<?php echo $column_action ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $column_action; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $recurring['name'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $recurring['name']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $recurring['sort_order'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $recurring['sort_order']; ?>]]></add>
+</operation>
+</file>
+<file path="admin/view/template/customer/custom_field_form.tpl">
+<operation>
+<search><![CDATA[<?php echo $entry_validation ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $entry_validation; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $validation ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $validation; ?>]]></add>
+</operation>
+</file>
+<file path="admin/view/template/customer/customer_form.tpl">
+<operation>
+<search><![CDATA[<?php echo $address_row ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $address_row; ?>]]></add>
+</operation>
+</file>
+<file path="admin/view/template/extension/extension.tpl">
+<operation>
+<search><![CDATA[<?php echo $store['status'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $store['status']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $store['status'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $store['status']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $captcha['status'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $captcha['status']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $feed['status'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $feed['status']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $feed['name'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $feed['name']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $fraud['status'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $fraud['status']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $fraud['name'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $fraud['name']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $payment['status'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $payment['status']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $payment['name'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $payment['name']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $payment['link'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $payment['link']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $shipping['status'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $shipping['status']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $shipping['name'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $shipping['name']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $store['status'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $store['status']; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $total['status'] ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $total['status']; ?>]]></add>
+</operation>
+</file>
+<file path="admin/view/template/extension/modification.tpl">
+<operation>
+<search><![CDATA[<?php echo $log ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $log; ?>]]></add>
+</operation>
+<operation>
+<search><![CDATA[<?php echo $button_clear ?>]]></search>
+<add position="replace"><![CDATA[<?php echo $button_clear; ?>]]></add>
 </operation>
 </file>
 </modification>
