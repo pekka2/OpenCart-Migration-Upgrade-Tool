@@ -24,7 +24,7 @@
 <file path="admin/controller/sale/order.php">
 <operation>
 <search><![CDATA[$this->request->server['HTTPS'] ? HTTPS_CATALOG : HTTP_CATALOG]]></search>
-<add position="replace"><![CDATA[$this->request->server['HTTPS'] ? str_replace("http://", "https://", HTTP_CATALOG) : HTTP_CATALOG]]></add>
+<add position="replace"><![CDATA[$this->request->server['HTTPS'] ? str_replace("http://", "https://", HTTPS_CATALOG) : HTTP_CATALOG]]></add>
 </operation>
 <operation>
 <search><![CDATA['name'     => $this->language->get('text_default'),]]></search>
