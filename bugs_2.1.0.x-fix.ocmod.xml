@@ -22,7 +22,7 @@
 </operation>
 <operation>
 <search><![CDATA['href'     => HTTP_CATALOG]]></search>
-<add position="replace"><![CDATA['href'     =>  $this->request->server['HTTPS'] ? str_replace("http://", "https://", HTTP_CATALOG) : HTTP_CATALOG]]></add>
+<add position="replace"><![CDATA['href'     =>  $this->request->server['HTTPS'] ? str_replace("http://", "https://", HTTPS_CATALOG) : HTTP_CATALOG]]></add>
 </operation>
 <operation>
 <search><![CDATA[rtrim($order_info['store_url'], '/'),]]]></search>
