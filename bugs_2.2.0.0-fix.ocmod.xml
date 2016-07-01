@@ -15,6 +15,13 @@
 <add position="replace"><![CDATA[sprintf($this->language->get('text_for'), $this->currency->format($this->currency->convert($this->request->post['amount'], $this->session->data['currency'], $this->config->get('config_currency')), $this->session->data['currency']), $this->request->post['to_name']),]]></add>
 </operation>
 </file>
+<file path="catalog/controller/module/amazon_login.php">
+<operation>
+<search><![CDATA[$user = $this->model_payment_amazon_login_pay->getUserInfo($this->request->get['access_token']);]]></search>
+<add position="after"><![CDATA[		} else {
+		    $user = array();]]></add>
+</operation>
+</file>
 <file path="admin/controller/customer/customer.php">
 <operation>
 <search><![CDATA[!empty($custom_field['validation'] && $custom_field['location'] == 'address'))]]></search>
