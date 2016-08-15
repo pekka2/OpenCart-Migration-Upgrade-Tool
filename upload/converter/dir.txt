@@ -1,6 +1,0 @@
-- `converter` 
-- `converter/system/upgrade`
-- `converter/system/language_model`
-- `converter/system/logs`
-- `converter/vqmod/vqcache`
-- `converter/vqmod/logs`
