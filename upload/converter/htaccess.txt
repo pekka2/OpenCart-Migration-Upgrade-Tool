@@ -1,3 +1,0 @@
-Options -Indexes
-
-RewriteBase /converter/
