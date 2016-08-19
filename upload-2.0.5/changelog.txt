@@ -18,7 +18,7 @@ legend
 
 CONVERTER
 ---------
-2.0.5 2015 16.10        + upgrade to version 2.1.0.1
+2.0.5 2015 10.16        + upgrade to version 2.1.0.1
                         # update save to table return old versions (move from table `return_product`)
 2.0.4 2015.09.10        + add column `product_option_id` to table `order_option` in version 1.4.x
                         + add column `type` to table `order_option` in version 1.4.x
