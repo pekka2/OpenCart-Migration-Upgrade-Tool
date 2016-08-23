@@ -27,7 +27,7 @@
 </file>
 <file path="admin/controller/extension/extension/dashboard.php">
     <operation> 
-        <search position="after"><![CDATA['dashboard_' . $this->request->get['extension']]]></search>
+        <search position="replace"><![CDATA['dashboard_' . $this->request->get['extension']]]></search>
         <add><![CDATA[$this->request->get['extension']]]></add>
     </operation>
 </file>
