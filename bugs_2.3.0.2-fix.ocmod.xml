@@ -3,19 +3,19 @@
 	<version>1.0</version>
 	<author>peku</author>
 	<code>qd3daADw98p</code>
-<file name="admin/model/catalog/category.php">
+<file path="admin/model/catalog/category.php">
     <operation> 
         <search position="after"><![CDATA[isset($data['keyword'])]]></search>
         <add><![CDATA[$data['keyword']]]></add>
     </operation>
 </file>
-<file name="admin/model/catalog/information.php">
+<file path="admin/model/catalog/information.php">
     <operation> 
         <search position="after"><![CDATA[isset($data['keyword'])]]></search>
         <add><![CDATA[$data['keyword']]]></add>
     </operation>
 </file>
-<file name="admin/controller/common/column_left.php">
+<file path="admin/controller/common/column_left.php">
     <operation> 
         <search position="after"><![CDATA[$data['lastname'] = $user_info['lastname'];]]></search>
         <add><![CDATA[              $data['username']  = $user_info['username'];]]></add>
@@ -24,24 +24,34 @@
         <search position="after"><![CDATA[$data['lastname'] = '';]]></search>
         <add><![CDATA[              $data['username']  = '';]]></add>
     </operation>
- </file>
-<file name="admin/model/localisation/language.php">
+</file>
+<file path="admin/controller/extension/extension/dashboard.php">
+    <operation> 
+        <search position="after"><![CDATA['dashboard_' . $this->request->get['extension']]]></search>
+        <add><![CDATA[$this->request->get['extension']]]></add>
+    </operation>
+    <operation> 
+        <search position="after"><![CDATA[$data['lastname'] = '';]]></search>
+        <add><![CDATA[              $data['username']  = '';]]></add>
+    </operation>
+</file>
+<file path="admin/model/localisation/language.php">
     <operation> 
         <search position="replace"><![CDATA[banner_image_description]]></search>
         <add><![CDATA[banner_image]]></add>
     </operation>
- </file>
-<file name="catalog/model/tool/image.php,admin/model/tool/image.php">
+</file>
+<file path="catalog/model/tool/image.php,admin/model/tool/image.php">
     <operation> 
         <search position="replace"><![CDATA[!= DIR_IMAGE]]></search>
         <add><![CDATA[!= str_replace('\\', '/', DIR_IMAGE)]]></add>
     </operation>
  </file>
-<file name="catalog/controller/information/contact.php">
+<file path="catalog/controller/information/contact.php">
     <operation> 
         <search position="replace"><![CDATA[$mail->setFrom($this->request->post['email']);]]></search>
         <add><![CDATA[$mail->setFrom($this->config->get('config_email'));
 			$mail->setReplyTo($this->request->post['email']);]]></add>
     </operation>
- </file>
+</file>
 </modification>
