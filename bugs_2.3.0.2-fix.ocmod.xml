@@ -30,10 +30,6 @@
         <search position="after"><![CDATA['dashboard_' . $this->request->get['extension']]]></search>
         <add><![CDATA[$this->request->get['extension']]]></add>
     </operation>
-    <operation> 
-        <search position="after"><![CDATA[$data['lastname'] = '';]]></search>
-        <add><![CDATA[              $data['username']  = '';]]></add>
-    </operation>
 </file>
 <file path="admin/model/localisation/language.php">
     <operation> 
