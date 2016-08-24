@@ -20,6 +20,12 @@
 			<add position="replace"><![CDATA[) DEFAULT COLLATE=utf8_general_ci;");]]></add>
 		</operation>
 	</file>
+	<file path="admin/controller/extension/modification.php">
+		<operation>
+			<search><![CDATA[$this->model_setting_setting->editSettingValue]]></search>
+			<add position="replace"><![CDATA[// $this->model_setting_setting->editSettingValue]]></add>
+		</operation>
+	</file>
 	<file path="catalog/controller/payment/pp_express.php">
 		<operation>
 			<search><![CDATA[$option['option_value']]]></search>
