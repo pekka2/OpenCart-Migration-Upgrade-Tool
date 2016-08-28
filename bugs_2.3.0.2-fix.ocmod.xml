@@ -5,13 +5,13 @@
 	<code>qd3daADw98p</code>
 <file path="admin/model/catalog/category.php">
     <operation> 
-        <search position="after"><![CDATA[isset($data['keyword'])]]></search>
+        <search position="replace"><![CDATA[isset($data['keyword'])]]></search>
         <add><![CDATA[$data['keyword']]]></add>
     </operation>
 </file>
 <file path="admin/model/catalog/information.php">
     <operation> 
-        <search position="after"><![CDATA[isset($data['keyword'])]]></search>
+        <search position="replace"><![CDATA[isset($data['keyword'])]]></search>
         <add><![CDATA[$data['keyword']]]></add>
     </operation>
 </file>
