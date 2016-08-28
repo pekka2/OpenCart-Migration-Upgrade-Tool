@@ -1,4 +1,4 @@
-ALTER TABLE `oc_user_group` CHANGE `permission` `permission` MEDIUMTEXT;
+ALTER TABLE `oc_user_group` CHANGE `permission` `permission` MEDIUMTEXT NOT NULL;
 
 INSERT INTO `oc_extension` (`type`, `code`) VALUES
 ('dashboard', 'activity'),
