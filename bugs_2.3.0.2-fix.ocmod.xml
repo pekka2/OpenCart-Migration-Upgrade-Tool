@@ -48,7 +48,13 @@
         <search><![CDATA[!= DIR_IMAGE]]></search>
         <add position="replace"><![CDATA[!= str_replace('\\', '/', DIR_IMAGE)]]></add>
     </operation>
- </file>
+</file>
+<file path="catalog/model/checkout/order.php">
+    <operation> 
+        <search><![CDATA[$this->{'model_fraud_' . $extension['code']}->check($order_info)]]></search>
+        <add position="replace"><![CDATA[$this->{'model_extension_fraud_' . $extension['code']}->check($order_info)]]></add>
+    </operation>
+</file>
 <file path="catalog/controller/information/contact.php">
     <operation> 
         <search><![CDATA[$mail->setFrom($this->request->post['email']);]]></search>
