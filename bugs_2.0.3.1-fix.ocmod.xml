@@ -22,8 +22,8 @@
 	</file>
 	<file path="admin/controller/extension/modification.php">
 		<operation>
-			<search><![CDATA[$this->model_setting_setting->editSettingValue]]></search>
-			<add position="replace"><![CDATA[// $this->model_setting_setting->editSettingValue]]></add>
+			<search><![CDATA[$this->model_setting_setting->editSettingValue('config', 'config_maintenance', true);]]></search>
+			<add position="replace"><![CDATA[// $this->model_setting_setting->editSettingValue('config', 'config_maintenance', true);]]></add>
 		</operation>
 	</file>
 	<file path="catalog/controller/payment/pp_express.php">
