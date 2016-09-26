@@ -3,12 +3,6 @@
 	<version>1.0</version>
 	<author>peku</author>
 	<code>qd3daADw98p</code>
-<file path="admin/model/catalog/category.php">
-    <operation> 
-        <search><![CDATA[isset($data['keyword'])]]></search>
-        <add position="replace"><![CDATA[$data['keyword']]]></add>
-    </operation>
-</file>
 <file path="admin/model/catalog/information.php">
     <operation> 
         <search><![CDATA[isset($data['keyword'])]]></search>
