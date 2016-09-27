@@ -37,7 +37,13 @@
         <add><![CDATA[config_alert_email]]></add>
     </operation>
 </file>
-<file path="catalog/model/tool/image.php,admin/model/tool/image.php">
+<file path="catalog/model/tool/image.php">
+    <operation> 
+        <search><![CDATA[!= DIR_IMAGE]]></search>
+        <add position="replace"><![CDATA[!= str_replace('\\', '/', DIR_IMAGE)]]></add>
+    </operation>
+</file>
+<file path="admin/model/tool/image.php">
     <operation> 
         <search><![CDATA[!= DIR_IMAGE]]></search>
         <add position="replace"><![CDATA[!= str_replace('\\', '/', DIR_IMAGE)]]></add>
