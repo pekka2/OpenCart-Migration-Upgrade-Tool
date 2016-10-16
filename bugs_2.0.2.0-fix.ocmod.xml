@@ -73,6 +73,30 @@
 			<add position="replace"><![CDATA[<?php echo $google_hangouts_code; ?>]]></add>
 		</operation>
 	</file>
+	<file path="admin/model/catalog/product.php">
+		<operation>
+			<search><![CDATA[(SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query =]]></search>
+			<add position="replace"><![CDATA[(SELECT keyword FROM `" . DB_PREFIX . "url_alias` WHERE `query` =]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/catalog/category.php">
+		<operation>
+			<search><![CDATA[(SELECT DISTINCT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=]]></search>
+			<add position="replace"><![CDATA[(SELECT DISTINCT keyword FROM `" . DB_PREFIX . "url_alias` WHERE `query` = 'category_id=]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/catalog/information.php">
+		<operation>
+			<search><![CDATA[(SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'information_id=]]></search>
+			<add position="replace"><![CDATA[(SELECT keyword FROM `" . DB_PREFIX . "url_alias` WHERE `query` = 'information_id=]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/catalog/manufacturer.php">
+		<operation>
+			<search><![CDATA[(SELECT keyword FROM `" . DB_PREFIX . "url_alias` WHERE `query` = 'manufacturer_id=]]></search>
+			<add position="replace"><![CDATA[(SELECT keyword FROM `" . DB_PREFIX . "url_alias` WHERE `query` = 'manufacturer_id=]]></add>
+		</operation>
+	</file>
 	<file path="catalog/controller/information/contact.php">
 		<operation>
 			<search><![CDATA[$this->config->get('config_mail_smtp_host')]]></search>
