@@ -31,7 +31,7 @@
         <add position="replace"><![CDATA[banner_image]]></add>
     </operation>
 </file>
-<file path="admin/view/template/setting.tpl">
+<file path="admin/view/template/setting/setting.tpl">
     <operation> 
         <search position="replace"><![CDATA[config_mail_alert_email]]></search>
         <add><![CDATA[config_alert_email]]></add>
