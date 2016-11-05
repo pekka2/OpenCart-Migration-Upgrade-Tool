@@ -38,8 +38,8 @@
 <add position="replace"><![CDATA['name'     => $this->language->get('text_default')]]></add>
 </operation>
 <operation>
-<search><![CDATA[if( $this->server['HTTPS'] && substr($order_info['store_url'],0,5) !='https' ){]]></search>
-<add position="replace" offset="3"><![CDATA[$data['store_url'] = $this->request->server['HTTPS'] ? str_replace("http://", "https://", $order_info['store_url']) : $order_info['store_url'];]]></add>
+<search><![CDATA[$this->request->server['HTTPS'] ? str_replace("http", "https", $order_info['store_url']) : $order_info['store_url']]]></search>
+<add position="replace" offset="3"><![CDATA[$this->request->server['HTTPS'] ? str_replace("http://", "https://", $order_info['store_url']) : $order_info['store_url']]]></add>
 </operation>
 </file>
 <file path="admin/view/template/customer/customer.tpl">
