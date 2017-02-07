@@ -72,14 +72,6 @@
             }]]></add>
     </operation>
     <operation> 
-        <search><![CDATA[$this->session->data['comment'] = strip_tags($this->request->post['comment']);]]></search>
-        <add position="replace"><![CDATA[$this->session->data['comment'] = '';
-
-        if (!empty($this->request->post['comment'])) {
-               $this->session->data['comment'] = strip_tags($this->request->post['comment']);
-        }]]></add>
-    </operation>
-    <operation> 
         <search><![CDATA[$this->session->data['payment_address']['company'] = $this->request->post['company'];]]></search>
         <add position="replace"><![CDATA[$this->session->data['payment_address']['company'] = '';
 
