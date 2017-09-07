@@ -17,7 +17,6 @@ INSERT INTO `oc_setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALU
 (0, 'total_tax', 'total_tax_sort_order', '5', 0),
 (0, 'total_credit', 'total_credit_sort_order', '7', 0),
 (0, 'total_credit', 'total_credit_status', '1', 0),
-(0, 'total_reward', 'total_reward_sort_order', '2', 0),
 (0, 'total_reward', 'total_reward_status', '1', 0),
 (0, 'total_shipping', 'total_shipping_status', '1', 0),
 (0, 'total_shipping', 'total_shipping_estimator', '1', 0),
