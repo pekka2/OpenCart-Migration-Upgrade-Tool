@@ -19,7 +19,6 @@ INSERT INTO `oc_setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALU
 (0, 'total_credit', 'total_credit_status', '1', 0),
 (0, 'total_reward', 'total_reward_status', '1', 0),
 (0, 'total_shipping', 'total_shipping_status', '1', 0),
-(0, 'total_shipping', 'total_shipping_estimator', '1', 0),
 (0, 'total_coupon', 'total_coupon_sort_order', '4', 0),
 (0, 'total_coupon', 'total_coupon_status', '1', 0),
 (0, 'theme_default', 'theme_default_product_limit', '15', 0),
