@@ -155,7 +155,7 @@ Voit silloin tehdä näin:
 Tuki:
 -----
 
-Pekka Mansikka, peku@pm-netti.com
+Pekka Mansikka, peku(at)pm-netti.com
 
 Takuuehdot
 ----------
