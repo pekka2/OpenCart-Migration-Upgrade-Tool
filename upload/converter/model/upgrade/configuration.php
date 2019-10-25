@@ -58,16 +58,22 @@ class ModelUpgradeConfiguration extends Model{
 								fclose( $fw ); 
 							}
 							
-										    if( !strpos( $check, 'HTTP_SERVER' ) ) {
+								             if( !strpos( $check, 'HTTP_SERVER' ) ) {
 								                if( $this->showOps ){
-												    	$this->text .= '<div class="notice"><pre>'.$http_server.'</pre></div>';
+											$this->text .= '<div class="notice"><pre>'.$http_server.'</pre></div>';
 								                }
-												$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'HTTP_SERVER', 'config.php' ) );
+											$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'HTTP_SERVER', 'config.php' ) );
 								                if( $this->showOps ){
-												    	$this->text .= '<div class="notice"><pre>'.$https_server.'</pre></div>';
+										        $this->text .= '<div class="notice"><pre>'.$https_server.'</pre></div>';
 								                }
-												$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'HTTPS_SERVER', 'config.php' ) );
-										   }
+											$this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'],  'HTTPS_SERVER', 'config.php' ) );
+								              }
+					                                      if($this->upgrade > 2020 &&  !strpos( $check, 'DB_PORT' )) {		
+		                                                                  if( $this->showOps ){
+						    	                              $this->text .= '<p><pre>'.$db_port.'</pre></p>';
+		                                                                  }
+								                       $this->text .= $this->msg( sprintf(  $this->lang['msg_config_constant'], 'DB_PORT', 'config.php' ) );
+		                                                               }
 	                if( $this->showOps ){
 					    	$this->text .= '<p><pre>'.$upload.'</pre></p>';
 	                }
