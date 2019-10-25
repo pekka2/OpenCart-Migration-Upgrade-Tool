@@ -376,6 +376,17 @@ class ModelUpgradeDatabase extends Model {
 		                }
 			$text .= $this->msg( sprintf( $this->lang['msg_text'], 'category_description',$this->lang['msg_new_data'] ) );
 		    }
+		// information_description
+		$sql = "UPDATE " . DB_PREFIX . "information_description SET `meta_title` = `title`";
+		    if(substr(VERSION,0,1) !='2.'){
+			    if( !$this->simulate ) {
+                       $this->db->query( $sql );
+		                }
+		                if( $this->showOps ){
+			                $text .= '<p><pre>' . $sql .'</pre></p>';
+		                }
+			$text .= $this->msg( sprintf( $this->lang['msg_text'], 'information_description',$this->lang['msg_new_data'] ) );
+		    }
 		// product_description
 		$sql = "UPDATE " . DB_PREFIX . "product_description SET `meta_title` = `name`";
 		    if(substr(VERSION,0,1) !='2.'){
