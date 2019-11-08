@@ -7,6 +7,7 @@ class ModelUpgradeDatabase extends Model {
 	  private $tablecounter;
 	  private $collatecounter;
 	  private $columncollatecounter;
+	  private $info;
 	public function addTable($data) {
         $this->simulate = ( !empty( $data['simulate'] ) ? true : false );
         $this->showOps  = ( !empty( $data['showOps'] ) ? true : false );
@@ -14,6 +15,8 @@ class ModelUpgradeDatabase extends Model {
         $this->max = 9;
         $this->min = 4;
 
+        $this->load->model('upgrade/info');
+        $this->info = $this->model_upgrade_info->getInfo();
         $this->lang = $this->lmodel->get('upgrade_database');
         $this->languages = $this->structure->language(); 
 
@@ -149,7 +152,7 @@ class ModelUpgradeDatabase extends Model {
 						if ($field['collation']) {
 							$sql .= " " . $field['collation'];
 						} elseif(!$int){
-						   if(substr(VERSION,0,5) !='1.5.5' && substr(VERSION,0,5) != '1.5.6' && substr(VERSION,0,1) !='2.'){
+						   if(!substr($this->info['version'],'1.5.5') && !substr($this->info['version'], '1.5.6') && $this->info['version'] < 2){
 							   $sql .= " COLLATE `utf8_general_ci`";
 						    }
 						}
@@ -1137,7 +1140,228 @@ private function categoryPath(){
 	        }
 	   $text .= $this->header( sprintf( $this->lang['msg_del_column'], $deletecolumn ) );
 	  return $text;
-	}
+    }
+	public function jsonEncode($data){
+        $text = '';
+        $json = 0;
+        $address = 0;
+        $affiliate = 0;
+        $activity = 0;
+        $module = 0;
+        $customer = array();
+        $order=array();
+		if($data['upgrade'] == '2100'){
+			if($this->info['version'] == '2.0.0.0' || $this->info['version'] == '2.0.1.0-2.0.3.1'){
+							  
+		        // address
+	     	   $query = $this->db->query("SELECT address_id,custom_field FROM `" . DB_PREFIX . "address`");
+
+		        foreach ($query->rows as $result) {
+		            if($result['custom_field'] !=''){
+		          	    $sql = "UPDATE `" . DB_PREFIX . "address` SET `custom_field` = '" . $this->db->escape(json_encode(unserialize($result['custom_field']))) . "' WHERE `address_id` = '" . (int)$result['address_id'] . "'";
+				        if( !$this->simulate ) {
+                            $this->db->query( $sql );
+                        }
+                        if( $this->showOps ){
+	                        $text .= '<p><pre>' . $sql .'</pre></p>';
+                        }
+                        $address++;
+				    }
+		        }
+		        if($address > 0){
+	                $text .= $this->msg( sprintf( $this->lang['msg_address_json'], $address ) );
+	            }
+
+		       // customer
+		        $query = $this->db->query("SELECT customer_id,cart,wishlist,custom_field FROM `" . DB_PREFIX . "customer`");
+
+		        foreach ($query->rows as $result) {
+			        if($result['cart'] !='') {
+	                   $sql = "UPDATE `" . DB_PREFIX . "customer` SET `cart` = '" . $this->db->escape(json_encode(unserialize($result['cart']))) . "' WHERE `customer_id` = '" . (int)$result['customer_id'] . "'";
+				        if( !$this->simulate ) {
+                            $this->db->query( $sql );
+                        }
+                        if( $this->showOps ){
+	                        $text .= '<p><pre>' . $sql .'</pre></p>';
+                        }
+                        if(!in_array($result['customer_id'],$customer)){
+                        	array_push($customer,$result['customer_id']);
+                        }
+			        }
+
+			        if($result['wishlist'] !='') {
+	                    $sql2 = "UPDATE `" . DB_PREFIX . "customer` SET `wishlist` = '" . $this->db->escape(json_encode(unserialize($result['wishlist']))) . "' WHERE `customer_id` = '" . (int)$result['customer_id'] . "'";
+				        if( !$this->simulate ) {
+                            $this->db->query( $sql2 );
+                        }
+                        if( $this->showOps ){
+	                        $text .= '<p><pre>' . $sql2 .'</pre></p>';
+                        }
+                        if(!in_array($result['customer_id'],$customer)){
+                        	array_push($customer,$result['customer_id']);
+                        }
+			       }
+
+			       if ($result['custom_field'] !='') {
+	                   $sql3 = "UPDATE `" . DB_PREFIX . "customer` SET `custom_field` = '" . $this->db->escape(json_encode(unserialize($result['custom_field']))) . "' WHERE `customer_id` = '" . (int)$result['customer_id'] . "'";
+				        if( !$this->simulate ) {
+                            $this->db->query( $sql3 );
+                        }
+                        if( $this->showOps ){
+	                        $text .= '<p><pre>' . $sql3 .'</pre></p>';
+                        }
+                        if(!in_array($result['customer_id'],$customer)){
+                        	array_push($customer,$result['customer_id']);
+                        }
+			       }
+		        }
+		        $customer_rows = count($customer);
+                if($customer_rows > 0){
+	                $text .= $this->msg( sprintf( $this->lang['msg_customer_json'], $customer_rows ) );
+	            }
+
+		        // order
+		        $query = $this->db->query("SELECT order_id,custom_field,payment_custom_field,shipping_custom_field FROM `" . DB_PREFIX . "order`");
+
+		        foreach ($query->rows as $result) {
+		     	    $sql = "UPDATE `" . DB_PREFIX . "order` SET `custom_field` = '" . $this->db->escape(json_encode(unserialize($result['shipping_custom_field']))) . "' WHERE `order_id` = '" . (int)$result['order_id'] . "'";
+		     	    if($result['custom_filed'] !=''){
+				        if( !$this->simulate ) {
+                            $this->db->query( $sql );
+                        }
+                        if( $this->showOps ){
+	                        $text .= '<p><pre>' . $sql .'</pre></p>';
+                        }
+                        if(!in_array($result['order_id'],$order)){
+                        	array_push($order,$result['order_id']);
+                        }
+                    }
+		     	    if($result['payment_custom_filed'] !=''){
+				        $sql2 = "UPDATE `" . DB_PREFIX . "order` SET `payment_custom_field` = '" . $this->db->escape(json_encode(unserialize($result['shipping_custom_field']))) . "' WHERE `order_id` = '" . (int)$result['order_id'] . "'";
+				        if( !$this->simulate ) {
+                            $this->db->query( $sql2 );
+                        }
+                        if( $this->showOps ){
+	                        $text .= '<p><pre>' . $sql2 .'</pre></p>';
+                        }
+                        if(!in_array($result['order_id'],$order)){
+                        	array_push($order,$result['order_id']);
+                        }
+                    }
+		     	    if($result['shipping_custom_filed'] !=''){
+
+				        $sql3 = "UPDATE `" . DB_PREFIX . "order` SET `shipping_custom_field` = '" . $this->db->escape(json_encode(unserialize($result['shipping_custom_field']))) . "' WHERE `order_id` = '" . (int)$result['order_id'] . "'";
+				        if( !$this->simulate ) {
+                            $this->db->query( $sql3 );
+                        }
+                        if( $this->showOps ){
+	                        $text .= '<p><pre>' . $sql3 .'</pre></p>';
+                        }
+                        if(!in_array($result['order_id'],$order)){
+                        	array_push($order,$result['order_id']);
+                        }
+                   }
+			    }
+		        $order_rows = count($order);
+                if($order > 0){
+	                $text .= $this->msg( sprintf( $this->lang['msg_order_json'], $order_rows ) );
+	            }
+	            
+
+		        // affiliate_activity
+		        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "affiliate_activity` WHERE data LIKE 'a:%'");
+
+		        foreach ($query->rows as $result) {
+		  	        if ($result['data'] !='') {
+		  	        	$sql = "UPDATE `" . DB_PREFIX . "affiliate_activity` SET `data` = '" . $this->db->escape(json_encode(unserialize($result['data']))) . "' WHERE `affiliate_activity_id` = '" . (int)$result['affiliate_activity_id'] . "'";
+				        if( !$this->simulate ) {
+                            $this->db->query( $sql3 );
+                        }
+                        if( $this->showOps ){
+	                        $text .= '<p><pre>' . $sql3 .'</pre></p>';
+                        }
+                        $affiliate++;
+			        }
+		        }
+                if($affiliate > 0){
+	               $text .= $this->msg( sprintf( $this->lang['msg_affiliate_json'], $affiliate ) );
+	            }
+
+		       // customer_activity
+		        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_activity` WHERE data LIKE 'a:%'");
+
+		        foreach ($query->rows as $result) {
+			       if ($result['data'] !='') {
+				        $sql = "UPDATE `" . DB_PREFIX . "customer_activity` SET `data` = '" . $this->db->escape(json_encode(unserialize($result['data']))) . "' WHERE `customer_activity_id` = '" . (int)$result['customer_activity_id'] . "'";
+				        if( !$this->simulate ) {
+                            $this->db->query( $sql3 );
+                        }
+                        if( $this->showOps ){
+	                        $text .= '<p><pre>' . $sql3 .'</pre></p>';
+                        }
+                        $activity++;
+			        }
+		        }
+                if($activity > 0){
+	               $text .= $this->msg( sprintf( $this->lang['msg_customer_activity_json'], $activity ) );
+	            }
+
+		    // module
+	         if($this->info['version'] !='2.0.0.0'){
+		     $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "module`");
+
+		    foreach ($query->rows as $result) {
+			    if ($result['setting'] !='') {
+				    $sql = "UPDATE `" . DB_PREFIX . "module` SET `setting` = '" . $this->db->escape(json_encode(unserialize($result['setting']))) . "' WHERE `module_id` = '" . (int)$result['module_id'] . "'";
+				        if( !$this->simulate ) {
+                            $this->db->query( $sql3 );
+                        }
+                        if( $this->showOps ){
+	                        $text .= '<p><pre>' . $sql3 .'</pre></p>';
+                        }
+                        $module++;
+			   }
+		    }
+	               $text .= $this->msg( sprintf( $this->lang['msg_module_json'], $module ) );
+		   }
+	    }
+
+		// setting
+		$query = $this->db->query("SELECT setting_id,value FROM `" . DB_PREFIX . "setting` WHERE serialized = '1'");
+
+		foreach ($query->rows as $result) {
+			if (preg_match('/^(a:)/', $result['value'])) {
+				$sql = "UPDATE `" . DB_PREFIX . "setting` SET `value` = '" . $this->db->escape(json_encode(unserialize($result['value']))) . "' WHERE `setting_id` = '" . (int)$result['setting_id'] . "'";
+				if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ){
+	                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+                $json++;
+			}
+		}
+
+	   $text .= $this->msg( sprintf( $this->lang['msg_setting_json'], $json ) );
+
+		// user_group
+		$query = $this->db->query("SELECT user_group_id,permission FROM `" . DB_PREFIX . "user_group`");
+
+		foreach ($query->rows as $result) {
+				$sql = "UPDATE `" . DB_PREFIX . "user_group` SET `permission` = '" . $this->db->escape(json_encode(unserialize($result['permission']))) . "' WHERE `user_group_id` = '" . (int)$result['user_group_id'] . "'";
+				if( !$this->simulate ) {
+                       $this->db->query( $sql );
+                }
+                if( $this->showOps ){
+	                $text .= '<p><pre>' . $sql .'</pre></p>';
+                }
+		}
+	   $text .= $this->msg( $this->lang['msg_user_group_json'] );
+	   $text .= $this->header( $this->lang['msg_json_data'] );
+
+	   return $text;
+	 }
+    }
     private function msg( $data ){
        return str_replace( $data, '<div class="msg round">' . $data .'</div>', $data);
     }
