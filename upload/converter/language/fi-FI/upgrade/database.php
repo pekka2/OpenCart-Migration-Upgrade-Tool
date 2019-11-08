@@ -33,7 +33,10 @@ $_['header_step_module']     = 'Moduulit on siirretty uusiin tauluihin onnistune
 $_['help_ops']               = 'Näytä päivityksen eteneminen <small>(näyttää kaikki tietokantaan tehdyt muutokset)</small>';
 $_['help_simulate']          = 'Testi päivitys <small>(toiminnot ainoastaan testitilassa)</small>';
 $_['help_usage']             = '<b>Kuinka käyttää tätä työkalua? </b><ol type="1"><li>Jollei jo ole tehty, lataa OpenCart v.2 paketti <a href="http://www.opencart.com" target="_blank">OpenCartin</a> sivulta</li><li> Pura paketin paikallisesti </li><li>Tämä laajennus on  sijoitettu sinun asennetun kaupan <b>converter</b> kansioon (../converter))</li><li>Nyt sinulla on kaksi  (2) vaihtoehtoa:<ol type="I"><li> Siirtää kaikki kansiot ja tiedostot OpenCart v.2 paketista <b>asennettuun kauppaan</b></li><li><b>Luo uusi hakemisto</b> ja kopioi kaikki kansiot ja tiedostot Opencart v.2 paketista siihen.</li></ol></li><li>Jos olet valinnut menetelmän II, kopioi <b>image</b> hakemisto ja <b>2 config.php</b> tiedostoa vanhasta kaupasta</li><li><b>Älä  käytä OpenCart 2.x paketin asennusohjelmaa !</b></li><li>  Aseta vaihtoehdot yllä ja klikkaa  <b>Jatka</b></li><li>Jos olet tehnyt tämän päivityksen, älä unohda poistaa tätä skriptiä.</li></ol>';
+
 // Msg
+$_['msg_address_json']          = 'Muokattu <b>address</b>-taulussa yhteensä <b>%s</b> rivin json-data onnistuneesti';
+$_['msg_affiliate_json']        = 'Muokattu <b>affiliate_activity</b>-taulussa yhteensä <b>%s</b> rivin json-data onnistuneesti';
 $_['msg_cat_path']              = 'Lisätty <b>%s</b> entry/ies';
 $_['msg_change_column']         = 'saraketta <b>%s</b> on muokattu onnistuneesti taulussa <b>%s</b>';
 $_['msg_change_counter']        = 'MUOKATTU yhteensä <b>%s</b> sarakkeen rakennetta onnistuneesti';
@@ -42,14 +45,20 @@ $_['msg_column']                = 'Sarake <b>%s</b> on Lisätty onnistuneesti ta
 $_['msg_config']                = 'Kokoonpanoasetus <b>%s</b> on Lisätty onnistunesti tauluun <b>%s</b>';
 $_['msg_config_delete']         = 'Kokoonpanoasetus <b>%s</b> on Poistettu onnistuneesti taulusta <b>%s</b>';
 $_['msg_converter_setting']     = '<b>Seuraavaksi muunnetaan vanhojen OpenCart versioiden <em>setting</em> taulu yhteensopivaksi:</b>';
+$_['msg_customer_json']          = 'Muokattu <b>customer</b>-taulussa yhteensä <b>%s</b> rivin json-data onnistuneesti';
+$_['msg_customer_activity_json'] = 'Muokattu <b>customer_activity</b>-taulussa yhteensä <b>%s</b> rivin json-data onnistuneesti';
 $_['msg_del_column']            = 'Poistettu yhteensä <b>%s</b> sarake(tta) onnistuneesti';
 $_['msg_delete']                = 'Taulu <b>%s</b> on Poistettu onnistuneesti';
 $_['msg_delete_column']         = 'Sarake <b>%s</b> on Poistettu onnistuneesti taulusta <b>%s</b>';
 $_['msg_delete_setting']        = 'Poistettu <b>%s</b> asetus(ta) taulusta <b>%s%s</b> onnistuneesti';
 $_['msg_delete_table']          = 'Poistettu yhteensä <b>%s</b> taulu(a) onnistuneesti';
 $_['msg_end_converter_setting'] = '<b>Vanhan OpenCart version <em>setting</em> taulun muuntaminen suoritettu onnistuneesti!</b>';
+$_['msg_json_data']             = 'Tietokannan data on muutettu json-formaattin onnistuneesti';
+$_['msg_module_json']           = 'Muokattu <b>module</b>-taulussa yhteensä <b>%s</b> rivin json-data onnistuneesti';
 $_['msg_new_data']              = 'uusi data lisätty';
 $_['msg_new_setting']           = 'Lisätty yhteensä <b>%s</b> uutta asetus(ta) <b>%s%s</b> tauluun';
+$_['msg_order_json']            = 'Muokattu <b>order</b>-taulussa yhteensä <b>%s</b> rivin json-data onnistuneesti';
+$_['msg_setting_json']          = 'Muokattu <b>setting</b>-taulussa yhteensä <b>%s</b> rivin json-data onnistuneesti';
 $_['msg_table']                 = 'Taulu <b>%s</b> on Lisätty onnistuneesti tietokantaan';
 $_['msg_table_count']           = 'Lisätty yhteensä <b>%s</b> taulua onnistuneesti';
 $_['msg_collate_count']         = 'Muutettu yhteensä <b>%s</b> taulun aakosjärjestystä onnistuneesti';
@@ -57,4 +66,5 @@ $_['msg_column_collate_count']  = 'Päivitetty yhteensä <b>%s</b> sarakkeen aak
 $_['msg_text']                  = 'Taulussa <b>%s</b> - %s';
 $_['msg_truncate']              = 'Taulu <b>%s</b> on tyhjennetty!';
 $_['msg_upgrade_to_version']    = 'Tietokannan taulut on lisätty version <b>%s</b> -%s tasolle.';
+$_['msg_user_group_json']       = 'Muokattu<b>user_group</b>-taulun permission-sarake onnistuneesti';
 ?>
