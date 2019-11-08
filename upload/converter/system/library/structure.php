@@ -963,7 +963,7 @@ if( !array_search( 'meta_keywords', $this->columns('category_description') ) && 
 		            $this->module_model = 3;
 		            $this->tb = count($this->tables()) - 1;
 }
-if( !array_search( DB_PREFIX . 'affiliate', $this->tables())) {
+if( array_search( 'meta_keywords', $this->columns('category_description') ) && !array_search( DB_PREFIX . 'affiliate', $this->tables())) {
 		           ++$this->version;
 if($this->vdata == 0){
 		          ++$this->version;
