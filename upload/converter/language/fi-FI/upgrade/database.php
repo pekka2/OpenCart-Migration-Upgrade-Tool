@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']         = 'Päivitä tietokanta';
+
 // Text
 $_['text_intro_1']          = 'Tämä ohjelma on tarkoitettu ainostaan OpenCart versioiden 1.4.7 - 2.0.3.1 päivittämiseen versioon 2.x';
 $_['text_intro_2']          = 'Seuraava päivitys prosessi tehdään kolmessa vaiheessa:<ol><li>Tarkistetaan tietokannan taulut, lisätään puuttuvat taulut ja päivitetään muuttunut taulujen rakenne.</li><li>Muokkaa config.php tiedostot (etu- &amp; admin sivulla)</li><li>Muokkaa kuvatiedostojen polut</li></ol>';
@@ -18,12 +19,14 @@ $_['text_collate_info']     = 'Vaihda seuraavaksi tietokannan aakkosjärjestys';
 $_['text_version']          = 'Sinun kaupan tietokantaversioksi on tunnistettu %s.';
 $_['text_table_info']       = 'Aloita lisäämällä uudet taulut';
 $_['text_update_config']    = 'Nyt voit myös päivittää  <b>config.php</b> tiedostoja, jos sitä ei ole vielä tehty';
+
 // Entry
 $_['entry_up_1564']          = 'Päivitä tietokanta versioon 1.5.6.4';
 $_['entry_up_201_202']       = 'Päivitä tietokanta versioon 2.0.1 - 2.0.2.x';
 $_['entry_up_2030']          = 'Päivitä tietokanta  versioon 2.0.3.1';
 $_['entry_migration_module'] = 'Siirrä moduulit uudeastaan (tyhjentää ensin taulut `layout_module` ja `module`)';
 $_['entry_up_2100']          = 'Päivitä tietokanta  versioon 2.1.0.0';
+
 // Header
 $_['header_step_1']          = 'Tietokantaan on lisätty uudet taulut onnistuneesti';
 $_['header_step_column']     = 'Tietokantaan on lisätty uudet sarakkeet onnistuneesti';
@@ -66,5 +69,5 @@ $_['msg_column_collate_count']  = 'Päivitetty yhteensä <b>%s</b> sarakkeen aak
 $_['msg_text']                  = 'Taulussa <b>%s</b> - %s';
 $_['msg_truncate']              = 'Taulu <b>%s</b> on tyhjennetty!';
 $_['msg_upgrade_to_version']    = 'Tietokannan taulut on lisätty version <b>%s</b> -%s tasolle.';
-$_['msg_user_group_json']       = 'Muokattu<b>user_group</b>-taulun permission-sarake onnistuneesti';
+$_['msg_user_group_json']       = 'Muokattu <b>user_group</b>-taulun permission-sarake onnistuneesti';
 ?>
