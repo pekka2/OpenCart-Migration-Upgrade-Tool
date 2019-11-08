@@ -60,6 +60,8 @@ class ControllerUpgradeColumn extends Controller {
                  $this->data['add_collate'] = $this->model_upgrade_database->addCollate( $this->request->post );
                  $this->data['header_step'] = $this->language->get('header_step_collate');
              }
+
+                 $this->data['upgrade_json_encode'] = $this->model_upgrade_database->jsonEncode( $this->request->post );
           }
 	        $this->data['database'] = $this->url->link('upgrade/database');
                 $this->data['text_step'] = sprintf($this->language->get('text_step'),$step,$steps); 
