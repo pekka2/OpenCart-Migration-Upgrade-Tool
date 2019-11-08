@@ -19,6 +19,7 @@
 
    <?php if( isset( $add_collate ) ) { echo $add_collate; } ?>
    <?php if( isset( $upgrade_data ) ) { echo $upgrade_data; } ?>
+   <?php if( isset( $upgrade_json_encode ) ) { echo $upgrade_json_encode; } ?>
 
 </div>
 </div>
