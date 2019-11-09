@@ -17,7 +17,7 @@ error_reporting(E_ALL);
  * @todo move to mysqli
  */
 
-define('VERSION', '3.0.0');
+define('VERSION', '3.1.0');
 
 // Configuration
 if (is_file('config.php')) {
