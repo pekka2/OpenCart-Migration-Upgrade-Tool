@@ -18,6 +18,7 @@ legend
 
 CONVERTER
 ---------
+3.1.0  2019.11.08   + change serialized data to json-data, when upgraded to Opencart 2.1
 3.0.0  2015.09.23   ^ Upgrade scripts structure in converter/model
                     + New features to class library/structure
                     + SQL scripts to directory system/sql
